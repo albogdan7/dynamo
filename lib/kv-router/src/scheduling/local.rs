@@ -15,7 +15,7 @@ use tokio_util::sync::CancellationToken;
 use super::config::RouterQueuePolicy;
 use super::overlap::OverlapSignals;
 use super::overlap_refresh::{NoopOverlapScoresRefresh, OverlapScoresRefresh};
-use super::policy_config::PolicyProfile;
+use super::policy_config::{PolicyProfile, RejectThresholdsProvider};
 use super::prefill_load::PrefillLoadEstimator;
 use super::queue::{
     BookingHandle, ClassQueueStats, SchedulerBookingCleanup, SchedulerBookingDescriptor,
@@ -173,6 +173,7 @@ where
         overlap_scores_refresh: Option<Arc<RF>>,
         overloaded_worker_provider: Option<OverloadedWorkerProvider>,
         available_worker_provider: Option<WorkerAvailabilityProvider>,
+        reject_thresholds: Option<RejectThresholdsProvider>,
         recheck_interval: Duration,
         track_prefill_tokens_default: bool,
         cancellation_token: CancellationToken,
@@ -189,6 +190,7 @@ where
             overlap_scores_refresh,
             overloaded_worker_provider,
             available_worker_provider,
+            reject_thresholds,
         ));
 
         let (queue_updates, _) = watch::channel(());
@@ -1152,6 +1154,7 @@ mod tests {
             DefaultWorkerSelector::new(None, "test"),
             prefill_load_estimator,
             None::<Arc<NoopOverlapScoresRefresh>>,
+            None,
             None,
             None,
             Duration::from_secs(60),
@@ -2271,6 +2274,7 @@ mod tests {
             None::<Arc<NoopOverlapScoresRefresh>>,
             None,
             None,
+            None,
             Duration::from_secs(60),
             true,
             cancel_token.clone(),
@@ -2324,6 +2328,7 @@ mod tests {
             DefaultWorkerSelector::new(None, "test"),
             None,
             None::<Arc<NoopOverlapScoresRefresh>>,
+            None,
             None,
             None,
             Duration::from_secs(60),

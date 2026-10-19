@@ -21,7 +21,9 @@ use super::overlap::SelectedWorkerTierSnapshot;
 use super::overlap_refresh::{
     NoopOverlapScoresRefresh, OverlapScoresRefresh, read_overlap_refresh_after, refresh_overlap,
 };
-use super::policy_config::{BusyThresholds, PolicyClassConfig, PolicyProfile};
+use super::policy_config::{
+    BusyThresholds, PolicyClassConfig, PolicyProfile, RejectThresholdsProvider,
+};
 use super::policy_queue::{PolicyQueue, QueueMetadata, QueueSnapshot};
 use super::prefill_load::{PrefillLoadEstimator, effective_prefill_tokens};
 use super::queue_admission::WorkerPlacement;
@@ -86,6 +88,19 @@ struct SelectedWorkerForRequest {
     selected_worker_tiers: SelectedWorkerTierSnapshot,
     selected_worker_load: AdvisoryWorkerLoad,
     non_max_overlap_selection: Option<NonMaxOverlapSelection>,
+}
+
+fn union_worker_sets(
+    first: Option<HashSet<WorkerId>>,
+    second: Option<HashSet<WorkerId>>,
+) -> Option<HashSet<WorkerId>> {
+    match (first, second) {
+        (Some(mut first), Some(second)) => {
+            first.extend(second);
+            Some(first)
+        }
+        (first, second) => first.or(second),
+    }
 }
 
 fn non_max_overlap_selection<C: WorkerConfigLike>(
@@ -520,7 +535,7 @@ struct SchedulerQueueActor<
     cleanup: Arc<AdmissionCleanup>,
     capacity_updates: Option<Arc<CapacityUpdates>>,
     capacity_workers: FxHashSet<WorkerWithDpRank>,
-    profile: PolicyProfile,
+    profile: Arc<PolicyProfile>,
     pending_count: Arc<AtomicUsize>,
     pending_isl_tokens: Arc<AtomicUsize>,
     class_counters: Arc<Vec<ClassQueueCounters>>,
@@ -537,6 +552,7 @@ struct SchedulerQueueActor<
     non_max_overlap_selection_observer: Arc<OnceLock<NonMaxOverlapSelectionObserver>>,
     /// Per-candidate cost capture for admitted selections, installed once by the host.
     selection_trace: Arc<OnceLock<SelectionTraceSpec>>,
+    reject_thresholds: Option<RejectThresholdsProvider>,
 }
 
 /// Queue that gates scheduling requests behind a capacity check.
@@ -562,13 +578,14 @@ pub struct SchedulerQueue<
     pending_isl_tokens: Arc<AtomicUsize>,
     class_counters: Arc<Vec<ClassQueueCounters>>,
     workers_with_configs: watch::Receiver<HashMap<WorkerId, C>>,
-    profile: PolicyProfile,
+    profile: Arc<PolicyProfile>,
     start_time: Instant,
     available_worker_provider: Option<WorkerAvailabilityProvider>,
     supports_overlap_refresh: bool,
     non_max_overlap_selection_observer: Arc<OnceLock<NonMaxOverlapSelectionObserver>>,
     /// Per-candidate cost capture for admitted selections, installed once by the host.
     selection_trace: Arc<OnceLock<SelectionTraceSpec>>,
+    reject_thresholds: Option<RejectThresholdsProvider>,
     #[allow(clippy::type_complexity)]
     // Covariant type markers, without ownership or auto-trait bounds.
     _marker: PhantomData<fn() -> (P, C, Sel, RF)>,
@@ -592,6 +609,7 @@ impl<
         overlap_scores_refresh: Option<Arc<RF>>,
         overloaded_worker_provider: Option<OverloadedWorkerProvider>,
         available_worker_provider: Option<WorkerAvailabilityProvider>,
+        reject_thresholds: Option<RejectThresholdsProvider>,
     ) -> Self {
         Self::new_with_capacity(
             slots,
@@ -603,6 +621,7 @@ impl<
             overlap_scores_refresh,
             overloaded_worker_provider,
             available_worker_provider,
+            reject_thresholds,
             ADMISSION_CHANNEL_CAPACITY,
         )
     }
@@ -618,9 +637,11 @@ impl<
         overlap_scores_refresh: Option<Arc<RF>>,
         overloaded_worker_provider: Option<OverloadedWorkerProvider>,
         available_worker_provider: Option<WorkerAvailabilityProvider>,
+        reject_thresholds: Option<RejectThresholdsProvider>,
         admission_channel_capacity: usize,
     ) -> Self {
-        let pending = PolicyQueue::new(profile.clone());
+        let profile = Arc::new(profile);
+        let pending = PolicyQueue::new(&profile);
         let queueing_enabled = profile
             .classes()
             .iter()
@@ -697,7 +718,7 @@ impl<
             cleanup: Arc::clone(&cleanup),
             capacity_updates: capacity_updates.clone(),
             capacity_workers: FxHashSet::default(),
-            profile: profile.clone(),
+            profile: Arc::clone(&profile),
             pending_count: Arc::clone(&pending_count),
             pending_isl_tokens: Arc::clone(&pending_isl_tokens),
             class_counters: Arc::clone(&class_counters),
@@ -713,6 +734,7 @@ impl<
             available_worker_provider: available_worker_provider.clone(),
             non_max_overlap_selection_observer: Arc::clone(&non_max_overlap_selection_observer),
             selection_trace: Arc::clone(&selection_trace),
+            reject_thresholds: reject_thresholds.clone(),
         };
         tokio::spawn(actor.run(admission_rx));
         Self {
@@ -731,6 +753,7 @@ impl<
             supports_overlap_refresh: overlap_refresh_after.is_some(),
             non_max_overlap_selection_observer,
             selection_trace,
+            reject_thresholds,
             _marker: PhantomData,
         }
     }
@@ -885,10 +908,16 @@ impl<
         let cached_tokens = SchedulingContext::new(request, &workers)
             .with_available_workers(available.as_deref())
             .best_cached_tokens();
+        let reject_thresholds = self
+            .reject_thresholds
+            .as_ref()
+            .map(|provider| provider())
+            .unwrap_or_default();
         let mut classification =
             ClassifyRequest::with_timing(request.isl_tokens, cached_tokens, ingress_at)
                 .with_pinned_worker(request.pinned_worker)
-                .with_sequence_hashes(request.token_seq.as_deref());
+                .with_sequence_hashes(request.token_seq.as_deref())
+                .with_busy_thresholds(Arc::clone(&self.profile), reject_thresholds);
         if let Some(request_id) = request.mode.request_id() {
             classification = classification.with_request_id(request_id);
         }
@@ -1724,10 +1753,12 @@ impl<
 
         {
             let workers = self.workers_with_configs.borrow();
-            let overloaded_worker_ids = self
-                .overloaded_worker_provider
-                .as_ref()
-                .and_then(|provider| provider());
+            let overloaded_worker_ids = union_worker_sets(
+                self.overloaded_worker_provider
+                    .as_ref()
+                    .and_then(|provider| provider()),
+                self.workers_over_reject_thresholds(request, &workers),
+            );
             let mut eligibility = request
                 .eligibility_with_overloaded(overloaded_worker_ids.as_ref())
                 .with_available_workers(available_worker_ids.as_deref());
@@ -2013,6 +2044,27 @@ impl<
             initial_effective_prefill_tokens: effective_isl,
             expected_prefill_duration,
         })
+    }
+
+    /// Workers whose every rank is past the host's reject thresholds, judged on the `LOAD` rows
+    /// worker selection reads for this request.
+    fn workers_over_reject_thresholds(
+        &self,
+        request: &SchedulingRequest,
+        workers: &HashMap<WorkerId, C>,
+    ) -> Option<HashSet<WorkerId>> {
+        let limits = (self.reject_thresholds.as_ref()?)();
+        if !limits.is_configured() {
+            return None;
+        }
+        let over_limits = workers
+            .iter()
+            .filter(|(worker_id, config)| {
+                limits.worker_is_full(**worker_id, *config, &request.worker_loads)
+            })
+            .map(|(&worker_id, _)| worker_id)
+            .collect();
+        Some(over_limits)
     }
 
     /// Whether every eligible rank is past `limits`, judged on the same `LOAD` row worker
@@ -2373,6 +2425,7 @@ mod tests {
             None,
             None,
             None,
+            None,
         ));
 
         (queue, slots)
@@ -2424,6 +2477,7 @@ mod tests {
             None,
             None,
             None,
+            None,
         ));
 
         (queue, slots, cfg_tx)
@@ -2465,6 +2519,27 @@ mod tests {
         Arc<ActiveSequencesMultiWorker<NoopSequencePublisher>>,
         watch::Sender<HashMap<u64, SimpleWorkerConfig>>,
     ) {
+        make_queue_with_profile_sender_and_reject(
+            num_workers,
+            block_size,
+            max_num_batched_tokens,
+            profile,
+            None,
+        )
+    }
+
+    #[allow(clippy::type_complexity)]
+    fn make_queue_with_profile_sender_and_reject(
+        num_workers: usize,
+        block_size: u32,
+        max_num_batched_tokens: usize,
+        profile: PolicyProfile,
+        reject_thresholds: Option<RejectThresholdsProvider>,
+    ) -> (
+        Arc<SchedulerQueue<NoopSequencePublisher, SimpleWorkerConfig, DefaultWorkerSelector>>,
+        Arc<ActiveSequencesMultiWorker<NoopSequencePublisher>>,
+        watch::Sender<HashMap<u64, SimpleWorkerConfig>>,
+    ) {
         let dp_range: HashMap<u64, (u32, u32)> =
             (0..num_workers as u64).map(|id| (id, (0, 1))).collect();
         let slots = Arc::new(ActiveSequencesMultiWorker::new(
@@ -2497,6 +2572,7 @@ mod tests {
             None,
             None,
             None,
+            reject_thresholds,
         ));
         (queue, slots, cfg_tx)
     }
@@ -2546,6 +2622,7 @@ mod tests {
             None,
             overloaded_worker_provider,
             available_worker_provider,
+            None,
         ));
 
         (queue, slots)
@@ -2664,6 +2741,7 @@ mod tests {
             Some(refresher),
             None,
             None,
+            None,
         ));
 
         (queue, slots)
@@ -2719,6 +2797,7 @@ mod tests {
             DefaultWorkerSelector::new(None, "test"),
             None,
             Some(refresher),
+            None,
             None,
             None,
             admission_channel_capacity,
@@ -2895,6 +2974,71 @@ mod tests {
                 "ns_per_request_samples": samples,
             })
         );
+    }
+
+    #[tokio::test]
+    async fn classifiers_read_class_and_reject_thresholds() {
+        let profile = policy_profile(
+            r#"
+default_policy_family: latency
+uncached_isl_buckets:
+  - min_tokens: 0
+    bucket: short
+  - min_tokens: 32
+    bucket: long
+policy_classes:
+  - name: latency_short
+    policy_family: latency
+    cache_bucket: short
+    quantum: 1
+    decode_busy_threshold_frac: 0.5
+  - name: latency_long
+    policy_family: latency
+    cache_bucket: long
+    quantum: 1
+  - name: bulk_short
+    policy_family: bulk
+    cache_bucket: short
+    quantum: 1
+    prefill_busy_threshold_frac: 0.25
+  - name: bulk_long
+    policy_family: bulk
+    cache_bucket: long
+    quantum: 1
+"#,
+        );
+        let reject = crate::scheduling::BusyThresholds {
+            prefill_busy_threshold_frac: Some(1.0),
+            ..Default::default()
+        };
+        let (queue, _slots, _cfg_tx) = make_queue_with_profile_sender_and_reject(
+            1,
+            16,
+            64,
+            profile,
+            Some(Arc::new(move || reject)),
+        );
+        let (mut request, _rx) = make_request("classified", 16);
+        request.policy_class = Some("latency".to_string());
+        let (mut classified, _workers) =
+            queue.build_classify_request(&request, Instant::now(), WorkerInputs::NONE);
+
+        let latency = crate::scheduling::BusyThresholds {
+            decode_busy_threshold_frac: Some(0.5),
+            ..Default::default()
+        };
+        let bulk = crate::scheduling::BusyThresholds {
+            prefill_busy_threshold_frac: Some(0.25),
+            ..Default::default()
+        };
+        // 16 uncached tokens fall in the `short` bucket.
+        assert_eq!(classified.queue_thresholds(), latency);
+        assert_eq!(classified.queue_thresholds_for("bulk"), Some(bulk));
+        assert_eq!(classified.queue_thresholds_for("missing"), None);
+        assert_eq!(classified.reject_thresholds(), reject);
+
+        classified.set_policy_class("bulk");
+        assert_eq!(classified.queue_thresholds(), bulk);
     }
 
     #[tokio::test]
@@ -3534,11 +3678,11 @@ policy_classes:
         NoopOverlapScoresRefresh,
     > {
         SchedulerQueueActor {
-            pending: PolicyQueue::new(queue.profile.clone()),
+            pending: PolicyQueue::new(&queue.profile),
             cleanup: Arc::clone(&queue.cleanup),
             capacity_updates: None,
             capacity_workers: FxHashSet::default(),
-            profile: queue.profile.clone(),
+            profile: Arc::clone(&queue.profile),
             pending_count: Arc::clone(&queue.pending_count),
             pending_isl_tokens: Arc::clone(&queue.pending_isl_tokens),
             class_counters: Arc::clone(&queue.class_counters),
@@ -3556,6 +3700,7 @@ policy_classes:
                 &queue.non_max_overlap_selection_observer,
             ),
             selection_trace: Arc::clone(&queue.selection_trace),
+            reject_thresholds: queue.reject_thresholds.clone(),
         }
     }
 
@@ -4060,6 +4205,7 @@ policy_classes:
             None::<Arc<NoopOverlapScoresRefresh>>,
             None,
             None,
+            None,
         );
 
         let (request, receiver) = make_request("delivery-race", isl);
@@ -4151,6 +4297,70 @@ policy_classes:
                 .unwrap();
             slots.free(&request_id.to_string(), decay_now()).unwrap();
         }
+    }
+
+    #[tokio::test]
+    async fn reject_thresholds_shed_full_workers_and_reject_when_none_remain() {
+        let profile = PolicyProfile::synthetic(None, RouterQueuePolicy::Fcfs);
+        let (queue, slots, cfg_tx) = make_queue_with_profile_sender_and_reject(
+            2,
+            16,
+            1_000_000,
+            profile,
+            Some(Arc::new(|| crate::scheduling::BusyThresholds {
+                decode_busy_threshold_frac: Some(0.5),
+                ..Default::default()
+            })),
+        );
+        let worker_config = SimpleWorkerConfig {
+            max_num_batched_tokens: Some(1_000_000),
+            total_kv_blocks: Some(8),
+            ..Default::default()
+        };
+        cfg_tx
+            .send(HashMap::from([
+                (0, worker_config.clone()),
+                (1, worker_config),
+            ]))
+            .unwrap();
+        // Hold 6 of 8 KV blocks on `worker` with a decoding request.
+        let hold = |request_id: &'static str, worker: WorkerWithDpRank| {
+            let (mut held, held_rx) = make_request(request_id, 96);
+            held.token_seq = Some((0..6).collect());
+            held.pinned_worker = Some(worker);
+            (held, held_rx)
+        };
+        let first = WorkerWithDpRank::new(0, 0);
+        let second = WorkerWithDpRank::new(1, 0);
+        let (held, held_rx) = hold("held-0", first);
+        queue.enqueue(held).await;
+        held_rx.await.unwrap().unwrap();
+        slots
+            .mark_prefill_completed(&"held-0".to_string(), decay_now())
+            .unwrap();
+
+        let (next, next_rx) = make_request("next", 16);
+        queue.enqueue(next).await;
+        assert_eq!(
+            next_rx.await.unwrap().unwrap().best_worker,
+            second,
+            "a worker past the reject thresholds must be skipped"
+        );
+        slots.free(&"next".to_string(), decay_now()).unwrap();
+
+        let (held, held_rx) = hold("held-1", second);
+        queue.enqueue(held).await;
+        held_rx.await.unwrap().unwrap();
+        slots
+            .mark_prefill_completed(&"held-1".to_string(), decay_now())
+            .unwrap();
+
+        let (rejected, rejected_rx) = make_request("rejected", 16);
+        queue.enqueue(rejected).await;
+        assert!(matches!(
+            rejected_rx.await.unwrap(),
+            Err(KvSchedulerError::AllEligibleWorkersOverloaded)
+        ));
     }
 
     #[tokio::test]

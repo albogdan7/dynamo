@@ -31,6 +31,7 @@ def assignment():
             "VLLM_ELASTIC_EP_SCALE_UP_LAUNCH": "1",
             "VLLM_ENABLE_V1_MULTIPROCESSING": "1",
             "VLLM_USE_RUST_FRONTEND": "0",
+            "VLLM_ELASTIC_EP_DRAIN_REQUESTS": "1",
         },
     }
 
@@ -57,6 +58,7 @@ def test_launch_executes_native_engine_once(
     execute = Mock()
     monkeypatch.setattr(bootstrap.os, "execvpe", execute)
     monkeypatch.setenv("VLLM_ELASTIC_EP_SCALE_UP_LAUNCH", "0")
+    monkeypatch.setenv("VLLM_ELASTIC_EP_DRAIN_REQUESTS", "0")
     before = copy.deepcopy(assignment)
 
     bootstrap.launch(assignment_path, receipt_path, 1)
@@ -66,6 +68,7 @@ def test_launch_executes_native_engine_once(
     assert executable == "vllm"
     assert command == tuple(assignment["command"])
     assert environment["VLLM_ELASTIC_EP_SCALE_UP_LAUNCH"] == "1"
+    assert environment["VLLM_ELASTIC_EP_DRAIN_REQUESTS"] == "1"
     assert assignment == before
     bootstrap.check_launch(assignment_path, receipt_path)
     with pytest.raises(RuntimeError, match="already launched"):
@@ -132,6 +135,17 @@ def test_launch_initial_world_has_no_synthetic_operation(
 
     assignment["transitionID"] = "synthetic-grow"
     with pytest.raises(ValueError, match="initial formation"):
+        bootstrap.validate_assignment(assignment, launch_environment)
+
+
+@pytest.mark.parametrize("drain", [None, "0"])
+def test_launch_requires_native_drain_policy(assignment, launch_environment, drain):
+    if drain is None:
+        del assignment["environment"]["VLLM_ELASTIC_EP_DRAIN_REQUESTS"]
+    else:
+        assignment["environment"]["VLLM_ELASTIC_EP_DRAIN_REQUESTS"] = drain
+
+    with pytest.raises(ValueError, match="launch environment"):
         bootstrap.validate_assignment(assignment, launch_environment)
 
 

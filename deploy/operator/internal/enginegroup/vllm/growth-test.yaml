@@ -1,0 +1,73 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+
+# Pinned B200 functional growth test; see README.md for prerequisites and limits.
+# Manual MoE test, not shared L4/pre-merge CI; Elastic EP requires real expert redistribution.
+apiVersion: nvidia.com/v1beta1
+kind: DynamoGraphDeployment
+metadata:
+  name: vllm-enginegroup-followup
+spec:
+  backendFramework: vllm
+  components:
+  - name: Frontend
+    type: frontend
+    runtimeVersionOverride: "1.5.0"
+    replicas: 1
+    podTemplate:
+      spec:
+        containers:
+        - name: main
+          image: docker.io/jmancuso768/dynamo-vllm-enginegroup@sha256:36ebb4effbeeb41ad6a0d1daa2ae2aee5d5e89f8d98d1587780f94e28927540d
+          command: [python3]
+  - name: Worker
+    type: worker
+    runtimeVersionOverride: "1.5.0"
+    replicas: 1
+    engineGroup:
+      initialSize: 2
+      policy: {minSize: 2, maxSize: 4}
+    podTemplate:
+      metadata:
+        labels:
+          dynamo.nvidia.com/poc-member: followup-e2e
+      spec:
+        restartPolicy: Never
+        nodeSelector:
+          nvidia.com/gpu.product: NVIDIA-B200
+        tolerations:
+        - key: nvidia.com/gpu
+          operator: Equal
+          value: "true"
+          effect: NoSchedule
+        containers:
+        - name: main
+          image: docker.io/jmancuso768/dynamo-vllm-enginegroup@sha256:36ebb4effbeeb41ad6a0d1daa2ae2aee5d5e89f8d98d1587780f94e28927540d
+          command: [python3, -m, dynamo.vllm]
+          args:
+          - --model=/models/Qwen3-30B-A3B
+          - --served-model-name=Qwen/Qwen3-30B-A3B
+          - --tensor-parallel-size=1
+          - --data-parallel-size=2
+          - --data-parallel-rank=0
+          - --data-parallel-size-local=1
+          - --distributed-executor-backend=mp
+          - --enable-expert-parallel
+          - --enable-eplb
+          - --enable-elastic-ep
+          - --elastic-ep-max-dp-size=4
+          - --gpu-memory-utilization=0.8
+          - --max-model-len=2048
+          - --enforce-eager
+          - --scheduler-cls=vllm.v1.core.sched.async_scheduler.AsyncScheduler
+          resources:
+            requests: {cpu: "4", memory: 32Gi}
+            limits: {cpu: "16", memory: 96Gi, nvidia.com/gpu: "1"}
+          volumeMounts:
+          - {name: model, mountPath: /models, readOnly: true}
+          - {name: shm, mountPath: /dev/shm}
+        volumes:
+        - name: model
+          persistentVolumeClaim: {claimName: moe-model}
+        - name: shm
+          emptyDir: {medium: Memory, sizeLimit: 8Gi}

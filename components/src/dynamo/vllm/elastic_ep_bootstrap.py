@@ -127,6 +127,7 @@ def validate_assignment(document: dict, environment: dict[str, str]) -> None:
         "VLLM_ELASTIC_EP_SCALE_UP_LAUNCH": "1" if document["mode"] == "join" else "0",
         "VLLM_ENABLE_V1_MULTIPROCESSING": "1",
         "VLLM_USE_RUST_FRONTEND": "0",
+        "VLLM_ELASTIC_EP_DRAIN_REQUESTS": "1",
     }
     if document["environment"] != expected_overrides:
         raise ValueError(

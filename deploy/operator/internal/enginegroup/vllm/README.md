@@ -74,3 +74,54 @@ does not establish native gRPC or sidecar conformance.
 
 Tests cover native protocol validation, exact all-rank fan-out, plan-specific
 preflight, ambiguous transport outcomes and restart recovery of durable bindings.
+
+
+## Grove bootstrap
+
+### Launch-only bootstrap
+
+Each allocation uses one template. Its resolved launch assignment supplies stable
+group and member identities, rank, rendezvous, initial/join role, and the
+operation-bound DP target. All joiners receive the full resize target, not
+`rank + 1`. Initial participants form one complete world without a synthetic grow.
+
+The integration slice implements Pod-UID-bound launch assignments through the
+`nvidia.com/dynamo-vllm-launch` Pod annotation and a Downward API volume:
+
+```text
+Initial world: immutable native declaration + initial size
+Growth:       persisted capacity target + exact joining Pod UID
+                                |
+                      Go launch assignment
+                                |
+                  Pod annotation / Downward API
+                                |
+              launch-only Python entrypoint -> exec Dynamo vLLM worker
+```
+
+`VLLMGroveCapacity` composes Grove's physical observation with the launch profile's
+native bindings. It reuses the member-clique `/scale` and publishes joining
+assignments when Grove creates the Pods. Every joiner receives the complete
+resize target. Initial formation uses the same template without a synthetic grow.
+Assignments are immutable, published with Pod UID and resource-version
+preconditions, and replayed without relaunching retained processes. A replacement
+does not inherit the old Pod's assignment. Reusing a released slot requires explicit
+restoration and a new launch binding; the composed planner currently rejects it.
+
+Creation seeds an empty launch-binding record on the Engine Group. Before any
+command is published, capacity reconciliation persists each slot's exact Pod UID
+and assignment digest there, then waits for that cached observation. The record
+survives Pod deletion; a new occupant or lost binding fails closed instead of
+restarting initial formation. It records launch identity, not engine transaction
+phases. Existing Group and Pod lifecycle finalizers must protect effects first.
+
+The launcher has no Kubernetes credentials, engine control loop, proxy, or
+discovery owner. It replaces itself with the assigned native server or Dynamo worker. A launch receipt makes
+allocation readiness observable before the joiner's API is available; it proves
+only assignment consumption, never membership, health, verification, or admission.
+Container restarts are prohibited. The Pod-bound launch lifetime and vLLM's native
+API instance ID remain distinct and require correlation by the runtime resolver.
+
+Do not wait for inference readiness or registration before submitting the resize
+that lets a joiner initialize. Conversely, do not register a joiner because its
+Pod or launch receipt is ready.

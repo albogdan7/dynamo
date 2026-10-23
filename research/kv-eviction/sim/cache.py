@@ -1,0 +1,201 @@
+"""
+Prefix-cache simulator.
+
+Replays a request trace against a fixed-capacity block cache, calling the
+agent's eviction policy whenever a new block cannot fit. Computes serving
+metrics that the agent uses to improve its policy.
+
+INTEGRITY RULE: the policy's select_victim() only receives the current cache
+state — never future requests, trace data, or simulator internals.
+"""
+
+from __future__ import annotations
+
+import time
+import statistics
+from dataclasses import dataclass, field
+from typing import Any
+
+BLOCK_SIZE = 16          # tokens per cache block (must match trace.py)
+BASE_TTFT_MS = 50.0      # fixed decode overhead (ms)
+RECOMPUTE_MS = 3.0       # added per missed block (ms); models GPU recompute cost
+
+
+# ---------------------------------------------------------------------------
+# Internal block representation (never exposed to the policy directly)
+# ---------------------------------------------------------------------------
+
+@dataclass
+class _Block:
+    block_id: int
+    token_key: tuple          # the actual token sequence (not shown to policy)
+    creation_time: float
+    last_access_time: float
+    num_hits: int = 0
+    size_tokens: int = BLOCK_SIZE
+
+    def to_candidate(self) -> dict:
+        """Convert to the dict the policy receives. No token content, no future info."""
+        return {
+            "block_id":         self.block_id,
+            "num_hits":         self.num_hits,
+            "last_access_time": self.last_access_time,
+            "creation_time":    self.creation_time,
+            "size_tokens":      self.size_tokens,
+        }
+
+
+# ---------------------------------------------------------------------------
+# Prefix cache
+# ---------------------------------------------------------------------------
+
+class PrefixCache:
+    def __init__(self, capacity_blocks: int, policy):
+        self.capacity = capacity_blocks
+        self.policy = policy
+        self._store: dict[tuple, _Block] = {}   # token_key → Block
+        self._next_id = 0
+        self.eviction_count = 0
+        self._invalid_policy_fallbacks = 0
+
+    # ------------------------------------------------------------------
+    # Public interface
+    # ------------------------------------------------------------------
+
+    def process_request(self, tokens: list[int], arrival_time: float) -> dict:
+        """
+        Process one request. Returns per-request metrics dict.
+
+        Radix-style prefix matching: walk token blocks left-to-right,
+        stop at the first miss. All blocks from that miss onward are added
+        to the cache (triggering evictions as needed).
+        """
+        blocks = _tokenize(tokens)
+        hit_count = 0
+
+        for i, key in enumerate(blocks):
+            if key in self._store:
+                blk = self._store[key]
+                blk.last_access_time = arrival_time
+                blk.num_hits += 1
+                hit_count += 1
+            else:
+                # Radix rule: first miss breaks the prefix chain.
+                # Add this block and all subsequent ones.
+                for missed_key in blocks[i:]:
+                    if missed_key not in self._store:
+                        self._add_block(missed_key, arrival_time)
+                break
+
+        miss_count = len(blocks) - hit_count
+        ttft_ms = BASE_TTFT_MS + miss_count * RECOMPUTE_MS
+
+        return {
+            "hit_blocks":  hit_count,
+            "miss_blocks": miss_count,
+            "ttft_ms":     ttft_ms,
+            "hit_rate":    hit_count / max(len(blocks), 1),
+        }
+
+    # ------------------------------------------------------------------
+    # Internal helpers
+    # ------------------------------------------------------------------
+
+    def _add_block(self, key: tuple, t: float):
+        if len(self._store) >= self.capacity:
+            self._evict(t)
+        blk = _Block(
+            block_id=self._next_id,
+            token_key=key,
+            creation_time=t,
+            last_access_time=t,
+        )
+        self._next_id += 1
+        self._store[key] = blk
+
+    def _evict(self, current_time: float):
+        candidates = [b.to_candidate() for b in self._store.values()]
+        if not candidates:
+            return
+
+        # Call the agent's policy — only give it the safe candidate dicts.
+        try:
+            victim_id = self.policy.select_victim(candidates)
+        except Exception:
+            victim_id = None
+
+        # Find the block with that ID.
+        victim_key = next(
+            (k for k, b in self._store.items() if b.block_id == victim_id),
+            None,
+        )
+
+        if victim_key is None:
+            # Invalid or crashed policy: fall back to evicting the oldest block.
+            self._invalid_policy_fallbacks += 1
+            victim_key = min(self._store, key=lambda k: self._store[k].last_access_time)
+
+        del self._store[victim_key]
+        self.eviction_count += 1
+
+
+# ---------------------------------------------------------------------------
+# Simulation runner
+# ---------------------------------------------------------------------------
+
+def run(trace: list[dict], policy, capacity_blocks: int = 256) -> dict:
+    """
+    Replay *trace* through a PrefixCache of *capacity_blocks* using *policy*.
+
+    Returns a metrics dict suitable for writing to results/.
+    """
+    cache = PrefixCache(capacity_blocks=capacity_blocks, policy=policy)
+
+    per_request = []
+    wall_start = time.perf_counter()
+
+    for req in trace:
+        result = cache.process_request(req["input_tokens"], req["arrival_time"])
+        result["request_id"] = req["id"]
+        per_request.append(result)
+
+    wall_elapsed = time.perf_counter() - wall_start
+
+    ttfts      = [r["ttft_ms"]   for r in per_request]
+    hit_rates  = [r["hit_rate"]  for r in per_request]
+    hit_blocks = sum(r["hit_blocks"]  for r in per_request)
+    miss_blocks= sum(r["miss_blocks"] for r in per_request)
+
+    return {
+        "num_requests":         len(trace),
+        "capacity_blocks":      capacity_blocks,
+        "evictions":            cache.eviction_count,
+        "invalid_policy_fallbacks": cache._invalid_policy_fallbacks,
+        # TTFT
+        "mean_ttft_ms":         round(statistics.mean(ttfts), 2),
+        "p50_ttft_ms":          round(statistics.median(ttfts), 2),
+        "p95_ttft_ms":          round(_percentile(ttfts, 95), 2),
+        "p99_ttft_ms":          round(_percentile(ttfts, 99), 2),
+        # Hit rate
+        "overall_hit_rate":     round(hit_blocks / max(hit_blocks + miss_blocks, 1), 4),
+        "mean_request_hit_rate":round(statistics.mean(hit_rates), 4),
+        # Throughput proxy: requests per simulated second
+        "sim_throughput_rps":   round(len(trace) / max(trace[-1]["arrival_time"] - trace[0]["arrival_time"], 1e-9), 2),
+        # Wall time (how fast the sim ran)
+        "sim_wall_time_s":      round(wall_elapsed, 3),
+    }
+
+
+def _tokenize(tokens: list[int]) -> list[tuple]:
+    """Split token list into fixed-size block keys."""
+    n = (len(tokens) // BLOCK_SIZE) * BLOCK_SIZE
+    return [tuple(tokens[i:i + BLOCK_SIZE]) for i in range(0, n, BLOCK_SIZE)]
+
+
+def _percentile(data: list[float], p: int) -> float:
+    if not data:
+        return 0.0
+    sorted_data = sorted(data)
+    idx = (p / 100) * (len(sorted_data) - 1)
+    lo, hi = int(idx), min(int(idx) + 1, len(sorted_data) - 1)
+    return sorted_data[lo] + (sorted_data[hi] - sorted_data[lo]) * (idx - lo)

@@ -1,0 +1,32 @@
+{
+  "timestamp": "20261023_000614",
+  "policy_source": "\"\"\"\nKV Cache Eviction Policy\n========================\nEdit this file to implement your eviction policy.\n\nYour goal: reduce mean_ttft_ms and increase overall_hit_rate.\nRun `python submit.py` to evaluate your policy and see the metrics.\n\nHOW IT WORKS\n------------\nWhen the KV cache is full and a new block needs to be stored, the simulator\ncalls `select_victim(blocks)` to ask your policy which block to evict.\n\nYou return the block_id of the block you want to remove.\n\nWHAT YOU CAN SEE (the `blocks` argument)\n-----------------------------------------\nEach block is a dict with these fields:\n\n    block_id         (int)   unique ID for this block\n    num_hits         (int)   how many times a request reused this block\n    last_access_time (float) simulated time this block was last used\n    creation_time    (float) simulated time this block entered the cache\n    size_tokens      (int)   number of tokens in this block (always 16)\n\nWHAT YOU CANNOT SEE\n--------------------\n- Future requests\n- The actual token content of blocks\n- The evaluator or trace code\n\nBASELINE SCORE (LRU)\n---------------------\nThe default policy below is LRU. It scores roughly:\n    mean_ttft_ms       ~53 ms\n    overall_hit_rate   ~0.60\n\nBeat it.\n\"\"\"\n\n\nclass EvictionPolicy:\n\n    def select_victim(self, blocks: list[dict]) -> int:\n        \"\"\"\n        Choose one block to evict from the cache.\n\n        Parameters\n        ----------\n        blocks : list of dict\n            All currently evictable blocks (see fields above).\n\n        Returns\n        -------\n        int\n            The block_id of the block to evict.\n        \"\"\"\n        # DEFAULT: Least Recently Used \u2014 evict the block accessed longest ago.\n        return min(blocks, key=lambda b: b[\"last_access_time\"])[\"block_id\"]\n",
+  "tuning": {
+    "num_requests": 156,
+    "capacity_blocks": 256,
+    "evictions": 340,
+    "invalid_policy_fallbacks": 0,
+    "mean_ttft_ms": 61.46,
+    "p50_ttft_ms": 59.0,
+    "p95_ttft_ms": 71.0,
+    "p99_ttft_ms": 71.0,
+    "overall_hit_rate": 0.7229,
+    "mean_request_hit_rate": 0.6293,
+    "sim_throughput_rps": 9.92,
+    "sim_wall_time_s": 0.026
+  },
+  "eval": {
+    "num_requests": 156,
+    "capacity_blocks": 256,
+    "evictions": 413,
+    "invalid_policy_fallbacks": 0,
+    "mean_ttft_ms": 62.87,
+    "p50_ttft_ms": 59.0,
+    "p95_ttft_ms": 82.25,
+    "p99_ttft_ms": 116.0,
+    "overall_hit_rate": 0.7181,
+    "mean_request_hit_rate": 0.6618,
+    "sim_throughput_rps": 10.37,
+    "sim_wall_time_s": 0.031
+  }
+}

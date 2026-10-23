@@ -84,4 +84,13 @@ Beat it. Ideas to try:
 - Only edit `policy.py`.
 - `select_victim` must return a `block_id` from the provided list.
 - You cannot access future requests, trace data, or the simulator internals.
-- You can add helper methods or state to `EvictionPolicy` (e.g. a counter).
+- You can add helper methods or **state** to `EvictionPolicy` (e.g. a hit-count
+  dict that you update each call — just remember the object persists across calls).
+- Do not read or import anything from `../sim/`. The evaluator detects this.
+
+## Results
+
+Each run writes a timestamped file to `../results/run_<timestamp>.json`.
+That folder is outside this sandbox — it collects every run's metrics and
+the exact policy source that produced them, so your progress is logged
+even if you overwrite `policy.py`.

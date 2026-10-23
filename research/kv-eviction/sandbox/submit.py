@@ -25,7 +25,7 @@ import traceback
 # ---------------------------------------------------------------------------
 
 SANDBOX_DIR = os.path.dirname(os.path.abspath(__file__))
-RESULTS_DIR = os.path.join(SANDBOX_DIR, "results")
+RESULTS_DIR = os.path.join(SANDBOX_DIR, "..", "results")   # outside sandbox
 SIM_DIR     = os.path.join(SANDBOX_DIR, "..", "sim")
 POLICY_FILE = os.path.join(SANDBOX_DIR, "policy.py")
 
@@ -67,13 +67,23 @@ def load_policy():
 # Sandbox check: make sure policy doesn't access trace or sim internals
 # ---------------------------------------------------------------------------
 
+def _check_no_sim_imports(policy_source: str):
+    """Fail if policy.py tries to import the simulator or trace modules."""
+    forbidden = ["from sim", "import sim", "import trace", "import cache",
+                 "../sim", "kv-eviction/sim"]
+    for f in forbidden:
+        if f in policy_source:
+            print(f"\n[DISQUALIFIED] policy.py contains forbidden import: '{f}'")
+            print("  You may only use the blocks argument passed to select_victim().\n")
+            sys.exit(1)
+
+
 def _make_safe_policy(policy):
     """Wrap policy so crashes don't kill the whole run."""
     class SafePolicy:
         def select_victim(self, blocks):
             try:
                 result = policy.select_victim(blocks)
-                # Must return a valid block_id
                 valid_ids = {b["block_id"] for b in blocks}
                 if result not in valid_ids:
                     return None  # cache.py falls back to LRU
@@ -95,6 +105,7 @@ def main():
     # Load policy
     print("\nLoading policy.py ...", end=" ")
     policy, policy_source = load_policy()
+    _check_no_sim_imports(policy_source)
     safe_policy = _make_safe_policy(policy)
     print("OK")
 

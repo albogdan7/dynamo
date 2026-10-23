@@ -5,6 +5,7 @@
 
 use super::*;
 
+mod callback_backend;
 mod fifo;
 mod hashmap_backend;
 mod lineage;
@@ -15,6 +16,7 @@ mod reuse_policy;
 #[cfg(test)]
 mod tests;
 
+pub use callback_backend::{BlockCandidate, CallbackBackend, EvictionCallback};
 pub(crate) use fifo::FifoReusePolicy;
 pub(crate) use hashmap_backend::HashMapBackend;
 pub(crate) use lineage::{LeafPolicy, LineageBackend};

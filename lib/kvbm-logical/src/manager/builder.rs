@@ -14,8 +14,8 @@ use crate::{
     pools::{
         BlockDuplicationPolicy, BlockStore, InactiveIndex,
         backends::{
-            FifoReusePolicy, HashMapBackend, LeafPolicy, LineageBackend, LruBackend,
-            MultiLruBackend,
+            CallbackBackend, EvictionCallback, FifoReusePolicy, HashMapBackend, LeafPolicy,
+            LineageBackend, LruBackend, MultiLruBackend,
         },
     },
     registry::BlockRegistry,
@@ -68,6 +68,14 @@ pub enum InactiveBackendConfig {
     Lineage {
         /// Leaf-eviction ordering. Default: [`LineageEviction::Tick`].
         eviction: LineageEviction,
+    },
+    /// Callback-driven backend: delegates eviction ordering to `callback`.
+    ///
+    /// Use this for research hooks, simulation experiments, or any policy
+    /// that cannot be expressed as one of the built-in backends. See
+    /// [`EvictionCallback`] and [`crate::pools::backends::BlockCandidate`].
+    Callback {
+        callback: EvictionCallback,
     },
 }
 
@@ -280,6 +288,35 @@ impl<T: BlockMetadata> BlockManagerConfigBuilder<T> {
         self
     }
 
+    /// Use a callback-driven backend.
+    ///
+    /// `callback` receives the full list of inactive [`BlockCandidate`]s and
+    /// the requested eviction count, and returns indices (into the candidate
+    /// slice) ordered from first-to-evict to last-to-evict.
+    ///
+    /// # Example
+    /// ```rust,ignore
+    /// use std::sync::Arc;
+    /// use kvbm_logical::pools::backends::BlockCandidate;
+    ///
+    /// // LRU policy: evict the block that entered the inactive pool earliest.
+    /// let callback = Arc::new(|candidates: &[BlockCandidate], count: usize| -> Vec<usize> {
+    ///     let mut order: Vec<usize> = (0..candidates.len()).collect();
+    ///     order.sort_by_key(|&i| candidates[i].inserted_at);
+    ///     order.truncate(count);
+    ///     order
+    /// });
+    /// let manager = BlockManager::builder()
+    ///     .block_count(128)
+    ///     .registry(registry)
+    ///     .with_callback_backend(callback)
+    ///     .build()?;
+    /// ```
+    pub fn with_callback_backend(mut self, callback: EvictionCallback) -> Self {
+        self.inactive_backend = Some(InactiveBackendConfig::Callback { callback });
+        self
+    }
+
     /// Use the lineage backend with the default ([`Tick`](LineageEviction::Tick))
     /// leaf-eviction policy.
     pub fn with_lineage_backend(mut self) -> Self {
@@ -435,6 +472,10 @@ impl<T: BlockMetadata> BlockManagerConfigBuilder<T> {
                     block_count,
                     lineage_leaf_policy(eviction, block_count),
                 ))
+            }
+            Some(InactiveBackendConfig::Callback { callback }) => {
+                tracing::info!("Using Callback inactive backend");
+                Box::new(CallbackBackend::new(callback))
             }
             None => {
                 let eviction = LineageEviction::default();

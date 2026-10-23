@@ -39,6 +39,7 @@ pub use integrations::{
     SchedulableSequenceBuilder, ScheduleError, SequenceDelegate, SequenceEvent, SequenceState,
 };
 pub use manager::BlockManager;
+pub use pools::backends::{BlockCandidate, CallbackBackend, EvictionCallback};
 pub use registry::BlockRegistry;
 pub use sequence::{
     BlockSequence, BlockSequenceError, ExternalBlockAssignments, LogicalBlockAssignmentError,

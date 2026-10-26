@@ -201,18 +201,16 @@ def main():
     print("OK")
 
     # Import sim modules (only in this scoring process).
-    from trace import generate_trace, split_trace
+    from trace import generate_trace
     from cache import run
 
-    # Generate trace and split by session.
-    print("Generating trace    ...", end=" ")
-    full_trace = generate_trace(
-        num_sessions=40,
-        turns_per_session=6,
-        repeat_fraction=0.3,
-        seed=42,
-    )
-    tuning_trace, eval_trace = split_trace(full_trace, eval_fraction=0.5, seed=7)
+    # Two independent traces — same shape, different seeds.
+    # The agent tunes on seed=42 and is scored on seed=99.
+    # They share no token content, so there is nothing to memorize.
+    print("Generating traces   ...", end=" ")
+    _TRACE_KWARGS = dict(num_sessions=40, turns_per_session=6, repeat_fraction=0.3)
+    tuning_trace = generate_trace(**_TRACE_KWARGS, seed=42)
+    eval_trace   = generate_trace(**_TRACE_KWARGS, seed=99)
     print(f"OK  ({len(tuning_trace)} tuning / {len(eval_trace)} eval requests)")
 
     # Tuning run (agent sees these numbers).

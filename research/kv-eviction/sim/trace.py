@@ -83,7 +83,8 @@ def generate_trace(
             flat.append({
                 "arrival_time": session_start + t_idx * 1.0,
                 "input_tokens": req["input_tokens"],
-                "output_len": req["output_len"],
+                "output_len":   req["output_len"],
+                "session_id":   s_idx,   # used by split_trace
             })
 
     # Sort by arrival time and assign IDs.
@@ -96,10 +97,25 @@ def generate_trace(
 
 def split_trace(trace: list[dict], eval_fraction: float = 0.5, seed: int = 0):
     """
-    Split trace into tuning and evaluation halves by session boundary.
-    The agent tunes on the tuning half; final scores use the eval half.
-    eval_fraction is the share of requests held out for evaluation.
+    Split into disjoint tuning and evaluation sets by SESSION, not by request
+    index. This guarantees that no session has turns in both halves, so the
+    eval set is truly held out — the agent cannot tune on early turns and get
+    a free hit-rate boost on later turns of the same session.
     """
-    n = len(trace)
-    split = int(n * (1 - eval_fraction))
-    return trace[:split], trace[split:]
+    session_ids = sorted({r["session_id"] for r in trace})
+    rng = random.Random(seed)
+    rng.shuffle(session_ids)
+
+    n_eval = max(1, int(len(session_ids) * eval_fraction))
+    eval_sessions  = set(session_ids[:n_eval])
+    tuning_sessions = set(session_ids[n_eval:])
+
+    tuning = sorted(
+        [r for r in trace if r["session_id"] in tuning_sessions],
+        key=lambda r: r["arrival_time"],
+    )
+    evaluation = sorted(
+        [r for r in trace if r["session_id"] in eval_sessions],
+        key=lambda r: r["arrival_time"],
+    )
+    return tuning, evaluation

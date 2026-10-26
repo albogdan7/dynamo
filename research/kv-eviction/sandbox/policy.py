@@ -55,5 +55,6 @@ class EvictionPolicy:
         int
             The block_id of the block to evict.
         """
-        # DEFAULT: Least Recently Used — evict the block accessed longest ago.
-        return min(blocks, key=lambda b: b["last_access_time"])["block_id"]
+        # LRU with leaf-first tiebreak: among tied last_access_time, evict newest
+        # creation (deepest leaf) first, preserving shared prefix roots for repeats.
+        return min(blocks, key=lambda b: (b["last_access_time"], -b["creation_time"]))["block_id"]

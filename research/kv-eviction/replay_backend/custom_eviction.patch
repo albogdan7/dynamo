@@ -1,0 +1,289 @@
+--- a/src/engine/mod.rs
++++ b/src/engine/mod.rs
+@@ -5,6 +5,7 @@
+ 
+ pub(crate) mod belady;
+ mod cache;
++pub mod custom_eviction;
+ mod common;
+ mod config;
+ pub(crate) mod g3_offload;
+--- a/src/engine/custom_eviction.rs
++++ b/src/engine/custom_eviction.rs
+@@ -0,0 +1,78 @@
++// SPDX-License-Identifier: Apache-2.0
++//! Research-only scoped hook for synchronous, single-worker SGLang replay.
++//! Callbacks must be pure: admission rollback may repeat candidate decisions.
++use std::cell::RefCell;
++use serde::Serialize;
++
++#[derive(Debug, Clone, Serialize)]
++pub struct LeafCandidate {
++    pub block_id: u64,
++    pub lru_rank: usize,
++    pub size_tokens: usize,
++    pub prefix_tokens: usize,
++}
++
++type Selector = Box<dyn FnMut(&[LeafCandidate]) -> u64>;
++thread_local! {
++    static SELECTOR: RefCell<Option<Selector>> = RefCell::new(None);
++}
++
++pub(crate) fn active() -> bool {
++    SELECTOR.with(|s| s.borrow().is_some())
++}
++
++pub(crate) fn select(candidates: &[LeafCandidate]) -> u64 {
++    SELECTOR.with(|s| s.borrow_mut().as_mut().expect("custom selector missing")(candidates))
++}
++
++/// Scope a stateless selector to this thread, restoring it even on panic.
++/// Does not change other threads or support asynchronous/multi-worker engines.
++pub fn with_leaf_selector<T>(selector: Selector, run: impl FnOnce() -> T) -> T {
++    assert!(!active(), "nested leaf selectors are unsupported");
++    SELECTOR.with(|s| *s.borrow_mut() = Some(selector));
++    struct Reset;
++    impl Drop for Reset {
++        fn drop(&mut self) { SELECTOR.with(|s| *s.borrow_mut() = None); }
++    }
++    let _reset = Reset;
++    run()
++}
++
++#[cfg(test)]
++mod tests {
++    use super::*;
++    use crate::engine::cache::radix_cache::RadixCache;
++
++    #[test]
++    fn custom_eviction_only_exposes_unlocked_leaves_and_preserves_parent() {
++        let mut cache = RadixCache::new(3, 1);
++        let pages = cache.page_pool.allocate(3).unwrap();
++        let locked = cache.insert(&[1, 2], &pages[..2]);
++        cache.insert(&[1, 3], &[pages[0], pages[2]]);
++        cache.inc_lock_ref(locked);
++        let (evicted, _) = with_leaf_selector(Box::new(|leaves| {
++            assert_eq!(leaves.len(), 1);
++            assert_eq!(leaves[0].prefix_tokens, 1);
++            assert_eq!(leaves[0].size_tokens, 1);
++            leaves[0].block_id
++        }), || cache.evict(1));
++        assert_eq!(evicted, 1);
++        assert_eq!(cache.prefix_match_len(&[1, 2]), 2);
++        assert_eq!(cache.prefix_match_len(&[1, 3]), 1);
++        assert!(!active());
++    }
++
++    #[test]
++    fn custom_eviction_invalid_id_fails_before_mutation_and_restores_scope() {
++        let mut cache = RadixCache::new(1, 1);
++        let pages = cache.page_pool.allocate(1).unwrap();
++        cache.insert(&[7], &pages);
++        let failure = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
++            with_leaf_selector(Box::new(|_| u64::MAX), || cache.evict(1))
++        }));
++        assert!(failure.is_err());
++        assert!(!active());
++        assert_eq!(cache.prefix_match_len(&[7]), 1);
++        assert_eq!(cache.evict(1).0, 1);
++    }
++}
+--- a/src/engine/cache/radix_cache.rs
++++ b/src/engine/cache/radix_cache.rs
+@@ -10,7 +10,8 @@
+ use crate::engine::common::hashing::compute_block_hash_for_seq;
+ use crate::engine::common::hashing::{LocalBlockHash, SequenceHash, compute_next_seq_hash};
+ use rustc_hash::FxHashMap;
+-use slotmap::{SlotMap, new_key_type};
++use slotmap::{Key, SlotMap, new_key_type};
++use crate::engine::custom_eviction::{self, LeafCandidate};
+ use std::cmp::Reverse;
+ use std::collections::BTreeSet;
+ use std::sync::Arc;
+@@ -1001,7 +1002,32 @@
+         while evicted < num_tokens {
+             // Global input demand can execute on another worker. It intentionally ranks only
+             // this worker's causally resident, unlocked leaves; it never creates or unlocks KV.
+-            let victim = if let Some(belady) = &self.belady {
++            let victim = if custom_eviction::active() && !self.evictable_leaves.is_empty() {
++                assert!(self.belady.is_none(), "custom eviction cannot combine with Belady");
++                let indexed: Vec<_> = self.evictable_leaves.iter().copied().collect();
++                let candidates: Vec<_> = indexed.iter().enumerate().map(|(rank, &(_, id))| {
++                    let node = &self.nodes[id];
++                    let mut prefix_tokens = 0;
++                    let mut parent = node.parent;
++                    while let Some(id) = parent {
++                        prefix_tokens += self.nodes[id].key.len() * self.page_size;
++                        parent = self.nodes[id].parent;
++                    }
++                    LeafCandidate {
++                        block_id: id.data().as_ffi(),
++                        lru_rank: rank,
++                        size_tokens: node.key.len() * self.page_size,
++                        prefix_tokens,
++                    }
++                }).collect();
++                let selected = custom_eviction::select(&candidates);
++                let (accessed, id) = indexed.into_iter()
++                    .find(|(_, id)| id.data().as_ffi() == selected)
++                    .expect("custom policy returned an ineligible radix leaf");
++                assert!(self.is_evictable_leaf(id));
++                self.remove_evictable_leaf(id);
++                Some((accessed, id))
++            } else if let Some(belady) = &self.belady {
+                 let Some(&(_, accessed, id)) = belady.candidates.first() else {
+                     break;
+                 };
+--- a/src/perfmodel/perf_database/moe_a2a.rs
++++ b/src/perfmodel/perf_database/moe_a2a.rs
+@@ -1430,7 +1430,7 @@
+     #[test]
+     fn deepep_ll_dtype_candidates_match_shared_coverage_fixture() {
+         let cases: serde_json::Value = serde_json::from_str(include_str!(
+-            "../../../../../python/aisimulate/tests/fixtures/deepep_ll_dtype_candidates.json"
++            "../../../research_test_fixtures/deepep_ll_dtype_candidates.json"
+         ))
+         .unwrap();
+         for case in cases.as_array().unwrap() {
+@@ -1459,7 +1459,7 @@
+     #[test]
+     fn deepep_ll_runtime_matches_shared_coverage_viability_fixture() {
+         let cases: serde_json::Value = serde_json::from_str(include_str!(
+-            "../../../../../python/aisimulate/tests/fixtures/deepep_ll_calibration_viability.json"
++            "../../../research_test_fixtures/deepep_ll_calibration_viability.json"
+         ))
+         .unwrap();
+         for case in cases.as_array().unwrap() {
+--- a/research_test_fixtures/deepep_ll_dtype_candidates.json
++++ b/research_test_fixtures/deepep_ll_dtype_candidates.json
+@@ -0,0 +1,42 @@
++[
++  {
++    "name": "dispatch_typed_then_legacy",
++    "backend": "deepep_ll",
++    "phase": "dispatch",
++    "requested": "fp8",
++    "available": ["default", "fp8"],
++    "expected": ["fp8", "default"]
++  },
++  {
++    "name": "dispatch_alias_then_legacy",
++    "backend": "deepep_ll",
++    "phase": "dispatch",
++    "requested": "fp8_block",
++    "available": ["default", "fp8"],
++    "expected": ["fp8", "default"]
++  },
++  {
++    "name": "combine_typed_then_legacy",
++    "backend": "deepep_ll",
++    "phase": "combine",
++    "requested": "bfloat16",
++    "available": ["default", "bfloat16"],
++    "expected": ["bfloat16", "default"]
++  },
++  {
++    "name": "incompatible_dtype_rejects_legacy",
++    "backend": "deepep_ll",
++    "phase": "dispatch",
++    "requested": "nvfp4",
++    "available": ["default"],
++    "expected": []
++  },
++  {
++    "name": "non_ll_preserves_sole_default",
++    "backend": "deepep_ht",
++    "phase": "dispatch",
++    "requested": "fp8",
++    "available": ["default"],
++    "expected": ["default"]
++  }
++]
+--- a/research_test_fixtures/deepep_ll_calibration_viability.json
++++ b/research_test_fixtures/deepep_ll_calibration_viability.json
+@@ -0,0 +1,84 @@
++[
++  {
++    "name": "exact_ols",
++    "requested_dispatch_dtype": "fp8",
++    "requested_combine_dtype": "bfloat16",
++    "target_ep": 16,
++    "target_nodes": 2,
++    "expected": true,
++    "rows": [
++      {
++        "ep": 16,
++        "nodes": 2,
++        "dispatch_dtype": "fp8",
++        "combine_dtype": "bfloat16",
++        "points": [[32, 0.032], [64, 0.048]]
++      }
++    ]
++  },
++  {
++    "name": "exact_one_shot_with_system_t0",
++    "requested_dispatch_dtype": "fp8",
++    "requested_combine_dtype": "bfloat16",
++    "target_ep": 16,
++    "target_nodes": 2,
++    "expected": true,
++    "rows": [
++      {
++        "ep": 16,
++        "nodes": 2,
++        "dispatch_dtype": "fp8",
++        "combine_dtype": "bfloat16",
++        "points": [[64, 0.080]]
++      },
++      {
++        "ep": 8,
++        "nodes": 1,
++        "dispatch_dtype": "default",
++        "combine_dtype": "default",
++        "points": [[1, 0.017], [2, 0.018]]
++      }
++    ]
++  },
++  {
++    "name": "single_point_without_system_t0",
++    "requested_dispatch_dtype": "fp8",
++    "requested_combine_dtype": "bfloat16",
++    "target_ep": 16,
++    "target_nodes": 2,
++    "expected": false,
++    "rows": [
++      {
++        "ep": 16,
++        "nodes": 2,
++        "dispatch_dtype": "fp8",
++        "combine_dtype": "bfloat16",
++        "points": [[64, 0.080]]
++      }
++    ]
++  },
++  {
++    "name": "alternate_viable_donor",
++    "requested_dispatch_dtype": "fp8",
++    "requested_combine_dtype": "bfloat16",
++    "target_ep": 16,
++    "target_nodes": 2,
++    "expected": true,
++    "rows": [
++      {
++        "ep": 8,
++        "nodes": 1,
++        "dispatch_dtype": "fp8",
++        "combine_dtype": "bfloat16",
++        "points": [[32, 0.040], [64, 0.040]]
++      },
++      {
++        "ep": 4,
++        "nodes": 1,
++        "dispatch_dtype": "fp8",
++        "combine_dtype": "bfloat16",
++        "points": [[32, 0.032], [64, 0.048]]
++      }
++    ]
++  }
++]

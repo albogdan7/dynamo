@@ -17,7 +17,7 @@ from dataclasses import dataclass, field
 from typing import Any
 
 BLOCK_SIZE = 16          # tokens per cache block (must match trace.py)
-BASE_TTFT_MS = 50.0      # fixed decode overhead (ms)
+BASE_TTFT_MS = 50.0      # fixed execution overhead to first token (ms)
 RECOMPUTE_MS = 3.0       # added per missed block (ms); models GPU recompute cost
 
 
@@ -64,7 +64,10 @@ class PrefixCache:
 
     def process_request(self, tokens: list[int], arrival_time: float) -> dict:
         """
-        Process one request. Returns per-request metrics dict.
+        Process one request at service start. Returns execution-only metrics.
+
+        ``arrival_time`` is the cache access timestamp; the queue runner passes
+        service start here, not the original external arrival time.
 
         Radix-style prefix matching: walk token blocks left-to-right,
         stop at the first miss. All blocks from that miss onward are added
@@ -147,26 +150,49 @@ def run(trace: list[dict], policy, capacity_blocks: int = 256) -> dict:
     """
     Replay *trace* through a PrefixCache of *capacity_blocks* using *policy*.
 
+    Model one FIFO server occupied until each request's first token. Cache
+    accesses happen at service start; the next request cannot use the cache
+    until the preceding request finishes this execution stage. TTFT includes
+    queueing. This deliberately excludes batching and subsequent decode work,
+    so throughput measures first-token completions, not full generations.
+
+    Trace arrivals must be nondecreasing, in seconds. Ties retain input order.
     Returns a metrics dict suitable for writing to results/.
     """
+    if not trace:
+        raise ValueError("trace must contain at least one request")
+    if any(b["arrival_time"] < a["arrival_time"] for a, b in zip(trace, trace[1:])):
+        raise ValueError("trace must be ordered by arrival_time")
     cache = PrefixCache(capacity_blocks=capacity_blocks, policy=policy)
 
     per_request = []
     wall_start = time.perf_counter()
+    server_available_s = trace[0]["arrival_time"]
 
     for req in trace:
-        result = cache.process_request(req["input_tokens"], req["arrival_time"])
+        arrival_s = req["arrival_time"]
+        start_s = max(arrival_s, server_available_s)
+        result = cache.process_request(req["input_tokens"], start_s)
+        execution_ms = result["ttft_ms"]
+        waiting_ms = (start_s - arrival_s) * 1000.0
+        server_available_s = start_s + execution_ms / 1000.0
+        result["waiting_ms"] = waiting_ms
+        result["execution_ms"] = execution_ms
+        result["ttft_ms"] = waiting_ms + execution_ms
         result["request_id"] = req["id"]
         per_request.append(result)
 
     wall_elapsed = time.perf_counter() - wall_start
 
     ttfts      = [r["ttft_ms"]   for r in per_request]
+    waits      = [r["waiting_ms"] for r in per_request]
+    executions = [r["execution_ms"] for r in per_request]
     hit_rates  = [r["hit_rate"]  for r in per_request]
     hit_blocks = sum(r["hit_blocks"]  for r in per_request)
     miss_blocks= sum(r["miss_blocks"] for r in per_request)
 
     return {
+        "timing_model":         "fifo_single_server_first_token_v1",
         "num_requests":         len(trace),
         "capacity_blocks":      capacity_blocks,
         "evictions":            cache.eviction_count,
@@ -176,11 +202,14 @@ def run(trace: list[dict], policy, capacity_blocks: int = 256) -> dict:
         "p50_ttft_ms":          round(statistics.median(ttfts), 2),
         "p95_ttft_ms":          round(_percentile(ttfts, 95), 2),
         "p99_ttft_ms":          round(_percentile(ttfts, 99), 2),
+        "mean_waiting_ms":      round(statistics.mean(waits), 2),
+        "p95_waiting_ms":       round(_percentile(waits, 95), 2),
+        "mean_execution_ms":    round(statistics.mean(executions), 2),
         # Hit rate
         "overall_hit_rate":     round(hit_blocks / max(hit_blocks + miss_blocks, 1), 4),
         "mean_request_hit_rate":round(statistics.mean(hit_rates), 4),
-        # Throughput proxy: requests per simulated second
-        "sim_throughput_rps":   round(len(trace) / max(trace[-1]["arrival_time"] - trace[0]["arrival_time"], 1e-9), 2),
+        # First-token completions over the interval including queue drain.
+        "sim_throughput_rps":   round(len(trace) / (server_available_s - trace[0]["arrival_time"]), 2),
         # Wall time (how fast the sim ran)
         "sim_wall_time_s":      round(wall_elapsed, 3),
     }

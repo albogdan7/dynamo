@@ -1,0 +1,69 @@
+{
+  "experiment": "agent-written stateless leaf policies",
+  "evaluation_role": "tuning only",
+  "candidate_budget": 6,
+  "selected_candidate": 5,
+  "independent_rerun": "outputs/agent_trial_selected.json",
+  "trials": [
+    {
+      "candidate": 1,
+      "policy": "policies/agent_candidate_1.py",
+      "output": "outputs/run_20261029_045147_912881.json",
+      "policy_sha256": "f06af51c166323931b8fb7e73b18a62fb67f906d8748863e746a8e0c647f5453",
+      "spec_sha256": "c077ad03e4e61a0cb747f51fe896ba39a7515ac12bb3f352d10cd166c7e232da",
+      "completed_requests": 12,
+      "committed_prefill_tokens": 88,
+      "prefix_cache_reused_ratio": 0.3888888888888889
+    },
+    {
+      "candidate": 2,
+      "policy": "policies/agent_candidate_2.py",
+      "output": "outputs/run_20261029_045151_835366.json",
+      "policy_sha256": "57b6fee2ab67a58226a02f498cc1e68978350b8d6928ce71227b641ba2a2d15b",
+      "spec_sha256": "c077ad03e4e61a0cb747f51fe896ba39a7515ac12bb3f352d10cd166c7e232da",
+      "completed_requests": 12,
+      "committed_prefill_tokens": 84,
+      "prefix_cache_reused_ratio": 0.4166666666666667
+    },
+    {
+      "candidate": 3,
+      "policy": "policies/agent_candidate_3.py",
+      "output": "outputs/run_20261029_045156_314116.json",
+      "policy_sha256": "6bf0bdc9388349a08ada748eb7d8a342c57dfb3d4d4342f435fd8c08f8488436",
+      "spec_sha256": "c077ad03e4e61a0cb747f51fe896ba39a7515ac12bb3f352d10cd166c7e232da",
+      "completed_requests": 12,
+      "committed_prefill_tokens": 84,
+      "prefix_cache_reused_ratio": 0.4166666666666667
+    },
+    {
+      "candidate": 4,
+      "policy": "policies/agent_candidate_4.py",
+      "output": "outputs/run_20261029_045200_540909.json",
+      "policy_sha256": "e48ff263543ff66c7f48165eb4a68dddc64f8f8439aab266b609e2d4c2d00d4e",
+      "spec_sha256": "c077ad03e4e61a0cb747f51fe896ba39a7515ac12bb3f352d10cd166c7e232da",
+      "completed_requests": 12,
+      "committed_prefill_tokens": 84,
+      "prefix_cache_reused_ratio": 0.4166666666666667
+    },
+    {
+      "candidate": 5,
+      "policy": "policies/agent_candidate_5.py",
+      "output": "outputs/run_20261029_045205_156208.json",
+      "policy_sha256": "fe1951ada68a6b291013597bada17ebdf5091aeb2b84b99bb31ef7574d20baff",
+      "spec_sha256": "c077ad03e4e61a0cb747f51fe896ba39a7515ac12bb3f352d10cd166c7e232da",
+      "completed_requests": 12,
+      "committed_prefill_tokens": 80,
+      "prefix_cache_reused_ratio": 0.4444444444444444
+    },
+    {
+      "candidate": 6,
+      "policy": "policies/agent_candidate_6.py",
+      "output": "outputs/run_20261029_045210_370319.json",
+      "policy_sha256": "0a6bcf8bd241517a1184232c33691cade568ce47787beeeaba9e653b5548c8ba",
+      "spec_sha256": "c077ad03e4e61a0cb747f51fe896ba39a7515ac12bb3f352d10cd166c7e232da",
+      "completed_requests": 12,
+      "committed_prefill_tokens": 88,
+      "prefix_cache_reused_ratio": 0.3888888888888889
+    }
+  ]
+}

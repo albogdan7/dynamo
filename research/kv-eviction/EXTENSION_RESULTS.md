@@ -51,4 +51,4 @@ Regenerate the CSV/JSON from the committed evidence without a model or simulator
 python3 research/kv-eviction/summarize.py research/kv-eviction/evidence/comparison/runs
 ```
 
-[README.md](README.md) contains runnable commands and retrieval instructions. Codex is published in [PR #4](https://github.com/albogdan7/dynamo/pull/4); the additional-trace change follows it and targets the same fork’s `main`.
+[README.md](README.md) contains runnable commands and retrieval instructions. Codex is published in [PR #4](https://github.com/albogdan7/dynamo/pull/4); the additional-trace change is [PR #5](https://github.com/albogdan7/dynamo/pull/5). Both target the fork’s `main`; merge them in dependency order after #2 and #3.

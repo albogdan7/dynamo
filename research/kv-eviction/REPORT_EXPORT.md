@@ -20,6 +20,6 @@ python3 research/kv-eviction/export_report.py \
   --output /tmp/kv-eviction-audited-report
 ```
 
-Missing raw files fail clearly rather than falling back to receipts. The report states which verification mode ran. Either mode rejects changed policy or source hashes, inconsistent selection, failed receipts and mismatched comparisons. The raw audit additionally checks request/token arithmetic, workload and configuration hashes, and original metrics against the compact evidence.
+Missing raw files fail clearly rather than falling back to receipts. The JSON manifest records which verification mode ran. Either mode rejects changed policy or source hashes, inconsistent selection, failed receipts and mismatched comparisons. The raw audit additionally checks request/token arithmetic, workload and configuration hashes, and original metrics against the compact evidence.
 
 HTML, Markdown, CSV and the reproduction ZIP are byte deterministic with identical inputs and verification mode. The verification mode is recorded in the JSON manifest; the concise HTML contains only the results tables. Regenerating from compact evidence preserves the same HTML and numerical results. The manifest records input/output checksums and the generator checksum. Generated reports must be rebuilt from the script and evidence rather than edited manually.

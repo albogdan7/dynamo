@@ -7,134 +7,134 @@ Uncalibrated simulation. Changes are relative to LRU on the same split.
 
 ### Tuning performance
 
-| Metric and unit | LRU | Selected Claude policy | Selected Codex policy |
-| --- | --- | --- | --- |
-| Mean TTFT (ms) | 4,858.106 | 4,800.763 (-1.180% vs LRU) | 4,800.763 (-1.180% vs LRU) |
-| p95 TTFT (ms) | 29,403.750 | 29,230.426 (-0.589% vs LRU) | 29,230.426 (-0.589% vs LRU) |
-| Mean individual gap ITL (ms) | 31.78251 | 31.73395 (-0.153% vs LRU) | 31.73395 (-0.153% vs LRU) |
-| p95 individual gap ITL (ms) | 34.01000 | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) |
-| SLO goodput (requests/s) | 0.06161662420 | 0.06161662420 (0% vs LRU) | 0.06161662420 (0% vs LRU) |
-| SLO attainment (%) | 11.71875 | 11.71875 (0% vs LRU) | 11.71875 (0% vs LRU) |
-| Input token hit rate (%) | 25.49516 | 26.51742 (+4.010% vs LRU) | 26.51742 (+4.010% vs LRU) |
-| Recomputed input tokens (tokens) | 1,865,845 | 1,840,245 (-1.372% vs LRU) | 1,840,245 (-1.372% vs LRU) |
-| Evictions (512 token blocks) | 3,380 | 3,330 (-1.479% vs LRU) | 3,330 (-1.479% vs LRU) |
-| SLO passes / eligible | 30 / 256 | 30 / 256 (0% vs LRU) | 30 / 256 (0% vs LRU) |
-| Observation span (seconds) | 486.882 | 486.882 (0% vs LRU) | 486.882 (0% vs LRU) |
+| Metric and unit | LRU | FIFO | MRU | LFU | SLRU | Random 0 | Random 1 | Random 2 | Selected Claude policy | Selected Codex policy |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Mean TTFT (ms) | 4,858.106 | 4,848.072 (-0.207% vs LRU) | 4,877.116 (+0.391% vs LRU) | 4,777.016 (-1.669% vs LRU) | 4,777.016 (-1.669% vs LRU) | 4,899.948 (+0.861% vs LRU) | 4,888.997 (+0.636% vs LRU) | 4,900.125 (+0.865% vs LRU) | 4,777.016 (-1.669% vs LRU) | 4,777.016 (-1.669% vs LRU) |
+| p95 TTFT (ms) | 29,403.750 | 29,285.787 (-0.401% vs LRU) | 29,615.973 (+0.722% vs LRU) | 29,126.271 (-0.944% vs LRU) | 29,126.271 (-0.944% vs LRU) | 29,607.297 (+0.692% vs LRU) | 29,569.746 (+0.565% vs LRU) | 29,522.509 (+0.404% vs LRU) | 29,126.271 (-0.944% vs LRU) | 29,126.271 (-0.944% vs LRU) |
+| Mean individual gap ITL (ms) | 31.78251 | 31.80064 (+0.057% vs LRU) | 31.86300 (+0.253% vs LRU) | 31.67176 (-0.348% vs LRU) | 31.67176 (-0.348% vs LRU) | 31.85407 (+0.225% vs LRU) | 31.86652 (+0.264% vs LRU) | 31.87097 (+0.278% vs LRU) | 31.67176 (-0.348% vs LRU) | 31.67176 (-0.348% vs LRU) |
+| p95 individual gap ITL (ms) | 34.01000 | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) |
+| SLO goodput (requests/s) | 0.06161662420 | 0.05543438896 (-10.033% vs LRU) | 0.05545496178 (-10.000% vs LRU) | 0.06161662420 (0% vs LRU) | 0.06161662420 (0% vs LRU) | 0.05956161126 (-3.335% vs LRU) | 0.05543937253 (-10.025% vs LRU) | 0.05545005700 (-10.008% vs LRU) | 0.06161662420 (0% vs LRU) | 0.06161662420 (0% vs LRU) |
+| SLO attainment (%) | 11.71875 | 10.54688 (-10.000% vs LRU) | 10.54688 (-10.000% vs LRU) | 11.71875 (0% vs LRU) | 11.71875 (0% vs LRU) | 11.32812 (-3.333% vs LRU) | 10.54688 (-10.000% vs LRU) | 10.54688 (-10.000% vs LRU) | 11.71875 (0% vs LRU) | 11.71875 (0% vs LRU) |
+| Input token hit rate (%) | 25.49516 | 25.08625 (-1.604% vs LRU) | 24.20711 (-5.052% vs LRU) | 27.13077 (+6.415% vs LRU) | 27.13077 (+6.415% vs LRU) | 24.30934 (-4.651% vs LRU) | 24.06399 (-5.613% vs LRU) | 23.81865 (-6.576% vs LRU) | 27.13077 (+6.415% vs LRU) | 27.13077 (+6.415% vs LRU) |
+| Recomputed input tokens (tokens) | 1,865,845 | 1,876,085 (+0.549% vs LRU) | 1,898,102 (+1.729% vs LRU) | 1,824,886 (-2.195% vs LRU) | 1,824,886 (-2.195% vs LRU) | 1,895,541 (+1.592% vs LRU) | 1,901,685 (+1.921% vs LRU) | 1,907,829 (+2.250% vs LRU) | 1,824,886 (-2.195% vs LRU) | 1,824,886 (-2.195% vs LRU) |
+| Evictions (512 token blocks) | 3,380 | 3,400 (+0.592% vs LRU) | 3,443 (+1.864% vs LRU) | 3,300 (-2.367% vs LRU) | 3,300 (-2.367% vs LRU) | 3,438 (+1.716% vs LRU) | 3,450 (+2.071% vs LRU) | 3,462 (+2.426% vs LRU) | 3,300 (-2.367% vs LRU) | 3,300 (-2.367% vs LRU) |
+| SLO passes / eligible | 30 / 256 | 27 / 256 (-10.000% vs LRU) | 27 / 256 (-10.000% vs LRU) | 30 / 256 (0% vs LRU) | 30 / 256 (0% vs LRU) | 29 / 256 (-3.333% vs LRU) | 27 / 256 (-10.000% vs LRU) | 27 / 256 (-10.000% vs LRU) | 30 / 256 (0% vs LRU) | 30 / 256 (0% vs LRU) |
+| Observation span (seconds) | 486.882 | 487.062 (+0.037% vs LRU) | 486.882 (0% vs LRU) | 486.882 (0% vs LRU) | 486.882 (0% vs LRU) | 486.891 (+0.002% vs LRU) | 487.018 (+0.028% vs LRU) | 486.925 (+0.009% vs LRU) | 486.882 (0% vs LRU) | 486.882 (0% vs LRU) |
 
 ### Held-out performance
 
-| Metric and unit | LRU | Selected Claude policy | Selected Codex policy |
-| --- | --- | --- | --- |
-| Mean TTFT (ms) | 1,316.243 | 1,290.044 (-1.990% vs LRU) | 1,290.044 (-1.990% vs LRU) |
-| p95 TTFT (ms) | 3,218.012 | 3,218.012 (0% vs LRU) | 3,218.012 (0% vs LRU) |
-| Mean individual gap ITL (ms) | 27.84873 | 27.80476 (-0.158% vs LRU) | 27.80476 (-0.158% vs LRU) |
-| p95 individual gap ITL (ms) | 34.01000 | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) |
-| SLO goodput (requests/s) | 0.10576055434 | 0.10579424815 (+0.032% vs LRU) | 0.10579424815 (+0.032% vs LRU) |
-| SLO attainment (%) | 17.96875 | 17.96875 (0% vs LRU) | 17.96875 (0% vs LRU) |
-| Input token hit rate (%) | 37.12341 | 38.21222 (+2.933% vs LRU) | 38.21222 (+2.933% vs LRU) |
-| Recomputed input tokens (tokens) | 1,241,807 | 1,220,303 (-1.732% vs LRU) | 1,220,303 (-1.732% vs LRU) |
-| Evictions (512 token blocks) | 2,153 | 2,111 (-1.951% vs LRU) | 2,111 (-1.951% vs LRU) |
-| SLO passes / eligible | 46 / 256 | 46 / 256 (0% vs LRU) | 46 / 256 (0% vs LRU) |
-| Observation span (seconds) | 434.945 | 434.806 (-0.032% vs LRU) | 434.806 (-0.032% vs LRU) |
+| Metric and unit | LRU | FIFO | MRU | LFU | SLRU | Random 0 | Random 1 | Random 2 | Selected Claude policy | Selected Codex policy |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Mean TTFT (ms) | 1,316.243 | 1,330.708 (+1.099% vs LRU) | 1,365.337 (+3.730% vs LRU) | 1,294.068 (-1.685% vs LRU) | 1,290.044 (-1.990% vs LRU) | 1,326.591 (+0.786% vs LRU) | 1,326.669 (+0.792% vs LRU) | 1,338.578 (+1.697% vs LRU) | 1,294.068 (-1.685% vs LRU) | 1,294.068 (-1.685% vs LRU) |
+| p95 TTFT (ms) | 3,218.012 | 3,328.615 (+3.437% vs LRU) | 3,550.629 (+10.336% vs LRU) | 3,218.012 (0% vs LRU) | 3,218.012 (0% vs LRU) | 3,238.134 (+0.625% vs LRU) | 3,238.172 (+0.626% vs LRU) | 3,238.172 (+0.626% vs LRU) | 3,218.012 (0% vs LRU) | 3,218.012 (0% vs LRU) |
+| Mean individual gap ITL (ms) | 27.84873 | 27.86869 (+0.072% vs LRU) | 27.72103 (-0.459% vs LRU) | 27.80613 (-0.153% vs LRU) | 27.80476 (-0.158% vs LRU) | 27.88223 (+0.120% vs LRU) | 27.86822 (+0.070% vs LRU) | 27.88457 (+0.129% vs LRU) | 27.80613 (-0.153% vs LRU) | 27.80613 (-0.153% vs LRU) |
+| p95 individual gap ITL (ms) | 34.01000 | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) |
+| SLO goodput (requests/s) | 0.10576055434 | 0.10576055434 (0% vs LRU) | 0.10579424815 (+0.032% vs LRU) | 0.10579424815 (+0.032% vs LRU) | 0.10579424815 (+0.032% vs LRU) | 0.10576055434 (0% vs LRU) | 0.10577339034 (+0.012% vs LRU) | 0.10576055434 (0% vs LRU) | 0.10579424815 (+0.032% vs LRU) | 0.10579424815 (+0.032% vs LRU) |
+| SLO attainment (%) | 17.96875 | 17.96875 (0% vs LRU) | 17.96875 (0% vs LRU) | 17.96875 (0% vs LRU) | 17.96875 (0% vs LRU) | 17.96875 (0% vs LRU) | 17.96875 (0% vs LRU) | 17.96875 (0% vs LRU) | 17.96875 (0% vs LRU) | 17.96875 (0% vs LRU) |
+| Input token hit rate (%) | 37.12341 | 36.31976 (-2.165% vs LRU) | 35.56796 (-4.190% vs LRU) | 38.08260 (+2.584% vs LRU) | 38.21222 (+2.933% vs LRU) | 36.52715 (-1.606% vs LRU) | 36.57900 (-1.466% vs LRU) | 36.26791 (-2.304% vs LRU) | 38.08260 (+2.584% vs LRU) | 38.08260 (+2.584% vs LRU) |
+| Recomputed input tokens (tokens) | 1,241,807 | 1,257,679 (+1.278% vs LRU) | 1,272,527 (+2.474% vs LRU) | 1,222,863 (-1.526% vs LRU) | 1,220,303 (-1.732% vs LRU) | 1,253,583 (+0.948% vs LRU) | 1,252,559 (+0.866% vs LRU) | 1,258,703 (+1.361% vs LRU) | 1,222,863 (-1.526% vs LRU) | 1,222,863 (-1.526% vs LRU) |
+| Evictions (512 token blocks) | 2,153 | 2,184 (+1.440% vs LRU) | 2,213 (+2.787% vs LRU) | 2,116 (-1.719% vs LRU) | 2,111 (-1.951% vs LRU) | 2,176 (+1.068% vs LRU) | 2,174 (+0.975% vs LRU) | 2,186 (+1.533% vs LRU) | 2,116 (-1.719% vs LRU) | 2,116 (-1.719% vs LRU) |
+| SLO passes / eligible | 46 / 256 | 46 / 256 (0% vs LRU) | 46 / 256 (0% vs LRU) | 46 / 256 (0% vs LRU) | 46 / 256 (0% vs LRU) | 46 / 256 (0% vs LRU) | 46 / 256 (0% vs LRU) | 46 / 256 (0% vs LRU) | 46 / 256 (0% vs LRU) | 46 / 256 (0% vs LRU) |
+| Observation span (seconds) | 434.945 | 434.945 (0% vs LRU) | 434.806 (-0.032% vs LRU) | 434.806 (-0.032% vs LRU) | 434.806 (-0.032% vs LRU) | 434.945 (0% vs LRU) | 434.892 (-0.012% vs LRU) | 434.945 (0% vs LRU) | 434.806 (-0.032% vs LRU) | 434.806 (-0.032% vs LRU) |
 
 ## Mooncake conversation
 
 ### Tuning performance
 
-| Metric and unit | LRU | Selected Claude policy | Selected Codex policy |
-| --- | --- | --- | --- |
-| Mean TTFT (ms) | 4,917.973 | 4,917.973 (0% vs LRU) | 4,917.973 (0% vs LRU) |
-| p95 TTFT (ms) | 25,846.755 | 25,846.755 (0% vs LRU) | 25,846.755 (0% vs LRU) |
-| Mean individual gap ITL (ms) | 30.00789 | 30.00789 (0% vs LRU) | 30.00789 (0% vs LRU) |
-| p95 individual gap ITL (ms) | 34.01000 | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) |
-| SLO goodput (requests/s) | 0.05953105008 | 0.05953105008 (0% vs LRU) | 0.05953105008 (0% vs LRU) |
-| SLO attainment (%) | 20.70312 | 20.70312 (0% vs LRU) | 20.70312 (0% vs LRU) |
-| Input token hit rate (%) | 3.64990 | 3.64990 (0% vs LRU) | 3.64990 (0% vs LRU) |
-| Recomputed input tokens (tokens) | 3,446,585 | 3,446,585 (0% vs LRU) | 3,446,585 (0% vs LRU) |
-| Evictions (512 token blocks) | 6,536 | 6,536 (0% vs LRU) | 6,536 (0% vs LRU) |
-| SLO passes / eligible | 53 / 256 | 53 / 256 (0% vs LRU) | 53 / 256 (0% vs LRU) |
-| Observation span (seconds) | 890.292 | 890.292 (0% vs LRU) | 890.292 (0% vs LRU) |
+| Metric and unit | LRU | FIFO | MRU | LFU | SLRU | Random 0 | Random 1 | Random 2 | Selected Claude policy | Selected Codex policy |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Mean TTFT (ms) | 4,917.973 | 4,917.973 (0% vs LRU) | 4,917.973 (0% vs LRU) | 4,917.973 (0% vs LRU) | 4,917.973 (0% vs LRU) | 4,917.973 (0% vs LRU) | 4,917.973 (0% vs LRU) | 4,917.973 (0% vs LRU) | 4,917.973 (0% vs LRU) | 4,917.973 (0% vs LRU) |
+| p95 TTFT (ms) | 25,846.755 | 25,846.755 (0% vs LRU) | 25,846.755 (0% vs LRU) | 25,846.755 (0% vs LRU) | 25,846.755 (0% vs LRU) | 25,846.755 (0% vs LRU) | 25,846.755 (0% vs LRU) | 25,846.755 (0% vs LRU) | 25,846.755 (0% vs LRU) | 25,846.755 (0% vs LRU) |
+| Mean individual gap ITL (ms) | 30.00789 | 30.00789 (0% vs LRU) | 30.00789 (0% vs LRU) | 30.00789 (0% vs LRU) | 30.00789 (0% vs LRU) | 30.00789 (0% vs LRU) | 30.00789 (0% vs LRU) | 30.00789 (0% vs LRU) | 30.00789 (0% vs LRU) | 30.00789 (0% vs LRU) |
+| p95 individual gap ITL (ms) | 34.01000 | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) |
+| SLO goodput (requests/s) | 0.05953105008 | 0.05953105008 (0% vs LRU) | 0.05953105008 (0% vs LRU) | 0.05953105008 (0% vs LRU) | 0.05953105008 (0% vs LRU) | 0.05953105008 (0% vs LRU) | 0.05953105008 (0% vs LRU) | 0.05953105008 (0% vs LRU) | 0.05953105008 (0% vs LRU) | 0.05953105008 (0% vs LRU) |
+| SLO attainment (%) | 20.70312 | 20.70312 (0% vs LRU) | 20.70312 (0% vs LRU) | 20.70312 (0% vs LRU) | 20.70312 (0% vs LRU) | 20.70312 (0% vs LRU) | 20.70312 (0% vs LRU) | 20.70312 (0% vs LRU) | 20.70312 (0% vs LRU) | 20.70312 (0% vs LRU) |
+| Input token hit rate (%) | 3.64990 | 3.64990 (0% vs LRU) | 3.64990 (0% vs LRU) | 3.64990 (0% vs LRU) | 3.64990 (0% vs LRU) | 3.64990 (0% vs LRU) | 3.64990 (0% vs LRU) | 3.64990 (0% vs LRU) | 3.64990 (0% vs LRU) | 3.64990 (0% vs LRU) |
+| Recomputed input tokens (tokens) | 3,446,585 | 3,446,585 (0% vs LRU) | 3,446,585 (0% vs LRU) | 3,446,585 (0% vs LRU) | 3,446,585 (0% vs LRU) | 3,446,585 (0% vs LRU) | 3,446,585 (0% vs LRU) | 3,446,585 (0% vs LRU) | 3,446,585 (0% vs LRU) | 3,446,585 (0% vs LRU) |
+| Evictions (512 token blocks) | 6,536 | 6,536 (0% vs LRU) | 6,536 (0% vs LRU) | 6,536 (0% vs LRU) | 6,536 (0% vs LRU) | 6,536 (0% vs LRU) | 6,536 (0% vs LRU) | 6,536 (0% vs LRU) | 6,536 (0% vs LRU) | 6,536 (0% vs LRU) |
+| SLO passes / eligible | 53 / 256 | 53 / 256 (0% vs LRU) | 53 / 256 (0% vs LRU) | 53 / 256 (0% vs LRU) | 53 / 256 (0% vs LRU) | 53 / 256 (0% vs LRU) | 53 / 256 (0% vs LRU) | 53 / 256 (0% vs LRU) | 53 / 256 (0% vs LRU) | 53 / 256 (0% vs LRU) |
+| Observation span (seconds) | 890.292 | 890.292 (0% vs LRU) | 890.292 (0% vs LRU) | 890.292 (0% vs LRU) | 890.292 (0% vs LRU) | 890.292 (0% vs LRU) | 890.292 (0% vs LRU) | 890.292 (0% vs LRU) | 890.292 (0% vs LRU) | 890.292 (0% vs LRU) |
 
 ### Held-out performance
 
-| Metric and unit | LRU | Selected Claude policy | Selected Codex policy |
-| --- | --- | --- | --- |
-| Mean TTFT (ms) | 3,460.398 | 3,460.398 (0% vs LRU) | 3,460.398 (0% vs LRU) |
-| p95 TTFT (ms) | 19,887.940 | 19,887.940 (0% vs LRU) | 19,887.940 (0% vs LRU) |
-| Mean individual gap ITL (ms) | 26.40806 | 26.40806 (0% vs LRU) | 26.40806 (0% vs LRU) |
-| p95 individual gap ITL (ms) | 33.99620 | 33.99620 (0% vs LRU) | 33.99620 (0% vs LRU) |
-| SLO goodput (requests/s) | 0.10121511158 | 0.10121511158 (0% vs LRU) | 0.10121511158 (0% vs LRU) |
-| SLO attainment (%) | 32.42188 | 32.42188 (0% vs LRU) | 32.42188 (0% vs LRU) |
-| Input token hit rate (%) | 4.39218 | 4.39218 (0% vs LRU) | 4.39218 (0% vs LRU) |
-| Recomputed input tokens (tokens) | 2,844,801 | 2,844,801 (0% vs LRU) | 2,844,801 (0% vs LRU) |
-| Evictions (512 token blocks) | 5,345 | 5,345 (0% vs LRU) | 5,345 (0% vs LRU) |
-| SLO passes / eligible | 83 / 256 | 83 / 256 (0% vs LRU) | 83 / 256 (0% vs LRU) |
-| Observation span (seconds) | 820.036 | 820.036 (0% vs LRU) | 820.036 (0% vs LRU) |
+| Metric and unit | LRU | FIFO | MRU | LFU | SLRU | Random 0 | Random 1 | Random 2 | Selected Claude policy | Selected Codex policy |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Mean TTFT (ms) | 3,460.398 | 3,464.825 (+0.128% vs LRU) | 3,464.825 (+0.128% vs LRU) | 3,460.398 (0% vs LRU) | 3,460.398 (0% vs LRU) | 3,464.437 (+0.117% vs LRU) | 3,460.970 (+0.017% vs LRU) | 3,460.751 (+0.010% vs LRU) | 3,460.398 (0% vs LRU) | 3,464.825 (+0.128% vs LRU) |
+| p95 TTFT (ms) | 19,887.940 | 19,895.355 (+0.037% vs LRU) | 19,895.355 (+0.037% vs LRU) | 19,887.940 (0% vs LRU) | 19,887.940 (0% vs LRU) | 19,897.756 (+0.049% vs LRU) | 19,885.892 (-0.010% vs LRU) | 19,888.654 (+0.004% vs LRU) | 19,887.940 (0% vs LRU) | 19,895.355 (+0.037% vs LRU) |
+| Mean individual gap ITL (ms) | 26.40806 | 26.50126 (+0.353% vs LRU) | 26.50126 (+0.353% vs LRU) | 26.40806 (0% vs LRU) | 26.40806 (0% vs LRU) | 26.49021 (+0.311% vs LRU) | 26.42253 (+0.055% vs LRU) | 26.41570 (+0.029% vs LRU) | 26.40806 (0% vs LRU) | 26.50126 (+0.353% vs LRU) |
+| p95 individual gap ITL (ms) | 33.99620 | 33.99678 (+0.002% vs LRU) | 33.99678 (+0.002% vs LRU) | 33.99620 (0% vs LRU) | 33.99620 (0% vs LRU) | 33.99667 (+0.001% vs LRU) | 33.99635 (+0.000438% vs LRU) | 33.99620 (0% vs LRU) | 33.99620 (0% vs LRU) | 33.99678 (+0.002% vs LRU) |
+| SLO goodput (requests/s) | 0.10121511158 | 0.10121511158 (0% vs LRU) | 0.10121511158 (0% vs LRU) | 0.10121511158 (0% vs LRU) | 0.10121511158 (0% vs LRU) | 0.10121511158 (0% vs LRU) | 0.10121511158 (0% vs LRU) | 0.10121511158 (0% vs LRU) | 0.10121511158 (0% vs LRU) | 0.10121511158 (0% vs LRU) |
+| SLO attainment (%) | 32.42188 | 32.42188 (0% vs LRU) | 32.42188 (0% vs LRU) | 32.42188 (0% vs LRU) | 32.42188 (0% vs LRU) | 32.42188 (0% vs LRU) | 32.42188 (0% vs LRU) | 32.42188 (0% vs LRU) | 32.42188 (0% vs LRU) | 32.42188 (0% vs LRU) |
+| Input token hit rate (%) | 4.39218 | 4.39218 (0% vs LRU) | 4.39218 (0% vs LRU) | 4.39218 (0% vs LRU) | 4.39218 (0% vs LRU) | 4.39218 (0% vs LRU) | 4.39218 (0% vs LRU) | 4.39218 (0% vs LRU) | 4.39218 (0% vs LRU) | 4.39218 (0% vs LRU) |
+| Recomputed input tokens (tokens) | 2,844,801 | 2,872,449 (+0.972% vs LRU) | 2,872,449 (+0.972% vs LRU) | 2,844,801 (0% vs LRU) | 2,844,801 (0% vs LRU) | 2,869,377 (+0.864% vs LRU) | 2,848,897 (+0.144% vs LRU) | 2,847,873 (+0.108% vs LRU) | 2,844,801 (0% vs LRU) | 2,872,449 (+0.972% vs LRU) |
+| Evictions (512 token blocks) | 5,345 | 5,399 (+1.010% vs LRU) | 5,399 (+1.010% vs LRU) | 5,345 (0% vs LRU) | 5,345 (0% vs LRU) | 5,393 (+0.898% vs LRU) | 5,353 (+0.150% vs LRU) | 5,351 (+0.112% vs LRU) | 5,345 (0% vs LRU) | 5,399 (+1.010% vs LRU) |
+| SLO passes / eligible | 83 / 256 | 83 / 256 (0% vs LRU) | 83 / 256 (0% vs LRU) | 83 / 256 (0% vs LRU) | 83 / 256 (0% vs LRU) | 83 / 256 (0% vs LRU) | 83 / 256 (0% vs LRU) | 83 / 256 (0% vs LRU) | 83 / 256 (0% vs LRU) | 83 / 256 (0% vs LRU) |
+| Observation span (seconds) | 820.036 | 820.036 (0% vs LRU) | 820.036 (0% vs LRU) | 820.036 (0% vs LRU) | 820.036 (0% vs LRU) | 820.036 (0% vs LRU) | 820.036 (0% vs LRU) | 820.036 (0% vs LRU) | 820.036 (0% vs LRU) | 820.036 (0% vs LRU) |
 
 ## AgentX subset
 
 ### Tuning performance
 
-| Metric and unit | LRU | Selected Claude policy | Selected Codex policy |
-| --- | --- | --- | --- |
-| Mean TTFT (ms) | 223.629 | 223.629 (0% vs LRU) | 223.629 (0% vs LRU) |
-| p95 TTFT (ms) | 959.692 | 959.692 (0% vs LRU) | 959.692 (0% vs LRU) |
-| Mean individual gap ITL (ms) | 21.20386 | 21.20386 (0% vs LRU) | 21.20386 (0% vs LRU) |
-| p95 individual gap ITL (ms) | 34.01000 | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) |
-| SLO goodput (requests/s) | 0.00734658342 | 0.00734658342 (0% vs LRU) | 0.00734658342 (0% vs LRU) |
-| SLO attainment (%) | 96.66667 | 96.66667 (0% vs LRU) | 96.66667 (0% vs LRU) |
-| Input token hit rate (%) | 89.04271 | 89.04271 (0% vs LRU) | 89.04271 (0% vs LRU) |
-| Recomputed input tokens (tokens) | 510,592 | 510,592 (0% vs LRU) | 510,592 (0% vs LRU) |
-| Evictions (512 token blocks) | 734 | 734 (0% vs LRU) | 734 (0% vs LRU) |
-| SLO passes / eligible | 58 / 60 | 58 / 60 (0% vs LRU) | 58 / 60 (0% vs LRU) |
-| Observation span (seconds) | 7,894.826 | 7,894.826 (0% vs LRU) | 7,894.826 (0% vs LRU) |
+| Metric and unit | LRU | FIFO | MRU | LFU | SLRU | Random 0 | Random 1 | Random 2 | Selected Claude policy | Selected Codex policy |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Mean TTFT (ms) | 223.629 | 246.056 (+10.029% vs LRU) | 329.423 (+47.308% vs LRU) | 251.981 (+12.678% vs LRU) | 235.682 (+5.390% vs LRU) | 306.056 (+36.859% vs LRU) | 325.041 (+45.348% vs LRU) | 298.173 (+33.334% vs LRU) | 223.629 (0% vs LRU) | 223.629 (0% vs LRU) |
+| p95 TTFT (ms) | 959.692 | 993.763 (+3.550% vs LRU) | 1,466.521 (+52.812% vs LRU) | 993.763 (+3.550% vs LRU) | 959.692 (0% vs LRU) | 1,346.696 (+40.326% vs LRU) | 1,454.290 (+51.537% vs LRU) | 1,346.696 (+40.326% vs LRU) | 959.692 (0% vs LRU) | 959.692 (0% vs LRU) |
+| Mean individual gap ITL (ms) | 21.20386 | 21.20386 (0% vs LRU) | 21.27291 (+0.326% vs LRU) | 21.22706 (+0.109% vs LRU) | 21.22706 (+0.109% vs LRU) | 21.26864 (+0.305% vs LRU) | 21.26501 (+0.288% vs LRU) | 21.25542 (+0.243% vs LRU) | 21.20386 (0% vs LRU) | 21.20386 (0% vs LRU) |
+| p95 individual gap ITL (ms) | 34.01000 | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) |
+| SLO goodput (requests/s) | 0.00734658342 | 0.00721868780 (-1.741% vs LRU) | 0.00670787839 (-8.694% vs LRU) | 0.00721836614 (-1.745% vs LRU) | 0.00734591389 (-0.009% vs LRU) | 0.00683565484 (-6.955% vs LRU) | 0.00670810203 (-8.691% vs LRU) | 0.00696265416 (-5.226% vs LRU) | 0.00734658342 (0% vs LRU) | 0.00734658342 (0% vs LRU) |
+| SLO attainment (%) | 96.66667 | 95.00000 (-1.724% vs LRU) | 88.33333 (-8.621% vs LRU) | 95.00000 (-1.724% vs LRU) | 96.66667 (0% vs LRU) | 90.00000 (-6.897% vs LRU) | 88.33333 (-8.621% vs LRU) | 91.66667 (-5.172% vs LRU) | 96.66667 (0% vs LRU) | 96.66667 (0% vs LRU) |
+| Input token hit rate (%) | 89.04271 | 87.66928 (-1.542% vs LRU) | 82.77984 (-7.034% vs LRU) | 87.38360 (-1.863% vs LRU) | 88.39445 (-0.728% vs LRU) | 84.20821 (-5.429% vs LRU) | 83.03255 (-6.750% vs LRU) | 84.63673 (-4.948% vs LRU) | 89.04271 (0% vs LRU) | 89.04271 (0% vs LRU) |
+| Recomputed input tokens (tokens) | 510,592 | 574,592 (+12.534% vs LRU) | 802,432 (+57.157% vs LRU) | 587,904 (+15.142% vs LRU) | 540,800 (+5.916% vs LRU) | 735,872 (+44.121% vs LRU) | 790,656 (+54.851% vs LRU) | 715,904 (+40.211% vs LRU) | 510,592 (0% vs LRU) | 510,592 (0% vs LRU) |
+| Evictions (512 token blocks) | 734 | 859 (+17.030% vs LRU) | 1,304 (+77.657% vs LRU) | 885 (+20.572% vs LRU) | 793 (+8.038% vs LRU) | 1,174 (+59.946% vs LRU) | 1,281 (+74.523% vs LRU) | 1,135 (+54.632% vs LRU) | 734 (0% vs LRU) | 734 (0% vs LRU) |
+| SLO passes / eligible | 58 / 60 | 57 / 60 (-1.724% vs LRU) | 53 / 60 (-8.621% vs LRU) | 57 / 60 (-1.724% vs LRU) | 58 / 60 (0% vs LRU) | 54 / 60 (-6.897% vs LRU) | 53 / 60 (-8.621% vs LRU) | 55 / 60 (-5.172% vs LRU) | 58 / 60 (0% vs LRU) | 58 / 60 (0% vs LRU) |
+| Observation span (seconds) | 7,894.826 | 7,896.172 (+0.017% vs LRU) | 7,901.157 (+0.080% vs LRU) | 7,896.524 (+0.022% vs LRU) | 7,895.546 (+0.009% vs LRU) | 7,899.755 (+0.062% vs LRU) | 7,900.894 (+0.077% vs LRU) | 7,899.287 (+0.056% vs LRU) | 7,894.826 (0% vs LRU) | 7,894.826 (0% vs LRU) |
 
 ### Held-out performance
 
-| Metric and unit | LRU | Selected Claude policy | Selected Codex policy |
-| --- | --- | --- | --- |
-| Mean TTFT (ms) | 860.168 | 860.168 (0% vs LRU) | 860.168 (0% vs LRU) |
-| p95 TTFT (ms) | 5,242.193 | 5,242.193 (0% vs LRU) | 5,242.193 (0% vs LRU) |
-| Mean individual gap ITL (ms) | 25.88847 | 25.88847 (0% vs LRU) | 25.88847 (0% vs LRU) |
-| p95 individual gap ITL (ms) | 34.01000 | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) |
-| SLO goodput (requests/s) | 0.03411970079 | 0.03411970079 (0% vs LRU) | 0.03411970079 (0% vs LRU) |
-| SLO attainment (%) | 84.89583 | 84.89583 (0% vs LRU) | 84.89583 (0% vs LRU) |
-| Input token hit rate (%) | 92.38075 | 92.38075 (0% vs LRU) | 92.38075 (0% vs LRU) |
-| Recomputed input tokens (tokens) | 1,100,800 | 1,100,800 (0% vs LRU) | 1,100,800 (0% vs LRU) |
-| Evictions (512 token blocks) | 1,821 | 1,821 (0% vs LRU) | 1,821 (0% vs LRU) |
-| SLO passes / eligible | 163 / 192 | 163 / 192 (0% vs LRU) | 163 / 192 (0% vs LRU) |
-| Observation span (seconds) | 4,777.299 | 4,777.299 (0% vs LRU) | 4,777.299 (0% vs LRU) |
+| Metric and unit | LRU | FIFO | MRU | LFU | SLRU | Random 0 | Random 1 | Random 2 | Selected Claude policy | Selected Codex policy |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Mean TTFT (ms) | 860.168 | 1,168.275 (+35.819% vs LRU) | 1,230.962 (+43.107% vs LRU) | 864.856 (+0.545% vs LRU) | 861.473 (+0.152% vs LRU) | 1,203.044 (+39.861% vs LRU) | 1,199.972 (+39.504% vs LRU) | 1,192.239 (+38.605% vs LRU) | 863.040 (+0.334% vs LRU) | 860.168 (0% vs LRU) |
+| p95 TTFT (ms) | 5,242.193 | 6,951.151 (+32.600% vs LRU) | 7,083.467 (+35.124% vs LRU) | 5,213.872 (-0.540% vs LRU) | 5,209.735 (-0.619% vs LRU) | 6,847.392 (+30.621% vs LRU) | 6,743.877 (+28.646% vs LRU) | 6,631.326 (+26.499% vs LRU) | 5,259.535 (+0.331% vs LRU) | 5,242.193 (0% vs LRU) |
+| Mean individual gap ITL (ms) | 25.88847 | 26.23571 (+1.341% vs LRU) | 26.35029 (+1.784% vs LRU) | 25.89998 (+0.044% vs LRU) | 25.89532 (+0.026% vs LRU) | 26.27176 (+1.481% vs LRU) | 26.28962 (+1.550% vs LRU) | 26.25796 (+1.427% vs LRU) | 25.89219 (+0.014% vs LRU) | 25.88847 (0% vs LRU) |
+| p95 individual gap ITL (ms) | 34.01000 | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) | 34.01000 (0% vs LRU) |
+| SLO goodput (requests/s) | 0.03411970079 | 0.03246594427 (-4.847% vs LRU) | 0.03013312714 (-11.684% vs LRU) | 0.03411514860 (-0.013% vs LRU) | 0.03411785918 (-0.005% vs LRU) | 0.03160802711 (-7.361% vs LRU) | 0.03181664842 (-6.750% vs LRU) | 0.03224192127 (-5.504% vs LRU) | 0.03411769153 (-0.006% vs LRU) | 0.03411970079 (0% vs LRU) |
+| SLO attainment (%) | 84.89583 | 81.25000 (-4.294% vs LRU) | 75.52083 (-11.043% vs LRU) | 84.89583 (0% vs LRU) | 84.89583 (0% vs LRU) | 79.16667 (-6.748% vs LRU) | 79.68750 (-6.135% vs LRU) | 80.72917 (-4.908% vs LRU) | 84.89583 (0% vs LRU) | 84.89583 (0% vs LRU) |
+| Input token hit rate (%) | 92.38075 | 83.47509 (-9.640% vs LRU) | 81.42321 (-11.861% vs LRU) | 92.16812 (-0.230% vs LRU) | 92.29215 (-0.096% vs LRU) | 82.54306 (-10.649% vs LRU) | 82.53597 (-10.657% vs LRU) | 82.91870 (-10.242% vs LRU) | 92.27798 (-0.111% vs LRU) | 92.38075 (0% vs LRU) |
+| Recomputed input tokens (tokens) | 1,100,800 | 2,387,456 (+116.884% vs LRU) | 2,683,904 (+143.814% vs LRU) | 1,131,520 (+2.791% vs LRU) | 1,113,600 (+1.163% vs LRU) | 2,522,112 (+129.116% vs LRU) | 2,523,136 (+129.209% vs LRU) | 2,467,840 (+124.186% vs LRU) | 1,115,648 (+1.349% vs LRU) | 1,100,800 (0% vs LRU) |
+| Evictions (512 token blocks) | 1,821 | 4,334 (+138.001% vs LRU) | 4,913 (+169.797% vs LRU) | 1,881 (+3.295% vs LRU) | 1,846 (+1.373% vs LRU) | 4,597 (+152.444% vs LRU) | 4,599 (+152.554% vs LRU) | 4,491 (+146.623% vs LRU) | 1,850 (+1.593% vs LRU) | 1,821 (0% vs LRU) |
+| SLO passes / eligible | 163 / 192 | 156 / 192 (-4.294% vs LRU) | 145 / 192 (-11.043% vs LRU) | 163 / 192 (0% vs LRU) | 163 / 192 (0% vs LRU) | 152 / 192 (-6.748% vs LRU) | 153 / 192 (-6.135% vs LRU) | 155 / 192 (-4.908% vs LRU) | 163 / 192 (0% vs LRU) | 163 / 192 (0% vs LRU) |
+| Observation span (seconds) | 4,777.299 | 4,805.035 (+0.581% vs LRU) | 4,811.980 (+0.726% vs LRU) | 4,777.936 (+0.013% vs LRU) | 4,777.557 (+0.005% vs LRU) | 4,808.905 (+0.662% vs LRU) | 4,808.803 (+0.659% vs LRU) | 4,807.406 (+0.630% vs LRU) | 4,777.580 (+0.006% vs LRU) | 4,777.299 (0% vs LRU) |
 
 ## FreeInference subset
 
 ### Tuning performance
 
-| Metric and unit | LRU | Selected Claude policy | Selected Codex policy |
-| --- | --- | --- | --- |
-| Mean TTFT (ms) | 58.132 | 58.132 (0% vs LRU) | 58.132 (0% vs LRU) |
-| p95 TTFT (ms) | 210.521 | 210.521 (0% vs LRU) | 210.521 (0% vs LRU) |
-| Mean individual gap ITL (ms) | 28.78272 | 28.78272 (0% vs LRU) | 28.78272 (0% vs LRU) |
-| p95 individual gap ITL (ms) | 32.93878 | 32.93878 (0% vs LRU) | 32.93878 (0% vs LRU) |
-| SLO goodput (requests/s) | 0.00356668393 | 0.00356668393 (0% vs LRU) | 0.00356668393 (0% vs LRU) |
-| SLO attainment (%) | 99.28058 | 99.28058 (0% vs LRU) | 99.28058 (0% vs LRU) |
-| Input token hit rate (%) | 95.47943 | 95.47943 (0% vs LRU) | 95.47943 (0% vs LRU) |
-| Recomputed input tokens (tokens) | 310,626 | 310,626 (0% vs LRU) | 310,626 (0% vs LRU) |
-| Evictions (512 token blocks) | 443 | 443 (0% vs LRU) | 443 (0% vs LRU) |
-| SLO passes / eligible | 138 / 139 | 138 / 139 (0% vs LRU) | 138 / 139 (0% vs LRU) |
-| Observation span (seconds) | 38,691.402 | 38,691.402 (0% vs LRU) | 38,691.402 (0% vs LRU) |
+| Metric and unit | LRU | FIFO | MRU | LFU | SLRU | Random 0 | Random 1 | Random 2 | Selected Claude policy | Selected Codex policy |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Mean TTFT (ms) | 58.132 | 60.600 (+4.245% vs LRU) | 60.600 (+4.245% vs LRU) | 58.132 (0% vs LRU) | 58.132 (0% vs LRU) | 60.481 (+4.041% vs LRU) | 60.600 (+4.245% vs LRU) | 60.600 (+4.245% vs LRU) | 58.132 (0% vs LRU) | 58.132 (0% vs LRU) |
+| p95 TTFT (ms) | 210.521 | 212.394 (+0.890% vs LRU) | 212.394 (+0.890% vs LRU) | 210.521 (0% vs LRU) | 210.521 (0% vs LRU) | 212.394 (+0.890% vs LRU) | 212.394 (+0.890% vs LRU) | 212.394 (+0.890% vs LRU) | 210.521 (0% vs LRU) | 210.521 (0% vs LRU) |
+| Mean individual gap ITL (ms) | 28.78272 | 28.78272 (0% vs LRU) | 28.78272 (0% vs LRU) | 28.78272 (0% vs LRU) | 28.78272 (0% vs LRU) | 28.78272 (0% vs LRU) | 28.78272 (0% vs LRU) | 28.78272 (0% vs LRU) | 28.78272 (0% vs LRU) | 28.78272 (0% vs LRU) |
+| p95 individual gap ITL (ms) | 32.93878 | 32.93878 (0% vs LRU) | 32.93878 (0% vs LRU) | 32.93878 (0% vs LRU) | 32.93878 (0% vs LRU) | 32.93878 (0% vs LRU) | 32.93878 (0% vs LRU) | 32.93878 (0% vs LRU) | 32.93878 (0% vs LRU) | 32.93878 (0% vs LRU) |
+| SLO goodput (requests/s) | 0.00356668393 | 0.00356668393 (0% vs LRU) | 0.00356668393 (0% vs LRU) | 0.00356668393 (0% vs LRU) | 0.00356668393 (0% vs LRU) | 0.00356668393 (0% vs LRU) | 0.00356668393 (0% vs LRU) | 0.00356668393 (0% vs LRU) | 0.00356668393 (0% vs LRU) | 0.00356668393 (0% vs LRU) |
+| SLO attainment (%) | 99.28058 | 99.28058 (0% vs LRU) | 99.28058 (0% vs LRU) | 99.28058 (0% vs LRU) | 99.28058 (0% vs LRU) | 99.28058 (0% vs LRU) | 99.28058 (0% vs LRU) | 99.28058 (0% vs LRU) | 99.28058 (0% vs LRU) | 99.28058 (0% vs LRU) |
+| Input token hit rate (%) | 95.47943 | 95.24099 (-0.250% vs LRU) | 95.24099 (-0.250% vs LRU) | 95.47943 (0% vs LRU) | 95.47943 (0% vs LRU) | 95.25590 (-0.234% vs LRU) | 95.24099 (-0.250% vs LRU) | 95.24099 (-0.250% vs LRU) | 95.47943 (0% vs LRU) | 95.47943 (0% vs LRU) |
+| Recomputed input tokens (tokens) | 310,626 | 327,010 (+5.275% vs LRU) | 327,010 (+5.275% vs LRU) | 310,626 (0% vs LRU) | 310,626 (0% vs LRU) | 325,986 (+4.945% vs LRU) | 327,010 (+5.275% vs LRU) | 327,010 (+5.275% vs LRU) | 310,626 (0% vs LRU) | 310,626 (0% vs LRU) |
+| Evictions (512 token blocks) | 443 | 475 (+7.223% vs LRU) | 475 (+7.223% vs LRU) | 443 (0% vs LRU) | 443 (0% vs LRU) | 473 (+6.772% vs LRU) | 475 (+7.223% vs LRU) | 475 (+7.223% vs LRU) | 443 (0% vs LRU) | 443 (0% vs LRU) |
+| SLO passes / eligible | 138 / 139 | 138 / 139 (0% vs LRU) | 138 / 139 (0% vs LRU) | 138 / 139 (0% vs LRU) | 138 / 139 (0% vs LRU) | 138 / 139 (0% vs LRU) | 138 / 139 (0% vs LRU) | 138 / 139 (0% vs LRU) | 138 / 139 (0% vs LRU) | 138 / 139 (0% vs LRU) |
+| Observation span (seconds) | 38,691.402 | 38,691.402 (0% vs LRU) | 38,691.402 (0% vs LRU) | 38,691.402 (0% vs LRU) | 38,691.402 (0% vs LRU) | 38,691.402 (0% vs LRU) | 38,691.402 (0% vs LRU) | 38,691.402 (0% vs LRU) | 38,691.402 (0% vs LRU) | 38,691.402 (0% vs LRU) |
 
 ### Held-out performance
 
-| Metric and unit | LRU | Selected Claude policy | Selected Codex policy |
-| --- | --- | --- | --- |
-| Mean TTFT (ms) | 86.946 | 86.946 (0% vs LRU) | 87.456 (+0.586% vs LRU) |
-| p95 TTFT (ms) | 472.443 | 472.443 (0% vs LRU) | 472.443 (0% vs LRU) |
-| Mean individual gap ITL (ms) | 23.53870 | 23.53870 (0% vs LRU) | 23.54053 (+0.008% vs LRU) |
-| p95 individual gap ITL (ms) | 27.19496 | 27.19496 (0% vs LRU) | 27.19496 (0% vs LRU) |
-| SLO goodput (requests/s) | 0.00187989519 | 0.00187989519 (0% vs LRU) | 0.00187989441 (-0.000042% vs LRU) |
-| SLO attainment (%) | 100.00000 | 100.00000 (0% vs LRU) | 100.00000 (0% vs LRU) |
-| Input token hit rate (%) | 84.65545 | 84.65545 (0% vs LRU) | 84.52359 (-0.156% vs LRU) |
-| Recomputed input tokens (tokens) | 119,161 | 119,161 (0% vs LRU) | 120,185 (+0.859% vs LRU) |
-| Evictions (512 token blocks) | 78 | 78 (0% vs LRU) | 80 (+2.564% vs LRU) |
-| SLO passes / eligible | 33 / 33 | 33 / 33 (0% vs LRU) | 33 / 33 (0% vs LRU) |
-| Observation span (seconds) | 17,554.170 | 17,554.170 (0% vs LRU) | 17,554.177 (+0.000042% vs LRU) |
+| Metric and unit | LRU | FIFO | MRU | LFU | SLRU | Random 0 | Random 1 | Random 2 | Selected Claude policy | Selected Codex policy |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Mean TTFT (ms) | 86.946 | 86.946 (0% vs LRU) | 113.150 (+30.138% vs LRU) | 87.456 (+0.586% vs LRU) | 87.456 (+0.586% vs LRU) | 111.646 (+28.408% vs LRU) | 112.599 (+29.504% vs LRU) | 113.142 (+30.128% vs LRU) | 87.456 (+0.586% vs LRU) | 86.946 (0% vs LRU) |
+| p95 TTFT (ms) | 472.443 | 472.443 (0% vs LRU) | 483.099 (+2.255% vs LRU) | 472.443 (0% vs LRU) | 472.443 (0% vs LRU) | 483.099 (+2.255% vs LRU) | 483.099 (+2.255% vs LRU) | 483.099 (+2.255% vs LRU) | 472.443 (0% vs LRU) | 472.443 (0% vs LRU) |
+| Mean individual gap ITL (ms) | 23.53870 | 23.53870 (0% vs LRU) | 23.61308 (+0.316% vs LRU) | 23.54053 (+0.008% vs LRU) | 23.54053 (+0.008% vs LRU) | 23.60962 (+0.301% vs LRU) | 23.61125 (+0.308% vs LRU) | 23.61125 (+0.308% vs LRU) | 23.54053 (+0.008% vs LRU) | 23.53870 (0% vs LRU) |
+| p95 individual gap ITL (ms) | 27.19496 | 27.19496 (0% vs LRU) | 27.19691 (+0.007% vs LRU) | 27.19496 (0% vs LRU) | 27.19496 (0% vs LRU) | 27.19659 (+0.006% vs LRU) | 27.19691 (+0.007% vs LRU) | 27.19691 (+0.007% vs LRU) | 27.19496 (0% vs LRU) | 27.19496 (0% vs LRU) |
+| SLO goodput (requests/s) | 0.00187989519 | 0.00187989519 (0% vs LRU) | 0.00182286090 (-3.034% vs LRU) | 0.00187989441 (-0.000042% vs LRU) | 0.00187989441 (-0.000042% vs LRU) | 0.00182286521 (-3.034% vs LRU) | 0.00182286173 (-3.034% vs LRU) | 0.00182286080 (-3.034% vs LRU) | 0.00187989441 (-0.000042% vs LRU) | 0.00187989519 (0% vs LRU) |
+| SLO attainment (%) | 100.00000 | 100.00000 (0% vs LRU) | 96.96970 (-3.030% vs LRU) | 100.00000 (0% vs LRU) | 100.00000 (0% vs LRU) | 96.96970 (-3.030% vs LRU) | 96.96970 (-3.030% vs LRU) | 96.96970 (-3.030% vs LRU) | 100.00000 (0% vs LRU) | 100.00000 (0% vs LRU) |
+| Input token hit rate (%) | 84.65545 | 84.65545 (0% vs LRU) | 79.84249 (-5.685% vs LRU) | 84.52359 (-0.156% vs LRU) | 84.52359 (-0.156% vs LRU) | 80.04028 (-5.452% vs LRU) | 79.97435 (-5.530% vs LRU) | 79.90842 (-5.607% vs LRU) | 84.52359 (-0.156% vs LRU) | 84.65545 (0% vs LRU) |
+| Recomputed input tokens (tokens) | 119,161 | 119,161 (0% vs LRU) | 156,537 (+31.366% vs LRU) | 120,185 (+0.859% vs LRU) | 120,185 (+0.859% vs LRU) | 155,001 (+30.077% vs LRU) | 155,513 (+30.507% vs LRU) | 156,025 (+30.936% vs LRU) | 120,185 (+0.859% vs LRU) | 119,161 (0% vs LRU) |
+| Evictions (512 token blocks) | 78 | 78 (0% vs LRU) | 151 (+93.590% vs LRU) | 80 (+2.564% vs LRU) | 80 (+2.564% vs LRU) | 148 (+89.744% vs LRU) | 149 (+91.026% vs LRU) | 150 (+92.308% vs LRU) | 80 (+2.564% vs LRU) | 78 (0% vs LRU) |
+| SLO passes / eligible | 33 / 33 | 33 / 33 (0% vs LRU) | 32 / 33 (-3.030% vs LRU) | 33 / 33 (0% vs LRU) | 33 / 33 (0% vs LRU) | 32 / 33 (-3.030% vs LRU) | 32 / 33 (-3.030% vs LRU) | 32 / 33 (-3.030% vs LRU) | 33 / 33 (0% vs LRU) | 33 / 33 (0% vs LRU) |
+| Observation span (seconds) | 17,554.170 | 17,554.170 (0% vs LRU) | 17,554.823 (+0.004% vs LRU) | 17,554.177 (+0.000042% vs LRU) | 17,554.177 (+0.000042% vs LRU) | 17,554.781 (+0.003% vs LRU) | 17,554.815 (+0.004% vs LRU) | 17,554.824 (+0.004% vs LRU) | 17,554.177 (+0.000042% vs LRU) | 17,554.170 (0% vs LRU) |

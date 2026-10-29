@@ -17,6 +17,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from export_report import (
     ROOT,
     build,
+    comparison_root,
     delta,
     fmt,
     reproduction_archive,
@@ -69,7 +70,17 @@ def test_embedded_bundle_rebuilds_identical_html_and_scores(tmp_path):
     with (rebuilt / "submissions.csv").open() as source:
         assert len(list(csv.DictReader(source))) == 40
     with (rebuilt / "results.csv").open() as source:
-        assert len(list(csv.DictReader(source))) == 12
+        assert (
+            len(list(csv.DictReader(source)))
+            == sum(
+                len(record["baselines"]) + 1
+                for record in (
+                    json.loads(p.read_text())
+                    for p in (comparison_root(ROOT) / "runs").glob("*.json")
+                )
+            )
+            // 2
+        )
 
 
 @pytest.fixture
@@ -81,7 +92,7 @@ def copied_evidence(tmp_path):
 
 def test_report_refuses_changed_policy(copied_evidence, tmp_path):
     policy = next(
-        (copied_evidence / "evidence/comparison/agentx-codex/policies").glob("*.py")
+        (comparison_root(copied_evidence) / "agentx-codex/policies").glob("*.py")
     )
     policy.write_text("class EvictionPolicy: pass\n")
     with pytest.raises(ValueError, match="Policy changed"):
@@ -89,7 +100,7 @@ def test_report_refuses_changed_policy(copied_evidence, tmp_path):
 
 
 def test_report_refuses_mismatched_comparison(copied_evidence, tmp_path):
-    path = copied_evidence / "evidence/comparison/runs/agentx-codex.json"
+    path = comparison_root(copied_evidence) / "runs/agentx-codex.json"
     record = json.loads(path.read_text())
     record["manifest"]["config_sha256"] = "0" * 64
     path.write_text(json.dumps(record))
@@ -130,10 +141,12 @@ def test_every_value_opens_its_exact_policy_source(tmp_path):
     build(ROOT, tmp_path)
     parser = Policies()
     parser.feed((tmp_path / "kv-eviction-results.html").read_text())
-    assert len(parser.dialogs) == 12
-    assert len(parser.buttons) == 4 * 2 * 11 * 3
+    runs, _ = validate(ROOT)
+    expected = sum(len(trace["policies"]) for trace in sections(ROOT, runs))
+    assert len(parser.dialogs) == expected
+    assert len(parser.buttons) == 2 * 11 * expected
     assert set(parser.buttons) == set(parser.dialogs)
-    for path in (ROOT / "evidence/comparison/runs").glob("*.json"):
+    for path in (comparison_root(ROOT) / "runs").glob("*.json"):
         record = json.loads(path.read_text())
         selected = next(
             s
@@ -155,13 +168,20 @@ def test_tuning_values_and_rate_changes_use_their_own_lru_baseline():
     trace = next(t for t in sections(ROOT, runs) if t["trace"] == "mooncake-toolagent")
     record = runs["mooncake-toolagent", "claude"]
     tuning = record["selection"]["tuning"]
-    assert trace["tables"][0]["rows"][0]["values"][1] == fmt(tuning["mean_ttft_ms"], 3)
-    assert trace["tables"][1]["rows"][0]["values"][1] == fmt(
+    column = next(
+        index
+        for index, policy in enumerate(trace["policies"])
+        if policy["id"].endswith("-claude")
+    )
+    assert trace["tables"][0]["rows"][0]["values"][column] == fmt(
+        tuning["mean_ttft_ms"], 3
+    )
+    assert trace["tables"][1]["rows"][0]["values"][column] == fmt(
         record["evaluation"]["mean_ttft_ms"], 3
     )
     assert (
-        trace["tables"][0]["rows"][0]["values"][1]
-        != trace["tables"][1]["rows"][0]["values"][1]
+        trace["tables"][0]["rows"][0]["values"][column]
+        != trace["tables"][1]["rows"][0]["values"][column]
     )
     assert delta(75, 50) == 50  # Relative percent, rather than 25 percentage points.
     assert delta(3, 0) is None  # Undefined comparisons must not invent a percentage.

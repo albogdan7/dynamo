@@ -10,11 +10,13 @@ import subprocess
 import sys
 import time
 import zipfile
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
 from kv_experiment.agents import DEFAULT_MODELS, invoke_agent
+from kv_experiment.baselines import policies as heuristic_policies
 from kv_experiment.legacy import reproduce as reproduce_legacy
 from kv_experiment.metrics import score
 from kv_experiment.runtime import IMAGE, NATIVE, PolicyError, replay
@@ -39,7 +41,11 @@ lru_rank: 0 is oldest in the native inactive queue;
 creation_order: monotonic allocation-event counter;
 release_order: monotonic inactive-release-event counter;
 num_releases: number of times this physical copy entered the inactive queue.
-These are causal logical counters, NOT simulated timestamps, depth, or hit counts.
+hit_count: actual physical-copy uses, including initial computation and committed
+cached-prefix activations (including overlapping readers); not canceled reservations;
+last_access_order: monotonic committed-access counter, including creation.
+Orders are causal logical counters, not simulated timestamps or prefix depths.
+hit_count is an access count; num_releases is only a lifecycle counter.
 You cannot change scheduling, cache capacity, trace, scorer, timing, or the SLO.
 You cannot access future requests or evaluation data. The controller executes your
 policy in a network-free, read-only container, with a 2-second decision deadline.
@@ -181,6 +187,9 @@ def setup(args) -> tuple[Path, Path, dict]:
         "native_binary_sha256": digest(NATIVE),
         "policy_container": IMAGE,
         "policy_decision_timeout_seconds": 2,
+        "baseline_jobs": args.baseline_jobs,
+        "heuristic_baselines": heuristic_policies(),
+        "access_count_semantics": "Initial computed use plus each committed prefix activation; per physical copy, reset on reallocation. Separate access clock preserves prior lifecycle counters.",
         "python": sys.version,
         "cargo": command_output(["cargo", "--version"]),
         "slo": {"ttft_ms": args.ttft_slo_ms, "per_request_p95_itl_ms": args.itl_slo_ms},
@@ -203,18 +212,35 @@ def baseline(args, output: Path, config: Path) -> dict:
     baselines = {}
     policy = output / "leaf-first-policy.py"
     policy.write_text(LEAF_FIRST)
-    for name, candidate in (("native-lru", None), ("leaf-first-lru", policy)):
-        baselines[name] = {}
-        for split in ("tuning", "evaluation"):
-            print(f"Baseline {name}: {split}", flush=True)
-            baselines[name][split] = replay(
-                output / f"{split}-trace.jsonl",
-                config,
-                output / f"{name}-{split}",
-                candidate,
-                args.ttft_slo_ms,
-                args.itl_slo_ms,
-            )
+    candidates = [("native-lru", None), ("leaf-first-lru", policy)]
+    for name, specification in heuristic_policies().items():
+        source = output / f"baseline-{name}.py"
+        source.write_text(specification["source"])
+        candidates.append((name, source))
+
+    def score_candidate(name, candidate, split):
+        print(f"Baseline {name}: {split}", flush=True)
+        return replay(
+            output / f"{split}-trace.jsonl",
+            config,
+            output / f"{name}-{split}",
+            candidate,
+            args.ttft_slo_ms,
+            args.itl_slo_ms,
+        )
+
+    # Each replay is a separate process with fresh cache, policy and PRNG state.
+    # Concurrency changes wall time only, not simulated scheduling or timing.
+    with ThreadPoolExecutor(max_workers=args.baseline_jobs) as executor:
+        jobs = {
+            (name, split): executor.submit(score_candidate, name, candidate, split)
+            for name, candidate in candidates
+            for split in ("tuning", "evaluation")
+        }
+        for name, _ in candidates:
+            baselines[name] = {
+                split: jobs[name, split].result() for split in ("tuning", "evaluation")
+            }
     write_json(output / "baselines.json", baselines)
     return baselines
 
@@ -466,6 +492,9 @@ def main():
     repro.add_argument("--output", type=Path, default=Path("experiments/reproduction"))
     for name in ("baseline", "run"):
         command = commands.add_parser(name)
+        command.add_argument(
+            "--baseline-jobs", type=int, choices=range(1, 5), default=2
+        )
         command.add_argument(
             "--trace", choices=list(SOURCES), default="mooncake-toolagent"
         )

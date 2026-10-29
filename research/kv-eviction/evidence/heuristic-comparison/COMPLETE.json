@@ -1,0 +1,19 @@
+{
+  "runs": [
+    "mooncake-toolagent-claude",
+    "mooncake-toolagent-codex",
+    "mooncake-conversation-claude",
+    "mooncake-conversation-codex",
+    "agentx-claude",
+    "agentx-codex",
+    "freeinference-claude",
+    "freeinference-codex"
+  ],
+  "audited_replays": 192,
+  "fresh_agent_searches": 8,
+  "random_seeds": [
+    0,
+    1,
+    2
+  ]
+}

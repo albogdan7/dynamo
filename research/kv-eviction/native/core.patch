@@ -1,6 +1,6 @@
 --- /dev/null
 +++ b/src/research_eviction.rs
-@@ -0,0 +1,37 @@
+@@ -0,0 +1,39 @@
 +// SPDX-License-Identifier: Apache-2.0
 +//! Research-only hooks. No forecast, active-block access, or changes to scheduling.
 +use std::fs::File;
@@ -18,6 +18,8 @@
 +    pub release_order: u64,
 +    pub num_releases: u64,
 +    pub lru_rank: usize,
++    pub hit_count: u64,
++    pub last_access_order: u64,
 +}
 +type Callback = Box<dyn Fn(&[Candidate]) -> Result<u64> + Send + Sync>;
 +static CALLBACK: OnceLock<Callback> = OnceLock::new();
@@ -49,45 +51,64 @@
 +pub mod research_eviction;
 --- a/src/engine/cache/vllm_block_pool.rs
 +++ b/src/engine/cache/vllm_block_pool.rs
-@@ -72,6 +72,9 @@
+@@ -72,6 +72,11 @@
  
  #[derive(Debug)]
  struct BlockCopy {
++    hit_count: u64,
++    last_access_order: u64,
 +    creation_order: u64,
 +    release_order: u64,
 +    num_releases: u64,
      state: CopyState,
  }
  
-@@ -335,6 +338,7 @@
+@@ -335,6 +340,8 @@
  }
  
  pub(crate) struct VllmBlockPool {
 +    research_clock: u64,
++    research_access_clock: u64,
      capacity: usize,
      copies: SlotMap<BlockCopyId, BlockCopy>,
      // Preserve the compact token-only index. State keys are allocated lazily;
-@@ -361,6 +365,7 @@
+@@ -361,6 +368,8 @@
      pub(crate) fn new(capacity: usize) -> Self {
          assert!(capacity > 0, "capacity must be > 0");
          Self {
 +            research_clock: 0,
++            research_access_clock: 0,
              capacity,
              copies: SlotMap::with_key(),
              by_hash: FxHashMap::default(),
-@@ -626,7 +631,11 @@
+@@ -626,7 +635,14 @@
          assert!(self.reserved > 0, "pool reserved-capacity underflow");
          self.reserved -= 1;
  
 +        self.research_clock += 1;
++        self.research_access_clock += 1;
          let id = self.copies.insert(BlockCopy {
++            hit_count: 1,
++            last_access_order: self.research_access_clock,
 +            creation_order: self.research_clock,
 +            release_order: 0,
 +            num_releases: 0,
              state: CopyState::Private,
          });
          if let Some(dependency) = source_reuse {
-@@ -1277,6 +1286,9 @@
+@@ -1252,6 +1268,11 @@
+         *refs = refs
+             .checked_add(1)
+             .unwrap_or_else(|| panic!("reference count overflow"));
++        // Count committed reuse, including accesses while another request holds it.
++        // Speculative reservations and cancellations do not count.
++        self.research_access_clock += 1;
++        self.copies[id].hit_count += 1;
++        self.copies[id].last_access_order = self.research_access_clock;
+     }
+ 
+     fn unpin(&mut self, id: BlockCopyId, expected_hash: SequenceHash) {
+@@ -1277,6 +1298,9 @@
      }
  
      fn insert_inactive(&mut self, id: BlockCopyId) {
@@ -97,7 +118,7 @@
          debug_assert!(
              self.is_inactive(id),
              "only an unreferenced, unpinned cached copy can enter the inactive LRU"
-@@ -1614,10 +1626,31 @@
+@@ -1614,10 +1638,32 @@
      /// Evict one physical copy. A hash is returned only on its final copy.
      fn evict_one(&mut self) -> EvictedCapacity {
          self.sync_belady_candidates();
@@ -121,6 +142,7 @@
 +                crate::research_eviction::Candidate {
 +                    block_id: id.data().as_ffi(), creation_order: copy.creation_order,
 +                    release_order: copy.release_order, num_releases: copy.num_releases, lru_rank: rank,
++                    hit_count: copy.hit_count, last_access_order: copy.last_access_order,
 +                }
 +            }).collect();
 +            let selected = crate::research_eviction::choose(&candidates);

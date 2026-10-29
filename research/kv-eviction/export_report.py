@@ -58,13 +58,25 @@ def evidence_path(root, relative):
     return path
 
 
+def comparison_root(root):
+    pointer = root / "evidence/current-comparison.json"
+    return (
+        evidence_path(root, read(pointer)["directory"])
+        if pointer.exists()
+        else root / "evidence/comparison"
+    )
+
+
 def validate(root, raw_root=None):
     """Verify sources, policies, selection and receipts before reporting scores."""
     runs = {}
     files = {}
     audit_count = 0
     raw_count = 0
-    for filename in sorted((root / "evidence/comparison/runs").glob("*.json")):
+    pointer = root / "evidence/current-comparison.json"
+    if pointer.exists():
+        files[str(pointer.relative_to(root))] = sha(pointer)
+    for filename in sorted((comparison_root(root) / "runs").glob("*.json")):
         record = read(filename)
         key = (record["trace"], record["agent"])
         require(key not in runs, "Duplicate trace and agent record")
@@ -90,10 +102,19 @@ def validate(root, raw_root=None):
         statuses = []
         for submission in record["submissions"]:
             status = submission["status"]
-            require(
-                status["valid"],
-                "Report requires explicit handling of invalid submissions",
-            )
+            if not status["valid"]:
+                require(
+                    "tuning" not in status, "Invalid submission has a successful score"
+                )
+                if submission.get("policy_path"):
+                    source = evidence_path(root, submission["policy_path"])
+                    require(
+                        sha(source) == submission["source_sha256"],
+                        "Failed submission source changed",
+                    )
+                    files[str(source.relative_to(root))] = sha(source)
+                statuses.append(status)
+                continue
             policy = evidence_path(root, submission["policy_path"])
             require(sha(policy) == status["policy_sha256"], f"Policy changed: {policy}")
             files[str(policy.relative_to(root))] = sha(policy)
@@ -101,7 +122,11 @@ def validate(root, raw_root=None):
         require(
             len(statuses) == manifest["submission_budget"], "Submission count mismatch"
         )
-        ordered = sorted(statuses, key=lambda item: item["ordinal"])
+        ordered = sorted(
+            (item for item in statuses if item["valid"]),
+            key=lambda item: item["ordinal"],
+        )
+        require(ordered, "No valid policies")
         selected = max(
             ordered,
             key=lambda item: (
@@ -128,7 +153,7 @@ def validate(root, raw_root=None):
                 all(baseline[field] == leaf[field] for field in METRICS),
                 "Native leaf first baseline differs",
             )
-        for metrics in [record["evaluation"], *(s["tuning"] for s in statuses)]:
+        for metrics in [record["evaluation"], *(s["tuning"] for s in ordered)]:
             expected = metrics["slo_passes"] * 1000 / metrics["observation_duration_ms"]
             require(
                 math.isclose(metrics["goodput_rps"], expected, rel_tol=1e-12),
@@ -136,6 +161,15 @@ def validate(root, raw_root=None):
             )
         for name in ("replay-check.json", "independent-audit.json"):
             files[str((bundle / name).relative_to(root))] = sha(bundle / name)
+        for baseline_name, specification in record.get("baseline_sources", {}).items():
+            source = evidence_path(root, specification["path"])
+            require(sha(source) == specification["sha256"], "Baseline source changed")
+            require(
+                source.read_text()
+                == manifest["heuristic_baselines"][baseline_name]["source"],
+                "Baseline source differs from frozen definition",
+            )
+            files[str(source.relative_to(root))] = sha(source)
         if raw_root is not None:
             from evidence.audit_run import audit
 
@@ -176,23 +210,19 @@ def validate(root, raw_root=None):
         == {(trace, agent) for trace in TRACES for agent in ("claude", "codex")},
         "Expected four paired traces",
     )
-    for name in (
-        "legacy-reproduction.json",
-        "comparison/toolagent-baseline-wrapper-compatibility.json",
-    ):
-        path = root / "evidence" / name
-        files[str(path.relative_to(root))] = sha(path)
-    historical = root / "evidence/mooncake-claude-pilot"
-    for path in [
-        *(historical / name for name in ("baselines.json", "evaluation.json")),
-        *historical.glob("submissions/*/submission.json"),
-    ]:
-        files[str(path.relative_to(root))] = sha(path)
     return runs, {
         "input_sha256": files,
         "saved_audit_receipts": audit_count,
         "raw_replays_reaudited": raw_count,
-        "verified_policy_sources": sum(len(r["submissions"]) for r in runs.values()),
+        "verified_policy_sources": sum(
+            bool(s.get("policy_path")) for r in runs.values() for s in r["submissions"]
+        ),
+        "valid_submissions": sum(
+            s["status"]["valid"] for r in runs.values() for s in r["submissions"]
+        ),
+        "invalid_submissions": sum(
+            not s["status"]["valid"] for r in runs.values() for s in r["submissions"]
+        ),
         "verified_source_snapshots": len(runs),
         "selected_replay_receipts": len(runs),
     }
@@ -213,6 +243,8 @@ def usage(record):
     costs = []
     for submission in record["submissions"]:
         metadata = submission["agent_metadata"]
+        if metadata is None:
+            return {**{key: None for key in results}, "usd": None}
         tokens = metadata["usage"]
         results["input"] += tokens["input_tokens"]
         results["cache_read"] += tokens.get(
@@ -255,6 +287,19 @@ def sections(root, runs):
                 "note": "Python callback equivalent to the native LRU baseline. Baseline scores use the native implementation.",
             }
         ]
+        for name, specification in (
+            left["manifest"].get("heuristic_baselines", {}).items()
+        ):
+            source = left["baseline_sources"][name]
+            policies.append(
+                {
+                    "id": trace + "-" + name,
+                    "label": specification["label"],
+                    "source": evidence_path(root, source["path"]).read_text(),
+                    "note": specification["note"],
+                    "baseline": name,
+                }
+            )
         for agent, record in (("claude", left), ("codex", right)):
             selected = next(
                 item
@@ -278,6 +323,10 @@ def sections(root, runs):
             ("evaluation", "Held-out performance"),
         ):
             metrics = [left["baselines"]["native-lru"][split]]
+            metrics.extend(
+                left["baselines"][name][split]
+                for name in left["manifest"].get("heuristic_baselines", {})
+            )
             metrics.extend(
                 record["selection"]["tuning"]
                 if split == "tuning"
@@ -370,8 +419,12 @@ def markdown(traces):
                 [
                     "### " + comparison["title"],
                     "",
-                    "| Metric and unit | LRU | Selected Claude policy | Selected Codex policy |",
-                    "| --- | --- | --- | --- |",
+                    "| Metric and unit | "
+                    + " | ".join(policy["label"] for policy in trace["policies"])
+                    + " |",
+                    "| "
+                    + " | ".join("---" for _ in range(1 + len(trace["policies"])))
+                    + " |",
                 ]
             )
             for row in comparison["rows"]:
@@ -393,15 +446,18 @@ def reproduction_archive(root):
         for name in (
             "export_report.py",
             "summarize.py",
+            "run_comparison.py",
+            "collect_comparison.py",
             "REPORT_EXPORT.md",
             "TRACE_SOURCES.md",
+            "HEURISTIC_BASELINES.md",
             "README.md",
             "evidence/audit_run.py",
-            "evidence/legacy-reproduction.json",
         )
     }
-    paths.update((root / "evidence/comparison").rglob("*"))
-    paths.update((root / "evidence/mooncake-claude-pilot").rglob("*"))
+    paths.update(comparison_root(root).rglob("*"))
+    if (root / "evidence/current-comparison.json").exists():
+        paths.add(root / "evidence/current-comparison.json")
     content = io.BytesIO()
     with zipfile.ZipFile(content, "w", zipfile.ZIP_DEFLATED) as archive:
         for path in sorted(p for p in paths if p.is_file()):
@@ -420,9 +476,30 @@ def webpage(traces, reproduction):
         parts.append(
             f'<section id="{trace["trace"]}"><h2>{html.escape(trace["label"])}</h2><p class="context">Cache {trace["cache_tokens"]:,} tokens</p>'
         )
+        choices = [policy for policy in trace["policies"] if "baseline" in policy]
+        if choices:
+            options = "".join(
+                f'<option value="{policy["baseline"]}"{" selected" if policy["baseline"] == "lfu" else ""}>{html.escape(policy["label"])}</option>'
+                for policy in choices
+            )
+            parts.append(
+                f'<label class="baseline-picker">Compare baseline <select data-baseline-for="{trace["trace"]}">{options}</select></label>'
+            )
+
+        def column_attributes(policy, trace_name=trace["trace"]):
+            if "baseline" not in policy:
+                return ""
+            hidden = " hidden" if policy["baseline"] != "lfu" else ""
+            return f' data-baseline-group="{trace_name}" data-baseline-name="{policy["baseline"]}"{hidden}'
+
         for comparison in trace["tables"]:
             parts.append(
-                f'<h3>{comparison["title"]} <span>{comparison["requests"]} requests</span></h3><div class="table-scroll"><table><thead><tr><th scope="col">Metric and unit</th><th scope="col">LRU</th><th scope="col">Selected Claude policy</th><th scope="col">Selected Codex policy</th></tr></thead><tbody>'
+                f'<h3>{comparison["title"]} <span>{comparison["requests"]} requests</span></h3><div class="table-scroll"><table><thead><tr><th scope="col">Metric and unit</th>'
+                + "".join(
+                    f'<th scope="col"{column_attributes(policy)}>{html.escape(policy["label"])}</th>'
+                    for policy in trace["policies"]
+                )
+                + "</tr></thead><tbody>"
             )
             for row in comparison["rows"]:
                 parts.append(
@@ -438,7 +515,7 @@ def webpage(traces, reproduction):
                         else f'<span class="change">{change_text(row["changes"][index])}</span>'
                     )
                     parts.append(
-                        f'<td><div class="value"><span>{row["values"][index]}</span><button type="button" class="view-policy" data-policy="{policy["id"]}" aria-label="{accessible}" title="{accessible}">&lt;/&gt;</button></div>{change}</td>'
+                        f'<td{column_attributes(policy)}><div class="value"><span>{row["values"][index]}</span><button type="button" class="view-policy" data-policy="{policy["id"]}" aria-label="{accessible}" title="{accessible}">&lt;/&gt;</button></div>{change}</td>'
                     )
                 parts.append("</tr>")
             parts.append("</tbody></table></div>")
@@ -451,13 +528,20 @@ def webpage(traces, reproduction):
     return (
         """<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>KV eviction results</title>
 <style>
-*{box-sizing:border-box}body{margin:32px auto;padding:0 22px;max-width:1120px;font:15px/1.5 system-ui,sans-serif;color:#202020;background:white}h1{font-size:26px;letter-spacing:-.5px;margin:0 0 8px}h2{font-size:21px;margin:0}h3{font-size:16px;font-weight:600;margin:20px 0 8px}h3 span{font-size:12px;font-weight:400;color:#666;margin-left:8px}.intro,.context,footer{color:#666;font-size:12px}.intro{margin:0 0 28px}.context{margin:3px 0 16px}section{padding:0 0 32px;margin:0 0 30px;border-bottom:1px solid #ddd}.table-scroll{overflow-x:auto}table{width:100%;min-width:680px;border-collapse:collapse;font-variant-numeric:tabular-nums}th,td{padding:9px 12px;border-bottom:1px solid #e8e8e8;vertical-align:middle}thead th{font-size:12px;font-weight:600;background:#f4f4f4;text-align:right;color:#333}thead th:first-child{text-align:left;width:34%}tbody th{text-align:left;font-size:13px;font-weight:400}td{text-align:right;font-size:13px;width:22%}.value{display:flex;align-items:center;justify-content:flex-end;gap:6px;white-space:nowrap}.change{display:block;color:#777;font-size:11px;margin-right:27px;white-space:nowrap}.view-policy{font:11px ui-monospace,monospace;padding:3px 2px;color:#666;background:transparent;border:0;border-radius:3px;cursor:pointer}.view-policy:hover{background:#eee;color:#111}button:focus-visible,a:focus-visible{outline:2px solid #555;outline-offset:2px}dialog{border:1px solid #ddd;border-radius:6px;width:min(760px,calc(100% - 32px));max-height:85vh;padding:22px;box-shadow:0 12px 45px #0002}dialog::backdrop{background:#0005}.modal-heading{display:flex;justify-content:space-between;align-items:center;gap:12px}.modal-heading h2{font-size:19px}dialog p{font-size:13px;margin:8px 0}.policy-note{color:#666}dialog pre{margin:18px 0 0;overflow:auto;font:13px/1.6 ui-monospace,monospace;white-space:pre}form{margin:0}.close{font:inherit;font-size:13px;border:1px solid #ccc;border-radius:4px;padding:5px 10px;background:white;cursor:pointer}footer{margin:0 0 28px}footer a{color:inherit}footer p{margin:5px 0}@media(max-width:600px){body{padding:0 12px;margin:20px auto}h1{font-size:23px}th,td{padding:8px}dialog{padding:15px}dialog pre{font-size:12px}}@media print{body{font-size:10pt;margin:0;padding:0;max-width:none}.view-policy,dialog,footer{display:none}.table-scroll{overflow:visible}table{min-width:0}section{break-before:page;border:0;margin:0;padding:0}section:first-of-type{break-before:auto}tr{break-inside:avoid}.change{margin-right:0}}
+*{box-sizing:border-box}[hidden]{display:none!important}.baseline-picker{font-size:12px;color:#555}.baseline-picker select{font:inherit;margin-left:6px;padding:4px 6px;border:1px solid #ccc;background:white;border-radius:3px}body{margin:32px auto;padding:0 22px;max-width:1120px;font:15px/1.5 system-ui,sans-serif;color:#202020;background:white}h1{font-size:26px;letter-spacing:-.5px;margin:0 0 8px}h2{font-size:21px;margin:0}h3{font-size:16px;font-weight:600;margin:20px 0 8px}h3 span{font-size:12px;font-weight:400;color:#666;margin-left:8px}.intro,.context,footer{color:#666;font-size:12px}.intro{margin:0 0 28px}.context{margin:3px 0 16px}section{padding:0 0 32px;margin:0 0 30px;border-bottom:1px solid #ddd}.table-scroll{overflow-x:auto}table{width:100%;min-width:860px;border-collapse:collapse;font-variant-numeric:tabular-nums}th,td{padding:9px 12px;border-bottom:1px solid #e8e8e8;vertical-align:middle}thead th{font-size:12px;font-weight:600;background:#f4f4f4;text-align:right;color:#333}thead th:first-child{text-align:left;width:30%}tbody th{text-align:left;font-size:13px;font-weight:400}td{text-align:right;font-size:13px;width:17.5%}.value{display:flex;align-items:center;justify-content:flex-end;gap:6px;white-space:nowrap}.change{display:block;color:#777;font-size:11px;margin-right:27px;white-space:nowrap}.view-policy{font:11px ui-monospace,monospace;padding:3px 2px;color:#666;background:transparent;border:0;border-radius:3px;cursor:pointer}.view-policy:hover{background:#eee;color:#111}button:focus-visible,a:focus-visible{outline:2px solid #555;outline-offset:2px}dialog{border:1px solid #ddd;border-radius:6px;width:min(760px,calc(100% - 32px));max-height:85vh;padding:22px;box-shadow:0 12px 45px #0002}dialog::backdrop{background:#0005}.modal-heading{display:flex;justify-content:space-between;align-items:center;gap:12px}.modal-heading h2{font-size:19px}dialog p{font-size:13px;margin:8px 0}.policy-note{color:#666}dialog pre{margin:18px 0 0;overflow:auto;font:13px/1.6 ui-monospace,monospace;white-space:pre}form{margin:0}.close{font:inherit;font-size:13px;border:1px solid #ccc;border-radius:4px;padding:5px 10px;background:white;cursor:pointer}footer{margin:0 0 28px}footer a{color:inherit}footer p{margin:5px 0}@media(max-width:600px){body{padding:0 12px;margin:20px auto}h1{font-size:23px}th,td{padding:8px}dialog{padding:15px}dialog pre{font-size:12px}}@media print{body{font-size:10pt;margin:0;padding:0;max-width:none}.view-policy,dialog,footer{display:none}.table-scroll{overflow:visible}table{min-width:0}section{break-before:page;border:0;margin:0;padding:0}section:first-of-type{break-before:auto}tr{break-inside:avoid}.change{margin-right:0}}
 </style></head><body><main><h1>KV eviction results</h1><p class="intro">Uncalibrated simulation · SLO: TTFT ≤ 1,000 ms and per-request p95 ITL ≤ 50 ms · Percentages show relative change from LRU. Click &lt;/&gt; beside a value to view its policy.</p>
 """
         + "\n".join(parts)
-        + f'<footer><p>Δ = 100 × (policy − LRU) / LRU. Percentage-valued metrics also use relative change. A negative change means a lower value, not necessarily a better result.</p><p><a download="kv-eviction-reproduce.zip" href="data:application/zip;base64,{payload}">Reproduction files</a></p></footer></main><noscript>Enable JavaScript to open policy source dialogs.</noscript>'
+        + f'<footer><p>Δ = 100 × (policy − LRU) / LRU. Percentage-valued metrics also use relative change. A negative change means a lower value, not necessarily a better result. Random seeds 0, 1 and 2 are separate runs, not an average or a best-seed selection.</p><p><a download="kv-eviction-reproduce.zip" href="data:application/zip;base64,{payload}">Reproduction files</a></p></footer></main><noscript>Enable JavaScript to open policy source dialogs and switch heuristic baselines.</noscript>'
         + """
 <script>
+document.addEventListener('change', function(event) {
+  const menu = event.target.closest('select[data-baseline-for]');
+  if (!menu) return;
+  document.querySelectorAll('[data-baseline-group="' + menu.dataset.baselineFor + '"]').forEach(function(cell) {
+    cell.hidden = cell.dataset.baselineName !== menu.value;
+  });
+});
 document.addEventListener('click', function(event) {
   const button = event.target.closest('button[data-policy]');
   if (button) {
@@ -488,7 +572,7 @@ def build(root, output, raw_root=None):
     )
     runs, verification = validate(root, raw_root)
     output.mkdir(parents=True, exist_ok=True)
-    summarize(root / "evidence/comparison/runs", output)
+    summarize(comparison_root(root) / "runs", output)
     pages = sections(root, runs)
     (output / "kv-eviction-results.md").write_text(markdown(pages))
     reproduction = reproduction_archive(root)
@@ -515,9 +599,15 @@ def build(root, output, raw_root=None):
                         "id": sub["id"],
                         "ordinal": status["ordinal"],
                         "selected": sub["id"] == record["selection"]["submission_id"],
-                        "policy_sha256": status["policy_sha256"],
+                        "valid": status["valid"],
+                        "policy_sha256": status.get(
+                            "policy_sha256", sub.get("source_sha256")
+                        ),
                         "policy_path": sub["policy_path"],
-                        **{field: status["tuning"][field] for field in METRICS},
+                        **{
+                            field: status.get("tuning", {}).get(field)
+                            for field in METRICS
+                        },
                     }
                 )
     write_csv(output / "submissions.csv", submissions)

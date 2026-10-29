@@ -2,7 +2,7 @@
 
 Run from the fork repository root. This release supports **Claude Code or Codex** with **Mooncake tool/agent, Mooncake conversation, AgentX and a qualified FreeInference subset**. It launches the agent, evaluates submitted Python policies in containers, selects using tuning data, and saves an independent evaluation. [TRACE_SOURCES.md](TRACE_SOURCES.md) defines each source, qualification and schedule.
 
-See [EXTENSION_RESULTS.md](EXTENSION_RESULTS.md) for the current matched results; [REPORT.md](REPORT.md) retains the initial release findings.
+The [HTML report](reports/kv-eviction-results.html) contains the current fresh agent and heuristic comparison. [EXTENSION_RESULTS.md](EXTENSION_RESULTS.md) and [REPORT.md](REPORT.md) retain earlier comparisons and release findings.
 
 The [shareable HTML report](reports/kv-eviction-results.html) shows tuning and held-out metrics for each trace, percentage changes from LRU and policy source dialogs. It is a single offline file with the report generator and compact evidence embedded as a downloadable ZIP. [REPORT_EXPORT.md](REPORT_EXPORT.md) explains sharing and regeneration:
 
@@ -62,6 +62,10 @@ Outputs are relative to `research/kv-eviction/`, must stay inside that directory
 For Codex, use the same command with `--agent codex --model gpt-6.1-sol` and a separate output directory. The native Codex CLI and matching `codex-code-mode-host` must be installed (tested with 0.164.0). The runner copies the trusted runtime into a write-protected workspace subtree; agent commands cannot read the trace or credentials, write the runtime/configuration, use the network, or invoke shell/app/plugin/subagent tools. It requires a successful `policy.py` file-change event; a completed CLI turn alone is not accepted as a submission. Codex receives the current policy in its prompt because shell/read commands are disabled. [Official permissions documentation](https://learn.chatgpt.com/docs/permissions).
 
 Codex JSON reports token usage but no server-resolved model ID or monetary cost. The runner records the exact requested model ID and leaves unavailable fields null with a reason.
+
+## Fixed heuristic baselines
+
+Every new run also evaluates allocation-order FIFO, MRU, actual-access LFU, two-tier SLRU and random replacement with seeds 0, 1 and 2. All use the same native eligibility and scoring. [HEURISTIC_BASELINES.md](HEURISTIC_BASELINES.md) defines the variants and commands for fresh matched agent searches, auditing and report generation.
 
 ## Additional traces
 

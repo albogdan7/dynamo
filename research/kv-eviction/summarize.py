@@ -33,27 +33,54 @@ def summarize(directory: Path, output: Path) -> None:
         if set(records) != {"claude", "codex"}:
             raise ValueError(f"Need both agent pilots for {trace}")
         left, right = records["claude"], records["codex"]
-        for field in ("config_sha256", "slo", "submission_budget", "selection"):
-            if left["manifest"][field] != right["manifest"][field]:
+        for field in (
+            "config_sha256",
+            "slo",
+            "submission_budget",
+            "selection",
+            "heuristic_baselines",
+        ):
+            if left["manifest"].get(field) != right["manifest"].get(field):
                 raise ValueError(
                     f"Mismatched {field} in {trace}; do not compare these runs"
                 )
+        if set(left["baselines"]) != set(right["baselines"]):
+            raise ValueError(f"Different baseline sets in {trace}")
         for split in ("tuning", "evaluation"):
             if (
                 left["manifest"]["trace"]["windows"][split]["sha256"]
                 != right["manifest"]["trace"]["windows"][split]["sha256"]
             ):
                 raise ValueError(f"Mismatched {split} data in {trace}")
-            for metric in METRICS:
-                if (
-                    left["baselines"]["native-lru"][split][metric]
-                    != right["baselines"]["native-lru"][split][metric]
-                ):
-                    raise ValueError(f"Different baseline {metric} in {trace}")
+            for baseline_name in left["baselines"]:
+                for metric in [
+                    *METRICS,
+                    "requests",
+                    "slo_passes",
+                    "slo_eligible_requests",
+                ]:
+                    if (
+                        left["baselines"][baseline_name][split][metric]
+                        != right["baselines"][baseline_name][split][metric]
+                    ):
+                        raise ValueError(
+                            f"Different {baseline_name} {metric} in {trace}"
+                        )
         verification[trace] = {"matched_settings_and_baselines": True}
-        baseline = left["baselines"]["native-lru"]["evaluation"]
+        labels = {
+            "native-lru": "LRU",
+            **{
+                name: specification["label"]
+                for name, specification in left["manifest"]
+                .get("heuristic_baselines", {})
+                .items()
+            },
+        }
         policies = [
-            ("LRU", None, baseline),
+            (labels.get(name, name), None, splits["evaluation"])
+            for name, splits in left["baselines"].items()
+            if name != "leaf-first-lru"
+        ] + [
             ("Claude", left["model"], left["evaluation"]),
             ("Codex", right["model"], right["evaluation"]),
         ]

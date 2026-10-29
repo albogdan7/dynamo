@@ -1,0 +1,146 @@
+{
+  "native-lru-tuning": {
+    "matches": true,
+    "requests": 139,
+    "slo_passes": 138,
+    "metrics_sha256": "63c1d03a4acd9fd26f347d843eb03fae532941ae49a76aaef19004273c0ad083"
+  },
+  "native-lru-evaluation": {
+    "matches": true,
+    "requests": 33,
+    "slo_passes": 33,
+    "metrics_sha256": "b4be3b2d1971ad57f391e82e13ef094e7ee059f62e619c47028012b02d0febc3"
+  },
+  "leaf-first-lru-tuning": {
+    "matches": true,
+    "requests": 139,
+    "slo_passes": 138,
+    "metrics_sha256": "3cf2ca27e110315739f03ed46b7ea6aeb71833599ea774bfdb642a53ac5c845b"
+  },
+  "leaf-first-lru-evaluation": {
+    "matches": true,
+    "requests": 33,
+    "slo_passes": 33,
+    "metrics_sha256": "1aa959e9db287b907975f346d9c079f4090202bb3f24484c285575d6764cb30c"
+  },
+  "fifo-tuning": {
+    "matches": true,
+    "requests": 139,
+    "slo_passes": 138,
+    "metrics_sha256": "5cec372db66b9c617f1c15719e28a08b3fe70a7213c212b1fb6ede3e07ee15f1"
+  },
+  "fifo-evaluation": {
+    "matches": true,
+    "requests": 33,
+    "slo_passes": 33,
+    "metrics_sha256": "91e84c52aa3a105db4a5ff4c3a9409472e5b5088245e0cc0c03a582d2f3d9797"
+  },
+  "mru-tuning": {
+    "matches": true,
+    "requests": 139,
+    "slo_passes": 138,
+    "metrics_sha256": "66b0e03aa0837b585d0a3c06330df99a764e16d965929abeb66c4717f19352a6"
+  },
+  "mru-evaluation": {
+    "matches": true,
+    "requests": 33,
+    "slo_passes": 32,
+    "metrics_sha256": "6eda042df1b168f27f64689818691fefbaf95506f5f0c00539d40a85adb33dc3"
+  },
+  "lfu-tuning": {
+    "matches": true,
+    "requests": 139,
+    "slo_passes": 138,
+    "metrics_sha256": "629d3acb74b246e918bf062a1de90c857912722165bd192c16dfc693eb08ab3d"
+  },
+  "lfu-evaluation": {
+    "matches": true,
+    "requests": 33,
+    "slo_passes": 33,
+    "metrics_sha256": "b4669c2f7a0e75d79b4afcbdb4328b7ad1f404cbc4d1b65aa053503d7d1723e3"
+  },
+  "slru-tuning": {
+    "matches": true,
+    "requests": 139,
+    "slo_passes": 138,
+    "metrics_sha256": "f8da282221b675ec745aec39a8ccfe190668d535c1225c2c4ea16890e44f07b9"
+  },
+  "slru-evaluation": {
+    "matches": true,
+    "requests": 33,
+    "slo_passes": 33,
+    "metrics_sha256": "6dbcf136b6dcd324b7527c072a1d353af48e44849d129c61f9324283fab08f42"
+  },
+  "random-0-tuning": {
+    "matches": true,
+    "requests": 139,
+    "slo_passes": 138,
+    "metrics_sha256": "441dcdf16bb71e4244cebd5f5d6d5674b8e66d44446c9e0a32fb12f5b1c0ee5c"
+  },
+  "random-0-evaluation": {
+    "matches": true,
+    "requests": 33,
+    "slo_passes": 32,
+    "metrics_sha256": "d32dc5539b8c4ba13c4d875494c37af7e83b15553d0e0873675884bfd2ffda91"
+  },
+  "random-1-tuning": {
+    "matches": true,
+    "requests": 139,
+    "slo_passes": 138,
+    "metrics_sha256": "46cfb1cb90e0dc6903175f866a15867d99da13d1e7d14d2e18eb4bd9bc32816c"
+  },
+  "random-1-evaluation": {
+    "matches": true,
+    "requests": 33,
+    "slo_passes": 32,
+    "metrics_sha256": "48fa4550cceb4221df71624268bf0a8f797cad5ba5ca29f3f261cd6845e82599"
+  },
+  "random-2-tuning": {
+    "matches": true,
+    "requests": 139,
+    "slo_passes": 138,
+    "metrics_sha256": "41e4bb427035fb6680e6d77af7a71b48706afdb09d037f21842b2d998b815c80"
+  },
+  "random-2-evaluation": {
+    "matches": true,
+    "requests": 33,
+    "slo_passes": 32,
+    "metrics_sha256": "a10756157dae6f0525a24d2e460c5b1fd7d50155290e75dd293d9016182a6e7f"
+  },
+  "evaluation": {
+    "matches": true,
+    "requests": 33,
+    "slo_passes": 33,
+    "metrics_sha256": "c806c102c94d6bf8f5ae2eddc5181f62c7b0fde5f0043f8ed1c8269e7bbd7440"
+  },
+  "submissions/2026-10-29-17-58-52/tuning": {
+    "matches": true,
+    "requests": 139,
+    "slo_passes": 138,
+    "metrics_sha256": "de311ab4383efbbb3acfd2509031d35d95a11a27974c2dc08d10856378d5107d"
+  },
+  "submissions/2026-10-29-17-59-14/tuning": {
+    "matches": true,
+    "requests": 139,
+    "slo_passes": 138,
+    "metrics_sha256": "9a19f0301e3f4c23b0aebcaaf43176266a240878de00c2197cfeae85e39d825e"
+  },
+  "submissions/2026-10-29-17-59-35/tuning": {
+    "matches": true,
+    "requests": 139,
+    "slo_passes": 138,
+    "metrics_sha256": "610454e7868b43c634332d3449638210c4afb993c42141592bb4191a1630de5a"
+  },
+  "submissions/2026-10-29-18-00-00/tuning": {
+    "matches": true,
+    "requests": 139,
+    "slo_passes": 138,
+    "metrics_sha256": "d9a11ef46d2faa85ea270423cacdaf7babff035bcc100944f030c99dabf9ae73"
+  },
+  "submissions/2026-10-29-18-00-22/tuning": {
+    "matches": true,
+    "requests": 139,
+    "slo_passes": 138,
+    "metrics_sha256": "91a165716ed147032ea31c9924e2dd629b01090742a1237caa919b62f4ba973d"
+  }
+}

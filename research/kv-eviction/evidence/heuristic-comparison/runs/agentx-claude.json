@@ -1,0 +1,1450 @@
+{
+  "schema_version": 1,
+  "trace": "agentx",
+  "agent": "claude",
+  "model": "claude-sonnet-5-5",
+  "original_run": "experiments/heuristic-rerun-2026-10-29/agentx-claude",
+  "manifest": {
+    "schema_version": 1,
+    "created_at": "2026-10-29T17:50:16.459369-05:00",
+    "timezone": "America/Chicago",
+    "command": [
+      "/Users/miguel/Documents/ChatGPT/Agentic GPU Environment/dynamo-kv-research/research/kv-eviction/.venv/bin/python",
+      "/Users/miguel/Documents/ChatGPT/Agentic GPU Environment/dynamo-kv-research/research/kv-eviction/experiment.py",
+      "run",
+      "--agent",
+      "claude",
+      "--model",
+      "claude-sonnet-5-5",
+      "--trace",
+      "agentx",
+      "--sessions-per-split",
+      "2",
+      "--cache-tokens",
+      "196608",
+      "--ttft-slo-ms",
+      "1000",
+      "--itl-slo-ms",
+      "50",
+      "--submissions",
+      "5",
+      "--output",
+      "/Users/miguel/Documents/ChatGPT/Agentic GPU Environment/dynamo-kv-research/research/kv-eviction/experiments/heuristic-rerun-2026-10-29/agentx-claude"
+    ],
+    "source": {
+      "commit": "44c82f55e4dda420edc5adcc7a9043cc1ee49311",
+      "files": {
+        "research/kv-eviction/.gitattributes": "7992d1d038000e8b415e41cf862af0b9493a82501f8c7ad9e2e3b1f8c19c61b3",
+        "research/kv-eviction/.gitignore": "4b6f700070464a8005bda81aefda562b1205359cfa885a72c68d65fef6c9b406",
+        "research/kv-eviction/BASELINE.md": "a8a9d1854127f3cb9a4acc74f99ef4baf708351708c570bb4fa36e4bee8eda7c",
+        "research/kv-eviction/CODEX_RESULTS.md": "31d64311fc442e41e58b0cdfc6372f6f35fb29122d51689659571ae8f096e0f9",
+        "research/kv-eviction/EXTENSION_RESULTS.md": "ead620266f216e6d82fbdcc1c8036930bd4bb53334cc5eb50bc522aacc1ec912",
+        "research/kv-eviction/HEURISTIC_BASELINES.md": "e7b7e34506f81b7b49f219eadf7377422b6f72d77e1bef4aaa6a9397c2eb4978",
+        "research/kv-eviction/PLAN.md": "7336eb2b85cc11c6a507c650eed93531593d2a7aaea09de01f65b01ebab51cf1",
+        "research/kv-eviction/README.md": "561f5ec020504026cc2bdba84ad343181de1b501af4cbc6d453cec71adb64c98",
+        "research/kv-eviction/REPORT.md": "df3af33b6478968a987ea23c9e74b5541259d4695d9a9a8cf97209087ad2e084",
+        "research/kv-eviction/REPORT_EXPORT.md": "fe8353c21d3f4cc892bc3807d8314a7e937c08e8497d01bcc2627c67c7b4400f",
+        "research/kv-eviction/RESEARCH_NOTES.md": "5e83514e37dad0e17161f88d14d7b98a644d917ca79c2019b212eba77541c5f7",
+        "research/kv-eviction/TRACE_SOURCES.md": "e91a2d9a206d733c929d13d8d0b4fa84c4186d77b6fba41057663c8b3a8ad073",
+        "research/kv-eviction/baseline.py": "20eabe6909487ce0c370b1e8f62c84edee0b99d12b56270776ddcfc3cead0381",
+        "research/kv-eviction/collect_comparison.py": "d4e5839289cf9ee60cf2ae4fe014e9089ab688522d83f767dd2e9cd4bb3dd35e",
+        "research/kv-eviction/experiment.py": "35f3afca46651b3d9a3335a419f87764c53682d3794fbb686f98dd3861b81b40",
+        "research/kv-eviction/export_report.py": "657efd5109fe6e3f7d5beabac2f39e890327b8e38c147735e89fe8136fcaca5e",
+        "research/kv-eviction/kv_experiment/__init__.py": "d61ca6c3deda7cdc038ad8d853c01db2db33c1ec0eb7e873e02da34617f707e2",
+        "research/kv-eviction/kv_experiment/agents.py": "2fdfda62a2ec894905de54f8e8a5552a3125ffeebfaba08ccb5169e2d38b23e9",
+        "research/kv-eviction/kv_experiment/baselines.py": "f1bfd12fb5dd3c917a18e99339c57462c23ff61e357d03a38ffee3847ab5578e",
+        "research/kv-eviction/kv_experiment/legacy.py": "82815d6db140cac818e71ead1fd7e6637fc3ff9307d84c7716fc67bb4dc13ee9",
+        "research/kv-eviction/kv_experiment/metrics.py": "e9209a115101ed8d3b65663109ac4f65d64f97659b69f4ec100319f18aa14a0f",
+        "research/kv-eviction/kv_experiment/policy_worker.py": "da55172af816ad7dbcb28dce84fda79bb7d80ce58d3717d3315bb4d77cb002af",
+        "research/kv-eviction/kv_experiment/runtime.py": "2134717bf3e1d3c44fb39aecf3e534ebefa37ff9117b55f8db5758c29d8e05e9",
+        "research/kv-eviction/kv_experiment/sessions.py": "1fb104f3434177f77d43f90bfcb72aeeea6a91c76a492b35f4e640123536e823",
+        "research/kv-eviction/kv_experiment/sources.py": "82bad0c0fc2ecf5f21df5f2f0d0ff8e65d6538233cbc5fd306c175573c535315",
+        "research/kv-eviction/kv_experiment/traces.py": "22295a07431c3a1a2d2aec9e9826f0b92cc238123dd024d7bbfba0d051aadc9a",
+        "research/kv-eviction/native/Cargo.lock": "36bf83c62b8ae9abadc2f7061fda783624309ba36995399d9f2a5e48584fafa6",
+        "research/kv-eviction/native/Cargo.toml": "b26ca1c06181b60460e42ea0a8a130f8146e6a06ed4679804565e599963f832e",
+        "research/kv-eviction/native/core.patch": "5181609007eea8900156266f93314563d4a8f5ff5c5d6a20d00b77e262e1b494",
+        "research/kv-eviction/native/src/main.rs": "872f03cf9e7081d46ee7efad958e9624588dd7caea78fc75fdb80c31a346ae5c",
+        "research/kv-eviction/prepare_native.py": "727909fc852109c7699702dddd3a9fcb3d30356c7983fe5363af74b482806708",
+        "research/kv-eviction/profiles/interactive.json": "4359d8be19c881636bf0b8b4bb04343bf8aa1a5e77e4ecd19495ba1e426fc54d",
+        "research/kv-eviction/pytest.ini": "63d2d16d09ffac6af35c37894465ff5fda0f528400c04ea11195910526b03f28",
+        "research/kv-eviction/run_comparison.py": "c8668d3adc586fd6e7fa09afbff8721d9c3e13eb287c66539bc7e0c05bf7ddba",
+        "research/kv-eviction/sandbox/AGENTS.md": "70f93658e904c2f7b0f4fa5881d05249237786da186210ab08eb61a6d0fc8c47",
+        "research/kv-eviction/sandbox/CLAUDE.md": "336cc4fbf19beaada7ccf9986414fa91851a8d7a07dfb3ccbe800a69eed0ab49",
+        "research/kv-eviction/sandbox/README.md": "1b9b67b87eb2e1499e2466ca98c8dbae89e7beb07cad95e3c8699f0d5eacbc3b",
+        "research/kv-eviction/sandbox/policy.py": "7cd83d7adc85da7cb8b73843f7eb32fd93faee1c6c9967a45910bdca57127769",
+        "research/kv-eviction/sandbox/policy_runner.py": "8ea160b6aa096ed1d52eacfe16a5ab4f9f73acaae2ee32f3c2bd805b93453164",
+        "research/kv-eviction/sandbox/submit.py": "67d39d494eafb2a38bc73948ea377cabbebf4c30ce14ad28e14300f5bd132742",
+        "research/kv-eviction/sim/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "research/kv-eviction/sim/cache.py": "ad3e312b64a9917edbff583a42ef795c31aa8f77f3477ebca64ab671a68599d0",
+        "research/kv-eviction/sim/trace.py": "66f310516e6282627b135969e2113885fcdeb995cd4ab0483f2e3e0369f322c6",
+        "research/kv-eviction/summarize.py": "f2490d4d6b26a5d52705585d91160a0d1c4c19281e942797e90a3fd9dcc3764c"
+      },
+      "sha256": "71afdd4318405651d29c6984756064e0cafb6d0ef61c563f628c8326755e79a1"
+    },
+    "trace": {
+      "name": "agentx",
+      "revision": "23f152f6f0f9399a85901b89a6458def0ef16729",
+      "url": "https://huggingface.co/datasets/semianalysisai/cc-traces-weka-062126/resolve/23f152f6f0f9399a85901b89a6458def0ef16729/traces.jsonl",
+      "sha256": "26cc19dcee8ea765f93fa33062e2e5fe65aa86383c15730390839338ed762153",
+      "filename": "agentx-first-16-sessions.jsonl",
+      "kind": "weka",
+      "block_size": 64,
+      "license": "Apache-2.0",
+      "requests": null,
+      "subset_lines": 16,
+      "uncompressed_sha256": null,
+      "license_url": "https://huggingface.co/datasets/semianalysisai/cc-traces-weka-062126/blob/23f152f6f0f9399a85901b89a6458def0ef16729/README.md",
+      "format": "agentic_mooncake",
+      "arrival_time_multiplier": 1,
+      "execution": "closed-loop completion/tool gaps; serial top-level plays, native subagent spawn/join",
+      "agentic_lanes": 1,
+      "qualification": [
+        {
+          "source_ordinal": 0,
+          "session_id": "002001296e8a8c38ad9d7cc436d691afc602",
+          "excluded_reasons": [
+            "nonpositive or missing output count",
+            "more than 128 model requests in complete play",
+            "context exceeds bounded 196608-token workload"
+          ]
+        },
+        {
+          "source_ordinal": 1,
+          "session_id": "006c98de37d819e95b0840e25426bb7ca99d",
+          "excluded_reasons": [
+            "no subagent group"
+          ]
+        },
+        {
+          "source_ordinal": 2,
+          "session_id": "00ca01c4aaeccee751ae6285beb54dea262f",
+          "excluded_reasons": []
+        },
+        {
+          "source_ordinal": 3,
+          "session_id": "0196085d85d2075a50b74cd8795ffbdcea9a",
+          "excluded_reasons": [
+            "nonpositive or missing output count",
+            "more than 128 model requests in complete play",
+            "context exceeds bounded 196608-token workload"
+          ]
+        },
+        {
+          "source_ordinal": 4,
+          "session_id": "02bc0afb13f7a2d9efa86c28511261d85c0e",
+          "excluded_reasons": [
+            "more than 128 model requests in complete play",
+            "context exceeds bounded 196608-token workload"
+          ]
+        },
+        {
+          "source_ordinal": 5,
+          "session_id": "03e110ac6921c2fe9ac7772a9654314a2beb",
+          "excluded_reasons": [
+            "context exceeds bounded 196608-token workload"
+          ]
+        },
+        {
+          "source_ordinal": 6,
+          "session_id": "0470d446a4514dfe0c6ad0be92853bd13287",
+          "excluded_reasons": [
+            "more than 128 model requests in complete play",
+            "context exceeds bounded 196608-token workload"
+          ]
+        },
+        {
+          "source_ordinal": 7,
+          "session_id": "04dba6fe621301a1d01fd63b8d02c9645c48",
+          "excluded_reasons": []
+        },
+        {
+          "source_ordinal": 8,
+          "session_id": "05c249572509162371b7b82339674db64b5d",
+          "excluded_reasons": [
+            "no subagent group"
+          ]
+        },
+        {
+          "source_ordinal": 9,
+          "session_id": "05f72f78a037cfa5cd4e4541960a574701d9",
+          "excluded_reasons": [
+            "no subagent group"
+          ]
+        },
+        {
+          "source_ordinal": 10,
+          "session_id": "063179eb93f4337a662e859c5a2c5638e03f",
+          "excluded_reasons": []
+        },
+        {
+          "source_ordinal": 11,
+          "session_id": "069d7bf5f1efb4e76e3c84510367e6af78a5",
+          "excluded_reasons": [
+            "more than 128 model requests in complete play",
+            "context exceeds bounded 196608-token workload"
+          ]
+        },
+        {
+          "source_ordinal": 12,
+          "session_id": "077ea9e6554f45bbad9c24a8462bae9a8512",
+          "excluded_reasons": [
+            "no subagent group"
+          ]
+        },
+        {
+          "source_ordinal": 13,
+          "session_id": "07dd40536557a1d6440a923557c3129dc929",
+          "excluded_reasons": []
+        },
+        {
+          "source_ordinal": 14,
+          "session_id": "085411a4cc4b15108dd9b50007261a2efb65",
+          "excluded_reasons": [
+            "context exceeds bounded 196608-token workload"
+          ]
+        },
+        {
+          "source_ordinal": 15,
+          "session_id": "085aacf44ac5428ad3c6b4f6cd431e083832",
+          "excluded_reasons": [
+            "nonpositive or missing output count",
+            "more than 128 model requests in complete play",
+            "context exceeds bounded 196608-token workload"
+          ]
+        }
+      ],
+      "source_sessions": 16,
+      "qualified_sessions": 4,
+      "windows": {
+        "tuning": {
+          "source_ordinals": [
+            2,
+            7
+          ],
+          "session_ids": [
+            "00ca01c4aaeccee751ae6285beb54dea262f",
+            "04dba6fe621301a1d01fd63b8d02c9645c48"
+          ],
+          "sessions": 2,
+          "requests": 60,
+          "sha256": "1d5433215090537b4c646f9ee9eb4528fddee01adf6d38f912eedd75c4c9c489",
+          "source_sha256": "88a401c8a6c1f0192abba83bdbcf6fb4751b56266df248cd7eddd819acc74197",
+          "minimum_cache_tokens": 169472,
+          "cold_start": true
+        },
+        "evaluation": {
+          "source_ordinals": [
+            10,
+            13
+          ],
+          "session_ids": [
+            "063179eb93f4337a662e859c5a2c5638e03f",
+            "07dd40536557a1d6440a923557c3129dc929"
+          ],
+          "sessions": 2,
+          "requests": 192,
+          "sha256": "5640e8fa278266351dab31b02da5460254a6e58be195b074add11886b5e3b92b",
+          "source_sha256": "84718003b3357bf7be2047f4b39ea4d1fbdb16a177b1fff3c860f4eb33252c06",
+          "minimum_cache_tokens": 118784,
+          "cold_start": true
+        }
+      },
+      "model_hash_isolation": true,
+      "input_count_basis": "proxy 64-token blocks (source counting artifacts)"
+    },
+    "timing": {
+      "description": "Native polynomial timing: illustrative and uncalibrated; no GPU/model accuracy claim. Single vLLM worker, no offload or speculation. Trace scheduling and timing multipliers are recorded separately in each run manifest.",
+      "timing_source": "aisimulate-core native polynomial, pinned version; assumed",
+      "rank": {
+        "block_size": 512,
+        "num_gpu_blocks": 384,
+        "max_num_seqs": 32,
+        "max_num_batched_tokens": 4096,
+        "timing_model": {
+          "type": "polynomial"
+        }
+      },
+      "trace": {
+        "format": "agentic_mooncake",
+        "source_block_size": 64,
+        "agentic_lanes": 1
+      }
+    },
+    "config_sha256": "f1014d58fc13044c0036f5f23e9242c6323a118b0dc627bf3fdb2c2e9b38af31",
+    "native_binary_sha256": "50073428a40f1d7f03b3704c9b346cbb9da06755e91ad5d83e99698b7a4f62e3",
+    "policy_container": "python@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258",
+    "policy_decision_timeout_seconds": 2,
+    "baseline_jobs": 2,
+    "heuristic_baselines": {
+      "fifo": {
+        "label": "FIFO",
+        "source": "class EvictionPolicy:\n    def select_victim(self, blocks: list[dict]) -> int:\n        return min(blocks, key=lambda block: block[\"creation_order\"])[\"block_id\"]\n",
+        "note": "Allocation-order FIFO: evict the oldest physical copy, rather than the oldest cache publication."
+      },
+      "mru": {
+        "label": "MRU",
+        "source": "class EvictionPolicy:\n    def select_victim(self, blocks: list[dict]) -> int:\n        return min(blocks, key=lambda block: -block[\"lru_rank\"])[\"block_id\"]\n",
+        "note": "Evict the newest eligible copy in the native inactive release queue; the opposite end from LRU."
+      },
+      "lfu": {
+        "label": "LFU",
+        "source": "class EvictionPolicy:\n    def select_victim(self, blocks: list[dict]) -> int:\n        return min(blocks, key=lambda block: (block[\"hit_count\"], block[\"lru_rank\"]))[\"block_id\"]\n",
+        "note": "Least physical-copy accesses, then native LRU. Initial computed use counts once; each committed cached-prefix activation adds one, including overlapping readers. Canceled reservations do not count. Counts reset on reallocation."
+      },
+      "slru": {
+        "label": "SLRU",
+        "source": "class EvictionPolicy:\n    def select_victim(self, blocks: list[dict]) -> int:\n        return min(blocks, key=lambda block: (block[\"hit_count\"] >= 2, block[\"lru_rank\"]))[\"block_id\"]\n",
+        "note": "SGLang-style segmented LRU: copies with at least two actual accesses are protected behind the probationary tier; native LRU within each tier. This is the two-tier hit-threshold variant, not a bounded protected queue."
+      },
+      "random-0": {
+        "label": "Random 0",
+        "seed": 0,
+        "source": "import random\n\nclass EvictionPolicy:\n    def __init__(self):\n        self.rng = random.Random(0)\n\n    def select_victim(self, blocks: list[dict]) -> int:\n        return self.rng.choice(sorted(blocks, key=lambda block: block[\"lru_rank\"]))[\"block_id\"]\n",
+        "note": "Uniform random replacement over native eligible candidates, ordered by LRU rank. Fixed seed 0; fresh PRNG per replay. All three seeds are reported separately without selecting a best seed."
+      },
+      "random-1": {
+        "label": "Random 1",
+        "seed": 1,
+        "source": "import random\n\nclass EvictionPolicy:\n    def __init__(self):\n        self.rng = random.Random(1)\n\n    def select_victim(self, blocks: list[dict]) -> int:\n        return self.rng.choice(sorted(blocks, key=lambda block: block[\"lru_rank\"]))[\"block_id\"]\n",
+        "note": "Uniform random replacement over native eligible candidates, ordered by LRU rank. Fixed seed 1; fresh PRNG per replay. All three seeds are reported separately without selecting a best seed."
+      },
+      "random-2": {
+        "label": "Random 2",
+        "seed": 2,
+        "source": "import random\n\nclass EvictionPolicy:\n    def __init__(self):\n        self.rng = random.Random(2)\n\n    def select_victim(self, blocks: list[dict]) -> int:\n        return self.rng.choice(sorted(blocks, key=lambda block: block[\"lru_rank\"]))[\"block_id\"]\n",
+        "note": "Uniform random replacement over native eligible candidates, ordered by LRU rank. Fixed seed 2; fresh PRNG per replay. All three seeds are reported separately without selecting a best seed."
+      }
+    },
+    "access_count_semantics": "Initial computed use plus each committed prefix activation; per physical copy, reset on reallocation. Separate access clock preserves prior lifecycle counters.",
+    "python": "3.12.14 (main, Aug 14 2026, 15:24:41) [Clang 22.1.3 ]",
+    "cargo": "cargo 1.98.0 (797e8a9bc 2026-08-05) (Homebrew)",
+    "slo": {
+      "ttft_ms": 1000.0,
+      "per_request_p95_itl_ms": 50.0
+    },
+    "selection": "highest tuning goodput, lowest tuning mean TTFT, earlier submission",
+    "agent": "claude",
+    "model": "claude-sonnet-5-5",
+    "submission_budget": 5,
+    "warmup_requests": 0,
+    "arrival_rate_scale": 1.0,
+    "determinism": "canonical_v1",
+    "limitation": "Uncalibrated polynomial timing; not measured GPU performance. Native inactive release order has no ties, so the creation-order tiebreak is equivalent to native LRU. Legacy results are a separate simulator.",
+    "agent_cli_version": "2.1.285 (Claude Code)"
+  },
+  "baselines": {
+    "native-lru": {
+      "tuning": {
+        "valid": true,
+        "requests": 60,
+        "completed": 60,
+        "mean_ttft_ms": 223.62905008349955,
+        "p95_ttft_ms": 959.6919179998513,
+        "mean_itl_ms": 21.203861023708715,
+        "p95_itl_ms": 34.01000000000931,
+        "itl_samples": 77022,
+        "goodput_rps": 0.00734658341506348,
+        "slo_attainment_pct": 96.66666666666667,
+        "slo_passes": 58,
+        "slo_eligible_requests": 60,
+        "zero_output_requests": 0,
+        "observation_duration_ms": 7894826.3053920325,
+        "input_tokens": 4659840,
+        "reused_input_tokens": 4149248,
+        "token_hit_pct": 89.04271391292404,
+        "recomputed_input_tokens": 510592,
+        "evictions": 734,
+        "ttft_slo_ms": 1000.0,
+        "itl_slo_ms": 50.0,
+        "quantile": "nearest rank",
+        "itl_slo": "per-request p95 of individual gaps",
+        "slo_warning": "SLO attainment is <=5% or >=95%; check whether this load supports meaningful comparisons",
+        "policy_calls": 0,
+        "simulator_wall_seconds": 4.9770829580083955
+      },
+      "evaluation": {
+        "valid": true,
+        "requests": 192,
+        "completed": 192,
+        "mean_ttft_ms": 860.1681691868688,
+        "p95_ttft_ms": 5242.193090999499,
+        "mean_itl_ms": 25.88846508555173,
+        "p95_itl_ms": 34.00999999977648,
+        "itl_samples": 73923,
+        "goodput_rps": 0.03411970078726355,
+        "slo_attainment_pct": 84.89583333333333,
+        "slo_passes": 163,
+        "slo_eligible_requests": 192,
+        "zero_output_requests": 0,
+        "observation_duration_ms": 4777298.635070265,
+        "input_tokens": 14447616,
+        "reused_input_tokens": 13346816,
+        "token_hit_pct": 92.38074987596569,
+        "recomputed_input_tokens": 1100800,
+        "evictions": 1821,
+        "ttft_slo_ms": 1000.0,
+        "itl_slo_ms": 50.0,
+        "quantile": "nearest rank",
+        "itl_slo": "per-request p95 of individual gaps",
+        "slo_warning": null,
+        "policy_calls": 0,
+        "simulator_wall_seconds": 4.896484750002855
+      }
+    },
+    "leaf-first-lru": {
+      "tuning": {
+        "valid": true,
+        "requests": 60,
+        "completed": 60,
+        "mean_ttft_ms": 223.62905008349955,
+        "p95_ttft_ms": 959.6919179998513,
+        "mean_itl_ms": 21.203861023708715,
+        "p95_itl_ms": 34.01000000000931,
+        "itl_samples": 77022,
+        "goodput_rps": 0.00734658341506348,
+        "slo_attainment_pct": 96.66666666666667,
+        "slo_passes": 58,
+        "slo_eligible_requests": 60,
+        "zero_output_requests": 0,
+        "observation_duration_ms": 7894826.3053920325,
+        "input_tokens": 4659840,
+        "reused_input_tokens": 4149248,
+        "token_hit_pct": 89.04271391292404,
+        "recomputed_input_tokens": 510592,
+        "evictions": 734,
+        "ttft_slo_ms": 1000.0,
+        "itl_slo_ms": 50.0,
+        "quantile": "nearest rank",
+        "itl_slo": "per-request p95 of individual gaps",
+        "slo_warning": "SLO attainment is <=5% or >=95%; check whether this load supports meaningful comparisons",
+        "policy_calls": 734,
+        "simulator_wall_seconds": 13.901853875024244
+      },
+      "evaluation": {
+        "valid": true,
+        "requests": 192,
+        "completed": 192,
+        "mean_ttft_ms": 860.1681691868688,
+        "p95_ttft_ms": 5242.193090999499,
+        "mean_itl_ms": 25.88846508555173,
+        "p95_itl_ms": 34.00999999977648,
+        "itl_samples": 73923,
+        "goodput_rps": 0.03411970078726355,
+        "slo_attainment_pct": 84.89583333333333,
+        "slo_passes": 163,
+        "slo_eligible_requests": 192,
+        "zero_output_requests": 0,
+        "observation_duration_ms": 4777298.635070265,
+        "input_tokens": 14447616,
+        "reused_input_tokens": 13346816,
+        "token_hit_pct": 92.38074987596569,
+        "recomputed_input_tokens": 1100800,
+        "evictions": 1821,
+        "ttft_slo_ms": 1000.0,
+        "itl_slo_ms": 50.0,
+        "quantile": "nearest rank",
+        "itl_slo": "per-request p95 of individual gaps",
+        "slo_warning": null,
+        "policy_calls": 1821,
+        "simulator_wall_seconds": 26.803890541981673
+      }
+    },
+    "fifo": {
+      "tuning": {
+        "valid": true,
+        "requests": 60,
+        "completed": 60,
+        "mean_ttft_ms": 246.0561932335039,
+        "p95_ttft_ms": 993.7625089990906,
+        "mean_itl_ms": 21.203861023708715,
+        "p95_itl_ms": 34.01000000000931,
+        "itl_samples": 77022,
+        "goodput_rps": 0.0072186877991728534,
+        "slo_attainment_pct": 95.0,
+        "slo_passes": 57,
+        "slo_eligible_requests": 60,
+        "zero_output_requests": 0,
+        "observation_duration_ms": 7896171.933981033,
+        "input_tokens": 4659840,
+        "reused_input_tokens": 4085248,
+        "token_hit_pct": 87.66927619832441,
+        "recomputed_input_tokens": 574592,
+        "evictions": 859,
+        "ttft_slo_ms": 1000.0,
+        "itl_slo_ms": 50.0,
+        "quantile": "nearest rank",
+        "itl_slo": "per-request p95 of individual gaps",
+        "slo_warning": "SLO attainment is <=5% or >=95%; check whether this load supports meaningful comparisons",
+        "policy_calls": 859,
+        "simulator_wall_seconds": 15.411049000016646
+      },
+      "evaluation": {
+        "valid": true,
+        "requests": 192,
+        "completed": 192,
+        "mean_ttft_ms": 1168.2752690501425,
+        "p95_ttft_ms": 6951.150849997066,
+        "mean_itl_ms": 26.23570882212597,
+        "p95_itl_ms": 34.00999999977648,
+        "itl_samples": 73923,
+        "goodput_rps": 0.032465944268613704,
+        "slo_attainment_pct": 81.25,
+        "slo_passes": 156,
+        "slo_eligible_requests": 192,
+        "zero_output_requests": 0,
+        "observation_duration_ms": 4805035.045625093,
+        "input_tokens": 14447616,
+        "reused_input_tokens": 12060160,
+        "token_hit_pct": 83.47508682401305,
+        "recomputed_input_tokens": 2387456,
+        "evictions": 4334,
+        "ttft_slo_ms": 1000.0,
+        "itl_slo_ms": 50.0,
+        "quantile": "nearest rank",
+        "itl_slo": "per-request p95 of individual gaps",
+        "slo_warning": null,
+        "policy_calls": 4334,
+        "simulator_wall_seconds": 62.59133954200661
+      }
+    },
+    "mru": {
+      "tuning": {
+        "valid": true,
+        "requests": 60,
+        "completed": 60,
+        "mean_ttft_ms": 329.42318176654845,
+        "p95_ttft_ms": 1466.5211830027401,
+        "mean_itl_ms": 21.272911933695223,
+        "p95_itl_ms": 34.01000000000931,
+        "itl_samples": 77022,
+        "goodput_rps": 0.006707878389200649,
+        "slo_attainment_pct": 88.33333333333333,
+        "slo_passes": 53,
+        "slo_eligible_requests": 60,
+        "zero_output_requests": 0,
+        "observation_duration_ms": 7901156.956770022,
+        "input_tokens": 4659840,
+        "reused_input_tokens": 3857408,
+        "token_hit_pct": 82.77983793434967,
+        "recomputed_input_tokens": 802432,
+        "evictions": 1304,
+        "ttft_slo_ms": 1000.0,
+        "itl_slo_ms": 50.0,
+        "quantile": "nearest rank",
+        "itl_slo": "per-request p95 of individual gaps",
+        "slo_warning": null,
+        "policy_calls": 1304,
+        "simulator_wall_seconds": 22.142434457986383
+      },
+      "evaluation": {
+        "valid": true,
+        "requests": 192,
+        "completed": 192,
+        "mean_ttft_ms": 1230.9618320657064,
+        "p95_ttft_ms": 7083.46749098599,
+        "mean_itl_ms": 26.350288637677178,
+        "p95_itl_ms": 34.00999999977648,
+        "itl_samples": 73923,
+        "goodput_rps": 0.03013312713947339,
+        "slo_attainment_pct": 75.52083333333333,
+        "slo_passes": 145,
+        "slo_eligible_requests": 192,
+        "zero_output_requests": 0,
+        "observation_duration_ms": 4811979.8296690835,
+        "input_tokens": 14447616,
+        "reused_input_tokens": 11763712,
+        "token_hit_pct": 81.42320504642427,
+        "recomputed_input_tokens": 2683904,
+        "evictions": 4913,
+        "ttft_slo_ms": 1000.0,
+        "itl_slo_ms": 50.0,
+        "quantile": "nearest rank",
+        "itl_slo": "per-request p95 of individual gaps",
+        "slo_warning": null,
+        "policy_calls": 4913,
+        "simulator_wall_seconds": 70.36743129100068
+      }
+    },
+    "lfu": {
+      "tuning": {
+        "valid": true,
+        "requests": 60,
+        "completed": 60,
+        "mean_ttft_ms": 251.9807199833831,
+        "p95_ttft_ms": 993.7625089990906,
+        "mean_itl_ms": 21.227056477410123,
+        "p95_itl_ms": 34.01000000000931,
+        "itl_samples": 77022,
+        "goodput_rps": 0.00721836613742882,
+        "slo_attainment_pct": 95.0,
+        "slo_passes": 57,
+        "slo_eligible_requests": 60,
+        "zero_output_requests": 0,
+        "observation_duration_ms": 7896523.799817029,
+        "input_tokens": 4659840,
+        "reused_input_tokens": 4071936,
+        "token_hit_pct": 87.38360115368768,
+        "recomputed_input_tokens": 587904,
+        "evictions": 885,
+        "ttft_slo_ms": 1000.0,
+        "itl_slo_ms": 50.0,
+        "quantile": "nearest rank",
+        "itl_slo": "per-request p95 of individual gaps",
+        "slo_warning": "SLO attainment is <=5% or >=95%; check whether this load supports meaningful comparisons",
+        "policy_calls": 885,
+        "simulator_wall_seconds": 17.272904584009666
+      },
+      "evaluation": {
+        "valid": true,
+        "requests": 192,
+        "completed": 192,
+        "mean_ttft_ms": 864.8560914733667,
+        "p95_ttft_ms": 5213.87155800499,
+        "mean_itl_ms": 25.89998297856242,
+        "p95_itl_ms": 34.00999999977648,
+        "itl_samples": 73923,
+        "goodput_rps": 0.03411514860084891,
+        "slo_attainment_pct": 84.89583333333333,
+        "slo_passes": 163,
+        "slo_eligible_requests": 192,
+        "zero_output_requests": 0,
+        "observation_duration_ms": 4777936.098333277,
+        "input_tokens": 14447616,
+        "reused_input_tokens": 13316096,
+        "token_hit_pct": 92.16811963994613,
+        "recomputed_input_tokens": 1131520,
+        "evictions": 1881,
+        "ttft_slo_ms": 1000.0,
+        "itl_slo_ms": 50.0,
+        "quantile": "nearest rank",
+        "itl_slo": "per-request p95 of individual gaps",
+        "slo_warning": null,
+        "policy_calls": 1881,
+        "simulator_wall_seconds": 28.804829542001244
+      }
+    },
+    "slru": {
+      "tuning": {
+        "valid": true,
+        "requests": 60,
+        "completed": 60,
+        "mean_ttft_ms": 235.68166898340704,
+        "p95_ttft_ms": 959.6919179998513,
+        "mean_itl_ms": 21.227056477410123,
+        "p95_itl_ms": 34.01000000000931,
+        "itl_samples": 77022,
+        "goodput_rps": 0.007345913892750485,
+        "slo_attainment_pct": 96.66666666666667,
+        "slo_passes": 58,
+        "slo_eligible_requests": 60,
+        "zero_output_requests": 0,
+        "observation_duration_ms": 7895545.856757031,
+        "input_tokens": 4659840,
+        "reused_input_tokens": 4119040,
+        "token_hit_pct": 88.39445131163302,
+        "recomputed_input_tokens": 540800,
+        "evictions": 793,
+        "ttft_slo_ms": 1000.0,
+        "itl_slo_ms": 50.0,
+        "quantile": "nearest rank",
+        "itl_slo": "per-request p95 of individual gaps",
+        "slo_warning": "SLO attainment is <=5% or >=95%; check whether this load supports meaningful comparisons",
+        "policy_calls": 793,
+        "simulator_wall_seconds": 15.76297033301671
+      },
+      "evaluation": {
+        "valid": true,
+        "requests": 192,
+        "completed": 192,
+        "mean_ttft_ms": 861.4726777650442,
+        "p95_ttft_ms": 5209.735276000574,
+        "mean_itl_ms": 25.895321121007903,
+        "p95_itl_ms": 34.00999999977648,
+        "itl_samples": 73923,
+        "goodput_rps": 0.03411785917903636,
+        "slo_attainment_pct": 84.89583333333333,
+        "slo_passes": 163,
+        "slo_eligible_requests": 192,
+        "zero_output_requests": 0,
+        "observation_duration_ms": 4777556.503315277,
+        "input_tokens": 14447616,
+        "reused_input_tokens": 13334016,
+        "token_hit_pct": 92.29215394429087,
+        "recomputed_input_tokens": 1113600,
+        "evictions": 1846,
+        "ttft_slo_ms": 1000.0,
+        "itl_slo_ms": 50.0,
+        "quantile": "nearest rank",
+        "itl_slo": "per-request p95 of individual gaps",
+        "slo_warning": null,
+        "policy_calls": 1846,
+        "simulator_wall_seconds": 28.27538733399706
+      }
+    },
+    "random-0": {
+      "tuning": {
+        "valid": true,
+        "requests": 60,
+        "completed": 60,
+        "mean_ttft_ms": 306.05579481661687,
+        "p95_ttft_ms": 1346.6960689999999,
+        "mean_itl_ms": 21.26863847851326,
+        "p95_itl_ms": 34.01000000000931,
+        "itl_samples": 77022,
+        "goodput_rps": 0.006835654841111986,
+        "slo_attainment_pct": 90.0,
+        "slo_passes": 54,
+        "slo_eligible_requests": 60,
+        "zero_output_requests": 0,
+        "observation_duration_ms": 7899755.21807002,
+        "input_tokens": 4659840,
+        "reused_input_tokens": 3923968,
+        "token_hit_pct": 84.20821315753331,
+        "recomputed_input_tokens": 735872,
+        "evictions": 1174,
+        "ttft_slo_ms": 1000.0,
+        "itl_slo_ms": 50.0,
+        "quantile": "nearest rank",
+        "itl_slo": "per-request p95 of individual gaps",
+        "slo_warning": null,
+        "policy_calls": 1174,
+        "simulator_wall_seconds": 21.60310866701184
+      },
+      "evaluation": {
+        "valid": true,
+        "requests": 192,
+        "completed": 192,
+        "mean_ttft_ms": 1203.0437392218894,
+        "p95_ttft_ms": 6847.3919759960845,
+        "mean_itl_ms": 26.271762176291883,
+        "p95_itl_ms": 34.00999999977648,
+        "itl_samples": 73923,
+        "goodput_rps": 0.031608027110066196,
+        "slo_attainment_pct": 79.16666666666667,
+        "slo_passes": 152,
+        "slo_eligible_requests": 192,
+        "zero_output_requests": 0,
+        "observation_duration_ms": 4808905.012347089,
+        "input_tokens": 14447616,
+        "reused_input_tokens": 11925504,
+        "token_hit_pct": 82.54305762279397,
+        "recomputed_input_tokens": 2522112,
+        "evictions": 4597,
+        "ttft_slo_ms": 1000.0,
+        "itl_slo_ms": 50.0,
+        "quantile": "nearest rank",
+        "itl_slo": "per-request p95 of individual gaps",
+        "slo_warning": null,
+        "policy_calls": 4597,
+        "simulator_wall_seconds": 65.7642503749812
+      }
+    },
+    "random-1": {
+      "tuning": {
+        "valid": true,
+        "requests": 60,
+        "completed": 60,
+        "mean_ttft_ms": 325.0412492500098,
+        "p95_ttft_ms": 1454.2897849981673,
+        "mean_itl_ms": 21.26500707496653,
+        "p95_itl_ms": 34.01000000000931,
+        "itl_samples": 77022,
+        "goodput_rps": 0.006708102031539872,
+        "slo_attainment_pct": 88.33333333333333,
+        "slo_passes": 53,
+        "slo_eligible_requests": 60,
+        "zero_output_requests": 0,
+        "observation_duration_ms": 7900893.539008028,
+        "input_tokens": 4659840,
+        "reused_input_tokens": 3869184,
+        "token_hit_pct": 83.03255047383601,
+        "recomputed_input_tokens": 790656,
+        "evictions": 1281,
+        "ttft_slo_ms": 1000.0,
+        "itl_slo_ms": 50.0,
+        "quantile": "nearest rank",
+        "itl_slo": "per-request p95 of individual gaps",
+        "slo_warning": null,
+        "policy_calls": 1281,
+        "simulator_wall_seconds": 21.899974833999295
+      },
+      "evaluation": {
+        "valid": true,
+        "requests": 192,
+        "completed": 192,
+        "mean_ttft_ms": 1199.9721037271047,
+        "p95_ttft_ms": 6743.877004997805,
+        "mean_itl_ms": 26.289615098238034,
+        "p95_itl_ms": 34.00999999977648,
+        "itl_samples": 73923,
+        "goodput_rps": 0.031816648415773,
+        "slo_attainment_pct": 79.6875,
+        "slo_passes": 153,
+        "slo_eligible_requests": 192,
+        "zero_output_requests": 0,
+        "observation_duration_ms": 4808803.177526101,
+        "input_tokens": 14447616,
+        "reused_input_tokens": 11924480,
+        "token_hit_pct": 82.53596994825998,
+        "recomputed_input_tokens": 2523136,
+        "evictions": 4599,
+        "ttft_slo_ms": 1000.0,
+        "itl_slo_ms": 50.0,
+        "quantile": "nearest rank",
+        "itl_slo": "per-request p95 of individual gaps",
+        "slo_warning": null,
+        "policy_calls": 4599,
+        "simulator_wall_seconds": 66.4502219579881
+      }
+    },
+    "random-2": {
+      "tuning": {
+        "valid": true,
+        "requests": 60,
+        "completed": 60,
+        "mean_ttft_ms": 298.1726251000358,
+        "p95_ttft_ms": 1346.6960689999999,
+        "mean_itl_ms": 21.255422409182824,
+        "p95_itl_ms": 34.01000000000931,
+        "itl_samples": 77022,
+        "goodput_rps": 0.006962654156053711,
+        "slo_attainment_pct": 91.66666666666667,
+        "slo_passes": 55,
+        "slo_eligible_requests": 60,
+        "zero_output_requests": 0,
+        "observation_duration_ms": 7899286.50300403,
+        "input_tokens": 4659840,
+        "reused_input_tokens": 3943936,
+        "token_hit_pct": 84.6367257244884,
+        "recomputed_input_tokens": 715904,
+        "evictions": 1135,
+        "ttft_slo_ms": 1000.0,
+        "itl_slo_ms": 50.0,
+        "quantile": "nearest rank",
+        "itl_slo": "per-request p95 of individual gaps",
+        "slo_warning": null,
+        "policy_calls": 1135,
+        "simulator_wall_seconds": 20.938346124981763
+      },
+      "evaluation": {
+        "valid": true,
+        "requests": 192,
+        "completed": 192,
+        "mean_ttft_ms": 1192.2391157428076,
+        "p95_ttft_ms": 6631.325790998526,
+        "mean_itl_ms": 26.257956627045125,
+        "p95_itl_ms": 34.00999999977648,
+        "itl_samples": 73923,
+        "goodput_rps": 0.03224192127383436,
+        "slo_attainment_pct": 80.72916666666667,
+        "slo_passes": 155,
+        "slo_eligible_requests": 192,
+        "zero_output_requests": 0,
+        "observation_duration_ms": 4807405.820626107,
+        "input_tokens": 14447616,
+        "reused_input_tokens": 11979776,
+        "token_hit_pct": 82.91870437309518,
+        "recomputed_input_tokens": 2467840,
+        "evictions": 4491,
+        "ttft_slo_ms": 1000.0,
+        "itl_slo_ms": 50.0,
+        "quantile": "nearest rank",
+        "itl_slo": "per-request p95 of individual gaps",
+        "slo_warning": null,
+        "policy_calls": 4491,
+        "simulator_wall_seconds": 64.44968474999769
+      }
+    }
+  },
+  "baseline_sources": {
+    "fifo": {
+      "path": "evidence/heuristic-comparison/agentx-claude/baselines/fifo.py",
+      "sha256": "009ae4a5d23e2a9753f03121c511a50e6a22297888d431eb7beaf6be56943bcb"
+    },
+    "mru": {
+      "path": "evidence/heuristic-comparison/agentx-claude/baselines/mru.py",
+      "sha256": "71aaa623c93b6f96533fef728c2835927e664b748e967118eae8883b5670ceb6"
+    },
+    "lfu": {
+      "path": "evidence/heuristic-comparison/agentx-claude/baselines/lfu.py",
+      "sha256": "9410a02892fad0893e028050dfe21cb84de3df5fce0b531f010bf1bc07159ee7"
+    },
+    "slru": {
+      "path": "evidence/heuristic-comparison/agentx-claude/baselines/slru.py",
+      "sha256": "c20eae486dc6d3dfe3a93508e5f67e65d2b4a3dd64b3a804d98935d8744e5276"
+    },
+    "random-0": {
+      "path": "evidence/heuristic-comparison/agentx-claude/baselines/random-0.py",
+      "sha256": "b2b49061aa507fdd1c7e094215d6661f250a2911321060e775ec43258df92b54"
+    },
+    "random-1": {
+      "path": "evidence/heuristic-comparison/agentx-claude/baselines/random-1.py",
+      "sha256": "75a7069b56e57056aaffd2f6e41e529656d1d897e7e0ee0617f0767a28725b53"
+    },
+    "random-2": {
+      "path": "evidence/heuristic-comparison/agentx-claude/baselines/random-2.py",
+      "sha256": "7d307d3db430a47643b0f40fa6f5084c45c59f975cc92b10b778ad352471ccf2"
+    }
+  },
+  "evaluation": {
+    "valid": true,
+    "requests": 192,
+    "completed": 192,
+    "mean_ttft_ms": 863.039864035824,
+    "p95_ttft_ms": 5259.534751999192,
+    "mean_itl_ms": 25.89218962858982,
+    "p95_itl_ms": 34.00999999977648,
+    "itl_samples": 73923,
+    "goodput_rps": 0.03411769152584758,
+    "slo_attainment_pct": 84.89583333333333,
+    "slo_passes": 163,
+    "slo_eligible_requests": 192,
+    "zero_output_requests": 0,
+    "observation_duration_ms": 4777579.980067266,
+    "input_tokens": 14447616,
+    "reused_input_tokens": 13331968,
+    "token_hit_pct": 92.2779785952229,
+    "recomputed_input_tokens": 1115648,
+    "evictions": 1850,
+    "ttft_slo_ms": 1000.0,
+    "itl_slo_ms": 50.0,
+    "quantile": "nearest rank",
+    "itl_slo": "per-request p95 of individual gaps",
+    "slo_warning": null,
+    "policy_calls": 1850,
+    "simulator_wall_seconds": 27.010413500014693
+  },
+  "selection": {
+    "submission_id": "2026-10-29-17-55-31",
+    "tuning": {
+      "valid": true,
+      "requests": 60,
+      "completed": 60,
+      "mean_ttft_ms": 223.62905008349955,
+      "p95_ttft_ms": 959.6919179998513,
+      "mean_itl_ms": 21.203861023708715,
+      "p95_itl_ms": 34.01000000000931,
+      "itl_samples": 77022,
+      "goodput_rps": 0.00734658341506348,
+      "slo_attainment_pct": 96.66666666666667,
+      "slo_passes": 58,
+      "slo_eligible_requests": 60,
+      "zero_output_requests": 0,
+      "observation_duration_ms": 7894826.3053920325,
+      "input_tokens": 4659840,
+      "reused_input_tokens": 4149248,
+      "token_hit_pct": 89.04271391292404,
+      "recomputed_input_tokens": 510592,
+      "evictions": 734,
+      "ttft_slo_ms": 1000.0,
+      "itl_slo_ms": 50.0,
+      "quantile": "nearest rank",
+      "itl_slo": "per-request p95 of individual gaps",
+      "slo_warning": "SLO attainment is <=5% or >=95%; check whether this load supports meaningful comparisons",
+      "policy_calls": 734,
+      "simulator_wall_seconds": 13.180391082976712
+    },
+    "policy_sha256": "4c478955627cd537f47e424c97cd92c95d88f310014f9040a135be01b6db8379"
+  },
+  "submissions": [
+    {
+      "id": "2026-10-29-17-55-31",
+      "status": {
+        "id": "2026-10-29-17-55-31",
+        "ordinal": 1,
+        "created_at": "2026-10-29T17:55:31.845812-05:00",
+        "valid": true,
+        "tuning": {
+          "valid": true,
+          "requests": 60,
+          "completed": 60,
+          "mean_ttft_ms": 223.62905008349955,
+          "p95_ttft_ms": 959.6919179998513,
+          "mean_itl_ms": 21.203861023708715,
+          "p95_itl_ms": 34.01000000000931,
+          "itl_samples": 77022,
+          "goodput_rps": 0.00734658341506348,
+          "slo_attainment_pct": 96.66666666666667,
+          "slo_passes": 58,
+          "slo_eligible_requests": 60,
+          "zero_output_requests": 0,
+          "observation_duration_ms": 7894826.3053920325,
+          "input_tokens": 4659840,
+          "reused_input_tokens": 4149248,
+          "token_hit_pct": 89.04271391292404,
+          "recomputed_input_tokens": 510592,
+          "evictions": 734,
+          "ttft_slo_ms": 1000.0,
+          "itl_slo_ms": 50.0,
+          "quantile": "nearest rank",
+          "itl_slo": "per-request p95 of individual gaps",
+          "slo_warning": "SLO attainment is <=5% or >=95%; check whether this load supports meaningful comparisons",
+          "policy_calls": 734,
+          "simulator_wall_seconds": 13.180391082976712
+        },
+        "policy_sha256": "4c478955627cd537f47e424c97cd92c95d88f310014f9040a135be01b6db8379",
+        "duplicate": false,
+        "wall_seconds": 24.07940829198924
+      },
+      "policy_path": "evidence/heuristic-comparison/agentx-claude/policies/2026-10-29-17-55-31.py",
+      "source_sha256": "4c478955627cd537f47e424c97cd92c95d88f310014f9040a135be01b6db8379",
+      "agent_metadata": {
+        "requested_model": "claude-sonnet-5-5",
+        "resolved_model": "claude-sonnet-5-5",
+        "runtime_seconds": 10.7001842080208,
+        "usage": {
+          "input_tokens": 6,
+          "cache_creation_input_tokens": 6853,
+          "cache_read_input_tokens": 25374,
+          "output_tokens": 955,
+          "output_tokens_details": {
+            "thinking_tokens": 214
+          },
+          "server_tool_use": {
+            "web_search_requests": 0,
+            "web_fetch_requests": 0
+          },
+          "service_tier": "standard",
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 6853,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "inference_geo": "global",
+          "iterations": [
+            {
+              "input_tokens": 2,
+              "output_tokens": 273,
+              "cache_read_input_tokens": 10591,
+              "cache_creation_input_tokens": 667,
+              "cache_creation": {
+                "ephemeral_5m_input_tokens": 0,
+                "ephemeral_1h_input_tokens": 667
+              },
+              "type": "message"
+            }
+          ],
+          "speed": "standard",
+          "fallback_credit": null
+        },
+        "model_usage": {
+          "claude-sonnet-5-5": {
+            "inputTokens": 6,
+            "outputTokens": 955,
+            "cacheReadInputTokens": 25374,
+            "cacheCreationInputTokens": 6853,
+            "webSearchRequests": 0,
+            "costUSD": 0.0420488,
+            "contextWindow": 1000000,
+            "maxOutputTokens": 128000,
+            "thinkingTokens": 214,
+            "canonicalModel": "claude-sonnet-5-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          }
+        },
+        "api_equivalent_usd": 0.0420488,
+        "cost_note": "CLI-reported API-equivalent estimate, not subscription billing"
+      }
+    },
+    {
+      "id": "2026-10-29-17-55-55",
+      "status": {
+        "id": "2026-10-29-17-55-55",
+        "ordinal": 2,
+        "created_at": "2026-10-29T17:55:55.926018-05:00",
+        "valid": true,
+        "tuning": {
+          "valid": true,
+          "requests": 60,
+          "completed": 60,
+          "mean_ttft_ms": 224.19263443348694,
+          "p95_ttft_ms": 959.6919179998513,
+          "mean_itl_ms": 21.203861023708715,
+          "p95_itl_ms": 34.01000000000931,
+          "itl_samples": 77022,
+          "goodput_rps": 0.007346551948367108,
+          "slo_attainment_pct": 96.66666666666667,
+          "slo_passes": 58,
+          "slo_eligible_requests": 60,
+          "zero_output_requests": 0,
+          "observation_duration_ms": 7894860.120453032,
+          "input_tokens": 4659840,
+          "reused_input_tokens": 4148224,
+          "token_hit_pct": 89.02073890949046,
+          "recomputed_input_tokens": 511616,
+          "evictions": 736,
+          "ttft_slo_ms": 1000.0,
+          "itl_slo_ms": 50.0,
+          "quantile": "nearest rank",
+          "itl_slo": "per-request p95 of individual gaps",
+          "slo_warning": "SLO attainment is <=5% or >=95%; check whether this load supports meaningful comparisons",
+          "policy_calls": 736,
+          "simulator_wall_seconds": 13.831162999995286
+        },
+        "policy_sha256": "87f51472ccf082f362b987672d2293b51a162678b2a4354e3463bbc4de8cae94",
+        "duplicate": false,
+        "wall_seconds": 28.801959500007797
+      },
+      "policy_path": "evidence/heuristic-comparison/agentx-claude/policies/2026-10-29-17-55-55.py",
+      "source_sha256": "87f51472ccf082f362b987672d2293b51a162678b2a4354e3463bbc4de8cae94",
+      "agent_metadata": {
+        "requested_model": "claude-sonnet-5-5",
+        "resolved_model": "claude-sonnet-5-5",
+        "runtime_seconds": 14.905575584009057,
+        "usage": {
+          "input_tokens": 6,
+          "cache_creation_input_tokens": 7668,
+          "cache_read_input_tokens": 26738,
+          "output_tokens": 1083,
+          "output_tokens_details": {
+            "thinking_tokens": 276
+          },
+          "server_tool_use": {
+            "web_search_requests": 0,
+            "web_fetch_requests": 0
+          },
+          "service_tier": "standard",
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 7668,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "inference_geo": "global",
+          "iterations": [
+            {
+              "input_tokens": 2,
+              "output_tokens": 331,
+              "cache_read_input_tokens": 11336,
+              "cache_creation_input_tokens": 737,
+              "cache_creation": {
+                "ephemeral_5m_input_tokens": 0,
+                "ephemeral_1h_input_tokens": 737
+              },
+              "type": "message"
+            }
+          ],
+          "speed": "standard",
+          "fallback_credit": null
+        },
+        "model_usage": {
+          "claude-sonnet-5-5": {
+            "inputTokens": 6,
+            "outputTokens": 1083,
+            "cacheReadInputTokens": 26738,
+            "cacheCreationInputTokens": 7668,
+            "webSearchRequests": 0,
+            "costUSD": 0.0468616,
+            "contextWindow": 1000000,
+            "maxOutputTokens": 128000,
+            "thinkingTokens": 276,
+            "canonicalModel": "claude-sonnet-5-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          }
+        },
+        "api_equivalent_usd": 0.0468616,
+        "cost_note": "CLI-reported API-equivalent estimate, not subscription billing"
+      }
+    },
+    {
+      "id": "2026-10-29-17-56-24",
+      "status": {
+        "id": "2026-10-29-17-56-24",
+        "ordinal": 3,
+        "created_at": "2026-10-29T17:56:24.728657-05:00",
+        "valid": true,
+        "tuning": {
+          "valid": true,
+          "requests": 60,
+          "completed": 60,
+          "mean_ttft_ms": 223.62905008349955,
+          "p95_ttft_ms": 959.6919179998513,
+          "mean_itl_ms": 21.203861023708715,
+          "p95_itl_ms": 34.01000000000931,
+          "itl_samples": 77022,
+          "goodput_rps": 0.00734658341506348,
+          "slo_attainment_pct": 96.66666666666667,
+          "slo_passes": 58,
+          "slo_eligible_requests": 60,
+          "zero_output_requests": 0,
+          "observation_duration_ms": 7894826.3053920325,
+          "input_tokens": 4659840,
+          "reused_input_tokens": 4149248,
+          "token_hit_pct": 89.04271391292404,
+          "recomputed_input_tokens": 510592,
+          "evictions": 734,
+          "ttft_slo_ms": 1000.0,
+          "itl_slo_ms": 50.0,
+          "quantile": "nearest rank",
+          "itl_slo": "per-request p95 of individual gaps",
+          "slo_warning": "SLO attainment is <=5% or >=95%; check whether this load supports meaningful comparisons",
+          "policy_calls": 734,
+          "simulator_wall_seconds": 13.314908125001239
+        },
+        "policy_sha256": "15a93a99ca2c12e5d192043c0401beaf618d696a5e0311b61649645ff7fdf94e",
+        "duplicate": false,
+        "wall_seconds": 25.452118582994444
+      },
+      "policy_path": "evidence/heuristic-comparison/agentx-claude/policies/2026-10-29-17-56-24.py",
+      "source_sha256": "15a93a99ca2c12e5d192043c0401beaf618d696a5e0311b61649645ff7fdf94e",
+      "agent_metadata": {
+        "requested_model": "claude-sonnet-5-5",
+        "resolved_model": "claude-sonnet-5-5",
+        "runtime_seconds": 11.941436124994652,
+        "usage": {
+          "input_tokens": 6,
+          "cache_creation_input_tokens": 7994,
+          "cache_read_input_tokens": 27990,
+          "output_tokens": 711,
+          "output_tokens_details": {
+            "thinking_tokens": 114
+          },
+          "server_tool_use": {
+            "web_search_requests": 0,
+            "web_fetch_requests": 0
+          },
+          "service_tier": "standard",
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 7994,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "inference_geo": "global",
+          "iterations": [
+            {
+              "input_tokens": 2,
+              "output_tokens": 265,
+              "cache_read_input_tokens": 11968,
+              "cache_creation_input_tokens": 431,
+              "cache_creation": {
+                "ephemeral_5m_input_tokens": 0,
+                "ephemeral_1h_input_tokens": 431
+              },
+              "type": "message"
+            }
+          ],
+          "speed": "standard",
+          "fallback_credit": null
+        },
+        "model_usage": {
+          "claude-sonnet-5-5": {
+            "inputTokens": 6,
+            "outputTokens": 711,
+            "cacheReadInputTokens": 27990,
+            "cacheCreationInputTokens": 7994,
+            "webSearchRequests": 0,
+            "costUSD": 0.044696,
+            "contextWindow": 1000000,
+            "maxOutputTokens": 128000,
+            "thinkingTokens": 114,
+            "canonicalModel": "claude-sonnet-5-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          }
+        },
+        "api_equivalent_usd": 0.044696,
+        "cost_note": "CLI-reported API-equivalent estimate, not subscription billing"
+      }
+    },
+    {
+      "id": "2026-10-29-17-56-50",
+      "status": {
+        "id": "2026-10-29-17-56-50",
+        "ordinal": 4,
+        "created_at": "2026-10-29T17:56:50.181518-05:00",
+        "valid": true,
+        "tuning": {
+          "valid": true,
+          "requests": 60,
+          "completed": 60,
+          "mean_ttft_ms": 223.62905008349955,
+          "p95_ttft_ms": 959.6919179998513,
+          "mean_itl_ms": 21.203861023708715,
+          "p95_itl_ms": 34.01000000000931,
+          "itl_samples": 77022,
+          "goodput_rps": 0.00734658341506348,
+          "slo_attainment_pct": 96.66666666666667,
+          "slo_passes": 58,
+          "slo_eligible_requests": 60,
+          "zero_output_requests": 0,
+          "observation_duration_ms": 7894826.3053920325,
+          "input_tokens": 4659840,
+          "reused_input_tokens": 4149248,
+          "token_hit_pct": 89.04271391292404,
+          "recomputed_input_tokens": 510592,
+          "evictions": 734,
+          "ttft_slo_ms": 1000.0,
+          "itl_slo_ms": 50.0,
+          "quantile": "nearest rank",
+          "itl_slo": "per-request p95 of individual gaps",
+          "slo_warning": "SLO attainment is <=5% or >=95%; check whether this load supports meaningful comparisons",
+          "policy_calls": 734,
+          "simulator_wall_seconds": 13.357862833014224
+        },
+        "policy_sha256": "f232b12f50af458e9af853a3f79a32d87e9fdeb6afc8c4e837b9b76750ee39bf",
+        "duplicate": false,
+        "wall_seconds": 29.227176334010437
+      },
+      "policy_path": "evidence/heuristic-comparison/agentx-claude/policies/2026-10-29-17-56-50.py",
+      "source_sha256": "f232b12f50af458e9af853a3f79a32d87e9fdeb6afc8c4e837b9b76750ee39bf",
+      "agent_metadata": {
+        "requested_model": "claude-sonnet-5-5",
+        "resolved_model": "claude-sonnet-5-5",
+        "runtime_seconds": 15.801523333997466,
+        "usage": {
+          "input_tokens": 6,
+          "cache_creation_input_tokens": 8899,
+          "cache_read_input_tokens": 29238,
+          "output_tokens": 1015,
+          "output_tokens_details": {
+            "thinking_tokens": 224
+          },
+          "server_tool_use": {
+            "web_search_requests": 0,
+            "web_fetch_requests": 0
+          },
+          "service_tier": "standard",
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 8899,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "inference_geo": "global",
+          "iterations": [
+            {
+              "input_tokens": 2,
+              "output_tokens": 288,
+              "cache_read_input_tokens": 12592,
+              "cache_creation_input_tokens": 712,
+              "cache_creation": {
+                "ephemeral_5m_input_tokens": 0,
+                "ephemeral_1h_input_tokens": 712
+              },
+              "type": "message"
+            }
+          ],
+          "speed": "standard",
+          "fallback_credit": null
+        },
+        "model_usage": {
+          "claude-sonnet-5-5": {
+            "inputTokens": 6,
+            "outputTokens": 1015,
+            "cacheReadInputTokens": 29238,
+            "cacheCreationInputTokens": 8899,
+            "webSearchRequests": 0,
+            "costUSD": 0.0516056,
+            "contextWindow": 1000000,
+            "maxOutputTokens": 128000,
+            "thinkingTokens": 224,
+            "canonicalModel": "claude-sonnet-5-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          }
+        },
+        "api_equivalent_usd": 0.0516056,
+        "cost_note": "CLI-reported API-equivalent estimate, not subscription billing"
+      }
+    },
+    {
+      "id": "2026-10-29-17-57-19",
+      "status": {
+        "id": "2026-10-29-17-57-19",
+        "ordinal": 5,
+        "created_at": "2026-10-29T17:57:19.409466-05:00",
+        "valid": true,
+        "tuning": {
+          "valid": true,
+          "requests": 60,
+          "completed": 60,
+          "mean_ttft_ms": 223.62905008349955,
+          "p95_ttft_ms": 959.6919179998513,
+          "mean_itl_ms": 21.203861023708715,
+          "p95_itl_ms": 34.01000000000931,
+          "itl_samples": 77022,
+          "goodput_rps": 0.00734658341506348,
+          "slo_attainment_pct": 96.66666666666667,
+          "slo_passes": 58,
+          "slo_eligible_requests": 60,
+          "zero_output_requests": 0,
+          "observation_duration_ms": 7894826.3053920325,
+          "input_tokens": 4659840,
+          "reused_input_tokens": 4149248,
+          "token_hit_pct": 89.04271391292404,
+          "recomputed_input_tokens": 510592,
+          "evictions": 734,
+          "ttft_slo_ms": 1000.0,
+          "itl_slo_ms": 50.0,
+          "quantile": "nearest rank",
+          "itl_slo": "per-request p95 of individual gaps",
+          "slo_warning": "SLO attainment is <=5% or >=95%; check whether this load supports meaningful comparisons",
+          "policy_calls": 734,
+          "simulator_wall_seconds": 13.366656666999916
+        },
+        "policy_sha256": "4e6b8a6535b9d5f33b202a9c7d870a0e78f70f20baf04ddec626fec31af4f8fa",
+        "duplicate": false,
+        "wall_seconds": 26.59633495900198
+      },
+      "policy_path": "evidence/heuristic-comparison/agentx-claude/policies/2026-10-29-17-57-19.py",
+      "source_sha256": "4e6b8a6535b9d5f33b202a9c7d870a0e78f70f20baf04ddec626fec31af4f8fa",
+      "agent_metadata": {
+        "requested_model": "claude-sonnet-5-5",
+        "resolved_model": "claude-sonnet-5-5",
+        "runtime_seconds": 13.162653832987417,
+        "usage": {
+          "input_tokens": 6,
+          "cache_creation_input_tokens": 9446,
+          "cache_read_input_tokens": 30519,
+          "output_tokens": 953,
+          "output_tokens_details": {
+            "thinking_tokens": 121
+          },
+          "server_tool_use": {
+            "web_search_requests": 0,
+            "web_fetch_requests": 0
+          },
+          "service_tier": "standard",
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 9446,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "inference_geo": "global",
+          "iterations": [
+            {
+              "input_tokens": 2,
+              "output_tokens": 333,
+              "cache_read_input_tokens": 13246,
+              "cache_creation_input_tokens": 605,
+              "cache_creation": {
+                "ephemeral_5m_input_tokens": 0,
+                "ephemeral_1h_input_tokens": 605
+              },
+              "type": "message"
+            }
+          ],
+          "speed": "standard",
+          "fallback_credit": null
+        },
+        "model_usage": {
+          "claude-sonnet-5-5": {
+            "inputTokens": 6,
+            "outputTokens": 953,
+            "cacheReadInputTokens": 30519,
+            "cacheCreationInputTokens": 9446,
+            "webSearchRequests": 0,
+            "costUSD": 0.0534298,
+            "contextWindow": 1000000,
+            "maxOutputTokens": 128000,
+            "thinkingTokens": 121,
+            "canonicalModel": "claude-sonnet-5-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          }
+        },
+        "api_equivalent_usd": 0.0534298,
+        "cost_note": "CLI-reported API-equivalent estimate, not subscription billing"
+      }
+    }
+  ],
+  "source_snapshot_path": "evidence/heuristic-comparison/agentx-claude/controller-source.zip",
+  "source_snapshot_sha256": "c98b6cc432dbc1ad525a97b66762e5eff031578095f60239a0d7ac624da01ace",
+  "fresh_replay_matches": true,
+  "audited_replays": 24
+}

@@ -1,4 +1,6 @@
-# Codex and additional-trace results
+# Initial Codex and additional trace comparison
+
+Historical comparison. The [current HTML report](reports/kv-eviction-results.html) uses eight fresh agent searches and the fixed heuristic baselines described in [HEURISTIC_BASELINES.md](HEURISTIC_BASELINES.md).
 
 Completed 2026-10-29. **Codex support and three additional traces are implemented in the fork.** Full metrics are in [results.csv](evidence/comparison/results.csv) and [results.json](evidence/comparison/results.json); source/cohort details are in [TRACE_SOURCES.md](TRACE_SOURCES.md).
 

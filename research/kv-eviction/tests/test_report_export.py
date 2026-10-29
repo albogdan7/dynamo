@@ -14,7 +14,15 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from export_report import ROOT, build, reproduction_archive
+from export_report import (
+    ROOT,
+    build,
+    delta,
+    fmt,
+    reproduction_archive,
+    sections,
+    validate,
+)
 
 
 class Downloads(HTMLParser):
@@ -87,3 +95,73 @@ def test_report_refuses_mismatched_comparison(copied_evidence, tmp_path):
     path.write_text(json.dumps(record))
     with pytest.raises(ValueError, match="Mismatched config_sha256"):
         build(copied_evidence, tmp_path / "bad-report")
+
+
+class Policies(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.dialogs = {}
+        self.buttons = []
+        self.current = None
+        self.in_code = False
+
+    def handle_starttag(self, tag, attributes):
+        attributes = dict(attributes)
+        if tag == "dialog":
+            self.current = attributes["id"]
+            self.dialogs[self.current] = ""
+        elif tag == "code" and self.current:
+            self.in_code = True
+        elif tag == "button" and "data-policy" in attributes:
+            self.buttons.append(attributes["data-policy"])
+
+    def handle_endtag(self, tag):
+        if tag == "code":
+            self.in_code = False
+        elif tag == "dialog":
+            self.current = None
+
+    def handle_data(self, data):
+        if self.in_code:
+            self.dialogs[self.current] += data
+
+
+def test_every_value_opens_its_exact_policy_source(tmp_path):
+    build(ROOT, tmp_path)
+    parser = Policies()
+    parser.feed((tmp_path / "kv-eviction-results.html").read_text())
+    assert len(parser.dialogs) == 12
+    assert len(parser.buttons) == 4 * 2 * 11 * 3
+    assert set(parser.buttons) == set(parser.dialogs)
+    for path in (ROOT / "evidence/comparison/runs").glob("*.json"):
+        record = json.loads(path.read_text())
+        selected = next(
+            s
+            for s in record["submissions"]
+            if s["id"] == record["selection"]["submission_id"]
+        )
+        assert (
+            parser.dialogs[f"{record['trace']}-{record['agent']}"]
+            == (ROOT / selected["policy_path"]).read_text()
+        )
+    for identity, source in parser.dialogs.items():
+        assert parser.buttons.count(identity) == 22
+        if identity.endswith("-lru"):
+            assert 'min(blocks, key=lambda block: block["lru_rank"])' in source
+
+
+def test_tuning_values_and_rate_changes_use_their_own_lru_baseline():
+    runs, _ = validate(ROOT)
+    trace = next(t for t in sections(ROOT, runs) if t["trace"] == "mooncake-toolagent")
+    record = runs["mooncake-toolagent", "claude"]
+    tuning = record["selection"]["tuning"]
+    assert trace["tables"][0]["rows"][0]["values"][1] == fmt(tuning["mean_ttft_ms"], 3)
+    assert trace["tables"][1]["rows"][0]["values"][1] == fmt(
+        record["evaluation"]["mean_ttft_ms"], 3
+    )
+    assert (
+        trace["tables"][0]["rows"][0]["values"][1]
+        != trace["tables"][1]["rows"][0]["values"][1]
+    )
+    assert delta(75, 50) == 50  # Relative percent, rather than 25 percentage points.
+    assert delta(3, 0) is None  # Undefined comparisons must not invent a percentage.

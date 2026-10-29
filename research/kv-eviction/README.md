@@ -4,7 +4,7 @@ Run from the fork repository root. This release supports **Claude Code or Codex*
 
 See [EXTENSION_RESULTS.md](EXTENSION_RESULTS.md) for the current matched results; [REPORT.md](REPORT.md) retains the initial release findings.
 
-The [shareable HTML report](reports/kv-eviction-results.html) includes all metrics, tuning submissions, limitations and reproduction commands. It is a single offline file with the report generator and compact evidence embedded as a downloadable ZIP. [REPORT_EXPORT.md](REPORT_EXPORT.md) explains sharing and regeneration:
+The [shareable HTML report](reports/kv-eviction-results.html) shows tuning and held-out metrics for each trace, percentage changes from LRU and policy source dialogs. It is a single offline file with the report generator and compact evidence embedded as a downloadable ZIP. [REPORT_EXPORT.md](REPORT_EXPORT.md) explains sharing and regeneration:
 
 ```bash
 python3 research/kv-eviction/export_report.py

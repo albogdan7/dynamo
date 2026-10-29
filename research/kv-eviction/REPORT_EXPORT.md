@@ -1,8 +1,8 @@
-# Share and regenerate the comprehensive report
+# Share and regenerate the results tables
 
-Send **`reports/kv-eviction-results.html`** as a file attachment. It opens offline in a browser, including on a phone. It contains its own styles, readable tables and navigation; it uses no JavaScript, external fonts or external assets. Source links are optional and require the internet only if followed. Browsers can print it or save it as a PDF.
+Send **`reports/kv-eviction-results.html`** as a file attachment. It opens offline in a browser, including on a phone. It shows tuning and held-out performance for each trace, comparing LRU and the selected Claude and Codex policies. Each metric includes relative change from LRU. Buttons beside the values open the exact policy source in a modal. Styles and the small dialog script are inline; there are no external assets or network requests. Browsers can print it or save it as a PDF.
 
-The HTML includes a **Download reproduction files** link with an embedded ZIP containing the generator, compact evidence, all 40 submitted policy sources and original controller source snapshots. No companion file is needed to read or forward the report. A recipient who wants to regenerate it can download and extract that ZIP, then run from its root:
+The HTML includes a **Reproduction files** link with an embedded ZIP containing the generator, compact evidence, all 40 submitted policy sources and original controller source snapshots. No companion file is needed to read or forward the report. A recipient who wants to regenerate it can download and extract that ZIP, then run from its root:
 
 ```bash
 python3 research/kv-eviction/export_report.py
@@ -22,4 +22,4 @@ python3 research/kv-eviction/export_report.py \
 
 Missing raw files fail clearly rather than falling back to receipts. The report states which verification mode ran. Either mode rejects changed policy or source hashes, inconsistent selection, failed receipts and mismatched comparisons. The raw audit additionally checks request/token arithmetic, workload and configuration hashes, and original metrics against the compact evidence.
 
-HTML, Markdown, CSV and the reproduction ZIP are byte deterministic with identical inputs and verification mode. Regenerating from compact evidence preserves the numerical results but changes the verification paragraph from a fresh raw audit to a receipt check. The manifest records input/output checksums and the generator checksum. Generated reports must be rebuilt from the script and evidence rather than edited manually.
+HTML, Markdown, CSV and the reproduction ZIP are byte deterministic with identical inputs and verification mode. The verification mode is recorded in the JSON manifest; the concise HTML contains only the results tables. Regenerating from compact evidence preserves the same HTML and numerical results. The manifest records input/output checksums and the generator checksum. Generated reports must be rebuilt from the script and evidence rather than edited manually.

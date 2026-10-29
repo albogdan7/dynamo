@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-10-28T23:33:36.806368-05:00",
+  "timezone": "America/Chicago",
+  "command": [
+    "/Users/miguel/Documents/ChatGPT/Agentic GPU Environment/dynamo-kv-research/research/kv-eviction/.venv/bin/python",
+    "research/kv-eviction/experiment.py",
+    "run",
+    "--agent",
+    "claude",
+    "--model",
+    "claude-sonnet-4-6",
+    "--window-requests",
+    "1000",
+    "--submissions",
+    "5",
+    "--output",
+    "experiments/mooncake-claude-pilot"
+  ],
+  "source": {
+    "commit": "dc61f2bbfbed0de800a7b2399188be82737f5bd0",
+    "files": {
+      "research/kv-eviction/.gitignore": "6f0f6fd1209df5f371ce86ddad0736f8d983276d01f465e148897b40dd7f62fd",
+      "research/kv-eviction/PLAN.md": "d6af0c46f9735d569faead7f99884295f368feddbf7937c1a6e718e0dda632e9",
+      "research/kv-eviction/RESEARCH_NOTES.md": "dd617bd85068331e9cd8c5316df1788361dcaf97b4c055c55d17aa3bada8c404",
+      "research/kv-eviction/experiment.py": "02bbed8d0fc0039764666cbbaa852da331bb01473c55fbf56dd3436a11bab6a3",
+      "research/kv-eviction/kv_experiment/__init__.py": "d61ca6c3deda7cdc038ad8d853c01db2db33c1ec0eb7e873e02da34617f707e2",
+      "research/kv-eviction/kv_experiment/agents.py": "3daf51c183fcc2db13bc43c0cc2424cde42d4d396973df1413448d3e2dace1e7",
+      "research/kv-eviction/kv_experiment/metrics.py": "59d747bb9d6182e0a131c6bf09c72a9df19526860272cd4c5c13c5db9ad2d4de",
+      "research/kv-eviction/kv_experiment/policy_worker.py": "047b3ab0dd270b2f49058ae74f34801b5d2805caf5de566bc8ae652ed82ea7b3",
+      "research/kv-eviction/kv_experiment/runtime.py": "d9bd5793d35606954f60ba107f36c3b16f1f789b6e583fd8e766f6a6ccf984ad",
+      "research/kv-eviction/kv_experiment/traces.py": "dd432cc93948a69fff659bf541a619ce857c2ee7b1901d8fc2153920c1eee2c1",
+      "research/kv-eviction/native/Cargo.lock": "36bf83c62b8ae9abadc2f7061fda783624309ba36995399d9f2a5e48584fafa6",
+      "research/kv-eviction/native/Cargo.toml": "b26ca1c06181b60460e42ea0a8a130f8146e6a06ed4679804565e599963f832e",
+      "research/kv-eviction/native/core.patch": "3befaaf83ab93e88009212a160ad92fde11e356eede339f62cc5779934e3a834",
+      "research/kv-eviction/native/src/main.rs": "0cdd4c99898275cc4e7fdd6dced609d3ccebd7ff02aaa0c14e9edb7efbd0988e",
+      "research/kv-eviction/prepare_native.py": "e97884198e98f71337cef7c9a76248af1ed9f1a66a964989a6442479487e5527",
+      "research/kv-eviction/profiles/interactive.json": "87e2329e77b845c0989e686848da6461a35f96969e35f0a631f0e20f15c2b440",
+      "research/kv-eviction/sandbox/AGENTS.md": "70f93658e904c2f7b0f4fa5881d05249237786da186210ab08eb61a6d0fc8c47",
+      "research/kv-eviction/sandbox/CLAUDE.md": "336cc4fbf19beaada7ccf9986414fa91851a8d7a07dfb3ccbe800a69eed0ab49",
+      "research/kv-eviction/sandbox/README.md": "1b9b67b87eb2e1499e2466ca98c8dbae89e7beb07cad95e3c8699f0d5eacbc3b",
+      "research/kv-eviction/sandbox/policy.py": "7cd83d7adc85da7cb8b73843f7eb32fd93faee1c6c9967a45910bdca57127769",
+      "research/kv-eviction/sandbox/policy_runner.py": "8ea160b6aa096ed1d52eacfe16a5ab4f9f73acaae2ee32f3c2bd805b93453164",
+      "research/kv-eviction/sandbox/submit.py": "67d39d494eafb2a38bc73948ea377cabbebf4c30ce14ad28e14300f5bd132742",
+      "research/kv-eviction/sim/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "research/kv-eviction/sim/cache.py": "ad3e312b64a9917edbff583a42ef795c31aa8f77f3477ebca64ab671a68599d0",
+      "research/kv-eviction/sim/trace.py": "66f310516e6282627b135969e2113885fcdeb995cd4ab0483f2e3e0369f322c6"
+    },
+    "sha256": "f89c7b38ca9fbfd2a674a8d8b8aec3d08ca29484f1dd4ef4c0af83a2145ad8f1"
+  },
+  "trace": {
+    "name": "mooncake-toolagent",
+    "requests": 23608,
+    "block_size": 512,
+    "revision": "bd7526307049ee1612cfcb90daceffb128994ade",
+    "license": "Apache-2.0 (repository LICENSE-APACHE)",
+    "license_url": "https://github.com/kvcache-ai/Mooncake/blob/bd7526307049ee1612cfcb90daceffb128994ade/LICENSE-APACHE",
+    "url": "https://raw.githubusercontent.com/kvcache-ai/Mooncake/bd7526307049ee1612cfcb90daceffb128994ade/FAST25-release/traces/toolagent_trace.jsonl",
+    "sha256": "48a2db1a13d3bc05e6330140c64f604ba366df20d3c9e128b5c35a01c1fa5f71",
+    "arrival_unit": "milliseconds",
+    "hashes": "ordered remapped prefix block identities",
+    "windows": {
+      "tuning": {
+        "start_row": 0,
+        "requests": 1000,
+        "first_arrival_ms": 0,
+        "last_arrival_ms": 173999,
+        "sha256": "d55fef60d3ade66423b5340f0a1707c051b8ec7136bc3417e97f68be947202c3",
+        "cold_start": true
+      },
+      "evaluation": {
+        "start_row": 11804,
+        "requests": 1000,
+        "first_arrival_ms": 1856999,
+        "last_arrival_ms": 2010000,
+        "sha256": "b3dfcb493174b6d9d3e4cf1ac4060f74adcc5b58df2328f927fb9b46a1eaf97c",
+        "cold_start": true
+      }
+    }
+  },
+  "timing": {
+    "description": "Native polynomial timing: illustrative and uncalibrated; no GPU/model accuracy claim. Single vLLM worker, no offload or speculation. Original arrivals, cold cache per window.",
+    "timing_source": "aisimulate-core native polynomial, pinned version; assumed",
+    "rank": {
+      "block_size": 512,
+      "num_gpu_blocks": 256,
+      "max_num_seqs": 32,
+      "max_num_batched_tokens": 4096,
+      "timing_model": {
+        "type": "polynomial"
+      }
+    }
+  },
+  "config_sha256": "45581a1f284c80eb4fe4e5da63f02dd078de0996fddf1a252f111a84872a123c",
+  "native_binary_sha256": "b8fce3adf5209b73399518d532d3ccacf548c6af9a8219f31e8a16a862513379",
+  "policy_container": "python@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258",
+  "policy_decision_timeout_seconds": 2,
+  "python": "3.12.14 (main, Aug 14 2026, 15:24:41) [Clang 22.1.3 ]",
+  "cargo": "cargo 1.98.0 (797e8a9bc 2026-08-05) (Homebrew)",
+  "slo": {
+    "ttft_ms": 1000,
+    "per_request_p95_itl_ms": 50
+  },
+  "selection": "highest tuning goodput, lowest tuning mean TTFT, earlier submission",
+  "agent": "claude",
+  "model": "claude-sonnet-4-6",
+  "submission_budget": 5,
+  "warmup_requests": 0,
+  "arrival_rate_scale": 1,
+  "determinism": "canonical_v1",
+  "limitation": "Uncalibrated polynomial timing; not measured GPU performance. Native inactive release order has no ties, so the creation-order tiebreak is equivalent to native LRU. Legacy results are a separate simulator.",
+  "agent_cli_version": "2.1.285 (Claude Code)"
+}

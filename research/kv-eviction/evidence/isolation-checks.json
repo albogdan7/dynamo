@@ -1,0 +1,22 @@
+{
+  "claude_cli": "2.1.285",
+  "model": "claude-sonnet-5-5",
+  "read_outside_workspace": "denied by --restricted file-tool boundary",
+  "write_outside_workspace": "denied by --restricted file-tool boundary",
+  "secret_exposed": false,
+  "outside_write_created": false,
+  "raw_artifacts": "experiments/claude-boundary-probe/agent.jsonl",
+  "tests": "18 passed with KV_RUN_CONTAINER_TESTS=1 (native engine and actual Docker boundary)",
+  "tested_boundaries": [
+    "host file read denied",
+    "read-only policy filesystem",
+    "network connection denied",
+    "invalid policy IDs",
+    "policy exceptions",
+    "decision timeout",
+    "container cleanup",
+    "bounded pipe write",
+    "alternate policy changes native reuse",
+    "callback LRU equals native LRU across fresh runs"
+  ]
+}

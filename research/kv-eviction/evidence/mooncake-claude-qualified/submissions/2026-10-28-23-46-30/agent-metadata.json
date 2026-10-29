@@ -1,0 +1,57 @@
+{
+  "requested_model": "claude-sonnet-5-5",
+  "resolved_model": "claude-sonnet-5-5",
+  "runtime_seconds": 10.951649958005873,
+  "usage": {
+    "input_tokens": 6,
+    "cache_creation_input_tokens": 5030,
+    "cache_read_input_tokens": 21850,
+    "output_tokens": 856,
+    "output_tokens_details": {
+      "thinking_tokens": 225
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 5030,
+      "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 2,
+        "output_tokens": 323,
+        "cache_read_input_tokens": 8917,
+        "cache_creation_input_tokens": 518,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 518
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "model_usage": {
+    "claude-sonnet-5-5": {
+      "inputTokens": 6,
+      "outputTokens": 856,
+      "cacheReadInputTokens": 21850,
+      "cacheCreationInputTokens": 5030,
+      "webSearchRequests": 0,
+      "costUSD": 0.033062,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 225,
+      "canonicalModel": "claude-sonnet-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  },
+  "api_equivalent_usd": 0.033062,
+  "cost_note": "CLI-reported API-equivalent estimate, not subscription billing"
+}

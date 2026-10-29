@@ -1,0 +1,29 @@
+{
+  "matches": true,
+  "fields": {
+    "valid": true,
+    "requests": true,
+    "completed": true,
+    "mean_ttft_ms": true,
+    "p95_ttft_ms": true,
+    "mean_itl_ms": true,
+    "p95_itl_ms": true,
+    "itl_samples": true,
+    "goodput_rps": true,
+    "slo_attainment_pct": true,
+    "slo_passes": true,
+    "slo_eligible_requests": true,
+    "zero_output_requests": true,
+    "observation_duration_ms": true,
+    "input_tokens": true,
+    "reused_input_tokens": true,
+    "token_hit_pct": true,
+    "recomputed_input_tokens": true,
+    "evictions": true,
+    "ttft_slo_ms": true,
+    "itl_slo_ms": true,
+    "quantile": true,
+    "itl_slo": true,
+    "policy_calls": true
+  }
+}

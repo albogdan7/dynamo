@@ -3,23 +3,15 @@
 import hashlib
 import json
 import math
+import shutil
+import subprocess
 import urllib.request
 from pathlib import Path
 
+from .sources import SOURCES
+
 ROOT = Path(__file__).resolve().parents[1]
-REVISION = "bd7526307049ee1612cfcb90daceffb128994ade"
-TRACE = {
-    "name": "mooncake-toolagent",
-    "requests": 23608,
-    "block_size": 512,
-    "revision": REVISION,
-    "license": "Apache-2.0 (repository LICENSE-APACHE)",
-    "license_url": f"https://github.com/kvcache-ai/Mooncake/blob/{REVISION}/LICENSE-APACHE",
-    "url": f"https://raw.githubusercontent.com/kvcache-ai/Mooncake/{REVISION}/FAST25-release/traces/toolagent_trace.jsonl",
-    "sha256": "48a2db1a13d3bc05e6330140c64f604ba366df20d3c9e128b5c35a01c1fa5f71",
-    "arrival_unit": "milliseconds",
-    "hashes": "ordered remapped prefix block identities",
-}
+TRACE = SOURCES["mooncake-toolagent"].metadata()
 
 
 def digest(path: Path) -> str:
@@ -54,34 +46,76 @@ def validate(rows: list[dict], block_size: int = 512) -> None:
             parent = block_hash
 
 
-def fetch() -> Path:
-    path = ROOT / ".cache/mooncake-toolagent.jsonl"
+def fetch(name: str = "mooncake-toolagent") -> Path:
+    source = SOURCES[name]
+    path = ROOT / ".cache" / source.filename
     path.parent.mkdir(exist_ok=True)
     if not path.exists():
-        with urllib.request.urlopen(TRACE["url"], timeout=60) as response:
-            data = response.read()
-        if hashlib.sha256(data).hexdigest() != TRACE["sha256"]:
+        temporary = path.with_suffix(path.suffix + ".partial")
+        with (
+            urllib.request.urlopen(source.url, timeout=90) as response,
+            temporary.open("wb") as output,
+        ):
+            if source.subset_lines is None:
+                shutil.copyfileobj(response, output)
+            else:
+                downloaded = 0
+                for _ in range(source.subset_lines):
+                    line = response.readline(64 * 1024 * 1024)
+                    downloaded += len(line)
+                    if not line.endswith(b"\n") or downloaded > 128 * 1024 * 1024:
+                        raise ValueError(
+                            "Complete-session subset exceeds download bounds"
+                        )
+                    output.write(line)
+        if digest(temporary) != source.sha256:
             raise ValueError("Downloaded trace checksum mismatch")
-        path.write_bytes(data)
-    if digest(path) != TRACE["sha256"]:
+        temporary.rename(path)
+    if digest(path) != source.sha256:
         raise ValueError("Cached trace checksum mismatch")
+    if source.uncompressed_sha256:
+        raw = path.with_suffix("")
+        if not raw.exists():
+            if shutil.which("zstd") is None:
+                raise RuntimeError("FreeInference download requires the zstd command")
+            subprocess.run(
+                ["zstd", "-d", "-q", "-f", str(path), "-o", str(raw)], check=True
+            )
+        if digest(raw) != source.uncompressed_sha256:
+            raise ValueError("Decompressed trace checksum mismatch")
+        return raw
     rows = [json.loads(line) for line in path.read_text().splitlines()]
-    if len(rows) != TRACE["requests"]:
+    if source.subset_lines is not None and len(rows) != source.subset_lines:
+        raise ValueError("Complete-session subset count mismatch")
+    if (
+        source.kind == "mooncake"
+        and source.requests is not None
+        and len(rows) != source.requests
+    ):
         raise ValueError("Trace request count mismatch")
-    validate(rows)
+    if source.kind == "mooncake":
+        validate(rows)
     return path
 
 
-def windows(source: Path, output: Path, count: int, arrival_scale: float = 1) -> dict:
+def windows(
+    source: Path,
+    output: Path,
+    count: int,
+    arrival_scale: float = 1,
+    name: str = "mooncake-toolagent",
+) -> dict:
     rows = [json.loads(line) for line in source.read_text().splitlines()]
     midpoint = len(rows) // 2
     if not 1 <= count <= midpoint:
         raise ValueError(f"window-requests must be between 1 and {midpoint}")
-    manifest = dict(TRACE)
+    manifest = SOURCES[name].metadata()
+    manifest["format"] = "mooncake"
+    manifest["execution"] = "fixed arrivals, cold state per window"
     manifest["arrival_time_multiplier"] = arrival_scale
     manifest["windows"] = {}
-    for name, start in (("tuning", 0), ("evaluation", midpoint)):
-        path = output / f"{name}-trace.jsonl"
+    for split, start in (("tuning", 0), ("evaluation", midpoint)):
+        path = output / f"{split}-trace.jsonl"
         selected = rows[start : start + count]
         origin = selected[0]["timestamp"]
         selected = [
@@ -89,7 +123,7 @@ def windows(source: Path, output: Path, count: int, arrival_scale: float = 1) ->
             for row in selected
         ]
         path.write_text("".join(json.dumps(row) + "\n" for row in selected))
-        manifest["windows"][name] = {
+        manifest["windows"][split] = {
             "start_row": start,
             "requests": count,
             "first_arrival_ms": selected[0]["timestamp"],

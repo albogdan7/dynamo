@@ -18,6 +18,8 @@ from kv_experiment.agents import DEFAULT_MODELS, invoke_agent
 from kv_experiment.legacy import reproduce as reproduce_legacy
 from kv_experiment.metrics import score
 from kv_experiment.runtime import IMAGE, NATIVE, PolicyError, replay
+from kv_experiment.sessions import session_windows
+from kv_experiment.sources import SOURCES
 from kv_experiment.traces import ROOT, digest, fetch, windows
 
 LRU = """class EvictionPolicy:
@@ -42,7 +44,7 @@ You cannot change scheduling, cache capacity, trace, scorer, timing, or the SLO.
 You cannot access future requests or evaluation data. The controller executes your
 policy in a network-free, read-only container, with a 2-second decision deadline.
 Use Python standard library only. Do not print; the protocol owns stdout.
-This is a flat fixed-arrival Mooncake replay, not a dependency-aware agent benchmark.
+Replay contract: {trace_description}.
 Timing is native polynomial and uncalibrated; scores are simulation estimates.
 Cache capacity is {cache_tokens} tokens in 512-token blocks. Each tuning replay has
 {window_requests} requests; inter-arrival times are multiplied by {arrival_scale}.
@@ -130,12 +132,37 @@ def setup(args) -> tuple[Path, Path, dict]:
     profile = json.loads(args.timing_profile.read_text())
     if profile["rank"]["block_size"] != 512 or args.cache_tokens % 512:
         raise ValueError(
-            "Mooncake requires 512-token blocks and a whole-block capacity"
+            "This experiment uses 512-token engine blocks and a whole-block capacity"
         )
     profile["rank"]["num_gpu_blocks"] = args.cache_tokens // 512
     config = output / "config.json"
+    specification = SOURCES[args.trace]
+    source_path = fetch(args.trace)
+    if specification.kind == "mooncake":
+        provenance = windows(
+            source_path,
+            output,
+            args.window_requests,
+            args.arrival_scale,
+            name=args.trace,
+        )
+    else:
+        provenance = session_windows(
+            args.trace, source_path, output, args.sessions_per_split, args.arrival_scale
+        )
+        minimum = max(
+            window["minimum_cache_tokens"] for window in provenance["windows"].values()
+        )
+        if args.cache_tokens < minimum:
+            raise ValueError(
+                f"Trace requires at least {minimum} cache tokens to fit its largest full request"
+            )
+    profile["trace"] = {
+        "format": provenance["format"],
+        "source_block_size": specification.block_size,
+        "agentic_lanes": provenance.get("agentic_lanes"),
+    }
     write_json(config, profile)
-    provenance = windows(fetch(), output, args.window_requests, args.arrival_scale)
     source = source_fingerprint()
     with zipfile.ZipFile(
         output / "controller-source.zip", "w", zipfile.ZIP_DEFLATED
@@ -211,7 +238,7 @@ def report(output: Path, baselines: dict, evaluation: dict | None = None) -> Non
         "# KV eviction evaluation",
         "",
         "Native serving replay; **uncalibrated polynomial timing, not GPU measurements**.",
-        "All policies use identical fixed-arrival evaluation data and fresh state.",
+        "All policies use the same evaluation source/configuration and fresh state. Closed-loop readiness follows each replay's simulated completions.",
         "Native release order has no ties: the leaf-first creation tiebreak is equivalent to native LRU here.",
         "",
         "| Metric | " + " | ".join(policies) + " |",
@@ -278,6 +305,7 @@ def report(output: Path, baselines: dict, evaluation: dict | None = None) -> Non
 
 
 def run(args, output: Path, config: Path, baselines: dict) -> None:
+    manifest = json.loads((output / "manifest.json").read_text())
     workspace = output / "agent-workspace"
     workspace.mkdir()
     (workspace / "policy.py").write_text(LRU)
@@ -296,8 +324,9 @@ def run(args, output: Path, config: Path, baselines: dict) -> None:
             ttft=args.ttft_slo_ms,
             itl=args.itl_slo_ms,
             cache_tokens=args.cache_tokens,
-            window_requests=args.window_requests,
+            window_requests=manifest["trace"]["windows"]["tuning"]["requests"],
             arrival_scale=args.arrival_scale,
+            trace_description=manifest["trace"]["execution"],
             feedback=json.dumps(feedback, indent=2),
         )
         if index == 0:
@@ -429,16 +458,25 @@ def reproduce(output: Path):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
-    commands.add_parser("fetch-traces")
+    downloader = commands.add_parser("fetch-traces")
+    downloader.add_argument(
+        "--trace", choices=list(SOURCES), default="mooncake-toolagent"
+    )
     repro = commands.add_parser("reproduce")
     repro.add_argument("--output", type=Path, default=Path("experiments/reproduction"))
     for name in ("baseline", "run"):
         command = commands.add_parser(name)
         command.add_argument(
-            "--trace", choices=["mooncake-toolagent"], default="mooncake-toolagent"
+            "--trace", choices=list(SOURCES), default="mooncake-toolagent"
         )
         command.add_argument("--cache-tokens", type=int, default=131072)
         command.add_argument("--window-requests", type=int, default=1000)
+        command.add_argument(
+            "--sessions-per-split",
+            type=int,
+            default=2,
+            help="Complete qualified sessions per split for AgentX/FreeInference",
+        )
         command.add_argument(
             "--arrival-scale",
             type=float,
@@ -472,11 +510,16 @@ def main():
     evaluate = commands.add_parser("evaluate")
     evaluate.add_argument("run_directory", type=Path)
     evaluate.add_argument("--output", type=Path, required=True)
+    evaluate.add_argument(
+        "--allow-native-rebuild",
+        action="store_true",
+        help="Explicitly test a rebuilt native binary; saved performance must still match",
+    )
     args = parser.parse_args()
     if args.command == "run":
         args.model = args.model or DEFAULT_MODELS[args.agent]
     if args.command == "fetch-traces":
-        print(fetch())
+        print(fetch(args.trace))
     elif args.command == "reproduce":
         output = (
             args.output.resolve() if args.output.is_absolute() else ROOT / args.output
@@ -509,7 +552,11 @@ def main():
             != manifest["trace"]["windows"]["evaluation"]["sha256"]
         ):
             raise ValueError("Evaluation trace checksum changed")
-        if digest(NATIVE) != manifest["native_binary_sha256"]:
+        actual_binary = digest(NATIVE)
+        if (
+            actual_binary != manifest["native_binary_sha256"]
+            and not args.allow_native_rebuild
+        ):
             raise ValueError(
                 "Native replay binary changed; use the original build for exact reproduction"
             )
@@ -529,7 +576,14 @@ def main():
         }
         write_json(
             output / "replay-check.json",
-            {"matches": all(comparisons.values()), "fields": comparisons},
+            {
+                "matches": all(comparisons.values()),
+                "fields": comparisons,
+                "expected_native_binary_sha256": manifest["native_binary_sha256"],
+                "actual_native_binary_sha256": actual_binary,
+                "native_binary_changed": actual_binary
+                != manifest["native_binary_sha256"],
+            },
         )
         if not all(comparisons.values()):
             raise ValueError(

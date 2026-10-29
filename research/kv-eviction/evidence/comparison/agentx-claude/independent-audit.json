@@ -1,0 +1,62 @@
+{
+  "evaluation": {
+    "matches": true,
+    "requests": 192,
+    "slo_passes": 163,
+    "metrics_sha256": "c57612076b056f31395a564316cf6be7cf24dce300b0bd343c50971f520b62f8"
+  },
+  "leaf-first-lru-evaluation": {
+    "matches": true,
+    "requests": 192,
+    "slo_passes": 163,
+    "metrics_sha256": "37d7a66a52b8763490f5245910a9dba73a2eace45190ef2c694114f382532f59"
+  },
+  "leaf-first-lru-tuning": {
+    "matches": true,
+    "requests": 60,
+    "slo_passes": 58,
+    "metrics_sha256": "00ae4e0a8c1d08fb8abf25b9e032c8873acd43e9eb5bab82577f61b70e1a7a39"
+  },
+  "native-lru-evaluation": {
+    "matches": true,
+    "requests": 192,
+    "slo_passes": 163,
+    "metrics_sha256": "7b1d1ee5784b991f81caee15f8e7d2df50884e2ebd765cac41d787f87d0eff6f"
+  },
+  "native-lru-tuning": {
+    "matches": true,
+    "requests": 60,
+    "slo_passes": 58,
+    "metrics_sha256": "7add9f23740cc149f817caef80238148413573a7e9c10a204d61a329c086ec46"
+  },
+  "submissions/2026-10-29-00-51-30/tuning": {
+    "matches": true,
+    "requests": 60,
+    "slo_passes": 58,
+    "metrics_sha256": "f382b303b4fe0292006db9409a90fcb319ebb688b51422436798cb580edfecbf"
+  },
+  "submissions/2026-10-29-00-51-56/tuning": {
+    "matches": true,
+    "requests": 60,
+    "slo_passes": 58,
+    "metrics_sha256": "a5f6cc82941eadd456e533ba3ed26e7d8cad0d1cf2728185c67be2ccac2adb46"
+  },
+  "submissions/2026-10-29-00-52-21/tuning": {
+    "matches": true,
+    "requests": 60,
+    "slo_passes": 58,
+    "metrics_sha256": "c8e3bc71e31601c8e33f2271fe5c2157d011693d0ccbaf97af56d262c2783ad0"
+  },
+  "submissions/2026-10-29-00-52-45/tuning": {
+    "matches": true,
+    "requests": 60,
+    "slo_passes": 58,
+    "metrics_sha256": "9061f24b9cc471385ec10a9250083160e7f5707dfdcbdb1244d4f8bf46c4c550"
+  },
+  "submissions/2026-10-29-00-53-08/tuning": {
+    "matches": true,
+    "requests": 60,
+    "slo_passes": 58,
+    "metrics_sha256": "9607619a2271c6cc201a4a663146b61a95aa7f12145c9ee5cc9ad9971d5c9324"
+  }
+}

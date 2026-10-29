@@ -1,6 +1,6 @@
-# KV eviction experiment report
+# Initial Claude release report
 
-Completed: 2026-10-29 (America/Chicago).
+Completed: 2026-10-29 (America/Chicago). This is the historical initial release; see [EXTENSION_RESULTS.md](EXTENSION_RESULTS.md) for current Codex/additional-trace support and comparisons.
 
 Implemented on `research/agent-eviction-experiments` in `albogdan7/dynamo`. This is the **Claude + one trace release (PRs 1–2)**. Codex and additional traces remain the next PRs in [PLAN.md](PLAN.md). Baseline PR [#2](https://github.com/albogdan7/dynamo/pull/2) and the complete experiment are submitted against this fork’s `main`; merge the baseline first.
 

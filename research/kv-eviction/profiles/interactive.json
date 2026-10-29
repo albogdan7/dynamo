@@ -1,5 +1,5 @@
 {
-  "description": "Native polynomial timing: illustrative and uncalibrated; no GPU/model accuracy claim. Single vLLM worker, no offload or speculation. Original arrivals, cold cache per window.",
+  "description": "Native polynomial timing: illustrative and uncalibrated; no GPU/model accuracy claim. Single vLLM worker, no offload or speculation. Trace scheduling and timing multipliers are recorded separately in each run manifest.",
   "timing_source": "aisimulate-core native polynomial, pinned version; assumed",
   "rank": {
     "block_size": 512,

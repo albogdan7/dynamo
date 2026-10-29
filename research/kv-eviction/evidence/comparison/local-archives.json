@@ -1,0 +1,53 @@
+{
+  "note": "Local full raw runs; compact evidence is committed separately. Attribution included in each archive.",
+  "archives": [
+    {
+      "path": "experiments/extension-claude-agentx.tar.gz",
+      "bytes": 5531519,
+      "sha256": "6ca3cf1d34159b029323b5ee69d3a727ade61a3118d02731bfeafe1bd50fde2c",
+      "excluded": [
+        "agent-workspace"
+      ]
+    },
+    {
+      "path": "experiments/extension-claude-conversation.tar.gz",
+      "bytes": 4157211,
+      "sha256": "3d2e29883cb1a6eca3f38ca8b5e7ccde44709aecfe84c84983b18423ae5fef59",
+      "excluded": [
+        "agent-workspace"
+      ]
+    },
+    {
+      "path": "experiments/extension-claude-freeinference.tar.gz",
+      "bytes": 3041986,
+      "sha256": "a5c3f6e36d7cab7c30717d3ec489176aa74835abbb9348a42689ec429fada94b",
+      "excluded": [
+        "agent-workspace"
+      ]
+    },
+    {
+      "path": "experiments/extension-codex-agentx.tar.gz",
+      "bytes": 5507743,
+      "sha256": "d7843d4c74f41fa3299eccd58f4d675d0206c1c918b9841e77c06ddbeec26583",
+      "excluded": [
+        "agent-workspace"
+      ]
+    },
+    {
+      "path": "experiments/extension-codex-conversation.tar.gz",
+      "bytes": 4128917,
+      "sha256": "86e1ea08e08a9a7a450fd1e9ed463bf249c494a7794d425aa603f13428df45a7",
+      "excluded": [
+        "agent-workspace"
+      ]
+    },
+    {
+      "path": "experiments/extension-codex-freeinference.tar.gz",
+      "bytes": 3017426,
+      "sha256": "d48b8507d1bd0d39e39ff3ce66e92d2f1dd27eb211873eeaea0b22723f718083",
+      "excluded": [
+        "agent-workspace"
+      ]
+    }
+  ]
+}

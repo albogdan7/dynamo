@@ -1,21 +1,21 @@
 # KV eviction agent experiments
 
-Updated: 2026-10-29. Implementation branch: `research/agent-eviction-experiments` in [albogdan7/dynamo](https://github.com/albogdan7/dynamo). All code, tests, documents and artifacts stay in this fork.
+Updated: 2026-10-29. Implementation branch: `research/kv-eviction-additional-traces` in [albogdan7/dynamo](https://github.com/albogdan7/dynamo). All code, tests, documents and artifacts stay in this fork.
 
 ## Deliverable
 
-One command launches a restricted coding agent, scores its submitted eviction policies, saves their source and performance, selects using tuning data, then evaluates with fresh state on withheld data. Start with **Claude Code + Mooncake tool/agent**. [README.md](README.md) documents runnable commands and output retrieval; [RESEARCH_NOTES.md](RESEARCH_NOTES.md) contains background research.
+One command launches a restricted coding agent, scores its submitted eviction policies, saves their source and performance, selects using tuning data, then evaluates with fresh state on withheld data. The initial release uses **Claude Code + Mooncake tool/agent**; the extensions add Codex and three traces. [README.md](README.md) documents runnable commands and output retrieval; [RESEARCH_NOTES.md](RESEARCH_NOTES.md) contains background research.
 
 ## PR stack
 
 | PR | Scope | Acceptance |
 | --- | --- | --- |
 | 1. Baseline and one trace ([#2](https://github.com/albogdan7/dynamo/pull/2)) | Reproduce legacy LRU and leaf-first LRU; pin Mooncake tool/agent and deterministic windows. | Two matching reproductions per policy; trace checksum and provenance verified. |
-| 2. Complete Claude experiment | Native serving replay with editable eviction, valid metrics, restricted Claude, isolated policy execution, saved submissions and report. One trace and one model per experiment. | A real agent edits policies; decisions affect eviction; every submission is retained; selected-policy replay and independent rescoring match. |
-| 3. Codex | Add Codex to the same command, policy contract and artifact format. | Real restricted Codex run; same settings and search budget for comparison. |
+| 2. Complete Claude experiment ([#3](https://github.com/albogdan7/dynamo/pull/3)) | Native serving replay with editable eviction, valid metrics, restricted Claude, isolated policy execution, saved submissions and report. One trace and one model per experiment. | A real agent edits policies; decisions affect eviction; every submission is retained; selected-policy replay and independent rescoring match. |
+| 3. Codex ([#4](https://github.com/albogdan7/dynamo/pull/4)) | Add Codex to the same command, policy contract and artifact format. | Real restricted Codex run; same settings and search budget for comparison. |
 | 4. Several traces | Add Mooncake conversation, then AgentX and a bounded FreeInference subset after verifying suitability. | Validated provenance, prefix identities and timing; both agent backends work without scorer changes. |
 
-Order: **1 → 2 → 3 → 4**. PR 2 is the first usable release. Codex and extra traces are extensions. Continuum, MORI and real serving-engine ports are separate work.
+Order: **1 → 2 → 3 → 4**. PR 2 is the first usable release. Codex and the three additional traces are implemented; current comparisons are in [EXTENSION_RESULTS.md](EXTENSION_RESULTS.md). Continuum, MORI and real serving-engine ports are separate work.
 
 ## Experiment contract
 
@@ -62,4 +62,4 @@ Report raw values and changes against both baselines. Percentage rates use perce
 
 ## Status
 
-Baseline reproduced twice per policy. Pinned trace validated. Native adapter built. Real restricted Claude smoke run completed. Native/container tests pass, including timeouts and isolation; real Claude outside-workspace read/write probes were denied. Two five-attempt pilots, lower-load qualification, exact selected-policy replay and independent arithmetic auditing are complete. The first release is implemented; see [REPORT.md](REPORT.md) for results and limitations. Codex support is implemented and its matched five-submission pilot reproduces Claude’s selected-policy metrics; extra traces are in progress. Baseline PR [#2](https://github.com/albogdan7/dynamo/pull/2) targets the fork’s `main`; the complete experiment branch includes that prerequisite and also targets the fork’s `main`. Merge the baseline PR first.
+Baseline reproduced twice per policy. Pinned trace validated. Native adapter built. Real restricted Claude smoke run completed. Native/container tests pass, including timeouts and isolation; real Claude outside-workspace read/write probes were denied. Two five-attempt pilots, lower-load qualification, exact selected-policy replay and independent arithmetic auditing are complete. The first release is implemented; see [REPORT.md](REPORT.md) for results and limitations. Codex support is implemented and its matched five-submission pilot reproduces Claude’s selected-policy metrics; Mooncake conversation, bounded AgentX and qualified FreeInference support are complete, with 25 passing tests and matched results recorded in [EXTENSION_RESULTS.md](EXTENSION_RESULTS.md). Baseline PR [#2](https://github.com/albogdan7/dynamo/pull/2) targets the fork’s `main`; the complete experiment branch includes that prerequisite and also targets the fork’s `main`. Merge the baseline PR first.

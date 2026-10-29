@@ -1,8 +1,8 @@
 # KV eviction experiments
 
-Run from the fork repository root. This release supports **Claude Code or Codex and the Mooncake tool/agent trace**. It launches the agent, evaluates submitted Python policies in containers, selects using tuning data, and saves an independent evaluation. Additional traces are the next extension in [PLAN.md](PLAN.md).
+Run from the fork repository root. This release supports **Claude Code or Codex** with **Mooncake tool/agent, Mooncake conversation, AgentX and a qualified FreeInference subset**. It launches the agent, evaluates submitted Python policies in containers, selects using tuning data, and saves an independent evaluation. [TRACE_SOURCES.md](TRACE_SOURCES.md) defines each source, qualification and schedule.
 
-See [REPORT.md](REPORT.md) for measured pilot results and limitations.
+See [EXTENSION_RESULTS.md](EXTENSION_RESULTS.md) for the current matched results; [REPORT.md](REPORT.md) retains the initial release findings.
 
 ## Setup
 
@@ -53,9 +53,35 @@ The default windows are source rows `[0,1000)` and `[11804,12804)`. `--window-re
 
 Outputs are relative to `research/kv-eviction/`, must stay inside that directory, and are never overwritten. Reusing an output name fails. With no `--output`, a timestamped name is generated.
 
-For Codex, use the same command with `--agent codex --model gpt-6.1-sol` and a separate output directory. The native Codex CLI and matching `codex-code-mode-host` must be installed (tested with 0.164.0). The runner copies the trusted runtime into a read-protected workspace subtree; agent commands cannot read the trace or credentials, write the runtime/configuration, use the network, or invoke shell/app/plugin/subagent tools. It requires a successful `policy.py` file-change event; a completed CLI turn alone is not accepted as a submission. Codex receives the current policy in its prompt because shell/read commands are disabled. [Official permissions documentation](https://learn.chatgpt.com/docs/permissions).
+For Codex, use the same command with `--agent codex --model gpt-6.1-sol` and a separate output directory. The native Codex CLI and matching `codex-code-mode-host` must be installed (tested with 0.164.0). The runner copies the trusted runtime into a write-protected workspace subtree; agent commands cannot read the trace or credentials, write the runtime/configuration, use the network, or invoke shell/app/plugin/subagent tools. It requires a successful `policy.py` file-change event; a completed CLI turn alone is not accepted as a submission. Codex receives the current policy in its prompt because shell/read commands are disabled. [Official permissions documentation](https://learn.chatgpt.com/docs/permissions).
 
 Codex JSON reports token usage but no server-resolved model ID or monetary cost. The runner records the exact requested model ID and leaves unavailable fields null with a reason.
+
+## Additional traces
+
+FreeInference downloading also requires the `zstd` command. Fetch any registered source with the same command:
+
+```bash
+python3 research/kv-eviction/experiment.py fetch-traces --trace agentx
+```
+
+Use `--trace mooncake-conversation` with the same fixed-arrival options as tool/agent. AgentX and FreeInference use **complete sessions**, so `--sessions-per-split` replaces request-window sizing:
+
+```bash
+python3 research/kv-eviction/experiment.py run \
+  --agent codex --model gpt-6.1-sol --trace agentx \
+  --sessions-per-split 2 --cache-tokens 196608 --submissions 5 \
+  --output experiments/my-agentx-run
+```
+
+```bash
+python3 research/kv-eviction/experiment.py run \
+  --agent claude --model claude-sonnet-5-5 --trace freeinference \
+  --sessions-per-split 3 --cache-tokens 81920 --submissions 5 \
+  --output experiments/my-freeinference-run
+```
+
+The policy interface, scoring and output layout are unchanged. Session runs also retain the selected raw source rows and canonical version-2 agentic-Mooncake trace. Model/provider KV domains are separated; unknown partial tails never gain invented sharing. Read [TRACE_SOURCES.md](TRACE_SOURCES.md) before interpreting these filtered subsets. The initial FreeInference evaluation has an all-pass SLO, which is reported as a limitation.
 
 ## Metrics
 
@@ -118,7 +144,7 @@ python3 research/kv-eviction/experiment.py evaluate \
   --output experiments/my-claude-repeat
 ```
 
-The command verifies policy, trace, configuration and native-binary checksums, then checks that the new metrics match the saved evaluation. It writes `replay-check.json`; a mismatch fails clearly.
+The command verifies policy, trace, configuration and native-binary checksums, then checks that the new metrics match the saved evaluation. It writes `replay-check.json`; a mismatch fails clearly. `--allow-native-rebuild` explicitly permits testing a different native build while still requiring the saved performance to match; the receipt records both binary hashes.
 
 Rescore the raw timing files independently of the agent and simulator, without changing the saved files:
 
@@ -142,8 +168,8 @@ A standalone test environment avoids importing the full serving stack:
 ```bash
 uv venv --python 3.12 research/kv-eviction/.venv
 uv pip install --python research/kv-eviction/.venv/bin/python pytest ruff
-KV_RUN_CONTAINER_TESTS=1 research/kv-eviction/.venv/bin/python -m pytest \
+KV_RUN_CODEX_TESTS=1 KV_RUN_CONTAINER_TESTS=1 research/kv-eviction/.venv/bin/python -m pytest \
   -q -c research/kv-eviction/pytest.ini research/kv-eviction/tests
 ```
 
-Container tests use the real Docker boundary; without the environment flag they are explicitly skipped. Native tests require the built adapter and are skipped when absent. The hand-calculated metrics test distinguishes tail ITL from average TPOT and checks failed requests and exact SLO boundaries. Other tests cover queueing/accounting, callback/native LRU equivalence and repeatability, malformed traces, invalid policies, deadlines, cleanup and host-file/write/network denial. Actual model trials and CLI boundary probes are separate manual evidence, not mocked tests.
+Container tests use the real Docker boundary; Codex tests use the installed native CLI permission boundary without a model call. Omit the corresponding environment flag to skip tests when that runtime is unavailable. Native tests require the built adapter and are skipped when absent. The hand-calculated metrics test distinguishes tail ITL from average TPOT and checks failed requests and exact SLO boundaries. Other tests cover queueing/accounting, callback/native LRU equivalence and repeatability, malformed traces, invalid policies, deadlines, cleanup and host-file/write/network denial. Actual model trials and CLI boundary probes are separate manual evidence, not mocked tests.

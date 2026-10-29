@@ -1,6 +1,6 @@
 # KV eviction experiments
 
-Run from the fork repository root. This release supports **Claude Code and the Mooncake tool/agent trace**. It launches the agent, evaluates submitted Python policies in containers, selects using tuning data, and saves an independent evaluation. Codex and extra traces are the next extensions in [PLAN.md](PLAN.md).
+Run from the fork repository root. This release supports **Claude Code or Codex and the Mooncake tool/agent trace**. It launches the agent, evaluates submitted Python policies in containers, selects using tuning data, and saves an independent evaluation. Additional traces are the next extension in [PLAN.md](PLAN.md).
 
 See [REPORT.md](REPORT.md) for measured pilot results and limitations.
 
@@ -52,6 +52,10 @@ Use a model your account supports; an alias such as `sonnet` is resolved and log
 The default windows are source rows `[0,1000)` and `[11804,12804)`. `--window-requests 256` uses the first 256 rows of each window. No shuffling or warmup; cache, policy and scheduling state restart for every replay. Source overlap does not establish session independence. This is fixed-arrival replay, not a dependency-aware agent benchmark.
 
 Outputs are relative to `research/kv-eviction/`, must stay inside that directory, and are never overwritten. Reusing an output name fails. With no `--output`, a timestamped name is generated.
+
+For Codex, use the same command with `--agent codex --model gpt-6.1-sol` and a separate output directory. The native Codex CLI and matching `codex-code-mode-host` must be installed (tested with 0.164.0). The runner copies the trusted runtime into a read-protected workspace subtree; agent commands cannot read the trace or credentials, write the runtime/configuration, use the network, or invoke shell/app/plugin/subagent tools. It requires a successful `policy.py` file-change event; a completed CLI turn alone is not accepted as a submission. Codex receives the current policy in its prompt because shell/read commands are disabled. [Official permissions documentation](https://learn.chatgpt.com/docs/permissions).
+
+Codex JSON reports token usage but no server-resolved model ID or monetary cost. The runner records the exact requested model ID and leaves unavailable fields null with a reason.
 
 ## Metrics
 
@@ -124,10 +128,10 @@ python3 research/kv-eviction/experiment.py rescore \
   --ttft-slo-ms 1000 --itl-slo-ms 50
 ```
 
-Full run outputs are ignored by Git. Export them explicitly for retrieval; the plan, report and compact evidence belong outside this directory:
+Full run outputs are ignored by Git. The mutable agent workspace/runtime can be excluded from export because submitted source and runtime hashes are already retained. Export them explicitly for retrieval; the plan, report and compact evidence belong outside this directory:
 
 ```bash
-tar -czf research/kv-eviction/experiments/my-claude-run.tar.gz \
+tar --exclude='*/agent-workspace' -czf research/kv-eviction/experiments/my-claude-run.tar.gz \
   -C research/kv-eviction/experiments my-claude-run
 ```
 

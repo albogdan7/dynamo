@@ -14,7 +14,7 @@ from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-from kv_experiment.agents import invoke_claude
+from kv_experiment.agents import DEFAULT_MODELS, invoke_agent
 from kv_experiment.legacy import reproduce as reproduce_legacy
 from kv_experiment.metrics import score
 from kv_experiment.runtime import IMAGE, NATIVE, PolicyError, replay
@@ -311,7 +311,7 @@ def run(args, output: Path, config: Path, baselines: dict) -> None:
         started = time.monotonic()
         phase = "agent"
         try:
-            agent = invoke_claude(workspace, prompt, model, submission)
+            agent = invoke_agent(args.agent, workspace, prompt, model, submission)
             write_json(submission / "agent-metadata.json", agent)
             if agent["resolved_model"]:
                 model = agent["resolved_model"]
@@ -458,8 +458,12 @@ def main():
             ),
         )
         if name == "run":
-            command.add_argument("--agent", choices=["claude"], default="claude")
-            command.add_argument("--model", default="sonnet")
+            command.add_argument(
+                "--agent", choices=["claude", "codex"], default="claude"
+            )
+            command.add_argument(
+                "--model", help="Exact model ID; default depends on agent"
+            )
             command.add_argument("--submissions", type=int, default=5)
     rescore = commands.add_parser("rescore")
     rescore.add_argument("directory", type=Path)
@@ -469,6 +473,8 @@ def main():
     evaluate.add_argument("run_directory", type=Path)
     evaluate.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
+    if args.command == "run":
+        args.model = args.model or DEFAULT_MODELS[args.agent]
     if args.command == "fetch-traces":
         print(fetch())
     elif args.command == "reproduce":

@@ -1,0 +1,11 @@
+{
+  "description": "Native polynomial timing: illustrative and uncalibrated; no GPU/model accuracy claim. Single vLLM worker, no offload or speculation. Original arrivals, cold cache per window.",
+  "timing_source": "aisimulate-core native polynomial, pinned version; assumed",
+  "rank": {
+    "block_size": 512,
+    "num_gpu_blocks": 256,
+    "max_num_seqs": 32,
+    "max_num_batched_tokens": 4096,
+    "timing_model": {"type": "polynomial"}
+  }
+}

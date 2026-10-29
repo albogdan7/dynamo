@@ -47,7 +47,7 @@ Policies choose one inactive, unreferenced, unpinned candidate block. They canno
 
 ## Mooncake tool and agent
 
-Tuning 256 requests; evaluation 256 requests. Cache 131,072 tokens. Arrival or delay multiplier 10. Source row intervals [0, 256) and [11804, 12060). 
+Tuning 256 requests; evaluation 256 requests. Cache 131,072 tokens. Arrival or delay multiplier 10. Source row intervals [0, 256) and [11804, 12060).
 
 ### Held out performance
 
@@ -86,7 +86,7 @@ The passing count and tail latencies do not improve. The small mean latency and 
 
 ## Mooncake conversation
 
-Tuning 256 requests; evaluation 256 requests. Cache 131,072 tokens. Arrival or delay multiplier 10. Source row intervals [0, 256) and [6015, 6271). 
+Tuning 256 requests; evaluation 256 requests. Cache 131,072 tokens. Arrival or delay multiplier 10. Source row intervals [0, 256) and [6015, 6271).
 
 ### Held out performance
 
@@ -125,7 +125,7 @@ Low cache reuse and substantial queueing dominate this cohort. Identical pilot s
 
 ## AgentX subset
 
-Tuning 60 requests; evaluation 192 requests. Cache 196,608 tokens. Arrival or delay multiplier 1. Complete session source ordinals [2, 7] for tuning and [10, 13] for evaluation. 
+Tuning 60 requests; evaluation 192 requests. Cache 196,608 tokens. Arrival or delay multiplier 1. Complete session source ordinals [2, 7] for tuning and [10, 13] for evaluation.
 
 ### Held out performance
 
@@ -164,7 +164,7 @@ The selected policies reproduce LRU, so identical held out scores are expected. 
 
 ## FreeInference subset
 
-Tuning 139 requests; evaluation 33 requests. Cache 81,920 tokens. Arrival or delay multiplier 1. Complete session source ordinals [0, 1, 3] for tuning and [4, 13, 14] for evaluation. 
+Tuning 139 requests; evaluation 33 requests. Cache 81,920 tokens. Arrival or delay multiplier 1. Complete session source ordinals [0, 1, 3] for tuning and [4, 13, 14] for evaluation.
 
 ### Held out performance
 

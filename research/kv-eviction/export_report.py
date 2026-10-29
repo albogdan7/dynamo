@@ -237,7 +237,7 @@ def sections(root, runs, validation):
         pages.append((title, blocks))
 
     def p(text):
-        blocks.append(("p", text))
+        blocks.append(("p", text.rstrip()))
 
     def h(text):
         blocks.append(("h", text))

@@ -1,0 +1,10 @@
+{
+  "submitted_policies": 5,
+  "valid_submissions": 5,
+  "invalid_submissions": 0,
+  "agent_failures": 0,
+  "policy_failures": 0,
+  "policy_timeouts": 0,
+  "policy_exceptions": 0,
+  "invalid_policy_decisions": 0
+}

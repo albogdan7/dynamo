@@ -1,0 +1,6 @@
+{
+  "id": "2026-10-28-23-46-11",
+  "valid": false,
+  "error_type": "TimeoutError",
+  "error": "Claude invocation exceeded its wall-clock budget"
+}

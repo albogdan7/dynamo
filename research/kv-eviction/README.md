@@ -4,6 +4,12 @@ Run from the fork repository root. This release supports **Claude Code or Codex*
 
 See [EXTENSION_RESULTS.md](EXTENSION_RESULTS.md) for the current matched results; [REPORT.md](REPORT.md) retains the initial release findings.
 
+The [shareable HTML report](reports/kv-eviction-results.html) includes all metrics, tuning submissions, limitations and reproduction commands. It is a single offline file with the report generator and compact evidence embedded as a downloadable ZIP. [REPORT_EXPORT.md](REPORT_EXPORT.md) explains sharing and regeneration:
+
+```bash
+python3 research/kv-eviction/export_report.py
+```
+
 ## Setup
 
 Requires Python 3.12+, Rust/Cargo (tested with 1.98), Docker, and signed-in Claude Code with `--restricted` and `--safe-mode` (tested with 2.1.285). No GPU or API key is required when using an existing Claude subscription. Standard CLI token/model access limits still apply.

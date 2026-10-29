@@ -2,7 +2,7 @@
 
 2026-10-29. `gpt-6.1-sol` and `claude-sonnet-5-5`, five submissions each, same Mooncake tool/agent 256-request tuning/evaluation windows, 131,072-token cache, tenfold inter-arrival timing, native polynomial timing, 1,000 ms TTFT / 50 ms per-request p95 ITL SLO.
 
-**Both searches selected the same release-frequency/LRU behavior and produced identical held-out performance.** This is one pilot per model, not evidence that either model is better.
+**Both searches selected release-history heuristics and produced identical held-out performance. The submitted source differs (binary second-chance versus release-count ranking); identical metrics do not prove the policies are universally equivalent.** This is one pilot per model, not evidence that either model is better.
 
 | Evaluation metric | Native LRU | Claude | Codex |
 | --- | ---: | ---: | ---: |

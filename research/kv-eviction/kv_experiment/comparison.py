@@ -131,17 +131,30 @@ def replay_config(
     return profile
 
 
-def plan(config: dict, inventory: dict, output: Path) -> list[dict]:
-    """Write frozen inputs and return every job, longest (callback) jobs first."""
+def freeze(path: Path, content: str, materialize: bool) -> Path:
+    """Write a frozen run input once; afterwards it must never change."""
+    if path.exists():
+        if path.read_text() != content:
+            raise ValueError(
+                f"Frozen run input differs from this configuration: {path}"
+            )
+    elif materialize:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(content)
+    else:
+        raise ValueError(f"Missing frozen run input: {path}")
+    return path
+
+
+def plan(
+    config: dict, inventory: dict, output: Path, materialize: bool = True
+) -> list[dict]:
+    """Freeze (or, for an audit, only verify) inputs; return jobs, callbacks first."""
     jobs = []
     table = policy_table(config)
-    (output / "policies").mkdir(exist_ok=True)
     for name, policy in table.items():
         if policy["source"] is not None:
-            path = output / "policies" / f"{name}.py"
-            if path.exists() and path.read_text() != policy["source"]:
-                raise ValueError(f"Frozen policy source differs from this run: {name}")
-            path.write_text(policy["source"])
+            freeze(output / "policies" / f"{name}.py", policy["source"], materialize)
     for trace in config["traces"]:
         item = inventory["traces"][trace]
         if item["status"] != "ready":
@@ -152,9 +165,9 @@ def plan(config: dict, inventory: dict, output: Path) -> list[dict]:
             )
         (recording,) = item["recordings"]
         inputs = output / "inputs" / trace
-        inputs.mkdir(parents=True, exist_ok=True)
         workload = inputs / "full.jsonl"
-        if not workload.exists():
+        if materialize and not workload.exists():
+            inputs.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(ROOT / recording["path"], workload)
         if sha256(workload) != recording["sha256"]:
             raise ValueError(f"Normalized workload changed: {trace}")
@@ -164,12 +177,19 @@ def plan(config: dict, inventory: dict, output: Path) -> list[dict]:
             "no-telemetry": None,
             "fine-telemetry": cadence["finer_check"]["sample_interval_ms"],
         }
-        configs = {}
-        for variant, interval in variants.items():
-            path = output / "replay-configs" / f"{trace}-{variant}.json"
-            path.parent.mkdir(exist_ok=True)
-            write_json(path, replay_config(config, trace, recording, interval))
-            configs[variant] = path
+        configs = {
+            variant: freeze(
+                output / "replay-configs" / f"{trace}-{variant}.json",
+                json.dumps(
+                    replay_config(config, trace, recording, interval),
+                    indent=2,
+                    allow_nan=False,
+                )
+                + "\n",
+                materialize,
+            )
+            for variant, interval in variants.items()
+        }
         for name, policy in table.items():
             jobs.append(
                 {
@@ -185,9 +205,12 @@ def plan(config: dict, inventory: dict, output: Path) -> list[dict]:
                 }
             )
         # Quantify sampling error on a bounded prefix with a finer cadence.
-        fixture = inputs / "cadence-fixture.jsonl"
         lines = workload.read_text().splitlines(keepends=True)
-        fixture.write_text("".join(lines[: cadence["finer_check"]["requests"]]))
+        fixture = freeze(
+            inputs / "cadence-fixture.jsonl",
+            "".join(lines[: cadence["finer_check"]["requests"]]),
+            materialize,
+        )
         for variant in ("telemetry", "fine-telemetry"):
             jobs.append(
                 {
@@ -246,7 +269,9 @@ def execute(job: dict, output: Path, run_identity: dict, config: dict) -> dict:
         write_json(directory / "manifest.json", expected)
         write_json(directory / "audit.json", audit(directory))
         return {"status": "completed", "seconds": time.monotonic() - started}
-    except Exception as error:  # noqa: BLE001 - every failure is preserved, none is fatal to other jobs
+    except (
+        Exception
+    ) as error:  # noqa: BLE001 - every failure is preserved, none is fatal to other jobs
         directory.mkdir(parents=True, exist_ok=True)
         if job["policy"] is not None:
             shutil.copyfile(job["policy"], directory / "policy.py")

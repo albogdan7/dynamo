@@ -9,7 +9,8 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from kv_experiment import comparison
+import baseline_report
+from kv_experiment import baseline_evidence, comparison
 from kv_experiment.inventory import sha256
 from kv_experiment.runtime import NATIVE
 from kv_experiment.traces import ROOT
@@ -57,11 +58,30 @@ def sweep(tmp_path):
             "blocked": {"cache_tokens": 512},
         },
     }
+
+    def summary(status, requests, cache_tokens, blocked):
+        return {
+            "status": status,
+            "cache_tokens": cache_tokens,
+            "capacity_blocks": cache_tokens // 512,
+            "observed": {"requests": requests},
+            "publisher_count_checks": {},
+            "publisher_counts_match": True,
+            "replayable_requests": requests - blocked,
+            "blocked_requests": blocked,
+            "blocked_excluding_capacity": 0,
+            "cache_tokens_to_fit_every_request": 2048,
+            "flag_counts": {"infeasible": blocked},
+            "blocker_counts": {"infeasible": blocked} if blocked else {},
+            "flag_definitions": {},
+            "revision": "fixture",
+            "license": "fixture",
+        }
+
     inventory = {
         "traces": {
             "fixture": {
-                "status": "ready",
-                "cache_tokens": 6 * 512,
+                **summary("ready", len(rows), 6 * 512, 0),
                 "recordings": [
                     {
                         "id": "full",
@@ -70,17 +90,11 @@ def sweep(tmp_path):
                         "format": "mooncake",
                         "source_block_size": 512,
                         "requests": len(rows),
+                        "timing": "original fixed arrivals",
                     }
                 ],
             },
-            "blocked": {
-                "status": "blocked",
-                "cache_tokens": 512,
-                "recordings": [],
-                "blocker_counts": {"infeasible": 1},
-                "blocked_requests": 1,
-                "observed": {"requests": 1},
-            },
+            "blocked": {**summary("blocked", 1, 512, 1), "recordings": []},
         }
     }
     for name, value in (("config.json", config), ("inventory.json", inventory)):
@@ -148,7 +162,40 @@ def test_failed_policy_is_preserved_without_a_score(sweep, monkeypatch):
     assert again["failed"] == ["fixture/fifo"]
     assert (run / "fixture/fifo.attempt-1/failure.json").is_file()
     assert again["jobs"]["fixture/lru"]["status"] == "skipped"
+    with pytest.raises(ValueError, match="Failed job"):
+        baseline_evidence.build(run, sweep / "evidence")
     # Frozen sources cannot be swapped inside an existing run.
     monkeypatch.setattr(comparison, "policy_table", table)
-    with pytest.raises(ValueError, match="Frozen policy source"):
+    with pytest.raises(ValueError, match="Frozen run input"):
         comparison.run(sweep / "config.json", sweep / "inventory.json", run, 4)
+
+
+def test_audit_and_report_regenerate_only_from_verified_evidence(sweep):
+    run, evidence = sweep / "run", sweep / "evidence"
+    comparison.run(sweep / "config.json", sweep / "inventory.json", run, 4)
+    results = baseline_evidence.build(run, evidence)
+    assert results["audited_jobs"] == 8
+    fixture = results["traces"]["fixture"]
+    assert set(fixture["policies"]) == {"lru", "fifo", "random-0"}
+    assert all(all(files.values()) for files in fixture["parity"].values())
+    assert results["traces"]["blocked"]["status"] == "blocked"
+    with pytest.raises(ValueError, match="exists"):
+        baseline_evidence.build(run, evidence)
+    page = sweep / "report/baselines.html"
+    summary = baseline_report.build(evidence, page)
+    assert summary["traces_reported"] == ["fixture"]
+    first = page.read_bytes()
+    table = page.with_suffix(".csv").read_text().splitlines()
+    assert len(table) == 1 + 3 * len(baseline_report.ROWS)
+    baseline_report.build(evidence, page)
+    assert page.read_bytes() == first
+    # Tampered compact evidence or raw replay files are refused.
+    results_file = evidence / "results.json"
+    results_file.write_text(results_file.read_text().replace('"fifo"', '"FIFO"', 1))
+    with pytest.raises(ValueError, match="changed"):
+        baseline_report.build(evidence, page)
+    tokens = run / "fixture/fifo/tokens.jsonl"
+    lines = tokens.read_text().splitlines(keepends=True)
+    tokens.write_text("".join(lines[:-1]))
+    with pytest.raises(ValueError):
+        baseline_evidence.build(run, sweep / "evidence-again")

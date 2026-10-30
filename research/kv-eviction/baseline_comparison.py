@@ -5,12 +5,14 @@ fetch: download pinned releases, ledger every source request and normalize
        only traces whose every request the replay contract can represent.
 run:   replay every ready trace once per policy, plus paired LRU checks, from
        cold state with original timestamps; resumable and never overwriting.
+audit: re-audit every raw job independently and write compact evidence.
 """
 
 import argparse
 import json
 from pathlib import Path
 
+from kv_experiment.baseline_evidence import build as build_evidence
 from kv_experiment.comparison import run as run_sweep
 from kv_experiment.inventory import build
 from kv_experiment.traces import ROOT
@@ -46,6 +48,15 @@ def run(args) -> None:
     print(f"Completed {output}")
 
 
+def audit(args) -> None:
+    results = build_evidence(args.run, args.evidence)
+    ready = [t for t, item in results["traces"].items() if item["status"] == "ready"]
+    print(
+        f"Audited {results['audited_jobs']} replays on {', '.join(ready)}; "
+        f"evidence in {args.evidence}"
+    )
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
@@ -61,8 +72,11 @@ def main():
         help="Fresh experiments/<date> directory; an existing one is resumed",
     )
     runner.add_argument("--jobs", type=int, default=8, help="Parallel replays")
+    auditor = commands.add_parser("audit", help="Audit a run and write evidence")
+    auditor.add_argument("--run", type=Path, required=True)
+    auditor.add_argument("--evidence", type=Path, required=True, help="Fresh directory")
     args = parser.parse_args()
-    {"fetch": fetch, "run": run}[args.command](args)
+    {"fetch": fetch, "run": run, "audit": audit}[args.command](args)
 
 
 if __name__ == "__main__":

@@ -243,6 +243,7 @@ LOWER_IS_BETTER = {
     "mean_itl_ms",
     "p95_itl_ms",
     "recomputed_input_tokens",
+    "evictions",
 }
 
 
@@ -543,7 +544,7 @@ def webpage(traces, reproduction):
 </style></head><body><main><h1>KV eviction results</h1><p class="intro">Uncalibrated simulation · SLO: TTFT ≤ 1,000 ms and per-request p95 ITL ≤ 50 ms · Percentages show relative change from LRU. Click &lt;/&gt; beside a value to view its policy.</p>
 """
         + "\n".join(parts)
-        + f'<footer><p>Green marks the best value per metric, including ties at displayed precision. All-equal rows are unmarked. Evictions and observation span are diagnostic and are not ranked.</p><p>Δ = 100 × (policy − LRU) / LRU. Percentage-valued metrics also use relative change. Random seeds 0, 1 and 2 are separate runs, not an average or a best-seed selection.</p><p><a download="kv-eviction-reproduce.zip" href="data:application/zip;base64,{payload}">Reproduction files</a></p></footer></main><noscript>Enable JavaScript to open policy source dialogs.</noscript>'
+        + f'<footer><p>Green marks the best value per metric, including ties at displayed precision; fewer evictions are highlighted. All-equal rows are unmarked. Observation span is diagnostic and is not ranked.</p><p>Δ = 100 × (policy − LRU) / LRU. Percentage-valued metrics also use relative change. Random seeds 0, 1 and 2 are separate runs, not an average or a best-seed selection.</p><p><a download="kv-eviction-reproduce.zip" href="data:application/zip;base64,{payload}">Reproduction files</a></p></footer></main><noscript>Enable JavaScript to open policy source dialogs.</noscript>'
         + """
 <script>
 document.addEventListener('click', function(event) {

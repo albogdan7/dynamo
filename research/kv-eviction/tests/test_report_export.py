@@ -196,7 +196,7 @@ def test_highlights_respect_direction_ties_and_display_precision():
     assert best_columns([None, None], True, 3) == []
 
 
-def test_all_policy_columns_are_visible_and_diagnostics_unranked(tmp_path):
+def test_all_columns_visible_and_eviction_minima_highlighted(tmp_path):
     build(ROOT, tmp_path)
     text = (tmp_path / "kv-eviction-results.html").read_text()
     assert "<select" not in text
@@ -210,5 +210,10 @@ def test_all_policy_columns_are_visible_and_diagnostics_unranked(tmp_path):
             assert all(
                 not row["best"]
                 for row in table["rows"]
-                if row["metric"] in {"evictions", "observation_duration_ms"}
+                if row["metric"] == "observation_duration_ms"
             )
+            evictions = next(
+                row for row in table["rows"] if row["metric"] == "evictions"
+            )
+            counts = [int(value.replace(",", "")) for value in evictions["values"]]
+            assert evictions["best"] == best_columns(counts, False, 0)

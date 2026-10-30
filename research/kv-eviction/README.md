@@ -1,5 +1,7 @@
 # KV eviction experiments
 
+Planned next: [full-trace heuristic comparison and KV occupancy measurements](FULL_TRACE_BASELINE_SPEC.md), preserving recorded timestamps. Current reports below describe subset pilots.
+
 Run from the fork repository root. This release supports **Claude Code or Codex** with **Mooncake tool/agent, Mooncake conversation, AgentX and a qualified FreeInference subset**. It launches the agent, evaluates submitted Python policies in containers, selects using tuning data, and saves an independent evaluation. [TRACE_SOURCES.md](TRACE_SOURCES.md) defines each source, qualification and schedule.
 
 The [HTML report](reports/kv-eviction-results.html) contains the current fresh agent and heuristic comparison. [EXTENSION_RESULTS.md](EXTENSION_RESULTS.md) and [REPORT.md](REPORT.md) retain earlier comparisons and release findings.

@@ -1,0 +1,889 @@
+{
+ "_provenance": "Pinned revisions. Trace-file SHA-256 values are the Hugging Face LFS object IDs at the pinned revision (tree API); Mooncake and FreeInference manifest hashes were computed from files downloaded at the same pinned revision. The fetch command verifies every byte against these values.",
+ "mooncake-toolagent": {
+  "kind": "mooncake",
+  "revision": "bd7526307049ee1612cfcb90daceffb128994ade",
+  "license": "Apache-2.0",
+  "source_block_size": 512,
+  "base_url": "https://raw.githubusercontent.com/kvcache-ai/Mooncake/bd7526307049ee1612cfcb90daceffb128994ade/FAST25-release/traces",
+  "published": {
+   "requests": 23608
+  },
+  "files": [
+   {
+    "path": "toolagent_trace.jsonl",
+    "bytes": 4415857,
+    "sha256": "48a2db1a13d3bc05e6330140c64f604ba366df20d3c9e128b5c35a01c1fa5f71",
+    "role": "trace"
+   }
+  ],
+  "published_note": "Mooncake FAST'25 release README request count."
+ },
+ "mooncake-conversation": {
+  "kind": "mooncake",
+  "revision": "bd7526307049ee1612cfcb90daceffb128994ade",
+  "license": "Apache-2.0",
+  "source_block_size": 512,
+  "base_url": "https://raw.githubusercontent.com/kvcache-ai/Mooncake/bd7526307049ee1612cfcb90daceffb128994ade/FAST25-release/traces",
+  "published": {
+   "requests": 12031
+  },
+  "files": [
+   {
+    "path": "conversation_trace.jsonl",
+    "bytes": 3029533,
+    "sha256": "b8cbb061a85206d729d91cdc2981f43c9e0d99209dce588d3af5f7934408b9df",
+    "role": "trace"
+   }
+  ],
+  "published_note": "Mooncake FAST'25 release README request count."
+ },
+ "agentx": {
+  "kind": "weka",
+  "revision": "23f152f6f0f9399a85901b89a6458def0ef16729",
+  "license": "Apache-2.0",
+  "source_block_size": 64,
+  "base_url": "https://huggingface.co/datasets/semianalysisai/cc-traces-weka-062126/resolve/23f152f6f0f9399a85901b89a6458def0ef16729",
+  "published": {
+   "plays": 393,
+   "requests": 98827,
+   "main_turns": 56798,
+   "subagent_groups": 1697,
+   "subagent_inner_requests": 42029
+  },
+  "files": [
+   {
+    "path": "traces.jsonl",
+    "bytes": 1847151435,
+    "sha256": "29b6a19e751ff5230771519aab755f80a0f43a4ba9cf96b72d3a6a437ec99276",
+    "role": "trace"
+   }
+  ],
+  "published_note": "README stats block for traces.jsonl at the pinned revision."
+ },
+ "freeinference": {
+  "kind": "freeinference",
+  "revision": "16d3c04dae6ccaa0c48a9064e204e3a8f1eb9ade",
+  "license": "CC-BY-4.0",
+  "source_block_size": 16,
+  "base_url": "https://huggingface.co/datasets/harvardMadsys/freeinference_agentic_trace/resolve/16d3c04dae6ccaa0c48a9064e204e3a8f1eb9ade",
+  "published": {
+   "root_sessions": 12002,
+   "root_requests": 1186582,
+   "root_tool_calls": 1213347
+  },
+  "files": [
+   {
+    "path": "release/2026-05-17_2026-05-23/manifest.json",
+    "bytes": 1394,
+    "sha256": "ee47aab41342750b6dd66388ee43891e4e0b28cdd203435b54ec9742528c5153",
+    "role": "manifest"
+   },
+   {
+    "path": "release/2026-05-17_2026-05-23/traces/2026-05-17.jsonl.zst",
+    "bytes": 484429,
+    "sha256": "f768c3a44d6c7eb02340adcb7bceaf5a451e20dc568d7a96d69f78bfb70e09a8",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-05-17_2026-05-23/traces/2026-05-18.jsonl.zst",
+    "bytes": 334746,
+    "sha256": "553ce7e870a3f33b07f33dd513a20ed8828e6480dff21a63d08584b3a953bc33",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-05-17_2026-05-23/traces/2026-05-19.jsonl.zst",
+    "bytes": 2493421,
+    "sha256": "b750dada416518328f123dc1cab5d05a219b6467934a9860b79eb2656260df0b",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-05-17_2026-05-23/traces/2026-05-20.jsonl.zst",
+    "bytes": 103976,
+    "sha256": "ea26af1a19b0b33ee40d89f5007bfd67f66cf4ee574f8b8b2819b6b16865ec38",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-05-17_2026-05-23/traces/2026-05-21.jsonl.zst",
+    "bytes": 160758,
+    "sha256": "e855337d384114d7ffa219ca6fad05774c298b3647cfd1935e1cdc7d0e32ec9e",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-05-17_2026-05-23/traces/2026-05-22.jsonl.zst",
+    "bytes": 273898,
+    "sha256": "452215935300db1df89dfb10e5c85769f8b1d3ff6a10532c8a8abea1378eb6a0",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-05-17_2026-05-23/traces/2026-05-23.jsonl.zst",
+    "bytes": 168235,
+    "sha256": "546fbd81ce41eb0d4804f53268c8bede4bcceaa840212ce64bc1408ef97a3a20",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-05-24_2026-05-30/manifest.json",
+    "bytes": 1396,
+    "sha256": "6abd5d3463f0d1366f14f034595a2f0308647f842aaf55037ed48c4ca0319119",
+    "role": "manifest"
+   },
+   {
+    "path": "release/2026-05-24_2026-05-30/traces/2026-05-24.jsonl.zst",
+    "bytes": 1120831,
+    "sha256": "acc248f2f6ee358a97d453c2f372e32f5ffdb8de8105bb52078a660776719715",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-05-24_2026-05-30/traces/2026-05-25.jsonl.zst",
+    "bytes": 661566,
+    "sha256": "6b3e2d56f2a5a22451d996edb799ca9af0122781129a49178332c2488715479b",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-05-24_2026-05-30/traces/2026-05-26.jsonl.zst",
+    "bytes": 416309,
+    "sha256": "c991804e6750db79351c73cfda3aec871b10887eeb96d9a5355177a2cc6b7b20",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-05-24_2026-05-30/traces/2026-05-27.jsonl.zst",
+    "bytes": 634528,
+    "sha256": "f765215b40c2b89aa0de09426461ba2295655b1824652d98b762c253e02283d6",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-05-24_2026-05-30/traces/2026-05-28.jsonl.zst",
+    "bytes": 290896,
+    "sha256": "fe725b1e0b9883d2fe0e5f9d9f1542a9a04e096c8d3dcf942602bdfc329a4d70",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-05-24_2026-05-30/traces/2026-05-29.jsonl.zst",
+    "bytes": 243699,
+    "sha256": "21d676f447d7256cb69b2ed1ac2490fc611e23683c0a63bc8694e53cd321a06c",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-05-24_2026-05-30/traces/2026-05-30.jsonl.zst",
+    "bytes": 177310,
+    "sha256": "de0416ab00cf4b580b95844558f9f508e657c0108766491df307988447833ce5",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-05-31_2026-06-06/manifest.json",
+    "bytes": 1391,
+    "sha256": "96191219dd2602fbc6ae18e051e55bfa1775d6fbca8ff7f5894c17bed1f109be",
+    "role": "manifest"
+   },
+   {
+    "path": "release/2026-05-31_2026-06-06/traces/2026-05-31.jsonl.zst",
+    "bytes": 289794,
+    "sha256": "ec6a3baca17702a28dac1b0d53da10798cc5af1b2448617f303a9f07b11e6663",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-05-31_2026-06-06/traces/2026-06-01.jsonl.zst",
+    "bytes": 295304,
+    "sha256": "f15e161472df66629ba73f3da0207ea732456068c4079c19df63432585e247a4",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-05-31_2026-06-06/traces/2026-06-02.jsonl.zst",
+    "bytes": 143361,
+    "sha256": "fcc19259e5948e0759269059ed58287bbfbc31fdcff97acebaa083e65c7e37da",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-05-31_2026-06-06/traces/2026-06-03.jsonl.zst",
+    "bytes": 404013,
+    "sha256": "989d1cfb7c4afeee7e759105ed7f58cf4e888821bfabaaa7f70ea4dd2463bacd",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-05-31_2026-06-06/traces/2026-06-04.jsonl.zst",
+    "bytes": 76734,
+    "sha256": "6be5b22564a3f2b10e3db811df6908808592c86826a44f85a385c0cbed18c478",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-05-31_2026-06-06/traces/2026-06-05.jsonl.zst",
+    "bytes": 257521,
+    "sha256": "36e9719dbdd784a882798be6c486415b2fd9df62c339d7174bc78fff29096420",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-05-31_2026-06-06/traces/2026-06-06.jsonl.zst",
+    "bytes": 103727,
+    "sha256": "ac71d23c0c190c399e90c031d918af982d985ea82dcb8989d9ddc7735328e97a",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-06-07_2026-06-13/manifest.json",
+    "bytes": 1392,
+    "sha256": "cb568f2be6d718d015ff67886042f86ac43637d73a61995ad6010e64177dcf56",
+    "role": "manifest"
+   },
+   {
+    "path": "release/2026-06-07_2026-06-13/traces/2026-06-07.jsonl.zst",
+    "bytes": 334465,
+    "sha256": "d83862e54d1106ffa45f54827cc09cbb762784af898c54d0487378e35d6307ed",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-06-07_2026-06-13/traces/2026-06-08.jsonl.zst",
+    "bytes": 321824,
+    "sha256": "514b809beb3328bc033a11eab064d05d4a645e41d5b0715fca58a29510a2adbf",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-06-07_2026-06-13/traces/2026-06-09.jsonl.zst",
+    "bytes": 209637,
+    "sha256": "caadcd4ec0a48b32d14df51cc2dbbcff8efc86bd62c532cd58fb9c09ce779529",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-06-07_2026-06-13/traces/2026-06-10.jsonl.zst",
+    "bytes": 206210,
+    "sha256": "44c9d9c7defb1ad5e0094639c4196c68932979f1adda479f1247a7ee7ea6c24a",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-06-07_2026-06-13/traces/2026-06-11.jsonl.zst",
+    "bytes": 197921,
+    "sha256": "5784672e984f0b8296b594961e874b33232134cf27fbf6ee83ec87413e0a2d36",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-06-07_2026-06-13/traces/2026-06-12.jsonl.zst",
+    "bytes": 172078,
+    "sha256": "43594449e8035ec5bbaf187c36215727cdaf309dc996bb684fb37b4943ae6554",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-06-07_2026-06-13/traces/2026-06-13.jsonl.zst",
+    "bytes": 133304,
+    "sha256": "5df863987fdf0d73825192eae43f588b058e705b34a6bdbb1161b1a9b462ca2b",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-06-14_2026-06-20/manifest.json",
+    "bytes": 1455,
+    "sha256": "47944e2405f869acc1fcc472c93a75dbb33d48bc8ad6bfa23b9c48e9bc2c1b41",
+    "role": "manifest"
+   },
+   {
+    "path": "release/2026-06-14_2026-06-20/traces/2026-06-14.jsonl.zst",
+    "bytes": 295951,
+    "sha256": "1adc4846f156d8823cc348a538bd27cc5b066d2592f15b34c0647aeb251f3098",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-06-14_2026-06-20/traces/2026-06-15.jsonl.zst",
+    "bytes": 239054,
+    "sha256": "6c3502f6a5b64e79a0e8c02df0480979263f42b35e1e7a09491ae3f14f97c00f",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-06-14_2026-06-20/traces/2026-06-16.jsonl.zst",
+    "bytes": 296606,
+    "sha256": "e59b1cafb3adb0766792678b137bf194273dfe709469ea6c1c987539732c2674",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-06-14_2026-06-20/traces/2026-06-17.jsonl.zst",
+    "bytes": 376521,
+    "sha256": "be64625cd124b9f84fa6b633e0769cf06f67e36096399a94015d1338d7651e64",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-06-14_2026-06-20/traces/2026-06-18.jsonl.zst",
+    "bytes": 1189237,
+    "sha256": "fdaad506e9a8d0dbe5c43df14973b9128173c6d9881edf4cea00baf168fabca8",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-06-14_2026-06-20/traces/2026-06-19.jsonl.zst",
+    "bytes": 1077545,
+    "sha256": "9dd4fe50e297b56177cedb47138ad4061e75ff92d29bd5329692e305e3325ebb",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-06-14_2026-06-20/traces/2026-06-20.jsonl.zst",
+    "bytes": 3565991,
+    "sha256": "edd4cc748f5d94a5adea3292d852d52e6a68534db6fad247bcc3790931b33f3c",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-06-21_2026-06-27/manifest.json",
+    "bytes": 1627,
+    "sha256": "534f160161e773a39da4305c4876f1dea9c3ead87a95f47e1c392f3f4b48652d",
+    "role": "manifest"
+   },
+   {
+    "path": "release/2026-06-21_2026-06-27/traces/2026-06-20.jsonl.zst",
+    "bytes": 59726,
+    "sha256": "be2875ee6b0a324df65865797ff50d3b5df0958bb5c19fba4598b24932b3dcea",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-06-21_2026-06-27/traces/2026-06-21.jsonl.zst",
+    "bytes": 1957597,
+    "sha256": "6febe1f01df542cae13daa2e509d22d1a86b78b22bfad21ef4f44b027c549e53",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-06-21_2026-06-27/traces/2026-06-22.jsonl.zst",
+    "bytes": 895137,
+    "sha256": "d4ba4ae06c01609e12ef3ef2517d4b5ee44b21ecc61656df1a40c7c4df00a601",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-06-21_2026-06-27/traces/2026-06-23.jsonl.zst",
+    "bytes": 2174857,
+    "sha256": "93a9d9cdda249325bbd6026d866dd2352909e6467d90619c955cfd4bbf8f3a1a",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-06-21_2026-06-27/traces/2026-06-24.jsonl.zst",
+    "bytes": 2529886,
+    "sha256": "2ee616fbd75431f43a180af3c6dcd256926471d85274ba4a4a3f7b2e122c264e",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-06-21_2026-06-27/traces/2026-06-25.jsonl.zst",
+    "bytes": 1069840,
+    "sha256": "2518a321519a284268f8e8def57cbdb8b79217eb27accefa66c47ff7fbf46f55",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-06-21_2026-06-27/traces/2026-06-26.jsonl.zst",
+    "bytes": 1740686,
+    "sha256": "30f66d4b3424e08f4764630cbbe60ba07947d503ed54398ed5d0a5ab384369a2",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-06-21_2026-06-27/traces/2026-06-27.jsonl.zst",
+    "bytes": 1904273,
+    "sha256": "cbb6601922053a385b4c762323adec536e0b695b18e5869cb67c3af4ffa0205a",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-06-28_2026-07-04/manifest.json",
+    "bytes": 1459,
+    "sha256": "cda14bf1036c8b4420db2ed231c288986ea9a3b511b9d7e2e73fc299532f719b",
+    "role": "manifest"
+   },
+   {
+    "path": "release/2026-06-28_2026-07-04/traces/2026-06-28.jsonl.zst",
+    "bytes": 2293650,
+    "sha256": "4a3d98d6db0ae5756d6a0792ffb31ed6905d225dbc7a8f730339daead1844dc7",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-06-28_2026-07-04/traces/2026-06-29.jsonl.zst",
+    "bytes": 2626040,
+    "sha256": "e381a1068b3f11469f4772ff854b0129c19da3d03470143b17dea171c87c4ee2",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-06-28_2026-07-04/traces/2026-06-30.jsonl.zst",
+    "bytes": 1582532,
+    "sha256": "1ed3d6d3ab8a96006307c6913673970f4ea0d42ca3c2eccc9e844b977ea188be",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-06-28_2026-07-04/traces/2026-07-01.jsonl.zst",
+    "bytes": 1514722,
+    "sha256": "fed6a44bd2471f8aa5737a4c0f7b322ecba6506d129fa19a265f5d6f16edf988",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-06-28_2026-07-04/traces/2026-07-02.jsonl.zst",
+    "bytes": 1438725,
+    "sha256": "20a571648b9cb180f5337f6693deedf0f1d5212e22881e0d80a11a85f8081c58",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-06-28_2026-07-04/traces/2026-07-03.jsonl.zst",
+    "bytes": 1847590,
+    "sha256": "d366ba32d1a0d235d1f2db3848c4130c96d5240cc2015f678bb430907820f89c",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-06-28_2026-07-04/traces/2026-07-04.jsonl.zst",
+    "bytes": 1933199,
+    "sha256": "2ec926432ee3f84d933afb9a7f5b329ad764c1e4b4fd33a9ff65e2ba6d85df0f",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-07-05_2026-07-11/manifest.json",
+    "bytes": 1626,
+    "sha256": "e36baf89867d12ee823fd354573c3652ef9a0d6c1646e15707b12a1f00d3fc57",
+    "role": "manifest"
+   },
+   {
+    "path": "release/2026-07-05_2026-07-11/traces/2026-07-04.jsonl.zst",
+    "bytes": 93491,
+    "sha256": "3fcf425d2dafb6e12d53783595af22cd3168d5a6bfda64d9868f275bb5edc004",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-07-05_2026-07-11/traces/2026-07-05.jsonl.zst",
+    "bytes": 2249536,
+    "sha256": "70ba80123bb2f69df6c9d03b0972ffc148a1e4f12dd35ebadc98692c7be5803f",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-07-05_2026-07-11/traces/2026-07-06.jsonl.zst",
+    "bytes": 4589545,
+    "sha256": "f52e6a38ffe5c463433bf4e99981dac551de34e066eca1d426af9a1f27587447",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-07-05_2026-07-11/traces/2026-07-07.jsonl.zst",
+    "bytes": 2120463,
+    "sha256": "1ef04b653e21d171fec2a148fc75c8a4a8e48d7ba52db39e0d22ad12d5f019f9",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-07-05_2026-07-11/traces/2026-07-08.jsonl.zst",
+    "bytes": 1583947,
+    "sha256": "ac5d2f5710541a6fced46c9240d5438eda31a46228df39dbba4b2723de08df10",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-07-05_2026-07-11/traces/2026-07-09.jsonl.zst",
+    "bytes": 1947245,
+    "sha256": "a3fad35c86a558aac8a886633c7709b1ab16460d0b3de44d942101fb8e766426",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-07-05_2026-07-11/traces/2026-07-10.jsonl.zst",
+    "bytes": 1211154,
+    "sha256": "df5b8203df156ea9470bee4dd4e4b7bc3786b84ae718f37a3459ac2f2c99f44d",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-07-05_2026-07-11/traces/2026-07-11.jsonl.zst",
+    "bytes": 1496130,
+    "sha256": "3981f7e8a1f2b40fc8cfed1e2a85774c51e76640786d2ccf69216bde9ba72e93",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-07-12_2026-07-18/manifest.json",
+    "bytes": 1631,
+    "sha256": "7dc8bc2bc0807644a41fb33962d5d61d5aa12fe0fc3c4170720d0d08491829ee",
+    "role": "manifest"
+   },
+   {
+    "path": "release/2026-07-12_2026-07-18/traces/2026-07-11.jsonl.zst",
+    "bytes": 242700,
+    "sha256": "497fe1b39c1f35bf31904ffc55b3aefceb2bd22f736a77f421bfacfc60862875",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-07-12_2026-07-18/traces/2026-07-12.jsonl.zst",
+    "bytes": 2393715,
+    "sha256": "891ce3f05c0c019034fb6bb2a8aca244f6c78a084594a119dfcdc5e95ab578bb",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-07-12_2026-07-18/traces/2026-07-13.jsonl.zst",
+    "bytes": 2170688,
+    "sha256": "b2a0a1ed33ef1fb9813e25dde36de6790e85ddbf03180e648a595b0e1b1f5213",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-07-12_2026-07-18/traces/2026-07-14.jsonl.zst",
+    "bytes": 2721980,
+    "sha256": "6da00371bd451f55ebe02f83e9a0da2811798d3a26338ac95f772d089207026d",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-07-12_2026-07-18/traces/2026-07-15.jsonl.zst",
+    "bytes": 3074767,
+    "sha256": "19c2eaecd028ad1e5ee0009998a657e82ea798e91e6e87cd97f99a32cf0daf20",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-07-12_2026-07-18/traces/2026-07-16.jsonl.zst",
+    "bytes": 3152877,
+    "sha256": "5c380a0dea7e8c033170ff746423cf299c3b8dfc87ffff86d07d932115d24653",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-07-12_2026-07-18/traces/2026-07-17.jsonl.zst",
+    "bytes": 5997120,
+    "sha256": "41ac35166cecfd83f9676b411ac4645eaed66c50b2c912e4a932beac31ad5b59",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-07-12_2026-07-18/traces/2026-07-18.jsonl.zst",
+    "bytes": 3527161,
+    "sha256": "72929264b31af06aa3b4dbcbb1a92555456aeb9d5aaf35d18342de30bacf549a",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-07-19_2026-07-25/manifest.json",
+    "bytes": 1467,
+    "sha256": "c38a60aea9968cfc3c03a05b12c8f5b05f732447e04f7fb688d6497f84224b7d",
+    "role": "manifest"
+   },
+   {
+    "path": "release/2026-07-19_2026-07-25/traces/2026-07-19.jsonl.zst",
+    "bytes": 7628227,
+    "sha256": "b9efeabae591c5cfe4f3205295b2f34cd4e024d60f2b88e89edb50ce62497da2",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-07-19_2026-07-25/traces/2026-07-20.jsonl.zst",
+    "bytes": 4082346,
+    "sha256": "9995182bba52dcbf95acb3a5a284fd2fc2156db3372c577c76638e8833050561",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-07-19_2026-07-25/traces/2026-07-21.jsonl.zst",
+    "bytes": 2688616,
+    "sha256": "07a606cb806fd6b129e23614cda164a331e0f69d3e884aa5484ffec185ad4d02",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-07-19_2026-07-25/traces/2026-07-22.jsonl.zst",
+    "bytes": 5852718,
+    "sha256": "4d47f2563dd80ebcf919534ee449e72fcbf521ac246e09bda5cc458e6e8973bc",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-07-19_2026-07-25/traces/2026-07-23.jsonl.zst",
+    "bytes": 1981017,
+    "sha256": "c4b5e5a967c912c8581c04a3a7dfce2c4870718f1163d5c6c8d1932ba0b97671",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-07-19_2026-07-25/traces/2026-07-24.jsonl.zst",
+    "bytes": 3166099,
+    "sha256": "53981e5a32e79dd48d45a766621fd52f681b57c271c7e66be799da5e365ca383",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-07-19_2026-07-25/traces/2026-07-25.jsonl.zst",
+    "bytes": 2163343,
+    "sha256": "79d9704ce29a1d57fd030b5e3b3c541b2409e1d1f275a8610466499cd20b337d",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-07-26_2026-08-01/manifest.json",
+    "bytes": 1634,
+    "sha256": "525bf96630938f1e974221292f6ba56a8b5f164e38e6defce3205926e3208c3f",
+    "role": "manifest"
+   },
+   {
+    "path": "release/2026-07-26_2026-08-01/traces/2026-07-25.jsonl.zst",
+    "bytes": 30132,
+    "sha256": "c6a759f00cd3198caf5c644301493811656f23c0827a2bc430a8785a727c1cc4",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-07-26_2026-08-01/traces/2026-07-26.jsonl.zst",
+    "bytes": 5933700,
+    "sha256": "b8dd86205a328ac7ffa734c6c58ae7865e36c73483a68e96a419849c4ab2b477",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-07-26_2026-08-01/traces/2026-07-27.jsonl.zst",
+    "bytes": 4150319,
+    "sha256": "12351c2f5b1ef9a5472bfab54df3464ec98d02165ac4c0808dad9f56c7d31c20",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-07-26_2026-08-01/traces/2026-07-28.jsonl.zst",
+    "bytes": 4453741,
+    "sha256": "0ecccb887eace42f9422d74b067ea3133aabe66bc9a508c38a9f34d31f7803c6",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-07-26_2026-08-01/traces/2026-07-29.jsonl.zst",
+    "bytes": 3532195,
+    "sha256": "065bec109de5fe8b4a18a81d504fa75defbd5d6253302c2ba159d2b5ae01bcec",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-07-26_2026-08-01/traces/2026-07-30.jsonl.zst",
+    "bytes": 4336958,
+    "sha256": "7debd60a1988b21378cd7477b48ac523aa98ca624144c47889e209d370f809aa",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-07-26_2026-08-01/traces/2026-07-31.jsonl.zst",
+    "bytes": 2185751,
+    "sha256": "2d154163d37ba3bca94940e7f9551b37c193e629a24c66b4b25bd765a9837bed",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-07-26_2026-08-01/traces/2026-08-01.jsonl.zst",
+    "bytes": 2722812,
+    "sha256": "a30e959af3fcea688504912cfae872ea7d3205c2525db900171801473b87853d",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-08-02_2026-08-08/manifest.json",
+    "bytes": 1468,
+    "sha256": "997985833fcb79171c36fb82ad1c04b26cc0345bdc8c1fa029a74fab276bcbc2",
+    "role": "manifest"
+   },
+   {
+    "path": "release/2026-08-02_2026-08-08/traces/2026-08-01.jsonl.zst",
+    "bytes": 42628,
+    "sha256": "04a4228452be4ec37fdac07f48a6cd443a4befd12ff99e329ca2542f15a84a21",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-08-02_2026-08-08/traces/2026-08-02.jsonl.zst",
+    "bytes": 3865439,
+    "sha256": "b274cdffeb4a83607fabd7b26da261b9b4bd39124c5758f8852bb12e8d73713d",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-08-02_2026-08-08/traces/2026-08-03.jsonl.zst",
+    "bytes": 5823932,
+    "sha256": "89425ae29bbdc78759f850873892c030d239e56664af82c6b1fafa1922d8e1be",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-08-02_2026-08-08/traces/2026-08-04.jsonl.zst",
+    "bytes": 8350325,
+    "sha256": "9672cb76de5be056a6d16b02c61e5716ddc9a61d1dcb919d0b0a24d2d236f6f8",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-08-02_2026-08-08/traces/2026-08-05.jsonl.zst",
+    "bytes": 4960867,
+    "sha256": "26c0b2ff7e6d0cc5855ab2e902acb5f17c6531542ad66d76c8d0e3859fbf3110",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-08-02_2026-08-08/traces/2026-08-06.jsonl.zst",
+    "bytes": 5294154,
+    "sha256": "8f40813f618d940bdd7585477a0825a949583bf1f43a237cb73be4ef2c16293a",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-08-02_2026-08-08/traces/2026-08-07.jsonl.zst",
+    "bytes": 1164738,
+    "sha256": "e7a7a24a63f8219e6665752de5656513f1e6734c24b49036b4441f43cec73915",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-08-09_2026-08-15/manifest.json",
+    "bytes": 1641,
+    "sha256": "d1991a987cab6051bc96e9a2803144b8ea1624014717a666dbe3f2d43bb1aa0a",
+    "role": "manifest"
+   },
+   {
+    "path": "release/2026-08-09_2026-08-15/traces/2026-08-08.jsonl.zst",
+    "bytes": 63169,
+    "sha256": "b51b572f16a0e0ba7aeda83960711f686961c98f5f49178410cf20813a9ffe04",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-08-09_2026-08-15/traces/2026-08-09.jsonl.zst",
+    "bytes": 13392505,
+    "sha256": "0dfe12e82802a51e75acb4618a1e8a59a57cc531cc3223b83a86f910a743a46a",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-08-09_2026-08-15/traces/2026-08-10.jsonl.zst",
+    "bytes": 10407395,
+    "sha256": "5020d5097b620ea954473ee3d8a57f47684efafc7da68115df3876efa4d106c2",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-08-09_2026-08-15/traces/2026-08-11.jsonl.zst",
+    "bytes": 9422474,
+    "sha256": "458220979f63e1b2c33e7844f4a72bfcc1807e9679204ca35b10c5c2336a7d76",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-08-09_2026-08-15/traces/2026-08-12.jsonl.zst",
+    "bytes": 6801473,
+    "sha256": "491a18f558da713a2b24290db29e3d4217a6a88e32894dfdd25ad712f1d304f8",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-08-09_2026-08-15/traces/2026-08-13.jsonl.zst",
+    "bytes": 9465119,
+    "sha256": "d91d1b9847f810e69580317ad29d123a19495e13195c3f82ef9780d6f09c5d35",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-08-09_2026-08-15/traces/2026-08-14.jsonl.zst",
+    "bytes": 7205644,
+    "sha256": "d89b01d962476ea47a3e9412e443f52547670ba16f73d80c5bbeddab57721bda",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-08-09_2026-08-15/traces/2026-08-15.jsonl.zst",
+    "bytes": 6055725,
+    "sha256": "b23802d112a9f8b391c7321e8bfdd1ce87c650345b9d901f19f70ecb92a05bc6",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-08-16_2026-08-22/manifest.json",
+    "bytes": 1641,
+    "sha256": "e98ea4ee454123ade7ef5c7cfe18a87dc5da69c813129664b9462a192c3c3d3d",
+    "role": "manifest"
+   },
+   {
+    "path": "release/2026-08-16_2026-08-22/traces/2026-08-15.jsonl.zst",
+    "bytes": 64438,
+    "sha256": "9f39b6844ad8cc786e5f43c1d87ad0d25aec169e49528984ae5f4fa8249bc77f",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-08-16_2026-08-22/traces/2026-08-16.jsonl.zst",
+    "bytes": 8967698,
+    "sha256": "961763e7053efce8c438228ae71bea6427f4098a056da84f30f40f5b5203f011",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-08-16_2026-08-22/traces/2026-08-17.jsonl.zst",
+    "bytes": 8879787,
+    "sha256": "7bb5954ecb7c963f6f9894dec3f2aa9368fa02b688389a9b66915b038ebe09cb",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-08-16_2026-08-22/traces/2026-08-18.jsonl.zst",
+    "bytes": 9424934,
+    "sha256": "1413fff00674a67a2810747af549e0f73828cb0b6189fafaf132320741e10dcb",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-08-16_2026-08-22/traces/2026-08-19.jsonl.zst",
+    "bytes": 8400083,
+    "sha256": "c6637398ad3bb960679d116e5605fb3544b4a8fcd7e6f38dc841735b74d77b98",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-08-16_2026-08-22/traces/2026-08-20.jsonl.zst",
+    "bytes": 9088255,
+    "sha256": "9ffbdc9ad8d95f49835640b1e2ba32bfe0dcb6684fd9d044c69549b1e0be3895",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-08-16_2026-08-22/traces/2026-08-21.jsonl.zst",
+    "bytes": 7875345,
+    "sha256": "99c1bd79687491bd558ebb34344b44a250cc028fb9ffe42415b0f4059165bc90",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-08-16_2026-08-22/traces/2026-08-22.jsonl.zst",
+    "bytes": 6098184,
+    "sha256": "eed6fca47e09f9fd4d42ca105f628d2bd1c074f3097f36cfa0d26aa02af8abf4",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-08-23_2026-08-29/manifest.json",
+    "bytes": 1475,
+    "sha256": "a528a86738a8d4d1b254bea5fbf7fb01d49ae03bc5f76b794a8084eae8547f0a",
+    "role": "manifest"
+   },
+   {
+    "path": "release/2026-08-23_2026-08-29/traces/2026-08-23.jsonl.zst",
+    "bytes": 9506013,
+    "sha256": "fb4887c6ee6a7eff3fdb225c2e7d6b0872468ac5138a1fa5c022657e4b551a8a",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-08-23_2026-08-29/traces/2026-08-24.jsonl.zst",
+    "bytes": 7200147,
+    "sha256": "7d2a9802dc0c7838588e6edec8967a9cbe990ad4b003d74f827b5c1d15d10923",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-08-23_2026-08-29/traces/2026-08-25.jsonl.zst",
+    "bytes": 11850982,
+    "sha256": "f48952f2a694d5f72ad5f30136b5107262ef29da8b5cb75c4b50c796f4f1aa75",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-08-23_2026-08-29/traces/2026-08-26.jsonl.zst",
+    "bytes": 13690940,
+    "sha256": "77d427eced1c7b8a02f5fa42dc6a0545d611fd8475869f532fafe6a8688a5b62",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-08-23_2026-08-29/traces/2026-08-27.jsonl.zst",
+    "bytes": 7991127,
+    "sha256": "221a1f9cff16ee9389eaea089458a032439bf867e47d83802fe0663d11762195",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-08-23_2026-08-29/traces/2026-08-28.jsonl.zst",
+    "bytes": 7391725,
+    "sha256": "de9055426b8e0487cc64ffb7ae8943116cca291d8b1280b321dea8bf21098ba4",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-08-23_2026-08-29/traces/2026-08-29.jsonl.zst",
+    "bytes": 7146192,
+    "sha256": "36bcc29cd9c54e730e0c0313e053c2acaaa07be02c9d5405f09be2bb314e46c0",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-08-30_2026-09-05/manifest.json",
+    "bytes": 1641,
+    "sha256": "a0db5cf1a9d50315898a54e6c540bc0349ec18c1707883bc132f0b027ff8a554",
+    "role": "manifest"
+   },
+   {
+    "path": "release/2026-08-30_2026-09-05/traces/2026-08-29.jsonl.zst",
+    "bytes": 167924,
+    "sha256": "559e4e8d3ec51275a7278b1ac1f5760bd49cd7c97b761122bee655667bd5eb02",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-08-30_2026-09-05/traces/2026-08-30.jsonl.zst",
+    "bytes": 15754355,
+    "sha256": "ed887579fc11e6c983a3b23cd40b8e4688b9209cccfa7c9d2130208c1f81b4cd",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-08-30_2026-09-05/traces/2026-08-31.jsonl.zst",
+    "bytes": 14465103,
+    "sha256": "a9c633db1892a19646db8b462fc280ad892b0f1401d73a214a4a965d4764d919",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-08-30_2026-09-05/traces/2026-09-01.jsonl.zst",
+    "bytes": 10381012,
+    "sha256": "e73649253f159ae41cd5ebb10bf09927268e84342fc2f5a7378c66568b99e566",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-08-30_2026-09-05/traces/2026-09-02.jsonl.zst",
+    "bytes": 10634027,
+    "sha256": "977771949e102613f028d8ea5d9623dab8bbff8c1da33b03a21e84bea2bb9e08",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-08-30_2026-09-05/traces/2026-09-03.jsonl.zst",
+    "bytes": 10332453,
+    "sha256": "237eae0d607724ebddf1e28bb72465df7853aaeebaf4438f0c391acee2c56810",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-08-30_2026-09-05/traces/2026-09-04.jsonl.zst",
+    "bytes": 13786301,
+    "sha256": "ec7396e4ba225bd677a7bab1aa11e96f426c5cb14ff6f3c214a6bf3b50fa5436",
+    "role": "trace"
+   },
+   {
+    "path": "release/2026-08-30_2026-09-05/traces/2026-09-05.jsonl.zst",
+    "bytes": 9064146,
+    "sha256": "734c58573334a58e8259f01421bfbfcd51933ac8b6df1980c10a495ed04ec794",
+    "role": "trace"
+   }
+  ],
+  "published_note": "README totals (12,002 sessions, 1,186,582 requests, 1,213,347 tool calls) are compared with root sessions; nested subagent sessions are counted separately."
+ }
+}

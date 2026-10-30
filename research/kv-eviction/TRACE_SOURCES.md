@@ -25,6 +25,37 @@ FreeInference selects complete, chronological sequential sessions with positive 
 
 These are small, qualified subsets with selection bias. Session-disjoint splits prevent directly reusing the same session as tuning/evaluation, but do not establish statistical independence or generalization to the full public corpus. The initial FreeInference evaluation has an all-pass SLO and AgentX tuning is nearly all-pass; report these limitations instead of changing thresholds to favor a policy.
 
+## Full-release coverage
+
+The full-trace baseline experiment uses complete pinned releases instead of the pilot windows above. `kv_experiment/releases.json` pins every file (byte count and SHA-256). Download and inventory all four releases with:
+
+```bash
+python3 research/kv-eviction/baseline_comparison.py fetch \
+  --config research/kv-eviction/configs/full-trace-baselines.json
+```
+
+This writes, under the ignored `.cache/full-trace/<trace>/` directory, `ledger.jsonl.gz` with one row per source request and `inventory.json` with counts by flag, model, day, file and session. Each ledger row records a stable source ID, file, line and in-line location, session, day, model, the recorded input/output counts and flags. FreeInference day files are also checked against the publisher's weekly manifests (decompressed SHA-256 and line count). Publisher totals are compared with observed counts and never forced to agree.
+
+Adapter contract:
+
+- Every source request appears exactly once; duplicate identities fail. Nothing is selected by length, cache fit, output count or performance.
+- Lengths are copied, never invented: Mooncake `input_length`/`output_length`; AgentX `in`/`out` (`in` is a 64-token hash-block count × 64); FreeInference input is the `o200k_base` role-token sum and output is the provider completion count.
+- A request is infeasible when `ceil((input + output) / 512)` exceeds the frozen capacity in blocks. Capacity is never raised to fit it.
+- Zero or missing outputs are ambiguous and block. FreeInference nested subagents and overlapping requests in one session also block, because this adapter has no faithful spawn/join or overlap translation yet; AgentX subagents are supported by the native importer.
+- One blocked request blocks its whole trace: the trace is not normalized or replayed, so no filtered run is reported as a full trace.
+- A ready Mooncake trace becomes one recording: the verified source file, with original arrivals, a cold start and cache retained throughout.
+
+Inventory at the pinned revisions and frozen capacities:
+
+| Trace | Source requests | Status | Blocking flags (may overlap) | Tokens needed to fit every request |
+| --- | ---: | --- | --- | ---: |
+| Mooncake tool/agent | 23,608 | ready | none | 126,976 (frozen 131,072) |
+| Mooncake conversation | 12,031 | ready | none | 126,976 (frozen 131,072) |
+| AgentX | 98,827: 393 plays, 56,798 main turns, 42,029 in 1,697 subagent groups | blocked | 38,806 exceed 196,608 tokens; 41 zero outputs | 996,864 |
+| FreeInference | 1,222,199: 12,002 root and 2,034 nested sessions, 119 day files over 112 days | blocked | 813,184 exceed 81,920 tokens; 35,617 nested; 4,727 zero completions (4,403 on tool-call responses); 17 overlaps | 1,260,032 |
+
+All publisher counts reconcile. FreeInference's README totals (12,002 sessions, 1,186,582 requests, 1,213,347 tool calls) count root sessions only; nested subagent sessions add 35,617 requests. Even with unlimited capacity, 41 AgentX and 40,007 FreeInference requests would remain blocked by source semantics. Unblocking either trace needs an explicit, separately frozen decision on capacity and on those semantics.
+
 ## Attribution and immutable references
 
 - [Mooncake FAST'25 release](https://github.com/kvcache-ai/Mooncake/blob/bd7526307049ee1612cfcb90daceffb128994ade/FAST25-release/README.md), revision `bd7526307049ee1612cfcb90daceffb128994ade`; repository Apache-2.0 license.

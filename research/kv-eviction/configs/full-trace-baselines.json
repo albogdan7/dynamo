@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "description": "Full-trace, heuristic-only KV eviction comparison. Original recorded timing, frozen per-trace capacities, 512-token engine blocks.",
+  "block_tokens": 512,
+  "traces": {
+    "mooncake-toolagent": {"cache_tokens": 131072},
+    "mooncake-conversation": {"cache_tokens": 131072},
+    "agentx": {"cache_tokens": 196608},
+    "freeinference": {"cache_tokens": 81920}
+  }
+}

@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-10-30T12:14:44.247842-05:00",
+  "command": [
+    "/opt/homebrew/opt/python@3.14/bin/python3.14",
+    "research/kv-eviction/baseline_comparison.py",
+    "run",
+    "--config",
+    "research/kv-eviction/configs/full-trace-baselines.json",
+    "--output",
+    "research/kv-eviction/experiments/2026-10-30-12-14-44",
+    "--jobs",
+    "8"
+  ],
+  "identity": {
+    "config_sha256": "d9c51eee8531e0fda5b54a32247e0e8dbfd9c88a1c144c861bcb11aad5e4e7ed",
+    "inventory_sha256": "6324b25f963a062eb44b55249d2d2c38046fdd3e0829bccdacc8df7415fea0fa",
+    "native_binary_sha256": "e98af2853f168870ab98dfdd1491badb7fa08f9681e42d1cbe615e6c0a339c23",
+    "policy_container": "python@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258",
+    "runtime_sha256": {
+      "kv_experiment/metrics.py": "e9209a115101ed8d3b65663109ac4f65d64f97659b69f4ec100319f18aa14a0f",
+      "kv_experiment/occupancy.py": "17f51bb869284e5a9f05fbeca24e4aea90f392aa1891cb48559324f188def846",
+      "kv_experiment/policy_worker.py": "da55172af816ad7dbcb28dce84fda79bb7d80ce58d3717d3315bb4d77cb002af",
+      "kv_experiment/runtime.py": "470a71084227c0a74eac441773b4dbc7c4d353f37c5f3b0a9e3cdb09947779ec",
+      "evidence/audit_run.py": "bf7c93d3b4b418c88988ba723dd6baf773c06bfd7268a8c6c1108c3c54f21e80",
+      "native/core.patch": "b7fc46a45eb4429f6c80a685cb44bda2999b18b5278c821181917fca9c671299",
+      "native/src/main.rs": "4937269e2d3854a368edc1ba5698927a173904a0e5e77d7cebb495146fffb787",
+      "native/Cargo.lock": "36bf83c62b8ae9abadc2f7061fda783624309ba36995399d9f2a5e48584fafa6"
+    }
+  },
+  "git_commit": "1fc87ce46660fc1d2248472227dfb2ffabfabcb5",
+  "git_status": "",
+  "python": "3.14.7 (main, Aug  5 2026, 10:29:49) [Clang 21.0.0 (clang-2100.1.1.101)]",
+  "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+  "cargo": "cargo 1.98.0 (797e8a9bc 2026-08-05) (Homebrew)",
+  "docker": "29.7.2",
+  "policies": {
+    "lru": {
+      "label": "LRU",
+      "source": null,
+      "note": "Native inactive-queue head: the least recently released eligible block.",
+      "kind": "policy",
+      "telemetry": true
+    },
+    "fifo": {
+      "label": "FIFO",
+      "source": "class EvictionPolicy:\n    def select_victim(self, blocks: list[dict]) -> int:\n        return min(blocks, key=lambda block: block[\"creation_order\"])[\"block_id\"]\n",
+      "note": "Allocation-order FIFO: evict the oldest physical copy, rather than the oldest cache publication.",
+      "kind": "policy",
+      "telemetry": true
+    },
+    "mru": {
+      "label": "MRU",
+      "source": "class EvictionPolicy:\n    def select_victim(self, blocks: list[dict]) -> int:\n        return min(blocks, key=lambda block: -block[\"lru_rank\"])[\"block_id\"]\n",
+      "note": "Evict the newest eligible copy in the native inactive release queue; the opposite end from LRU.",
+      "kind": "policy",
+      "telemetry": true
+    },
+    "lfu": {
+      "label": "LFU",
+      "source": "class EvictionPolicy:\n    def select_victim(self, blocks: list[dict]) -> int:\n        return min(blocks, key=lambda block: (block[\"hit_count\"], block[\"lru_rank\"]))[\"block_id\"]\n",
+      "note": "Least physical-copy accesses, then native LRU. Initial computed use counts once; each committed cached-prefix activation adds one, including overlapping readers. Canceled reservations do not count. Counts reset on reallocation.",
+      "kind": "policy",
+      "telemetry": true
+    },
+    "slru": {
+      "label": "SLRU",
+      "source": "class EvictionPolicy:\n    def select_victim(self, blocks: list[dict]) -> int:\n        return min(blocks, key=lambda block: (block[\"hit_count\"] >= 2, block[\"lru_rank\"]))[\"block_id\"]\n",
+      "note": "SGLang-style segmented LRU: copies with at least two actual accesses are protected behind the probationary tier; native LRU within each tier. This is the two-tier hit-threshold variant, not a bounded protected queue.",
+      "kind": "policy",
+      "telemetry": true
+    },
+    "random-0": {
+      "label": "Random 0",
+      "source": "import random\n\nclass EvictionPolicy:\n    def __init__(self):\n        self.rng = random.Random(0)\n\n    def select_victim(self, blocks: list[dict]) -> int:\n        return self.rng.choice(sorted(blocks, key=lambda block: block[\"lru_rank\"]))[\"block_id\"]\n",
+      "note": "Uniform random replacement over native eligible candidates, ordered by LRU rank. Fixed seed 0; fresh PRNG per replay. All three seeds are reported separately without selecting a best seed.",
+      "kind": "policy",
+      "telemetry": true
+    },
+    "random-1": {
+      "label": "Random 1",
+      "source": "import random\n\nclass EvictionPolicy:\n    def __init__(self):\n        self.rng = random.Random(1)\n\n    def select_victim(self, blocks: list[dict]) -> int:\n        return self.rng.choice(sorted(blocks, key=lambda block: block[\"lru_rank\"]))[\"block_id\"]\n",
+      "note": "Uniform random replacement over native eligible candidates, ordered by LRU rank. Fixed seed 1; fresh PRNG per replay. All three seeds are reported separately without selecting a best seed.",
+      "kind": "policy",
+      "telemetry": true
+    },
+    "random-2": {
+      "label": "Random 2",
+      "source": "import random\n\nclass EvictionPolicy:\n    def __init__(self):\n        self.rng = random.Random(2)\n\n    def select_victim(self, blocks: list[dict]) -> int:\n        return self.rng.choice(sorted(blocks, key=lambda block: block[\"lru_rank\"]))[\"block_id\"]\n",
+      "note": "Uniform random replacement over native eligible candidates, ordered by LRU rank. Fixed seed 2; fresh PRNG per replay. All three seeds are reported separately without selecting a best seed.",
+      "kind": "policy",
+      "telemetry": true
+    },
+    "lru-repeat": {
+      "label": "lru-repeat",
+      "source": null,
+      "note": "Native LRU replayed again; outputs must be identical.",
+      "kind": "check",
+      "telemetry": true
+    },
+    "lru-callback": {
+      "label": "lru-callback",
+      "source": "class EvictionPolicy:\n    def select_victim(self, blocks: list[dict]) -> int:\n        return min(blocks, key=lambda block: block[\"lru_rank\"])[\"block_id\"]\n",
+      "note": "LRU as a Python callback in the policy container; serving outputs must equal native LRU.",
+      "kind": "check",
+      "telemetry": true
+    },
+    "lru-no-telemetry": {
+      "label": "lru-no-telemetry",
+      "source": null,
+      "note": "Native LRU without telemetry; serving outputs must equal the instrumented run.",
+      "kind": "check",
+      "telemetry": false
+    }
+  },
+  "blocked_traces": {
+    "agentx": {
+      "blocker_counts": {
+        "infeasible": 38806,
+        "zero_output": 41
+      },
+      "blocked_requests": 38825,
+      "source_requests": 98827
+    },
+    "freeinference": {
+      "blocker_counts": {
+        "infeasible": 813184,
+        "nested_subagent": 35617,
+        "overlap": 17,
+        "zero_output": 4727
+      },
+      "blocked_requests": 841469,
+      "source_requests": 1222199
+    }
+  },
+  "limitation": "Uncalibrated native polynomial timing on one simulated worker; not measured GPU latency."
+}

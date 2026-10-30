@@ -3,27 +3,26 @@
 
 fetch: download pinned releases, ledger every source request and normalize
        only traces whose every request the replay contract can represent.
+run:   replay every ready trace once per policy, plus paired LRU checks, from
+       cold state with original timestamps; resumable and never overwriting.
+audit: re-audit every raw job independently and write compact evidence.
 """
 
 import argparse
-import hashlib
 import json
 from pathlib import Path
 
+from kv_experiment.baseline_evidence import build as build_evidence
+from kv_experiment.comparison import run as run_sweep
 from kv_experiment.inventory import build
 from kv_experiment.traces import ROOT
 
 INVENTORY = ROOT / ".cache/full-trace"
 
 
-def read_config(path: Path) -> tuple[dict, str]:
-    data = path.read_bytes()
-    return json.loads(data), hashlib.sha256(data).hexdigest()
-
-
 def fetch(args) -> None:
-    config, config_sha256 = read_config(args.config)
-    inventory = {"config_sha256": config_sha256, "traces": {}}
+    config = json.loads(args.config.read_text())
+    inventory = {"traces": {}}
     for trace, settings in config["traces"].items():
         print(f"Inventorying {trace}", flush=True)
         inventory["traces"][trace] = build(
@@ -40,14 +39,44 @@ def fetch(args) -> None:
     print(f"\nSaved {INVENTORY / 'inventory.json'}")
 
 
+def run(args) -> None:
+    output = args.output.resolve()
+    output.relative_to(ROOT / "experiments")
+    status = run_sweep(args.config, INVENTORY / "inventory.json", output, args.jobs)
+    if status["failed"]:
+        raise SystemExit(f"Failed jobs preserved in {output}: {status['failed']}")
+    print(f"Completed {output}")
+
+
+def audit(args) -> None:
+    results = build_evidence(args.run, args.evidence)
+    ready = [t for t, item in results["traces"].items() if item["status"] == "ready"]
+    print(
+        f"Audited {results['audited_jobs']} replays on {', '.join(ready)}; "
+        f"evidence in {args.evidence}"
+    )
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
     downloader = commands.add_parser("fetch", help="Download and inventory sources")
     downloader.add_argument("--config", type=Path, required=True)
     downloader.add_argument("--workers", type=int, default=8)
+    runner = commands.add_parser("run", help="Replay every policy on ready traces")
+    runner.add_argument("--config", type=Path, required=True)
+    runner.add_argument(
+        "--output",
+        type=Path,
+        required=True,
+        help="Fresh experiments/<date> directory; an existing one is resumed",
+    )
+    runner.add_argument("--jobs", type=int, default=8, help="Parallel replays")
+    auditor = commands.add_parser("audit", help="Audit a run and write evidence")
+    auditor.add_argument("--run", type=Path, required=True)
+    auditor.add_argument("--evidence", type=Path, required=True, help="Fresh directory")
     args = parser.parse_args()
-    {"fetch": fetch}[args.command](args)
+    {"fetch": fetch, "run": run, "audit": audit}[args.command](args)
 
 
 if __name__ == "__main__":

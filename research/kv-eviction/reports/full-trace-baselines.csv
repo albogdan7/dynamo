@@ -1,0 +1,561 @@
+trace,policy,group,metric,unit,value,change_vs_lru,change_kind
+mooncake-toolagent,lru,Latency,"Mean TTFT, including queueing",ms,8031363.587095319,0.0,relative %
+mooncake-toolagent,fifo,Latency,"Mean TTFT, including queueing",ms,8037648.11245463,0.078249792717755,relative %
+mooncake-toolagent,mru,Latency,"Mean TTFT, including queueing",ms,8060270.315379125,0.3599230438309675,relative %
+mooncake-toolagent,lfu,Latency,"Mean TTFT, including queueing",ms,7974006.464722488,-0.7141641858300574,relative %
+mooncake-toolagent,slru,Latency,"Mean TTFT, including queueing",ms,7977260.148800397,-0.6736519609429004,relative %
+mooncake-toolagent,random-0,Latency,"Mean TTFT, including queueing",ms,8067799.776117985,0.45367375822968903,relative %
+mooncake-toolagent,random-1,Latency,"Mean TTFT, including queueing",ms,8066171.385064957,0.43339835872411303,relative %
+mooncake-toolagent,random-2,Latency,"Mean TTFT, including queueing",ms,8066122.554211684,0.43279035669876453,relative %
+mooncake-toolagent,lru,Latency,p95 TTFT,ms,14615423.039650135,0.0,relative %
+mooncake-toolagent,fifo,Latency,p95 TTFT,ms,14631440.673083175,0.10959404588963828,relative %
+mooncake-toolagent,mru,Latency,p95 TTFT,ms,14675298.127710462,0.4096705781138965,relative %
+mooncake-toolagent,lfu,Latency,p95 TTFT,ms,14508949.034196164,-0.728504437847044,relative %
+mooncake-toolagent,slru,Latency,p95 TTFT,ms,14515082.622697338,-0.6865378900123731,relative %
+mooncake-toolagent,random-0,Latency,p95 TTFT,ms,14685699.116038676,0.48083504800298105,relative %
+mooncake-toolagent,random-1,Latency,p95 TTFT,ms,14683511.595779534,0.4658678434738661,relative %
+mooncake-toolagent,random-2,Latency,p95 TTFT,ms,14683864.572100695,0.46828293826928213,relative %
+mooncake-toolagent,lru,Latency,Mean ITL over individual token gaps,ms/gap,39.64276893269006,0.0,relative %
+mooncake-toolagent,fifo,Latency,Mean ITL over individual token gaps,ms/gap,39.70543978823172,0.15808899637679286,relative %
+mooncake-toolagent,mru,Latency,Mean ITL over individual token gaps,ms/gap,39.807175454877644,0.41472007787026754,relative %
+mooncake-toolagent,lfu,Latency,Mean ITL over individual token gaps,ms/gap,39.421123139857684,-0.5591077485246121,relative %
+mooncake-toolagent,slru,Latency,Mean ITL over individual token gaps,ms/gap,39.43387404379527,-0.526943234589583,relative %
+mooncake-toolagent,random-0,Latency,Mean ITL over individual token gaps,ms/gap,39.81525133657162,0.43509171666191726,relative %
+mooncake-toolagent,random-1,Latency,Mean ITL over individual token gaps,ms/gap,39.80730061859452,0.4150358068676141,relative %
+mooncake-toolagent,random-2,Latency,Mean ITL over individual token gaps,ms/gap,39.81557567611948,0.43590987229684686,relative %
+mooncake-toolagent,lru,Latency,p95 ITL over individual token gaps,ms/gap,116.02878000028431,0.0,relative %
+mooncake-toolagent,fifo,Latency,p95 ITL over individual token gaps,ms/gap,116.07920600101352,0.043459907730714065,relative %
+mooncake-toolagent,mru,Latency,p95 ITL over individual token gaps,ms/gap,116.33634299971163,0.2650747507873197,relative %
+mooncake-toolagent,lfu,Latency,p95 ITL over individual token gaps,ms/gap,115.42765800000052,-0.5180800834778454,relative %
+mooncake-toolagent,slru,Latency,p95 ITL over individual token gaps,ms/gap,115.45555999968201,-0.4940326017397578,relative %
+mooncake-toolagent,random-0,Latency,p95 ITL over individual token gaps,ms/gap,116.38885300047696,0.3103307646531883,relative %
+mooncake-toolagent,random-1,Latency,p95 ITL over individual token gaps,ms/gap,116.35813200101256,0.2838537134730146,relative %
+mooncake-toolagent,random-2,Latency,p95 ITL over individual token gaps,ms/gap,116.41200399957597,0.3302835721367803,relative %
+mooncake-toolagent,lru,SLO,SLO goodput,passing requests/s,5.3159673955861026e-05,0.0,relative %
+mooncake-toolagent,fifo,SLO,SLO goodput,passing requests/s,5.311400729283957e-05,-0.08590470863191202,relative %
+mooncake-toolagent,mru,SLO,SLO goodput,passing requests/s,5.298206187456915e-05,-0.3341105542508549,relative %
+mooncake-toolagent,lfu,SLO,SLO goodput,passing requests/s,5.3479220940139835e-05,0.6011078708724416,relative %
+mooncake-toolagent,slru,SLO,SLO goodput,passing requests/s,5.3460540803122356e-05,0.5659681951983853,relative %
+mooncake-toolagent,random-0,SLO,SLO goodput,passing requests/s,5.295283996085436e-05,-0.38908063126648074,relative %
+mooncake-toolagent,random-1,SLO,SLO goodput,passing requests/s,5.2959597998258603e-05,-0.376367917095477,relative %
+mooncake-toolagent,random-2,SLO,SLO goodput,passing requests/s,5.2958035064166574e-05,-0.3793079917342568,relative %
+mooncake-toolagent,lru,SLO,SLO passes,requests,1,0.0,relative %
+mooncake-toolagent,fifo,SLO,SLO passes,requests,1,0.0,relative %
+mooncake-toolagent,mru,SLO,SLO passes,requests,1,0.0,relative %
+mooncake-toolagent,lfu,SLO,SLO passes,requests,1,0.0,relative %
+mooncake-toolagent,slru,SLO,SLO passes,requests,1,0.0,relative %
+mooncake-toolagent,random-0,SLO,SLO passes,requests,1,0.0,relative %
+mooncake-toolagent,random-1,SLO,SLO passes,requests,1,0.0,relative %
+mooncake-toolagent,random-2,SLO,SLO passes,requests,1,0.0,relative %
+mooncake-toolagent,lru,SLO,SLO-eligible requests (positive output),requests,23608,0.0,relative %
+mooncake-toolagent,fifo,SLO,SLO-eligible requests (positive output),requests,23608,0.0,relative %
+mooncake-toolagent,mru,SLO,SLO-eligible requests (positive output),requests,23608,0.0,relative %
+mooncake-toolagent,lfu,SLO,SLO-eligible requests (positive output),requests,23608,0.0,relative %
+mooncake-toolagent,slru,SLO,SLO-eligible requests (positive output),requests,23608,0.0,relative %
+mooncake-toolagent,random-0,SLO,SLO-eligible requests (positive output),requests,23608,0.0,relative %
+mooncake-toolagent,random-1,SLO,SLO-eligible requests (positive output),requests,23608,0.0,relative %
+mooncake-toolagent,random-2,SLO,SLO-eligible requests (positive output),requests,23608,0.0,relative %
+mooncake-toolagent,lru,SLO,Zero-output requests (not SLO-eligible),requests,0,0.0,relative %
+mooncake-toolagent,fifo,SLO,Zero-output requests (not SLO-eligible),requests,0,0.0,relative %
+mooncake-toolagent,mru,SLO,Zero-output requests (not SLO-eligible),requests,0,0.0,relative %
+mooncake-toolagent,lfu,SLO,Zero-output requests (not SLO-eligible),requests,0,0.0,relative %
+mooncake-toolagent,slru,SLO,Zero-output requests (not SLO-eligible),requests,0,0.0,relative %
+mooncake-toolagent,random-0,SLO,Zero-output requests (not SLO-eligible),requests,0,0.0,relative %
+mooncake-toolagent,random-1,SLO,Zero-output requests (not SLO-eligible),requests,0,0.0,relative %
+mooncake-toolagent,random-2,SLO,Zero-output requests (not SLO-eligible),requests,0,0.0,relative %
+mooncake-toolagent,lru,SLO,SLO attainment,% of eligible,0.0042358522534733985,0.0,percentage points
+mooncake-toolagent,fifo,SLO,SLO attainment,% of eligible,0.0042358522534733985,0.0,percentage points
+mooncake-toolagent,mru,SLO,SLO attainment,% of eligible,0.0042358522534733985,0.0,percentage points
+mooncake-toolagent,lfu,SLO,SLO attainment,% of eligible,0.0042358522534733985,0.0,percentage points
+mooncake-toolagent,slru,SLO,SLO attainment,% of eligible,0.0042358522534733985,0.0,percentage points
+mooncake-toolagent,random-0,SLO,SLO attainment,% of eligible,0.0042358522534733985,0.0,percentage points
+mooncake-toolagent,random-1,SLO,SLO attainment,% of eligible,0.0042358522534733985,0.0,percentage points
+mooncake-toolagent,random-2,SLO,SLO attainment,% of eligible,0.0042358522534733985,0.0,percentage points
+mooncake-toolagent,lru,Cache effectiveness,Input-token hit rate (first admission),%,26.228446815859208,0.0,percentage points
+mooncake-toolagent,fifo,Cache effectiveness,Input-token hit rate (first admission),%,26.491838842443762,0.26339202658455463,percentage points
+mooncake-toolagent,mru,Cache effectiveness,Input-token hit rate (first admission),%,25.37015210854057,-0.8582947073186382,percentage points
+mooncake-toolagent,lfu,Cache effectiveness,Input-token hit rate (first admission),%,28.834867339465575,2.606420523606367,percentage points
+mooncake-toolagent,slru,Cache effectiveness,Input-token hit rate (first admission),%,28.67970824334536,2.451261427486152,percentage points
+mooncake-toolagent,random-0,Cache effectiveness,Input-token hit rate (first admission),%,24.938481842749212,-1.2899649731099956,percentage points
+mooncake-toolagent,random-1,Cache effectiveness,Input-token hit rate (first admission),%,24.956646810099873,-1.271800005759335,percentage points
+mooncake-toolagent,random-2,Cache effectiveness,Input-token hit rate (first admission),%,24.944284540652895,-1.284162275206313,percentage points
+mooncake-toolagent,lru,Cache effectiveness,Recomputed input tokens (incl. repeated prefill),tokens,149877155,0.0,relative %
+mooncake-toolagent,fifo,Cache effectiveness,Recomputed input tokens (incl. repeated prefill),tokens,150553753,0.45143504358620135,relative %
+mooncake-toolagent,mru,Cache effectiveness,Recomputed input tokens (incl. repeated prefill),tokens,152762670,1.9252533850138809,relative %
+mooncake-toolagent,lfu,Cache effectiveness,Recomputed input tokens (incl. repeated prefill),tokens,144594237,-3.524832053290572,relative %
+mooncake-toolagent,slru,Cache effectiveness,Recomputed input tokens (incl. repeated prefill),tokens,144907568,-3.315773507977249,relative %
+mooncake-toolagent,random-0,Cache effectiveness,Recomputed input tokens (incl. repeated prefill),tokens,153251356,2.2513110820658433,relative %
+mooncake-toolagent,random-1,Cache effectiveness,Recomputed input tokens (incl. repeated prefill),tokens,153127971,2.1689869947157714,relative %
+mooncake-toolagent,random-2,Cache effectiveness,Recomputed input tokens (incl. repeated prefill),tokens,153161143,2.191119787401896,relative %
+mooncake-toolagent,lru,Cache effectiveness,Evicted blocks,512-token blocks,290475,0.0,relative %
+mooncake-toolagent,fifo,Cache effectiveness,Evicted blocks,512-token blocks,291791,0.45305103709440964,relative %
+mooncake-toolagent,mru,Cache effectiveness,Evicted blocks,512-token blocks,296101,1.936827609949221,relative %
+mooncake-toolagent,lfu,Cache effectiveness,Evicted blocks,512-token blocks,280154,-3.553145709613559,relative %
+mooncake-toolagent,slru,Cache effectiveness,Evicted blocks,512-token blocks,280767,-3.3421120578362995,relative %
+mooncake-toolagent,random-0,Cache effectiveness,Evicted blocks,512-token blocks,297055,2.2652551854720704,relative %
+mooncake-toolagent,random-1,Cache effectiveness,Evicted blocks,512-token blocks,296816,2.18297615973837,relative %
+mooncake-toolagent,random-2,Cache effectiveness,Evicted blocks,512-token blocks,296877,2.2039762458042844,relative %
+mooncake-toolagent,lru,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.51085913087178,0.0,percentage points
+mooncake-toolagent,fifo,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.51246109752826,0.0016019666564801582,percentage points
+mooncake-toolagent,mru,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.51470110890472,0.0038419780329377318,percentage points
+mooncake-toolagent,lfu,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.50592805808037,-0.004931072791407587,percentage points
+mooncake-toolagent,slru,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.50617088317549,-0.004688247696293502,percentage points
+mooncake-toolagent,random-0,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.51459416724681,0.0037350363750334736,percentage points
+mooncake-toolagent,random-1,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.51430155953783,0.0034424286660481584,percentage points
+mooncake-toolagent,random-2,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.51522854402143,0.004369413149646562,percentage points
+mooncake-toolagent,lru,"KV occupancy, whole run","Physical, time-weighted p95",% of capacity,100.0,0.0,percentage points
+mooncake-toolagent,fifo,"KV occupancy, whole run","Physical, time-weighted p95",% of capacity,100.0,0.0,percentage points
+mooncake-toolagent,mru,"KV occupancy, whole run","Physical, time-weighted p95",% of capacity,100.0,0.0,percentage points
+mooncake-toolagent,lfu,"KV occupancy, whole run","Physical, time-weighted p95",% of capacity,100.0,0.0,percentage points
+mooncake-toolagent,slru,"KV occupancy, whole run","Physical, time-weighted p95",% of capacity,100.0,0.0,percentage points
+mooncake-toolagent,random-0,"KV occupancy, whole run","Physical, time-weighted p95",% of capacity,100.0,0.0,percentage points
+mooncake-toolagent,random-1,"KV occupancy, whole run","Physical, time-weighted p95",% of capacity,100.0,0.0,percentage points
+mooncake-toolagent,random-2,"KV occupancy, whole run","Physical, time-weighted p95",% of capacity,100.0,0.0,percentage points
+mooncake-toolagent,lru,"KV occupancy, whole run","Physical, sampled peak",% of capacity,100.0,0.0,percentage points
+mooncake-toolagent,fifo,"KV occupancy, whole run","Physical, sampled peak",% of capacity,100.0,0.0,percentage points
+mooncake-toolagent,mru,"KV occupancy, whole run","Physical, sampled peak",% of capacity,100.0,0.0,percentage points
+mooncake-toolagent,lfu,"KV occupancy, whole run","Physical, sampled peak",% of capacity,100.0,0.0,percentage points
+mooncake-toolagent,slru,"KV occupancy, whole run","Physical, sampled peak",% of capacity,100.0,0.0,percentage points
+mooncake-toolagent,random-0,"KV occupancy, whole run","Physical, sampled peak",% of capacity,100.0,0.0,percentage points
+mooncake-toolagent,random-1,"KV occupancy, whole run","Physical, sampled peak",% of capacity,100.0,0.0,percentage points
+mooncake-toolagent,random-2,"KV occupancy, whole run","Physical, sampled peak",% of capacity,100.0,0.0,percentage points
+mooncake-toolagent,lru,"KV occupancy, whole run",Time with physical ≥ 95% of capacity,% of time,99.82032030202919,0.0,percentage points
+mooncake-toolagent,fifo,"KV occupancy, whole run",Time with physical ≥ 95% of capacity,% of time,99.81038299396457,-0.009937308064621675,percentage points
+mooncake-toolagent,mru,"KV occupancy, whole run",Time with physical ≥ 95% of capacity,% of time,99.81986098962646,-0.00045931240272523155,percentage points
+mooncake-toolagent,lfu,"KV occupancy, whole run",Time with physical ≥ 95% of capacity,% of time,99.8144271033377,-0.005893198691481416,percentage points
+mooncake-toolagent,slru,"KV occupancy, whole run",Time with physical ≥ 95% of capacity,% of time,99.81449192341316,-0.00582837861603025,percentage points
+mooncake-toolagent,random-0,"KV occupancy, whole run",Time with physical ≥ 95% of capacity,% of time,99.82101940093231,0.0006990989031265826,percentage points
+mooncake-toolagent,random-1,"KV occupancy, whole run",Time with physical ≥ 95% of capacity,% of time,99.82258534670584,0.002265044676647676,percentage points
+mooncake-toolagent,random-2,"KV occupancy, whole run",Time with physical ≥ 95% of capacity,% of time,99.81146939517157,-0.008850906857617247,percentage points
+mooncake-toolagent,lru,"KV occupancy, whole run",Time with physical at 100% of capacity,% of time,52.79287220556559,0.0,percentage points
+mooncake-toolagent,fifo,"KV occupancy, whole run",Time with physical at 100% of capacity,% of time,52.813382011562105,0.020509805996518082,percentage points
+mooncake-toolagent,mru,"KV occupancy, whole run",Time with physical at 100% of capacity,% of time,53.02974573025626,0.23687352469067235,percentage points
+mooncake-toolagent,lfu,"KV occupancy, whole run",Time with physical at 100% of capacity,% of time,52.48290305402503,-0.3099691515405567,percentage points
+mooncake-toolagent,slru,"KV occupancy, whole run",Time with physical at 100% of capacity,% of time,52.53032739314803,-0.2625448124175591,percentage points
+mooncake-toolagent,random-0,"KV occupancy, whole run",Time with physical at 100% of capacity,% of time,52.98672977842931,0.1938575728637204,percentage points
+mooncake-toolagent,random-1,"KV occupancy, whole run",Time with physical at 100% of capacity,% of time,52.99137375705756,0.19850155149197235,percentage points
+mooncake-toolagent,random-2,"KV occupancy, whole run",Time with physical at 100% of capacity,% of time,53.0168184830878,0.22394627752221652,percentage points
+mooncake-toolagent,lru,"KV occupancy, whole run","Active (referenced or reserved), mean",% of capacity,85.26597880011792,0.0,percentage points
+mooncake-toolagent,fifo,"KV occupancy, whole run","Active (referenced or reserved), mean",% of capacity,85.28653000271194,0.02055120259402088,percentage points
+mooncake-toolagent,mru,"KV occupancy, whole run","Active (referenced or reserved), mean",% of capacity,85.26933101785482,0.00335221773690364,percentage points
+mooncake-toolagent,lfu,"KV occupancy, whole run","Active (referenced or reserved), mean",% of capacity,85.29301752771852,0.027038727600597667,percentage points
+mooncake-toolagent,slru,"KV occupancy, whole run","Active (referenced or reserved), mean",% of capacity,85.28824948077246,0.022270680654543185,percentage points
+mooncake-toolagent,random-0,"KV occupancy, whole run","Active (referenced or reserved), mean",% of capacity,85.2824279158022,0.016449115684281423,percentage points
+mooncake-toolagent,random-1,"KV occupancy, whole run","Active (referenced or reserved), mean",% of capacity,85.27765024114447,0.011671441026550156,percentage points
+mooncake-toolagent,random-2,"KV occupancy, whole run","Active (referenced or reserved), mean",% of capacity,85.28602071481133,0.020041914693408103,percentage points
+mooncake-toolagent,lru,"KV occupancy, whole run","Active, time-weighted p95",% of capacity,99.609375,0.0,percentage points
+mooncake-toolagent,fifo,"KV occupancy, whole run","Active, time-weighted p95",% of capacity,99.609375,0.0,percentage points
+mooncake-toolagent,mru,"KV occupancy, whole run","Active, time-weighted p95",% of capacity,99.609375,0.0,percentage points
+mooncake-toolagent,lfu,"KV occupancy, whole run","Active, time-weighted p95",% of capacity,99.609375,0.0,percentage points
+mooncake-toolagent,slru,"KV occupancy, whole run","Active, time-weighted p95",% of capacity,99.609375,0.0,percentage points
+mooncake-toolagent,random-0,"KV occupancy, whole run","Active, time-weighted p95",% of capacity,99.609375,0.0,percentage points
+mooncake-toolagent,random-1,"KV occupancy, whole run","Active, time-weighted p95",% of capacity,99.609375,0.0,percentage points
+mooncake-toolagent,random-2,"KV occupancy, whole run","Active, time-weighted p95",% of capacity,99.609375,0.0,percentage points
+mooncake-toolagent,lru,"KV occupancy, whole run","Active, sampled peak",% of capacity,100.0,0.0,percentage points
+mooncake-toolagent,fifo,"KV occupancy, whole run","Active, sampled peak",% of capacity,100.0,0.0,percentage points
+mooncake-toolagent,mru,"KV occupancy, whole run","Active, sampled peak",% of capacity,100.0,0.0,percentage points
+mooncake-toolagent,lfu,"KV occupancy, whole run","Active, sampled peak",% of capacity,100.0,0.0,percentage points
+mooncake-toolagent,slru,"KV occupancy, whole run","Active, sampled peak",% of capacity,100.0,0.0,percentage points
+mooncake-toolagent,random-0,"KV occupancy, whole run","Active, sampled peak",% of capacity,100.0,0.0,percentage points
+mooncake-toolagent,random-1,"KV occupancy, whole run","Active, sampled peak",% of capacity,100.0,0.0,percentage points
+mooncake-toolagent,random-2,"KV occupancy, whole run","Active, sampled peak",% of capacity,100.0,0.0,percentage points
+mooncake-toolagent,lru,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,32.42208514567964,0.0,percentage points
+mooncake-toolagent,fifo,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,32.540296567958165,0.11821142227852732,percentage points
+mooncake-toolagent,mru,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,32.4700566198297,0.04797147415006009,percentage points
+mooncake-toolagent,lfu,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,32.59344599417763,0.17136084849799005,percentage points
+mooncake-toolagent,slru,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,32.60237620337614,0.18029105769650045,percentage points
+mooncake-toolagent,random-0,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,32.43255541922408,0.010470273544441966,percentage points
+mooncake-toolagent,random-1,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,32.41656993473409,-0.0055152109455463005,percentage points
+mooncake-toolagent,random-2,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,32.42779361084112,0.005708465161482934,percentage points
+mooncake-toolagent,lru,"KV occupancy, whole run",Time with active at 100% of capacity,% of time,3.0433913339730436,0.0,percentage points
+mooncake-toolagent,fifo,"KV occupancy, whole run",Time with active at 100% of capacity,% of time,3.051930859046562,0.008539525073518295,percentage points
+mooncake-toolagent,mru,"KV occupancy, whole run",Time with active at 100% of capacity,% of time,3.0660719206813165,0.022680586708272887,percentage points
+mooncake-toolagent,lfu,"KV occupancy, whole run",Time with active at 100% of capacity,% of time,3.0670333209170195,0.0236419869439759,percentage points
+mooncake-toolagent,slru,"KV occupancy, whole run",Time with active at 100% of capacity,% of time,3.085207809748191,0.04181647577514758,percentage points
+mooncake-toolagent,random-0,"KV occupancy, whole run",Time with active at 100% of capacity,% of time,3.0315500877589123,-0.011841246214131296,percentage points
+mooncake-toolagent,random-1,"KV occupancy, whole run",Time with active at 100% of capacity,% of time,3.049943248719713,0.006551914746669496,percentage points
+mooncake-toolagent,random-2,"KV occupancy, whole run",Time with active at 100% of capacity,% of time,3.053030721449203,0.009639387476159555,percentage points
+mooncake-toolagent,lru,"KV occupancy, whole run","Inactive (reclaimable), mean",% of capacity,14.244880330753851,0.0,percentage points
+mooncake-toolagent,fifo,"KV occupancy, whole run","Inactive (reclaimable), mean",% of capacity,14.225931094816307,-0.018949235937544273,percentage points
+mooncake-toolagent,mru,"KV occupancy, whole run","Inactive (reclaimable), mean",% of capacity,14.245370091049885,0.0004897602960340919,percentage points
+mooncake-toolagent,lfu,"KV occupancy, whole run","Inactive (reclaimable), mean",% of capacity,14.212910530361853,-0.03196980039199815,percentage points
+mooncake-toolagent,slru,"KV occupancy, whole run","Inactive (reclaimable), mean",% of capacity,14.217921402403016,-0.02695892835083491,percentage points
+mooncake-toolagent,random-0,"KV occupancy, whole run","Inactive (reclaimable), mean",% of capacity,14.2321662514446,-0.012714079309251503,percentage points
+mooncake-toolagent,random-1,"KV occupancy, whole run","Inactive (reclaimable), mean",% of capacity,14.236651318393367,-0.008229012360484234,percentage points
+mooncake-toolagent,random-2,"KV occupancy, whole run","Inactive (reclaimable), mean",% of capacity,14.229207829210111,-0.015672501543740225,percentage points
+mooncake-toolagent,lru,"KV occupancy, whole run","Free, mean",% of capacity,0.48914086912822335,0.0,percentage points
+mooncake-toolagent,fifo,"KV occupancy, whole run","Free, mean",% of capacity,0.4875389024717461,-0.0016019666564772717,percentage points
+mooncake-toolagent,mru,"KV occupancy, whole run","Free, mean",% of capacity,0.48529889109529156,-0.003841978032931792,percentage points
+mooncake-toolagent,lfu,"KV occupancy, whole run","Free, mean",% of capacity,0.4940719419196389,0.004931072791415525,percentage points
+mooncake-toolagent,slru,"KV occupancy, whole run","Free, mean",% of capacity,0.4938291168245162,0.0046882476962928354,percentage points
+mooncake-toolagent,random-0,"KV occupancy, whole run","Free, mean",% of capacity,0.48540583275318605,-0.003735036375037304,percentage points
+mooncake-toolagent,random-1,"KV occupancy, whole run","Free, mean",% of capacity,0.4856984404621752,-0.0034424286660481584,percentage points
+mooncake-toolagent,random-2,"KV occupancy, whole run","Free, mean",% of capacity,0.48477145597856586,-0.004369413149657497,percentage points
+mooncake-toolagent,lru,"KV occupancy, request-active intervals","Physical, mean",% of capacity,99.51085913087178,0.0,percentage points
+mooncake-toolagent,fifo,"KV occupancy, request-active intervals","Physical, mean",% of capacity,99.51246109752826,0.0016019666564801582,percentage points
+mooncake-toolagent,mru,"KV occupancy, request-active intervals","Physical, mean",% of capacity,99.51470110890472,0.0038419780329377318,percentage points
+mooncake-toolagent,lfu,"KV occupancy, request-active intervals","Physical, mean",% of capacity,99.50592805808037,-0.004931072791407587,percentage points
+mooncake-toolagent,slru,"KV occupancy, request-active intervals","Physical, mean",% of capacity,99.50617088317549,-0.004688247696293502,percentage points
+mooncake-toolagent,random-0,"KV occupancy, request-active intervals","Physical, mean",% of capacity,99.51459416724681,0.0037350363750334736,percentage points
+mooncake-toolagent,random-1,"KV occupancy, request-active intervals","Physical, mean",% of capacity,99.51430155953783,0.0034424286660481584,percentage points
+mooncake-toolagent,random-2,"KV occupancy, request-active intervals","Physical, mean",% of capacity,99.51522854402143,0.004369413149646562,percentage points
+mooncake-toolagent,lru,"KV occupancy, request-active intervals","Active, mean",% of capacity,85.26597880011792,0.0,percentage points
+mooncake-toolagent,fifo,"KV occupancy, request-active intervals","Active, mean",% of capacity,85.28653000271194,0.02055120259402088,percentage points
+mooncake-toolagent,mru,"KV occupancy, request-active intervals","Active, mean",% of capacity,85.26933101785482,0.00335221773690364,percentage points
+mooncake-toolagent,lfu,"KV occupancy, request-active intervals","Active, mean",% of capacity,85.29301752771852,0.027038727600597667,percentage points
+mooncake-toolagent,slru,"KV occupancy, request-active intervals","Active, mean",% of capacity,85.28824948077246,0.022270680654543185,percentage points
+mooncake-toolagent,random-0,"KV occupancy, request-active intervals","Active, mean",% of capacity,85.2824279158022,0.016449115684281423,percentage points
+mooncake-toolagent,random-1,"KV occupancy, request-active intervals","Active, mean",% of capacity,85.27765024114447,0.011671441026550156,percentage points
+mooncake-toolagent,random-2,"KV occupancy, request-active intervals","Active, mean",% of capacity,85.28602071481133,0.020041914693408103,percentage points
+mooncake-toolagent,lru,"KV occupancy, request-active intervals",Time with active ≥ 95% of capacity,% of time,32.42208514567964,0.0,percentage points
+mooncake-toolagent,fifo,"KV occupancy, request-active intervals",Time with active ≥ 95% of capacity,% of time,32.540296567958165,0.11821142227852732,percentage points
+mooncake-toolagent,mru,"KV occupancy, request-active intervals",Time with active ≥ 95% of capacity,% of time,32.4700566198297,0.04797147415006009,percentage points
+mooncake-toolagent,lfu,"KV occupancy, request-active intervals",Time with active ≥ 95% of capacity,% of time,32.59344599417763,0.17136084849799005,percentage points
+mooncake-toolagent,slru,"KV occupancy, request-active intervals",Time with active ≥ 95% of capacity,% of time,32.60237620337614,0.18029105769650045,percentage points
+mooncake-toolagent,random-0,"KV occupancy, request-active intervals",Time with active ≥ 95% of capacity,% of time,32.43255541922408,0.010470273544441966,percentage points
+mooncake-toolagent,random-1,"KV occupancy, request-active intervals",Time with active ≥ 95% of capacity,% of time,32.41656993473409,-0.0055152109455463005,percentage points
+mooncake-toolagent,random-2,"KV occupancy, request-active intervals",Time with active ≥ 95% of capacity,% of time,32.42779361084112,0.005708465161482934,percentage points
+mooncake-toolagent,lru,Pressure and completion,Preemptions,events,372,0.0,relative %
+mooncake-toolagent,fifo,Pressure and completion,Preemptions,events,378,1.6129032258064502,relative %
+mooncake-toolagent,mru,Pressure and completion,Preemptions,events,381,2.4193548387096753,relative %
+mooncake-toolagent,lfu,Pressure and completion,Preemptions,events,381,2.4193548387096753,relative %
+mooncake-toolagent,slru,Pressure and completion,Preemptions,events,379,1.8817204301075252,relative %
+mooncake-toolagent,random-0,Pressure and completion,Preemptions,events,384,3.2258064516129004,relative %
+mooncake-toolagent,random-1,Pressure and completion,Preemptions,events,386,3.7634408602150504,relative %
+mooncake-toolagent,random-2,Pressure and completion,Preemptions,events,382,2.6881720430107503,relative %
+mooncake-toolagent,lru,Pressure and completion,"Waiting queue, time-weighted mean",requests,10079.2024244287,0.0,relative %
+mooncake-toolagent,fifo,Pressure and completion,"Waiting queue, time-weighted mean",requests,10078.426421368087,-0.007699052245768723,relative %
+mooncake-toolagent,mru,Pressure and completion,"Waiting queue, time-weighted mean",requests,10081.681365282386,0.02459461323722767,relative %
+mooncake-toolagent,lfu,Pressure and completion,"Waiting queue, time-weighted mean",requests,10067.382251438612,-0.11727290010010716,relative %
+mooncake-toolagent,slru,Pressure and completion,"Waiting queue, time-weighted mean",requests,10067.97141727447,-0.1114275384231811,relative %
+mooncake-toolagent,random-0,Pressure and completion,"Waiting queue, time-weighted mean",requests,10085.531896105842,0.06279734656187141,relative %
+mooncake-toolagent,random-1,Pressure and completion,"Waiting queue, time-weighted mean",requests,10084.783239696337,0.05536961192593726,relative %
+mooncake-toolagent,random-2,Pressure and completion,"Waiting queue, time-weighted mean",requests,10084.425093656326,0.05181629466004534,relative %
+mooncake-toolagent,lru,Pressure and completion,"Waiting queue, time-weighted p95",requests,18925,0.0,relative %
+mooncake-toolagent,fifo,Pressure and completion,"Waiting queue, time-weighted p95",requests,18925,0.0,relative %
+mooncake-toolagent,mru,Pressure and completion,"Waiting queue, time-weighted p95",requests,18926,0.005284015852047297,relative %
+mooncake-toolagent,lfu,Pressure and completion,"Waiting queue, time-weighted p95",requests,18899,-0.13738441215324082,relative %
+mooncake-toolagent,slru,Pressure and completion,"Waiting queue, time-weighted p95",requests,18902,-0.12153236459709893,relative %
+mooncake-toolagent,random-0,Pressure and completion,"Waiting queue, time-weighted p95",requests,18931,0.03170409511228378,relative %
+mooncake-toolagent,random-1,Pressure and completion,"Waiting queue, time-weighted p95",requests,18931,0.03170409511228378,relative %
+mooncake-toolagent,random-2,Pressure and completion,"Waiting queue, time-weighted p95",requests,18930,0.026420079260236484,relative %
+mooncake-toolagent,lru,Pressure and completion,"Waiting queue, sampled peak",requests,19876,0.0,relative %
+mooncake-toolagent,fifo,Pressure and completion,"Waiting queue, sampled peak",requests,19876,0.0,relative %
+mooncake-toolagent,mru,Pressure and completion,"Waiting queue, sampled peak",requests,19878,0.010062386798148637,relative %
+mooncake-toolagent,lfu,Pressure and completion,"Waiting queue, sampled peak",requests,19847,-0.14590460857315524,relative %
+mooncake-toolagent,slru,Pressure and completion,"Waiting queue, sampled peak",requests,19851,-0.12577983497685796,relative %
+mooncake-toolagent,random-0,Pressure and completion,"Waiting queue, sampled peak",requests,19880,0.020124773596297274,relative %
+mooncake-toolagent,random-1,Pressure and completion,"Waiting queue, sampled peak",requests,19880,0.020124773596297274,relative %
+mooncake-toolagent,random-2,Pressure and completion,"Waiting queue, sampled peak",requests,19879,0.015093580197222956,relative %
+mooncake-toolagent,lru,Pressure and completion,Completed requests,requests,23608,0.0,relative %
+mooncake-toolagent,fifo,Pressure and completion,Completed requests,requests,23608,0.0,relative %
+mooncake-toolagent,mru,Pressure and completion,Completed requests,requests,23608,0.0,relative %
+mooncake-toolagent,lfu,Pressure and completion,Completed requests,requests,23608,0.0,relative %
+mooncake-toolagent,slru,Pressure and completion,Completed requests,requests,23608,0.0,relative %
+mooncake-toolagent,random-0,Pressure and completion,Completed requests,requests,23608,0.0,relative %
+mooncake-toolagent,random-1,Pressure and completion,Completed requests,requests,23608,0.0,relative %
+mooncake-toolagent,random-2,Pressure and completion,Completed requests,requests,23608,0.0,relative %
+mooncake-toolagent,lru,Pressure and completion,Failed or unfinished requests,requests,0,0.0,relative %
+mooncake-toolagent,fifo,Pressure and completion,Failed or unfinished requests,requests,0,0.0,relative %
+mooncake-toolagent,mru,Pressure and completion,Failed or unfinished requests,requests,0,0.0,relative %
+mooncake-toolagent,lfu,Pressure and completion,Failed or unfinished requests,requests,0,0.0,relative %
+mooncake-toolagent,slru,Pressure and completion,Failed or unfinished requests,requests,0,0.0,relative %
+mooncake-toolagent,random-0,Pressure and completion,Failed or unfinished requests,requests,0,0.0,relative %
+mooncake-toolagent,random-1,Pressure and completion,Failed or unfinished requests,requests,0,0.0,relative %
+mooncake-toolagent,random-2,Pressure and completion,Failed or unfinished requests,requests,0,0.0,relative %
+mooncake-toolagent,lru,Pressure and completion,"Observation span, first arrival to last terminal event",s,18811.251566936047,0.0,relative %
+mooncake-toolagent,fifo,Pressure and completion,"Observation span, first arrival to last terminal event",s,18827.425211707054,0.08597856827046169,relative %
+mooncake-toolagent,mru,Pressure and completion,"Observation span, first arrival to last terminal event",s,18874.31263750024,0.33523059505000674,relative %
+mooncake-toolagent,lfu,Pressure and completion,"Observation span, first arrival to last terminal event",s,18698.851300008955,-0.5975161542395968,relative %
+mooncake-toolagent,slru,Pressure and completion,"Observation span, first arrival to last terminal event",s,18705.385036838143,-0.5627830222842967,relative %
+mooncake-toolagent,random-0,Pressure and completion,"Observation span, first arrival to last terminal event",s,18884.72838735854,0.3906003816973147,relative %
+mooncake-toolagent,random-1,Pressure and completion,"Observation span, first arrival to last terminal event",s,18882.318555984537,0.37778979668423585,relative %
+mooncake-toolagent,random-2,Pressure and completion,"Observation span, first arrival to last terminal event",s,18882.875824005754,0.3807522153156384,relative %
+mooncake-toolagent,lru,Pressure and completion,Request-active span,s,18811.251566936047,0.0,relative %
+mooncake-toolagent,fifo,Pressure and completion,Request-active span,s,18827.42521170705,0.08597856827043948,relative %
+mooncake-toolagent,mru,Pressure and completion,Request-active span,s,18874.31263750024,0.33523059505000674,relative %
+mooncake-toolagent,lfu,Pressure and completion,Request-active span,s,18698.851300008955,-0.5975161542395968,relative %
+mooncake-toolagent,slru,Pressure and completion,Request-active span,s,18705.385036838143,-0.5627830222842967,relative %
+mooncake-toolagent,random-0,Pressure and completion,Request-active span,s,18884.72838735854,0.3906003816973147,relative %
+mooncake-toolagent,random-1,Pressure and completion,Request-active span,s,18882.318555984537,0.37778979668423585,relative %
+mooncake-toolagent,random-2,Pressure and completion,Request-active span,s,18882.875824005754,0.3807522153156384,relative %
+mooncake-conversation,lru,Latency,"Mean TTFT, including queueing",ms,7970401.043405944,0.0,relative %
+mooncake-conversation,fifo,Latency,"Mean TTFT, including queueing",ms,7986885.351269841,0.20681905181592075,relative %
+mooncake-conversation,mru,Latency,"Mean TTFT, including queueing",ms,7987708.532835627,0.2171470335736947,relative %
+mooncake-conversation,lfu,Latency,"Mean TTFT, including queueing",ms,7970401.043405944,0.0,relative %
+mooncake-conversation,slru,Latency,"Mean TTFT, including queueing",ms,7970401.043405944,0.0,relative %
+mooncake-conversation,random-0,Latency,"Mean TTFT, including queueing",ms,7979526.756963128,0.11449503616551837,relative %
+mooncake-conversation,random-1,Latency,"Mean TTFT, including queueing",ms,7980940.34583274,0.1322305159978887,relative %
+mooncake-conversation,random-2,Latency,"Mean TTFT, including queueing",ms,7980365.71927701,0.12502100981870434,relative %
+mooncake-conversation,lru,Latency,p95 TTFT,ms,14411612.379186563,0.0,relative %
+mooncake-conversation,fifo,Latency,p95 TTFT,ms,14443453.661612093,0.22094184597634126,relative %
+mooncake-conversation,mru,Latency,p95 TTFT,ms,14445149.679533143,0.23271025797928502,relative %
+mooncake-conversation,lfu,Latency,p95 TTFT,ms,14411612.379186563,0.0,relative %
+mooncake-conversation,slru,Latency,p95 TTFT,ms,14411612.379186563,0.0,relative %
+mooncake-conversation,random-0,Latency,p95 TTFT,ms,14430382.835210413,0.13024535721595232,relative %
+mooncake-conversation,random-1,Latency,p95 TTFT,ms,14432276.620133668,0.14338604455492732,relative %
+mooncake-conversation,random-2,Latency,p95 TTFT,ms,14431268.345888842,0.1363897819696147,relative %
+mooncake-conversation,lru,Latency,Mean ITL over individual token gaps,ms/gap,38.34757371359003,0.0,relative %
+mooncake-conversation,fifo,Latency,Mean ITL over individual token gaps,ms/gap,38.4210334287158,0.19156287611421519,relative %
+mooncake-conversation,mru,Latency,Mean ITL over individual token gaps,ms/gap,38.42388890303389,0.19900917334130241,relative %
+mooncake-conversation,lfu,Latency,Mean ITL over individual token gaps,ms/gap,38.34757371359003,0.0,relative %
+mooncake-conversation,slru,Latency,Mean ITL over individual token gaps,ms/gap,38.34757371359003,0.0,relative %
+mooncake-conversation,random-0,Latency,Mean ITL over individual token gaps,ms/gap,38.389524492921645,0.10939617626120057,relative %
+mooncake-conversation,random-1,Latency,Mean ITL over individual token gaps,ms/gap,38.3917982906874,0.11532561988842893,relative %
+mooncake-conversation,random-2,Latency,Mean ITL over individual token gaps,ms/gap,38.389111214140456,0.10831845806116291,relative %
+mooncake-conversation,lru,Latency,p95 ITL over individual token gaps,ms/gap,111.66456100344658,0.0,relative %
+mooncake-conversation,fifo,Latency,p95 ITL over individual token gaps,ms/gap,112.1794409994036,0.461095258271893,relative %
+mooncake-conversation,mru,Latency,p95 ITL over individual token gaps,ms/gap,112.18629700131714,0.4672350772546796,relative %
+mooncake-conversation,lfu,Latency,p95 ITL over individual token gaps,ms/gap,111.66456100344658,0.0,relative %
+mooncake-conversation,slru,Latency,p95 ITL over individual token gaps,ms/gap,111.66456100344658,0.0,relative %
+mooncake-conversation,random-0,Latency,p95 ITL over individual token gaps,ms/gap,111.89926499966532,0.21018664660445996,relative %
+mooncake-conversation,random-1,Latency,p95 ITL over individual token gaps,ms/gap,111.9482789998874,0.25408060882634587,relative %
+mooncake-conversation,random-2,Latency,p95 ITL over individual token gaps,ms/gap,111.87694099918008,0.19019462739564563,relative %
+mooncake-conversation,lru,SLO,SLO goodput,passing requests/s,5.3734780857804744e-05,0.0,relative %
+mooncake-conversation,fifo,SLO,SLO goodput,passing requests/s,5.363974138922311e-05,-0.17686769549341008,relative %
+mooncake-conversation,mru,SLO,SLO goodput,passing requests/s,5.363486201328815e-05,-0.18594817531870644,relative %
+mooncake-conversation,lfu,SLO,SLO goodput,passing requests/s,5.3734780857804744e-05,0.0,relative %
+mooncake-conversation,slru,SLO,SLO goodput,passing requests/s,5.3734780857804744e-05,0.0,relative %
+mooncake-conversation,random-0,SLO,SLO goodput,passing requests/s,5.368023821417884e-05,-0.10150342618915342,relative %
+mooncake-conversation,random-1,SLO,SLO goodput,passing requests/s,5.367481345467914e-05,-0.11159886049277867,relative %
+mooncake-conversation,random-2,SLO,SLO goodput,passing requests/s,5.367751687451906e-05,-0.10656781766212875,relative %
+mooncake-conversation,lru,SLO,SLO passes,requests,1,0.0,relative %
+mooncake-conversation,fifo,SLO,SLO passes,requests,1,0.0,relative %
+mooncake-conversation,mru,SLO,SLO passes,requests,1,0.0,relative %
+mooncake-conversation,lfu,SLO,SLO passes,requests,1,0.0,relative %
+mooncake-conversation,slru,SLO,SLO passes,requests,1,0.0,relative %
+mooncake-conversation,random-0,SLO,SLO passes,requests,1,0.0,relative %
+mooncake-conversation,random-1,SLO,SLO passes,requests,1,0.0,relative %
+mooncake-conversation,random-2,SLO,SLO passes,requests,1,0.0,relative %
+mooncake-conversation,lru,SLO,SLO-eligible requests (positive output),requests,12031,0.0,relative %
+mooncake-conversation,fifo,SLO,SLO-eligible requests (positive output),requests,12031,0.0,relative %
+mooncake-conversation,mru,SLO,SLO-eligible requests (positive output),requests,12031,0.0,relative %
+mooncake-conversation,lfu,SLO,SLO-eligible requests (positive output),requests,12031,0.0,relative %
+mooncake-conversation,slru,SLO,SLO-eligible requests (positive output),requests,12031,0.0,relative %
+mooncake-conversation,random-0,SLO,SLO-eligible requests (positive output),requests,12031,0.0,relative %
+mooncake-conversation,random-1,SLO,SLO-eligible requests (positive output),requests,12031,0.0,relative %
+mooncake-conversation,random-2,SLO,SLO-eligible requests (positive output),requests,12031,0.0,relative %
+mooncake-conversation,lru,SLO,Zero-output requests (not SLO-eligible),requests,0,0.0,relative %
+mooncake-conversation,fifo,SLO,Zero-output requests (not SLO-eligible),requests,0,0.0,relative %
+mooncake-conversation,mru,SLO,Zero-output requests (not SLO-eligible),requests,0,0.0,relative %
+mooncake-conversation,lfu,SLO,Zero-output requests (not SLO-eligible),requests,0,0.0,relative %
+mooncake-conversation,slru,SLO,Zero-output requests (not SLO-eligible),requests,0,0.0,relative %
+mooncake-conversation,random-0,SLO,Zero-output requests (not SLO-eligible),requests,0,0.0,relative %
+mooncake-conversation,random-1,SLO,Zero-output requests (not SLO-eligible),requests,0,0.0,relative %
+mooncake-conversation,random-2,SLO,Zero-output requests (not SLO-eligible),requests,0,0.0,relative %
+mooncake-conversation,lru,SLO,SLO attainment,% of eligible,0.00831186102568365,0.0,percentage points
+mooncake-conversation,fifo,SLO,SLO attainment,% of eligible,0.00831186102568365,0.0,percentage points
+mooncake-conversation,mru,SLO,SLO attainment,% of eligible,0.00831186102568365,0.0,percentage points
+mooncake-conversation,lfu,SLO,SLO attainment,% of eligible,0.00831186102568365,0.0,percentage points
+mooncake-conversation,slru,SLO,SLO attainment,% of eligible,0.00831186102568365,0.0,percentage points
+mooncake-conversation,random-0,SLO,SLO attainment,% of eligible,0.00831186102568365,0.0,percentage points
+mooncake-conversation,random-1,SLO,SLO attainment,% of eligible,0.00831186102568365,0.0,percentage points
+mooncake-conversation,random-2,SLO,SLO attainment,% of eligible,0.00831186102568365,0.0,percentage points
+mooncake-conversation,lru,Cache effectiveness,Input-token hit rate (first admission),%,4.270856222920504,0.0,percentage points
+mooncake-conversation,fifo,Cache effectiveness,Input-token hit rate (first admission),%,4.270856222920504,0.0,percentage points
+mooncake-conversation,mru,Cache effectiveness,Input-token hit rate (first admission),%,4.253883123177154,-0.016973099743349707,percentage points
+mooncake-conversation,lfu,Cache effectiveness,Input-token hit rate (first admission),%,4.270856222920504,0.0,percentage points
+mooncake-conversation,slru,Cache effectiveness,Input-token hit rate (first admission),%,4.270856222920504,0.0,percentage points
+mooncake-conversation,random-0,Cache effectiveness,Input-token hit rate (first admission),%,4.255297548155767,-0.015558674764736935,percentage points
+mooncake-conversation,random-1,Cache effectiveness,Input-token hit rate (first admission),%,4.254236729421807,-0.016619493498696514,percentage points
+mooncake-conversation,random-2,Cache effectiveness,Input-token hit rate (first admission),%,4.254236729421807,-0.016619493498696514,percentage points
+mooncake-conversation,lru,Cache effectiveness,Recomputed input tokens (incl. repeated prefill),tokens,138801709,0.0,relative %
+mooncake-conversation,fifo,Cache effectiveness,Recomputed input tokens (incl. repeated prefill),tokens,140285755,1.069184241816501,relative %
+mooncake-conversation,mru,Cache effectiveness,Recomputed input tokens (incl. repeated prefill),tokens,140362065,1.1241619510607093,relative %
+mooncake-conversation,lfu,Cache effectiveness,Recomputed input tokens (incl. repeated prefill),tokens,138801709,0.0,relative %
+mooncake-conversation,slru,Cache effectiveness,Recomputed input tokens (incl. repeated prefill),tokens,138801709,0.0,relative %
+mooncake-conversation,random-0,Cache effectiveness,Recomputed input tokens (incl. repeated prefill),tokens,139651090,0.6119384308157283,relative %
+mooncake-conversation,random-1,Cache effectiveness,Recomputed input tokens (incl. repeated prefill),tokens,139747241,0.6812106326443024,relative %
+mooncake-conversation,random-2,Cache effectiveness,Recomputed input tokens (incl. repeated prefill),tokens,139698831,0.6463335404609527,relative %
+mooncake-conversation,lru,Cache effectiveness,Evicted blocks,512-token blocks,272671,0.0,relative %
+mooncake-conversation,fifo,Cache effectiveness,Evicted blocks,512-token blocks,275568,1.062452552710047,relative %
+mooncake-conversation,mru,Cache effectiveness,Evicted blocks,512-token blocks,275717,1.1170971610475533,relative %
+mooncake-conversation,lfu,Cache effectiveness,Evicted blocks,512-token blocks,272671,0.0,relative %
+mooncake-conversation,slru,Cache effectiveness,Evicted blocks,512-token blocks,272671,0.0,relative %
+mooncake-conversation,random-0,Cache effectiveness,Evicted blocks,512-token blocks,274330,0.6084255384694481,relative %
+mooncake-conversation,random-1,Cache effectiveness,Evicted blocks,512-token blocks,274516,0.6766396133068842,relative %
+mooncake-conversation,random-2,Cache effectiveness,Evicted blocks,512-token blocks,274422,0.6421658335503233,relative %
+mooncake-conversation,lru,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.71812867569237,0.0,percentage points
+mooncake-conversation,fifo,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.71939173226919,0.0012630565768176893,percentage points
+mooncake-conversation,mru,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.71958754605171,0.0014588703593432228,percentage points
+mooncake-conversation,lfu,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.71812867569237,0.0,percentage points
+mooncake-conversation,slru,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.71812867569237,0.0,percentage points
+mooncake-conversation,random-0,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.71828347154305,0.00015479585067623702,percentage points
+mooncake-conversation,random-1,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.71853671813764,0.0004080424452723719,percentage points
+mooncake-conversation,random-2,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.71911107032211,0.0009823946297444763,percentage points
+mooncake-conversation,lru,"KV occupancy, whole run","Physical, time-weighted p95",% of capacity,100.0,0.0,percentage points
+mooncake-conversation,fifo,"KV occupancy, whole run","Physical, time-weighted p95",% of capacity,100.0,0.0,percentage points
+mooncake-conversation,mru,"KV occupancy, whole run","Physical, time-weighted p95",% of capacity,100.0,0.0,percentage points
+mooncake-conversation,lfu,"KV occupancy, whole run","Physical, time-weighted p95",% of capacity,100.0,0.0,percentage points
+mooncake-conversation,slru,"KV occupancy, whole run","Physical, time-weighted p95",% of capacity,100.0,0.0,percentage points
+mooncake-conversation,random-0,"KV occupancy, whole run","Physical, time-weighted p95",% of capacity,100.0,0.0,percentage points
+mooncake-conversation,random-1,"KV occupancy, whole run","Physical, time-weighted p95",% of capacity,100.0,0.0,percentage points
+mooncake-conversation,random-2,"KV occupancy, whole run","Physical, time-weighted p95",% of capacity,100.0,0.0,percentage points
+mooncake-conversation,lru,"KV occupancy, whole run","Physical, sampled peak",% of capacity,100.0,0.0,percentage points
+mooncake-conversation,fifo,"KV occupancy, whole run","Physical, sampled peak",% of capacity,100.0,0.0,percentage points
+mooncake-conversation,mru,"KV occupancy, whole run","Physical, sampled peak",% of capacity,100.0,0.0,percentage points
+mooncake-conversation,lfu,"KV occupancy, whole run","Physical, sampled peak",% of capacity,100.0,0.0,percentage points
+mooncake-conversation,slru,"KV occupancy, whole run","Physical, sampled peak",% of capacity,100.0,0.0,percentage points
+mooncake-conversation,random-0,"KV occupancy, whole run","Physical, sampled peak",% of capacity,100.0,0.0,percentage points
+mooncake-conversation,random-1,"KV occupancy, whole run","Physical, sampled peak",% of capacity,100.0,0.0,percentage points
+mooncake-conversation,random-2,"KV occupancy, whole run","Physical, sampled peak",% of capacity,100.0,0.0,percentage points
+mooncake-conversation,lru,"KV occupancy, whole run",Time with physical ≥ 95% of capacity,% of time,99.95163869722798,0.0,percentage points
+mooncake-conversation,fifo,"KV occupancy, whole run",Time with physical ≥ 95% of capacity,% of time,99.9517242327497,8.553552171974843e-05,percentage points
+mooncake-conversation,mru,"KV occupancy, whole run",Time with physical ≥ 95% of capacity,% of time,99.95172862418804,8.992696005805101e-05,percentage points
+mooncake-conversation,lfu,"KV occupancy, whole run",Time with physical ≥ 95% of capacity,% of time,99.95163869722798,0.0,percentage points
+mooncake-conversation,slru,"KV occupancy, whole run",Time with physical ≥ 95% of capacity,% of time,99.95163869722798,0.0,percentage points
+mooncake-conversation,random-0,"KV occupancy, whole run",Time with physical ≥ 95% of capacity,% of time,99.95168778560723,4.908837925654552e-05,percentage points
+mooncake-conversation,random-1,"KV occupancy, whole run",Time with physical ≥ 95% of capacity,% of time,99.9516926678908,5.397066281886964e-05,percentage points
+mooncake-conversation,random-2,"KV occupancy, whole run",Time with physical ≥ 95% of capacity,% of time,99.95169023481293,5.1537584951688586e-05,percentage points
+mooncake-conversation,lru,"KV occupancy, whole run",Time with physical at 100% of capacity,% of time,63.01155342509615,0.0,percentage points
+mooncake-conversation,fifo,"KV occupancy, whole run",Time with physical at 100% of capacity,% of time,63.076581091829134,0.06502766673298055,percentage points
+mooncake-conversation,mru,"KV occupancy, whole run",Time with physical at 100% of capacity,% of time,63.07084328728594,0.059289862189785936,percentage points
+mooncake-conversation,lfu,"KV occupancy, whole run",Time with physical at 100% of capacity,% of time,63.01155342509615,0.0,percentage points
+mooncake-conversation,slru,"KV occupancy, whole run",Time with physical at 100% of capacity,% of time,63.01155342509615,0.0,percentage points
+mooncake-conversation,random-0,"KV occupancy, whole run",Time with physical at 100% of capacity,% of time,63.00717960389242,-0.004373821203735417,percentage points
+mooncake-conversation,random-1,"KV occupancy, whole run",Time with physical at 100% of capacity,% of time,63.04106840252065,0.0295149774244976,percentage points
+mooncake-conversation,random-2,"KV occupancy, whole run",Time with physical at 100% of capacity,% of time,63.03458161608523,0.023028190989073494,percentage points
+mooncake-conversation,lru,"KV occupancy, whole run","Active (referenced or reserved), mean",% of capacity,83.53223991212535,0.0,percentage points
+mooncake-conversation,fifo,"KV occupancy, whole run","Active (referenced or reserved), mean",% of capacity,83.52091463570576,-0.011325276419583474,percentage points
+mooncake-conversation,mru,"KV occupancy, whole run","Active (referenced or reserved), mean",% of capacity,83.5188740210051,-0.013365891120244555,percentage points
+mooncake-conversation,lfu,"KV occupancy, whole run","Active (referenced or reserved), mean",% of capacity,83.53223991212535,0.0,percentage points
+mooncake-conversation,slru,"KV occupancy, whole run","Active (referenced or reserved), mean",% of capacity,83.53223991212535,0.0,percentage points
+mooncake-conversation,random-0,"KV occupancy, whole run","Active (referenced or reserved), mean",% of capacity,83.52590200986093,-0.006337902264419881,percentage points
+mooncake-conversation,random-1,"KV occupancy, whole run","Active (referenced or reserved), mean",% of capacity,83.52540073511832,-0.0068391770070235225,percentage points
+mooncake-conversation,random-2,"KV occupancy, whole run","Active (referenced or reserved), mean",% of capacity,83.52873097834035,-0.0035089337849996127,percentage points
+mooncake-conversation,lru,"KV occupancy, whole run","Active, time-weighted p95",% of capacity,99.609375,0.0,percentage points
+mooncake-conversation,fifo,"KV occupancy, whole run","Active, time-weighted p95",% of capacity,99.609375,0.0,percentage points
+mooncake-conversation,mru,"KV occupancy, whole run","Active, time-weighted p95",% of capacity,99.609375,0.0,percentage points
+mooncake-conversation,lfu,"KV occupancy, whole run","Active, time-weighted p95",% of capacity,99.609375,0.0,percentage points
+mooncake-conversation,slru,"KV occupancy, whole run","Active, time-weighted p95",% of capacity,99.609375,0.0,percentage points
+mooncake-conversation,random-0,"KV occupancy, whole run","Active, time-weighted p95",% of capacity,99.609375,0.0,percentage points
+mooncake-conversation,random-1,"KV occupancy, whole run","Active, time-weighted p95",% of capacity,99.609375,0.0,percentage points
+mooncake-conversation,random-2,"KV occupancy, whole run","Active, time-weighted p95",% of capacity,99.609375,0.0,percentage points
+mooncake-conversation,lru,"KV occupancy, whole run","Active, sampled peak",% of capacity,100.0,0.0,percentage points
+mooncake-conversation,fifo,"KV occupancy, whole run","Active, sampled peak",% of capacity,100.0,0.0,percentage points
+mooncake-conversation,mru,"KV occupancy, whole run","Active, sampled peak",% of capacity,100.0,0.0,percentage points
+mooncake-conversation,lfu,"KV occupancy, whole run","Active, sampled peak",% of capacity,100.0,0.0,percentage points
+mooncake-conversation,slru,"KV occupancy, whole run","Active, sampled peak",% of capacity,100.0,0.0,percentage points
+mooncake-conversation,random-0,"KV occupancy, whole run","Active, sampled peak",% of capacity,100.0,0.0,percentage points
+mooncake-conversation,random-1,"KV occupancy, whole run","Active, sampled peak",% of capacity,100.0,0.0,percentage points
+mooncake-conversation,random-2,"KV occupancy, whole run","Active, sampled peak",% of capacity,100.0,0.0,percentage points
+mooncake-conversation,lru,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,27.636335142977558,0.0,percentage points
+mooncake-conversation,fifo,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,27.54239801112439,-0.09393713185316699,percentage points
+mooncake-conversation,mru,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,27.531847368661072,-0.10448777431648537,percentage points
+mooncake-conversation,lfu,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,27.636335142977558,0.0,percentage points
+mooncake-conversation,slru,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,27.636335142977558,0.0,percentage points
+mooncake-conversation,random-0,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,27.592179244470067,-0.044155898507490576,percentage points
+mooncake-conversation,random-1,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,27.594221597050545,-0.04211354592701255,percentage points
+mooncake-conversation,random-2,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,27.599368851371466,-0.03696629160609177,percentage points
+mooncake-conversation,lru,"KV occupancy, whole run",Time with active at 100% of capacity,% of time,3.0886752037066167,0.0,percentage points
+mooncake-conversation,fifo,"KV occupancy, whole run",Time with active at 100% of capacity,% of time,3.075166373844161,-0.01350882986245594,percentage points
+mooncake-conversation,mru,"KV occupancy, whole run",Time with active at 100% of capacity,% of time,3.0668414099198165,-0.021833793786800282,percentage points
+mooncake-conversation,lfu,"KV occupancy, whole run",Time with active at 100% of capacity,% of time,3.0886752037066167,0.0,percentage points
+mooncake-conversation,slru,"KV occupancy, whole run",Time with active at 100% of capacity,% of time,3.0886752037066167,0.0,percentage points
+mooncake-conversation,random-0,"KV occupancy, whole run",Time with active at 100% of capacity,% of time,3.0790984639652983,-0.009576739741318452,percentage points
+mooncake-conversation,random-1,"KV occupancy, whole run",Time with active at 100% of capacity,% of time,3.076640307222208,-0.012034896484408808,percentage points
+mooncake-conversation,random-2,"KV occupancy, whole run",Time with active at 100% of capacity,% of time,3.077332042416178,-0.011343161290438886,percentage points
+mooncake-conversation,lru,"KV occupancy, whole run","Inactive (reclaimable), mean",% of capacity,16.185888763567032,0.0,percentage points
+mooncake-conversation,fifo,"KV occupancy, whole run","Inactive (reclaimable), mean",% of capacity,16.198477096563426,0.012588332996394058,percentage points
+mooncake-conversation,mru,"KV occupancy, whole run","Inactive (reclaimable), mean",% of capacity,16.200713525046616,0.014824761479584225,percentage points
+mooncake-conversation,lfu,"KV occupancy, whole run","Inactive (reclaimable), mean",% of capacity,16.185888763567032,0.0,percentage points
+mooncake-conversation,slru,"KV occupancy, whole run","Inactive (reclaimable), mean",% of capacity,16.185888763567032,0.0,percentage points
+mooncake-conversation,random-0,"KV occupancy, whole run","Inactive (reclaimable), mean",% of capacity,16.192381461682125,0.0064926981150925656,percentage points
+mooncake-conversation,random-1,"KV occupancy, whole run","Inactive (reclaimable), mean",% of capacity,16.193135983019296,0.00724721945226392,percentage points
+mooncake-conversation,random-2,"KV occupancy, whole run","Inactive (reclaimable), mean",% of capacity,16.190380091981766,0.004491328414733431,percentage points
+mooncake-conversation,lru,"KV occupancy, whole run","Free, mean",% of capacity,0.2818713243076146,0.0,percentage points
+mooncake-conversation,fifo,"KV occupancy, whole run","Free, mean",% of capacity,0.2806082677308047,-0.0012630565768098623,percentage points
+mooncake-conversation,mru,"KV occupancy, whole run","Free, mean",% of capacity,0.28041245394827563,-0.0014588703593389485,percentage points
+mooncake-conversation,lfu,"KV occupancy, whole run","Free, mean",% of capacity,0.2818713243076146,0.0,percentage points
+mooncake-conversation,slru,"KV occupancy, whole run","Free, mean",% of capacity,0.2818713243076146,0.0,percentage points
+mooncake-conversation,random-0,"KV occupancy, whole run","Free, mean",% of capacity,0.28171652845694783,-0.00015479585066674462,percentage points
+mooncake-conversation,random-1,"KV occupancy, whole run","Free, mean",% of capacity,0.2814632818623709,-0.0004080424452436726,percentage points
+mooncake-conversation,random-2,"KV occupancy, whole run","Free, mean",% of capacity,0.2808889296778909,-0.0009823946297236597,percentage points
+mooncake-conversation,lru,"KV occupancy, request-active intervals","Physical, mean",% of capacity,99.71812867569237,0.0,percentage points
+mooncake-conversation,fifo,"KV occupancy, request-active intervals","Physical, mean",% of capacity,99.71939173226919,0.0012630565768176893,percentage points
+mooncake-conversation,mru,"KV occupancy, request-active intervals","Physical, mean",% of capacity,99.71958754605171,0.0014588703593432228,percentage points
+mooncake-conversation,lfu,"KV occupancy, request-active intervals","Physical, mean",% of capacity,99.71812867569237,0.0,percentage points
+mooncake-conversation,slru,"KV occupancy, request-active intervals","Physical, mean",% of capacity,99.71812867569237,0.0,percentage points
+mooncake-conversation,random-0,"KV occupancy, request-active intervals","Physical, mean",% of capacity,99.71828347154305,0.00015479585067623702,percentage points
+mooncake-conversation,random-1,"KV occupancy, request-active intervals","Physical, mean",% of capacity,99.71853671813764,0.0004080424452723719,percentage points
+mooncake-conversation,random-2,"KV occupancy, request-active intervals","Physical, mean",% of capacity,99.71911107032211,0.0009823946297444763,percentage points
+mooncake-conversation,lru,"KV occupancy, request-active intervals","Active, mean",% of capacity,83.53223991212535,0.0,percentage points
+mooncake-conversation,fifo,"KV occupancy, request-active intervals","Active, mean",% of capacity,83.52091463570576,-0.011325276419583474,percentage points
+mooncake-conversation,mru,"KV occupancy, request-active intervals","Active, mean",% of capacity,83.5188740210051,-0.013365891120244555,percentage points
+mooncake-conversation,lfu,"KV occupancy, request-active intervals","Active, mean",% of capacity,83.53223991212535,0.0,percentage points
+mooncake-conversation,slru,"KV occupancy, request-active intervals","Active, mean",% of capacity,83.53223991212535,0.0,percentage points
+mooncake-conversation,random-0,"KV occupancy, request-active intervals","Active, mean",% of capacity,83.52590200986093,-0.006337902264419881,percentage points
+mooncake-conversation,random-1,"KV occupancy, request-active intervals","Active, mean",% of capacity,83.52540073511832,-0.0068391770070235225,percentage points
+mooncake-conversation,random-2,"KV occupancy, request-active intervals","Active, mean",% of capacity,83.52873097834035,-0.0035089337849996127,percentage points
+mooncake-conversation,lru,"KV occupancy, request-active intervals",Time with active ≥ 95% of capacity,% of time,27.636335142977558,0.0,percentage points
+mooncake-conversation,fifo,"KV occupancy, request-active intervals",Time with active ≥ 95% of capacity,% of time,27.54239801112439,-0.09393713185316699,percentage points
+mooncake-conversation,mru,"KV occupancy, request-active intervals",Time with active ≥ 95% of capacity,% of time,27.531847368661072,-0.10448777431648537,percentage points
+mooncake-conversation,lfu,"KV occupancy, request-active intervals",Time with active ≥ 95% of capacity,% of time,27.636335142977558,0.0,percentage points
+mooncake-conversation,slru,"KV occupancy, request-active intervals",Time with active ≥ 95% of capacity,% of time,27.636335142977558,0.0,percentage points
+mooncake-conversation,random-0,"KV occupancy, request-active intervals",Time with active ≥ 95% of capacity,% of time,27.592179244470067,-0.044155898507490576,percentage points
+mooncake-conversation,random-1,"KV occupancy, request-active intervals",Time with active ≥ 95% of capacity,% of time,27.594221597050545,-0.04211354592701255,percentage points
+mooncake-conversation,random-2,"KV occupancy, request-active intervals",Time with active ≥ 95% of capacity,% of time,27.599368851371466,-0.03696629160609177,percentage points
+mooncake-conversation,lru,Pressure and completion,Preemptions,events,330,0.0,relative %
+mooncake-conversation,fifo,Pressure and completion,Preemptions,events,333,0.9090909090909038,relative %
+mooncake-conversation,mru,Pressure and completion,Preemptions,events,333,0.9090909090909038,relative %
+mooncake-conversation,lfu,Pressure and completion,Preemptions,events,330,0.0,relative %
+mooncake-conversation,slru,Pressure and completion,Preemptions,events,330,0.0,relative %
+mooncake-conversation,random-0,Pressure and completion,Preemptions,events,330,0.0,relative %
+mooncake-conversation,random-1,Pressure and completion,Preemptions,events,332,0.60606060606061,relative %
+mooncake-conversation,random-2,Pressure and completion,Preemptions,events,331,0.3030303030302939,relative %
+mooncake-conversation,lru,Pressure and completion,"Waiting queue, time-weighted mean",requests,5152.602118074005,0.0,relative %
+mooncake-conversation,fifo,Pressure and completion,"Waiting queue, time-weighted mean",requests,5154.127317366979,0.029600564103793303,relative %
+mooncake-conversation,mru,Pressure and completion,"Waiting queue, time-weighted mean",requests,5154.189287499665,0.030803259970180186,relative %
+mooncake-conversation,lfu,Pressure and completion,"Waiting queue, time-weighted mean",requests,5152.602118074005,0.0,relative %
+mooncake-conversation,slru,Pressure and completion,"Waiting queue, time-weighted mean",requests,5152.602118074005,0.0,relative %
+mooncake-conversation,random-0,Pressure and completion,"Waiting queue, time-weighted mean",requests,5153.265754044467,0.012879627715367548,relative %
+mooncake-conversation,random-1,Pressure and completion,"Waiting queue, time-weighted mean",requests,5153.657747923378,0.020487315441464204,relative %
+mooncake-conversation,random-2,Pressure and completion,"Waiting queue, time-weighted mean",requests,5153.546156405941,0.018321584129776802,relative %
+mooncake-conversation,lru,Pressure and completion,"Waiting queue, time-weighted p95",requests,9674,0.0,relative %
+mooncake-conversation,fifo,Pressure and completion,"Waiting queue, time-weighted p95",requests,9674,0.0,relative %
+mooncake-conversation,mru,Pressure and completion,"Waiting queue, time-weighted p95",requests,9674,0.0,relative %
+mooncake-conversation,lfu,Pressure and completion,"Waiting queue, time-weighted p95",requests,9674,0.0,relative %
+mooncake-conversation,slru,Pressure and completion,"Waiting queue, time-weighted p95",requests,9674,0.0,relative %
+mooncake-conversation,random-0,Pressure and completion,"Waiting queue, time-weighted p95",requests,9674,0.0,relative %
+mooncake-conversation,random-1,Pressure and completion,"Waiting queue, time-weighted p95",requests,9674,0.0,relative %
+mooncake-conversation,random-2,Pressure and completion,"Waiting queue, time-weighted p95",requests,9674,0.0,relative %
+mooncake-conversation,lru,Pressure and completion,"Waiting queue, sampled peak",requests,10125,0.0,relative %
+mooncake-conversation,fifo,Pressure and completion,"Waiting queue, sampled peak",requests,10129,0.03950617283949853,relative %
+mooncake-conversation,mru,Pressure and completion,"Waiting queue, sampled peak",requests,10129,0.03950617283949853,relative %
+mooncake-conversation,lfu,Pressure and completion,"Waiting queue, sampled peak",requests,10125,0.0,relative %
+mooncake-conversation,slru,Pressure and completion,"Waiting queue, sampled peak",requests,10125,0.0,relative %
+mooncake-conversation,random-0,Pressure and completion,"Waiting queue, sampled peak",requests,10127,0.019753086419749266,relative %
+mooncake-conversation,random-1,Pressure and completion,"Waiting queue, sampled peak",requests,10128,0.0296296296296239,relative %
+mooncake-conversation,random-2,Pressure and completion,"Waiting queue, sampled peak",requests,10127,0.019753086419749266,relative %
+mooncake-conversation,lru,Pressure and completion,Completed requests,requests,12031,0.0,relative %
+mooncake-conversation,fifo,Pressure and completion,Completed requests,requests,12031,0.0,relative %
+mooncake-conversation,mru,Pressure and completion,Completed requests,requests,12031,0.0,relative %
+mooncake-conversation,lfu,Pressure and completion,Completed requests,requests,12031,0.0,relative %
+mooncake-conversation,slru,Pressure and completion,Completed requests,requests,12031,0.0,relative %
+mooncake-conversation,random-0,Pressure and completion,Completed requests,requests,12031,0.0,relative %
+mooncake-conversation,random-1,Pressure and completion,Completed requests,requests,12031,0.0,relative %
+mooncake-conversation,random-2,Pressure and completion,Completed requests,requests,12031,0.0,relative %
+mooncake-conversation,lru,Pressure and completion,Failed or unfinished requests,requests,0,0.0,relative %
+mooncake-conversation,fifo,Pressure and completion,Failed or unfinished requests,requests,0,0.0,relative %
+mooncake-conversation,mru,Pressure and completion,Failed or unfinished requests,requests,0,0.0,relative %
+mooncake-conversation,lfu,Pressure and completion,Failed or unfinished requests,requests,0,0.0,relative %
+mooncake-conversation,slru,Pressure and completion,Failed or unfinished requests,requests,0,0.0,relative %
+mooncake-conversation,random-0,Pressure and completion,Failed or unfinished requests,requests,0,0.0,relative %
+mooncake-conversation,random-1,Pressure and completion,Failed or unfinished requests,requests,0,0.0,relative %
+mooncake-conversation,random-2,Pressure and completion,Failed or unfinished requests,requests,0,0.0,relative %
+mooncake-conversation,lru,Pressure and completion,"Observation span, first arrival to last terminal event",s,18609.920502816276,0.0,relative %
+mooncake-conversation,fifo,Pressure and completion,"Observation span, first arrival to last terminal event",s,18642.89375938178,0.17718107157154162,relative %
+mooncake-conversation,mru,Pressure and completion,"Observation span, first arrival to last terminal event",s,18644.589777302826,0.18629458670338384,relative %
+mooncake-conversation,lfu,Pressure and completion,"Observation span, first arrival to last terminal event",s,18609.920502816276,0.0,relative %
+mooncake-conversation,slru,Pressure and completion,"Observation span, first arrival to last terminal event",s,18609.920502816276,0.0,relative %
+mooncake-conversation,random-0,Pressure and completion,"Observation span, first arrival to last terminal event",s,18628.82940291917,0.10160656032911497,relative %
+mooncake-conversation,random-1,Pressure and completion,"Observation span, first arrival to last terminal event",s,18630.712165294437,0.11172354269333162,relative %
+mooncake-conversation,random-2,Pressure and completion,"Observation span, first arrival to last terminal event",s,18629.7738462396,0.1066815058147208,relative %
+mooncake-conversation,lru,Pressure and completion,Request-active span,s,18609.920502816276,0.0,relative %
+mooncake-conversation,fifo,Pressure and completion,Request-active span,s,18642.89375938178,0.17718107157154162,relative %
+mooncake-conversation,mru,Pressure and completion,Request-active span,s,18644.589777302826,0.18629458670338384,relative %
+mooncake-conversation,lfu,Pressure and completion,Request-active span,s,18609.920502816276,0.0,relative %
+mooncake-conversation,slru,Pressure and completion,Request-active span,s,18609.920502816276,0.0,relative %
+mooncake-conversation,random-0,Pressure and completion,Request-active span,s,18628.82940291917,0.10160656032911497,relative %
+mooncake-conversation,random-1,Pressure and completion,Request-active span,s,18630.712165294433,0.11172354269333162,relative %
+mooncake-conversation,random-2,Pressure and completion,Request-active span,s,18629.7738462396,0.1066815058147208,relative %

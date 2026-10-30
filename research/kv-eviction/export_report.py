@@ -651,5 +651,18 @@ if __name__ == "__main__":
         type=Path,
         help="Require and independently reaudit every original raw run",
     )
+    parser.add_argument(
+        "--baseline-evidence",
+        type=Path,
+        help="Report audited full-trace heuristic evidence instead of agent runs; "
+        "--output is then the HTML path and a sibling CSV is written",
+    )
     args = parser.parse_args()
-    build(ROOT, args.output, args.raw_root)
+    if args.baseline_evidence:
+        from baseline_report import build as build_baselines
+
+        print(
+            json.dumps(build_baselines(args.baseline_evidence, args.output), indent=2)
+        )
+    else:
+        build(ROOT, args.output, args.raw_root)

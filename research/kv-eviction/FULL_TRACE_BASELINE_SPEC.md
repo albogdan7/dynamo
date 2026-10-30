@@ -1,6 +1,6 @@
 # Full-trace KV eviction baseline experiment
 
-Status: proposed; not yet run. Updated 2026-10-30.
+Status: implemented and run; see [FULL_TRACE_RESULTS.md](FULL_TRACE_RESULTS.md). Updated 2026-10-30.
 
 ## Question
 
@@ -114,7 +114,7 @@ reports/full-trace-baselines.csv
 
 ## Proposed reproduction commands
 
-**CLI contract to implement in PRs A–C; these commands do not work yet.** Run from the fork repository root. Requires Python, Rust/Cargo, Docker for existing policy isolation, and zstd; no Claude/Codex login or GPU. `prepare_native.py` already exists.
+**Implemented in PRs A–C.** Run from the fork repository root. Requires Python, Rust/Cargo, Docker for existing policy isolation, and zstd; no Claude/Codex login or GPU. `prepare_native.py` already exists.
 
 ```bash
 python3 research/kv-eviction/prepare_native.py

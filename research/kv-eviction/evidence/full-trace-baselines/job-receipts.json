@@ -1,0 +1,1064 @@
+{
+  "mooncake-conversation/cadence-check/fine-telemetry": {
+    "manifest": {
+      "trace": "mooncake-conversation",
+      "job": "cadence-check/fine-telemetry",
+      "workload_sha256": "9e81b386f0d8cea16d376b041d7a7e8fed5ba65b53e989444c76cef408442c2a",
+      "replay_config_sha256": "5a2a170200b70095ff19b4fd1aef4200362f2d68d5b322176092f88622cbbfb4",
+      "policy_sha256": null,
+      "policy_mode": "native-lru",
+      "slo": {
+        "ttft_ms": 1000,
+        "per_request_p95_itl_ms": 50
+      },
+      "config_sha256": "d9c51eee8531e0fda5b54a32247e0e8dbfd9c88a1c144c861bcb11aad5e4e7ed",
+      "inventory_sha256": "6324b25f963a062eb44b55249d2d2c38046fdd3e0829bccdacc8df7415fea0fa",
+      "native_binary_sha256": "e98af2853f168870ab98dfdd1491badb7fa08f9681e42d1cbe615e6c0a339c23",
+      "policy_container": "python@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258",
+      "runtime_sha256": {
+        "kv_experiment/metrics.py": "e9209a115101ed8d3b65663109ac4f65d64f97659b69f4ec100319f18aa14a0f",
+        "kv_experiment/occupancy.py": "17f51bb869284e5a9f05fbeca24e4aea90f392aa1891cb48559324f188def846",
+        "kv_experiment/policy_worker.py": "da55172af816ad7dbcb28dce84fda79bb7d80ce58d3717d3315bb4d77cb002af",
+        "kv_experiment/runtime.py": "470a71084227c0a74eac441773b4dbc7c4d353f37c5f3b0a9e3cdb09947779ec",
+        "evidence/audit_run.py": "bf7c93d3b4b418c88988ba723dd6baf773c06bfd7268a8c6c1108c3c54f21e80",
+        "native/core.patch": "b7fc46a45eb4429f6c80a685cb44bda2999b18b5278c821181917fca9c671299",
+        "native/src/main.rs": "4937269e2d3854a368edc1ba5698927a173904a0e5e77d7cebb495146fffb787",
+        "native/Cargo.lock": "36bf83c62b8ae9abadc2f7061fda783624309ba36995399d9f2a5e48584fafa6"
+      }
+    },
+    "audit": {
+      "matches": true,
+      "requests": 2000,
+      "slo_passes": 1,
+      "metrics_sha256": "a3c19996f3f5b93f77389351b2790bd369bd29db3a6904138101bbb144736e86",
+      "occupancy_audited": true
+    },
+    "raw_sha256": {
+      "requests.jsonl": "5cd58a193a5bd3b9988ade60de9492c6f2099a94ed16766307ea6d1b54ffe50a",
+      "tokens.jsonl": "10c92733b8677d0c159541c6fd89546311c88932c39e50c438c9bdc58c250225",
+      "evictions.json": "4027a7657f754d8bd1682c01c7b2d4230f79fcd74287df1ce066d102cfac2128",
+      "occupancy.jsonl": "8b2c9b588d6f000ee39cca461431dbafe3f4ed5c1c057bd6510879b39eaf7283"
+    }
+  },
+  "mooncake-conversation/cadence-check/telemetry": {
+    "manifest": {
+      "trace": "mooncake-conversation",
+      "job": "cadence-check/telemetry",
+      "workload_sha256": "9e81b386f0d8cea16d376b041d7a7e8fed5ba65b53e989444c76cef408442c2a",
+      "replay_config_sha256": "4fdc2f93b71a694cbd44d5229570f5c55767978738e065fa4cbf058763273c93",
+      "policy_sha256": null,
+      "policy_mode": "native-lru",
+      "slo": {
+        "ttft_ms": 1000,
+        "per_request_p95_itl_ms": 50
+      },
+      "config_sha256": "d9c51eee8531e0fda5b54a32247e0e8dbfd9c88a1c144c861bcb11aad5e4e7ed",
+      "inventory_sha256": "6324b25f963a062eb44b55249d2d2c38046fdd3e0829bccdacc8df7415fea0fa",
+      "native_binary_sha256": "e98af2853f168870ab98dfdd1491badb7fa08f9681e42d1cbe615e6c0a339c23",
+      "policy_container": "python@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258",
+      "runtime_sha256": {
+        "kv_experiment/metrics.py": "e9209a115101ed8d3b65663109ac4f65d64f97659b69f4ec100319f18aa14a0f",
+        "kv_experiment/occupancy.py": "17f51bb869284e5a9f05fbeca24e4aea90f392aa1891cb48559324f188def846",
+        "kv_experiment/policy_worker.py": "da55172af816ad7dbcb28dce84fda79bb7d80ce58d3717d3315bb4d77cb002af",
+        "kv_experiment/runtime.py": "470a71084227c0a74eac441773b4dbc7c4d353f37c5f3b0a9e3cdb09947779ec",
+        "evidence/audit_run.py": "bf7c93d3b4b418c88988ba723dd6baf773c06bfd7268a8c6c1108c3c54f21e80",
+        "native/core.patch": "b7fc46a45eb4429f6c80a685cb44bda2999b18b5278c821181917fca9c671299",
+        "native/src/main.rs": "4937269e2d3854a368edc1ba5698927a173904a0e5e77d7cebb495146fffb787",
+        "native/Cargo.lock": "36bf83c62b8ae9abadc2f7061fda783624309ba36995399d9f2a5e48584fafa6"
+      }
+    },
+    "audit": {
+      "matches": true,
+      "requests": 2000,
+      "slo_passes": 1,
+      "metrics_sha256": "b94bb1da56890c01415fc662715df4f72a1690725c3a86f6fb757f94aaf88760",
+      "occupancy_audited": true
+    },
+    "raw_sha256": {
+      "requests.jsonl": "5cd58a193a5bd3b9988ade60de9492c6f2099a94ed16766307ea6d1b54ffe50a",
+      "tokens.jsonl": "10c92733b8677d0c159541c6fd89546311c88932c39e50c438c9bdc58c250225",
+      "evictions.json": "4027a7657f754d8bd1682c01c7b2d4230f79fcd74287df1ce066d102cfac2128",
+      "occupancy.jsonl": "2a11733de30889abff607aad7c013ab2f2b55a7c7214a7c9e6c51b40216848f7"
+    }
+  },
+  "mooncake-conversation/fifo": {
+    "manifest": {
+      "trace": "mooncake-conversation",
+      "job": "fifo",
+      "workload_sha256": "b8cbb061a85206d729d91cdc2981f43c9e0d99209dce588d3af5f7934408b9df",
+      "replay_config_sha256": "4fdc2f93b71a694cbd44d5229570f5c55767978738e065fa4cbf058763273c93",
+      "policy_sha256": "009ae4a5d23e2a9753f03121c511a50e6a22297888d431eb7beaf6be56943bcb",
+      "policy_mode": "container-callback",
+      "slo": {
+        "ttft_ms": 1000,
+        "per_request_p95_itl_ms": 50
+      },
+      "config_sha256": "d9c51eee8531e0fda5b54a32247e0e8dbfd9c88a1c144c861bcb11aad5e4e7ed",
+      "inventory_sha256": "6324b25f963a062eb44b55249d2d2c38046fdd3e0829bccdacc8df7415fea0fa",
+      "native_binary_sha256": "e98af2853f168870ab98dfdd1491badb7fa08f9681e42d1cbe615e6c0a339c23",
+      "policy_container": "python@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258",
+      "runtime_sha256": {
+        "kv_experiment/metrics.py": "e9209a115101ed8d3b65663109ac4f65d64f97659b69f4ec100319f18aa14a0f",
+        "kv_experiment/occupancy.py": "17f51bb869284e5a9f05fbeca24e4aea90f392aa1891cb48559324f188def846",
+        "kv_experiment/policy_worker.py": "da55172af816ad7dbcb28dce84fda79bb7d80ce58d3717d3315bb4d77cb002af",
+        "kv_experiment/runtime.py": "470a71084227c0a74eac441773b4dbc7c4d353f37c5f3b0a9e3cdb09947779ec",
+        "evidence/audit_run.py": "bf7c93d3b4b418c88988ba723dd6baf773c06bfd7268a8c6c1108c3c54f21e80",
+        "native/core.patch": "b7fc46a45eb4429f6c80a685cb44bda2999b18b5278c821181917fca9c671299",
+        "native/src/main.rs": "4937269e2d3854a368edc1ba5698927a173904a0e5e77d7cebb495146fffb787",
+        "native/Cargo.lock": "36bf83c62b8ae9abadc2f7061fda783624309ba36995399d9f2a5e48584fafa6"
+      }
+    },
+    "audit": {
+      "matches": true,
+      "requests": 12031,
+      "slo_passes": 1,
+      "metrics_sha256": "e6d3f33e8c747642d88024f3a3f085af5de7018330a81bf011adf2a1d6c0e09c",
+      "occupancy_audited": true
+    },
+    "raw_sha256": {
+      "requests.jsonl": "ebc087442cbf963f3b3f59e44be272652add3628612e16ad7b250046f256df3b",
+      "tokens.jsonl": "59f0c17c9ace152261093ef2a2771e834a81ef4ecbf8eddcc174c01748ec9d2e",
+      "evictions.json": "fca4ba09b3753348673763e20cdbd55b4e17169a6195247916f7b56e5defa6aa",
+      "occupancy.jsonl": "3f3d68a24884f9c10f488278388a9c56e0403820c0928daa30e5fbeb401617b3"
+    }
+  },
+  "mooncake-conversation/lfu": {
+    "manifest": {
+      "trace": "mooncake-conversation",
+      "job": "lfu",
+      "workload_sha256": "b8cbb061a85206d729d91cdc2981f43c9e0d99209dce588d3af5f7934408b9df",
+      "replay_config_sha256": "4fdc2f93b71a694cbd44d5229570f5c55767978738e065fa4cbf058763273c93",
+      "policy_sha256": "9410a02892fad0893e028050dfe21cb84de3df5fce0b531f010bf1bc07159ee7",
+      "policy_mode": "container-callback",
+      "slo": {
+        "ttft_ms": 1000,
+        "per_request_p95_itl_ms": 50
+      },
+      "config_sha256": "d9c51eee8531e0fda5b54a32247e0e8dbfd9c88a1c144c861bcb11aad5e4e7ed",
+      "inventory_sha256": "6324b25f963a062eb44b55249d2d2c38046fdd3e0829bccdacc8df7415fea0fa",
+      "native_binary_sha256": "e98af2853f168870ab98dfdd1491badb7fa08f9681e42d1cbe615e6c0a339c23",
+      "policy_container": "python@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258",
+      "runtime_sha256": {
+        "kv_experiment/metrics.py": "e9209a115101ed8d3b65663109ac4f65d64f97659b69f4ec100319f18aa14a0f",
+        "kv_experiment/occupancy.py": "17f51bb869284e5a9f05fbeca24e4aea90f392aa1891cb48559324f188def846",
+        "kv_experiment/policy_worker.py": "da55172af816ad7dbcb28dce84fda79bb7d80ce58d3717d3315bb4d77cb002af",
+        "kv_experiment/runtime.py": "470a71084227c0a74eac441773b4dbc7c4d353f37c5f3b0a9e3cdb09947779ec",
+        "evidence/audit_run.py": "bf7c93d3b4b418c88988ba723dd6baf773c06bfd7268a8c6c1108c3c54f21e80",
+        "native/core.patch": "b7fc46a45eb4429f6c80a685cb44bda2999b18b5278c821181917fca9c671299",
+        "native/src/main.rs": "4937269e2d3854a368edc1ba5698927a173904a0e5e77d7cebb495146fffb787",
+        "native/Cargo.lock": "36bf83c62b8ae9abadc2f7061fda783624309ba36995399d9f2a5e48584fafa6"
+      }
+    },
+    "audit": {
+      "matches": true,
+      "requests": 12031,
+      "slo_passes": 1,
+      "metrics_sha256": "8d002ae2fe89c9c08d44df8781eb8f14580daa6190abf22b4d792035c2829d11",
+      "occupancy_audited": true
+    },
+    "raw_sha256": {
+      "requests.jsonl": "1fc67ed58027006e3558d541731d9d56b94f9ee36f914cc6ff9264f731df5b57",
+      "tokens.jsonl": "c5594c6f8b193fce1bbf173acb1bc4160d0cc408bd2d546e6bc0932f5ae29c9a",
+      "evictions.json": "3143bbaa340255b48ef4859d1d61d5cfe6488decfe5d6807481d507d7f433868",
+      "occupancy.jsonl": "e3edc7b4e508a2a3313e9a60195c5de141d15c1cecd225212784e08a29cbe754"
+    }
+  },
+  "mooncake-conversation/lru": {
+    "manifest": {
+      "trace": "mooncake-conversation",
+      "job": "lru",
+      "workload_sha256": "b8cbb061a85206d729d91cdc2981f43c9e0d99209dce588d3af5f7934408b9df",
+      "replay_config_sha256": "4fdc2f93b71a694cbd44d5229570f5c55767978738e065fa4cbf058763273c93",
+      "policy_sha256": null,
+      "policy_mode": "native-lru",
+      "slo": {
+        "ttft_ms": 1000,
+        "per_request_p95_itl_ms": 50
+      },
+      "config_sha256": "d9c51eee8531e0fda5b54a32247e0e8dbfd9c88a1c144c861bcb11aad5e4e7ed",
+      "inventory_sha256": "6324b25f963a062eb44b55249d2d2c38046fdd3e0829bccdacc8df7415fea0fa",
+      "native_binary_sha256": "e98af2853f168870ab98dfdd1491badb7fa08f9681e42d1cbe615e6c0a339c23",
+      "policy_container": "python@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258",
+      "runtime_sha256": {
+        "kv_experiment/metrics.py": "e9209a115101ed8d3b65663109ac4f65d64f97659b69f4ec100319f18aa14a0f",
+        "kv_experiment/occupancy.py": "17f51bb869284e5a9f05fbeca24e4aea90f392aa1891cb48559324f188def846",
+        "kv_experiment/policy_worker.py": "da55172af816ad7dbcb28dce84fda79bb7d80ce58d3717d3315bb4d77cb002af",
+        "kv_experiment/runtime.py": "470a71084227c0a74eac441773b4dbc7c4d353f37c5f3b0a9e3cdb09947779ec",
+        "evidence/audit_run.py": "bf7c93d3b4b418c88988ba723dd6baf773c06bfd7268a8c6c1108c3c54f21e80",
+        "native/core.patch": "b7fc46a45eb4429f6c80a685cb44bda2999b18b5278c821181917fca9c671299",
+        "native/src/main.rs": "4937269e2d3854a368edc1ba5698927a173904a0e5e77d7cebb495146fffb787",
+        "native/Cargo.lock": "36bf83c62b8ae9abadc2f7061fda783624309ba36995399d9f2a5e48584fafa6"
+      }
+    },
+    "audit": {
+      "matches": true,
+      "requests": 12031,
+      "slo_passes": 1,
+      "metrics_sha256": "3c8d99f7aa5aad090a83a78f367fe474c6d07660425bdd083de5b59d91762006",
+      "occupancy_audited": true
+    },
+    "raw_sha256": {
+      "requests.jsonl": "1fc67ed58027006e3558d541731d9d56b94f9ee36f914cc6ff9264f731df5b57",
+      "tokens.jsonl": "c5594c6f8b193fce1bbf173acb1bc4160d0cc408bd2d546e6bc0932f5ae29c9a",
+      "evictions.json": "3143bbaa340255b48ef4859d1d61d5cfe6488decfe5d6807481d507d7f433868",
+      "occupancy.jsonl": "e3edc7b4e508a2a3313e9a60195c5de141d15c1cecd225212784e08a29cbe754"
+    }
+  },
+  "mooncake-conversation/lru-callback": {
+    "manifest": {
+      "trace": "mooncake-conversation",
+      "job": "lru-callback",
+      "workload_sha256": "b8cbb061a85206d729d91cdc2981f43c9e0d99209dce588d3af5f7934408b9df",
+      "replay_config_sha256": "4fdc2f93b71a694cbd44d5229570f5c55767978738e065fa4cbf058763273c93",
+      "policy_sha256": "46cd2ac41bab52dcf00ba26ad03c8be8a1fd114275baef93b6294d822e4b6da5",
+      "policy_mode": "container-callback",
+      "slo": {
+        "ttft_ms": 1000,
+        "per_request_p95_itl_ms": 50
+      },
+      "config_sha256": "d9c51eee8531e0fda5b54a32247e0e8dbfd9c88a1c144c861bcb11aad5e4e7ed",
+      "inventory_sha256": "6324b25f963a062eb44b55249d2d2c38046fdd3e0829bccdacc8df7415fea0fa",
+      "native_binary_sha256": "e98af2853f168870ab98dfdd1491badb7fa08f9681e42d1cbe615e6c0a339c23",
+      "policy_container": "python@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258",
+      "runtime_sha256": {
+        "kv_experiment/metrics.py": "e9209a115101ed8d3b65663109ac4f65d64f97659b69f4ec100319f18aa14a0f",
+        "kv_experiment/occupancy.py": "17f51bb869284e5a9f05fbeca24e4aea90f392aa1891cb48559324f188def846",
+        "kv_experiment/policy_worker.py": "da55172af816ad7dbcb28dce84fda79bb7d80ce58d3717d3315bb4d77cb002af",
+        "kv_experiment/runtime.py": "470a71084227c0a74eac441773b4dbc7c4d353f37c5f3b0a9e3cdb09947779ec",
+        "evidence/audit_run.py": "bf7c93d3b4b418c88988ba723dd6baf773c06bfd7268a8c6c1108c3c54f21e80",
+        "native/core.patch": "b7fc46a45eb4429f6c80a685cb44bda2999b18b5278c821181917fca9c671299",
+        "native/src/main.rs": "4937269e2d3854a368edc1ba5698927a173904a0e5e77d7cebb495146fffb787",
+        "native/Cargo.lock": "36bf83c62b8ae9abadc2f7061fda783624309ba36995399d9f2a5e48584fafa6"
+      }
+    },
+    "audit": {
+      "matches": true,
+      "requests": 12031,
+      "slo_passes": 1,
+      "metrics_sha256": "7d7f3a713062d24b7bcee8bd93077c2f4ac0d26a9a550d38be1959533510fa21",
+      "occupancy_audited": true
+    },
+    "raw_sha256": {
+      "requests.jsonl": "1fc67ed58027006e3558d541731d9d56b94f9ee36f914cc6ff9264f731df5b57",
+      "tokens.jsonl": "c5594c6f8b193fce1bbf173acb1bc4160d0cc408bd2d546e6bc0932f5ae29c9a",
+      "evictions.json": "3143bbaa340255b48ef4859d1d61d5cfe6488decfe5d6807481d507d7f433868",
+      "occupancy.jsonl": "e3edc7b4e508a2a3313e9a60195c5de141d15c1cecd225212784e08a29cbe754"
+    }
+  },
+  "mooncake-conversation/lru-no-telemetry": {
+    "manifest": {
+      "trace": "mooncake-conversation",
+      "job": "lru-no-telemetry",
+      "workload_sha256": "b8cbb061a85206d729d91cdc2981f43c9e0d99209dce588d3af5f7934408b9df",
+      "replay_config_sha256": "8a36b6cbd0918725c5e6fedcb4697386cd4eb67f9b2bb058215b840f3a18f0eb",
+      "policy_sha256": null,
+      "policy_mode": "native-lru",
+      "slo": {
+        "ttft_ms": 1000,
+        "per_request_p95_itl_ms": 50
+      },
+      "config_sha256": "d9c51eee8531e0fda5b54a32247e0e8dbfd9c88a1c144c861bcb11aad5e4e7ed",
+      "inventory_sha256": "6324b25f963a062eb44b55249d2d2c38046fdd3e0829bccdacc8df7415fea0fa",
+      "native_binary_sha256": "e98af2853f168870ab98dfdd1491badb7fa08f9681e42d1cbe615e6c0a339c23",
+      "policy_container": "python@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258",
+      "runtime_sha256": {
+        "kv_experiment/metrics.py": "e9209a115101ed8d3b65663109ac4f65d64f97659b69f4ec100319f18aa14a0f",
+        "kv_experiment/occupancy.py": "17f51bb869284e5a9f05fbeca24e4aea90f392aa1891cb48559324f188def846",
+        "kv_experiment/policy_worker.py": "da55172af816ad7dbcb28dce84fda79bb7d80ce58d3717d3315bb4d77cb002af",
+        "kv_experiment/runtime.py": "470a71084227c0a74eac441773b4dbc7c4d353f37c5f3b0a9e3cdb09947779ec",
+        "evidence/audit_run.py": "bf7c93d3b4b418c88988ba723dd6baf773c06bfd7268a8c6c1108c3c54f21e80",
+        "native/core.patch": "b7fc46a45eb4429f6c80a685cb44bda2999b18b5278c821181917fca9c671299",
+        "native/src/main.rs": "4937269e2d3854a368edc1ba5698927a173904a0e5e77d7cebb495146fffb787",
+        "native/Cargo.lock": "36bf83c62b8ae9abadc2f7061fda783624309ba36995399d9f2a5e48584fafa6"
+      }
+    },
+    "audit": {
+      "matches": true,
+      "requests": 12031,
+      "slo_passes": 1,
+      "metrics_sha256": "1a00538a792d0a591e72c26200ba99fb0340aa0bf4f711c5f2bc14e527daf619"
+    },
+    "raw_sha256": {
+      "requests.jsonl": "1fc67ed58027006e3558d541731d9d56b94f9ee36f914cc6ff9264f731df5b57",
+      "tokens.jsonl": "c5594c6f8b193fce1bbf173acb1bc4160d0cc408bd2d546e6bc0932f5ae29c9a",
+      "evictions.json": "3143bbaa340255b48ef4859d1d61d5cfe6488decfe5d6807481d507d7f433868"
+    }
+  },
+  "mooncake-conversation/lru-repeat": {
+    "manifest": {
+      "trace": "mooncake-conversation",
+      "job": "lru-repeat",
+      "workload_sha256": "b8cbb061a85206d729d91cdc2981f43c9e0d99209dce588d3af5f7934408b9df",
+      "replay_config_sha256": "4fdc2f93b71a694cbd44d5229570f5c55767978738e065fa4cbf058763273c93",
+      "policy_sha256": null,
+      "policy_mode": "native-lru",
+      "slo": {
+        "ttft_ms": 1000,
+        "per_request_p95_itl_ms": 50
+      },
+      "config_sha256": "d9c51eee8531e0fda5b54a32247e0e8dbfd9c88a1c144c861bcb11aad5e4e7ed",
+      "inventory_sha256": "6324b25f963a062eb44b55249d2d2c38046fdd3e0829bccdacc8df7415fea0fa",
+      "native_binary_sha256": "e98af2853f168870ab98dfdd1491badb7fa08f9681e42d1cbe615e6c0a339c23",
+      "policy_container": "python@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258",
+      "runtime_sha256": {
+        "kv_experiment/metrics.py": "e9209a115101ed8d3b65663109ac4f65d64f97659b69f4ec100319f18aa14a0f",
+        "kv_experiment/occupancy.py": "17f51bb869284e5a9f05fbeca24e4aea90f392aa1891cb48559324f188def846",
+        "kv_experiment/policy_worker.py": "da55172af816ad7dbcb28dce84fda79bb7d80ce58d3717d3315bb4d77cb002af",
+        "kv_experiment/runtime.py": "470a71084227c0a74eac441773b4dbc7c4d353f37c5f3b0a9e3cdb09947779ec",
+        "evidence/audit_run.py": "bf7c93d3b4b418c88988ba723dd6baf773c06bfd7268a8c6c1108c3c54f21e80",
+        "native/core.patch": "b7fc46a45eb4429f6c80a685cb44bda2999b18b5278c821181917fca9c671299",
+        "native/src/main.rs": "4937269e2d3854a368edc1ba5698927a173904a0e5e77d7cebb495146fffb787",
+        "native/Cargo.lock": "36bf83c62b8ae9abadc2f7061fda783624309ba36995399d9f2a5e48584fafa6"
+      }
+    },
+    "audit": {
+      "matches": true,
+      "requests": 12031,
+      "slo_passes": 1,
+      "metrics_sha256": "580a5ef06abd36057d97573610f7b1dcee033020b64612be228958bdcd4fc6ae",
+      "occupancy_audited": true
+    },
+    "raw_sha256": {
+      "requests.jsonl": "1fc67ed58027006e3558d541731d9d56b94f9ee36f914cc6ff9264f731df5b57",
+      "tokens.jsonl": "c5594c6f8b193fce1bbf173acb1bc4160d0cc408bd2d546e6bc0932f5ae29c9a",
+      "evictions.json": "3143bbaa340255b48ef4859d1d61d5cfe6488decfe5d6807481d507d7f433868",
+      "occupancy.jsonl": "e3edc7b4e508a2a3313e9a60195c5de141d15c1cecd225212784e08a29cbe754"
+    }
+  },
+  "mooncake-conversation/mru": {
+    "manifest": {
+      "trace": "mooncake-conversation",
+      "job": "mru",
+      "workload_sha256": "b8cbb061a85206d729d91cdc2981f43c9e0d99209dce588d3af5f7934408b9df",
+      "replay_config_sha256": "4fdc2f93b71a694cbd44d5229570f5c55767978738e065fa4cbf058763273c93",
+      "policy_sha256": "71aaa623c93b6f96533fef728c2835927e664b748e967118eae8883b5670ceb6",
+      "policy_mode": "container-callback",
+      "slo": {
+        "ttft_ms": 1000,
+        "per_request_p95_itl_ms": 50
+      },
+      "config_sha256": "d9c51eee8531e0fda5b54a32247e0e8dbfd9c88a1c144c861bcb11aad5e4e7ed",
+      "inventory_sha256": "6324b25f963a062eb44b55249d2d2c38046fdd3e0829bccdacc8df7415fea0fa",
+      "native_binary_sha256": "e98af2853f168870ab98dfdd1491badb7fa08f9681e42d1cbe615e6c0a339c23",
+      "policy_container": "python@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258",
+      "runtime_sha256": {
+        "kv_experiment/metrics.py": "e9209a115101ed8d3b65663109ac4f65d64f97659b69f4ec100319f18aa14a0f",
+        "kv_experiment/occupancy.py": "17f51bb869284e5a9f05fbeca24e4aea90f392aa1891cb48559324f188def846",
+        "kv_experiment/policy_worker.py": "da55172af816ad7dbcb28dce84fda79bb7d80ce58d3717d3315bb4d77cb002af",
+        "kv_experiment/runtime.py": "470a71084227c0a74eac441773b4dbc7c4d353f37c5f3b0a9e3cdb09947779ec",
+        "evidence/audit_run.py": "bf7c93d3b4b418c88988ba723dd6baf773c06bfd7268a8c6c1108c3c54f21e80",
+        "native/core.patch": "b7fc46a45eb4429f6c80a685cb44bda2999b18b5278c821181917fca9c671299",
+        "native/src/main.rs": "4937269e2d3854a368edc1ba5698927a173904a0e5e77d7cebb495146fffb787",
+        "native/Cargo.lock": "36bf83c62b8ae9abadc2f7061fda783624309ba36995399d9f2a5e48584fafa6"
+      }
+    },
+    "audit": {
+      "matches": true,
+      "requests": 12031,
+      "slo_passes": 1,
+      "metrics_sha256": "01c4d84965fd7486fa64585b09756b07e30a75a4158ecaa464b064951163594d",
+      "occupancy_audited": true
+    },
+    "raw_sha256": {
+      "requests.jsonl": "3ea2278a99e35d0ec0cef6a1dff2955edcb4503a7414e62f2709daa1a5015120",
+      "tokens.jsonl": "9c5b023b57adbecc5f6d16a5daaf0211c43e172306e3d309b98dc7dffc623d48",
+      "evictions.json": "add5bdacf37a6f54b96ed93056f0f9a059fcf70889d178e1349a9df196490bb8",
+      "occupancy.jsonl": "b6d80ca27a16a2af6a1a8bf9b8d9dbd70d0e62809704535c1c92630af24f5ad8"
+    }
+  },
+  "mooncake-conversation/random-0": {
+    "manifest": {
+      "trace": "mooncake-conversation",
+      "job": "random-0",
+      "workload_sha256": "b8cbb061a85206d729d91cdc2981f43c9e0d99209dce588d3af5f7934408b9df",
+      "replay_config_sha256": "4fdc2f93b71a694cbd44d5229570f5c55767978738e065fa4cbf058763273c93",
+      "policy_sha256": "b2b49061aa507fdd1c7e094215d6661f250a2911321060e775ec43258df92b54",
+      "policy_mode": "container-callback",
+      "slo": {
+        "ttft_ms": 1000,
+        "per_request_p95_itl_ms": 50
+      },
+      "config_sha256": "d9c51eee8531e0fda5b54a32247e0e8dbfd9c88a1c144c861bcb11aad5e4e7ed",
+      "inventory_sha256": "6324b25f963a062eb44b55249d2d2c38046fdd3e0829bccdacc8df7415fea0fa",
+      "native_binary_sha256": "e98af2853f168870ab98dfdd1491badb7fa08f9681e42d1cbe615e6c0a339c23",
+      "policy_container": "python@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258",
+      "runtime_sha256": {
+        "kv_experiment/metrics.py": "e9209a115101ed8d3b65663109ac4f65d64f97659b69f4ec100319f18aa14a0f",
+        "kv_experiment/occupancy.py": "17f51bb869284e5a9f05fbeca24e4aea90f392aa1891cb48559324f188def846",
+        "kv_experiment/policy_worker.py": "da55172af816ad7dbcb28dce84fda79bb7d80ce58d3717d3315bb4d77cb002af",
+        "kv_experiment/runtime.py": "470a71084227c0a74eac441773b4dbc7c4d353f37c5f3b0a9e3cdb09947779ec",
+        "evidence/audit_run.py": "bf7c93d3b4b418c88988ba723dd6baf773c06bfd7268a8c6c1108c3c54f21e80",
+        "native/core.patch": "b7fc46a45eb4429f6c80a685cb44bda2999b18b5278c821181917fca9c671299",
+        "native/src/main.rs": "4937269e2d3854a368edc1ba5698927a173904a0e5e77d7cebb495146fffb787",
+        "native/Cargo.lock": "36bf83c62b8ae9abadc2f7061fda783624309ba36995399d9f2a5e48584fafa6"
+      }
+    },
+    "audit": {
+      "matches": true,
+      "requests": 12031,
+      "slo_passes": 1,
+      "metrics_sha256": "d124ce8fc34cec6fe9efe592b1f99fdc09437d0b8e7b12fe9e9d9a1fda0a5dcd",
+      "occupancy_audited": true
+    },
+    "raw_sha256": {
+      "requests.jsonl": "2be3639748031016fb1d2aab601499b4458a4436db1990b767a1918cee2555dd",
+      "tokens.jsonl": "1178a5028259842a8cdd4d0275d95ee320703cb1f594ceae5f5b1b0466040da4",
+      "evictions.json": "e68ff62c882a8b8ca238c9d89154ffdc18e688fcc11c434b97060c072e47c14f",
+      "occupancy.jsonl": "40652bb6cc7aa742bcaca8da37467c4e1d6eaada8e7d22fdedef1b2feca13fed"
+    }
+  },
+  "mooncake-conversation/random-1": {
+    "manifest": {
+      "trace": "mooncake-conversation",
+      "job": "random-1",
+      "workload_sha256": "b8cbb061a85206d729d91cdc2981f43c9e0d99209dce588d3af5f7934408b9df",
+      "replay_config_sha256": "4fdc2f93b71a694cbd44d5229570f5c55767978738e065fa4cbf058763273c93",
+      "policy_sha256": "75a7069b56e57056aaffd2f6e41e529656d1d897e7e0ee0617f0767a28725b53",
+      "policy_mode": "container-callback",
+      "slo": {
+        "ttft_ms": 1000,
+        "per_request_p95_itl_ms": 50
+      },
+      "config_sha256": "d9c51eee8531e0fda5b54a32247e0e8dbfd9c88a1c144c861bcb11aad5e4e7ed",
+      "inventory_sha256": "6324b25f963a062eb44b55249d2d2c38046fdd3e0829bccdacc8df7415fea0fa",
+      "native_binary_sha256": "e98af2853f168870ab98dfdd1491badb7fa08f9681e42d1cbe615e6c0a339c23",
+      "policy_container": "python@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258",
+      "runtime_sha256": {
+        "kv_experiment/metrics.py": "e9209a115101ed8d3b65663109ac4f65d64f97659b69f4ec100319f18aa14a0f",
+        "kv_experiment/occupancy.py": "17f51bb869284e5a9f05fbeca24e4aea90f392aa1891cb48559324f188def846",
+        "kv_experiment/policy_worker.py": "da55172af816ad7dbcb28dce84fda79bb7d80ce58d3717d3315bb4d77cb002af",
+        "kv_experiment/runtime.py": "470a71084227c0a74eac441773b4dbc7c4d353f37c5f3b0a9e3cdb09947779ec",
+        "evidence/audit_run.py": "bf7c93d3b4b418c88988ba723dd6baf773c06bfd7268a8c6c1108c3c54f21e80",
+        "native/core.patch": "b7fc46a45eb4429f6c80a685cb44bda2999b18b5278c821181917fca9c671299",
+        "native/src/main.rs": "4937269e2d3854a368edc1ba5698927a173904a0e5e77d7cebb495146fffb787",
+        "native/Cargo.lock": "36bf83c62b8ae9abadc2f7061fda783624309ba36995399d9f2a5e48584fafa6"
+      }
+    },
+    "audit": {
+      "matches": true,
+      "requests": 12031,
+      "slo_passes": 1,
+      "metrics_sha256": "bca62c609ff4f9f5e219e14f680d094a29b3ec1743b0dd3e103994d23aa83065",
+      "occupancy_audited": true
+    },
+    "raw_sha256": {
+      "requests.jsonl": "bfe892277c6dced906a180a3108a98f1cb1057b6284519051efd7be52d655019",
+      "tokens.jsonl": "3c635eefd5a14d37e280f3a4970b212d175155e5f5d6b10d5e3a64c024d697a6",
+      "evictions.json": "332bb2411bf1550a161d7ed8fa590f0e6c1058b402ab764c9415df1f8b3a0e9f",
+      "occupancy.jsonl": "e679bf0b4b5a064265645b98b0834748382a7fc9865fa6015247464d33d1c92a"
+    }
+  },
+  "mooncake-conversation/random-2": {
+    "manifest": {
+      "trace": "mooncake-conversation",
+      "job": "random-2",
+      "workload_sha256": "b8cbb061a85206d729d91cdc2981f43c9e0d99209dce588d3af5f7934408b9df",
+      "replay_config_sha256": "4fdc2f93b71a694cbd44d5229570f5c55767978738e065fa4cbf058763273c93",
+      "policy_sha256": "7d307d3db430a47643b0f40fa6f5084c45c59f975cc92b10b778ad352471ccf2",
+      "policy_mode": "container-callback",
+      "slo": {
+        "ttft_ms": 1000,
+        "per_request_p95_itl_ms": 50
+      },
+      "config_sha256": "d9c51eee8531e0fda5b54a32247e0e8dbfd9c88a1c144c861bcb11aad5e4e7ed",
+      "inventory_sha256": "6324b25f963a062eb44b55249d2d2c38046fdd3e0829bccdacc8df7415fea0fa",
+      "native_binary_sha256": "e98af2853f168870ab98dfdd1491badb7fa08f9681e42d1cbe615e6c0a339c23",
+      "policy_container": "python@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258",
+      "runtime_sha256": {
+        "kv_experiment/metrics.py": "e9209a115101ed8d3b65663109ac4f65d64f97659b69f4ec100319f18aa14a0f",
+        "kv_experiment/occupancy.py": "17f51bb869284e5a9f05fbeca24e4aea90f392aa1891cb48559324f188def846",
+        "kv_experiment/policy_worker.py": "da55172af816ad7dbcb28dce84fda79bb7d80ce58d3717d3315bb4d77cb002af",
+        "kv_experiment/runtime.py": "470a71084227c0a74eac441773b4dbc7c4d353f37c5f3b0a9e3cdb09947779ec",
+        "evidence/audit_run.py": "bf7c93d3b4b418c88988ba723dd6baf773c06bfd7268a8c6c1108c3c54f21e80",
+        "native/core.patch": "b7fc46a45eb4429f6c80a685cb44bda2999b18b5278c821181917fca9c671299",
+        "native/src/main.rs": "4937269e2d3854a368edc1ba5698927a173904a0e5e77d7cebb495146fffb787",
+        "native/Cargo.lock": "36bf83c62b8ae9abadc2f7061fda783624309ba36995399d9f2a5e48584fafa6"
+      }
+    },
+    "audit": {
+      "matches": true,
+      "requests": 12031,
+      "slo_passes": 1,
+      "metrics_sha256": "1307497e06bb510439200e2f8414ced12eb9a004649a5b928e86b71446f57dbc",
+      "occupancy_audited": true
+    },
+    "raw_sha256": {
+      "requests.jsonl": "25ebf5136b5c2ca0f742cfcbfe273897f467188c335aa34ac47aee8aa9100884",
+      "tokens.jsonl": "358a3cc9ecf280bc170816b7dce62a6edf428cf7b32f6a75360ae774a475cfb3",
+      "evictions.json": "04c118925922d1bf61fecc43f30e1b2ceedbc0f01f3fb6167ea45b78a2042504",
+      "occupancy.jsonl": "b4559dff6e5c362e0b5fa4c3691de93ac3f0d70e5985caddfab8b94fdf99deea"
+    }
+  },
+  "mooncake-conversation/slru": {
+    "manifest": {
+      "trace": "mooncake-conversation",
+      "job": "slru",
+      "workload_sha256": "b8cbb061a85206d729d91cdc2981f43c9e0d99209dce588d3af5f7934408b9df",
+      "replay_config_sha256": "4fdc2f93b71a694cbd44d5229570f5c55767978738e065fa4cbf058763273c93",
+      "policy_sha256": "c20eae486dc6d3dfe3a93508e5f67e65d2b4a3dd64b3a804d98935d8744e5276",
+      "policy_mode": "container-callback",
+      "slo": {
+        "ttft_ms": 1000,
+        "per_request_p95_itl_ms": 50
+      },
+      "config_sha256": "d9c51eee8531e0fda5b54a32247e0e8dbfd9c88a1c144c861bcb11aad5e4e7ed",
+      "inventory_sha256": "6324b25f963a062eb44b55249d2d2c38046fdd3e0829bccdacc8df7415fea0fa",
+      "native_binary_sha256": "e98af2853f168870ab98dfdd1491badb7fa08f9681e42d1cbe615e6c0a339c23",
+      "policy_container": "python@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258",
+      "runtime_sha256": {
+        "kv_experiment/metrics.py": "e9209a115101ed8d3b65663109ac4f65d64f97659b69f4ec100319f18aa14a0f",
+        "kv_experiment/occupancy.py": "17f51bb869284e5a9f05fbeca24e4aea90f392aa1891cb48559324f188def846",
+        "kv_experiment/policy_worker.py": "da55172af816ad7dbcb28dce84fda79bb7d80ce58d3717d3315bb4d77cb002af",
+        "kv_experiment/runtime.py": "470a71084227c0a74eac441773b4dbc7c4d353f37c5f3b0a9e3cdb09947779ec",
+        "evidence/audit_run.py": "bf7c93d3b4b418c88988ba723dd6baf773c06bfd7268a8c6c1108c3c54f21e80",
+        "native/core.patch": "b7fc46a45eb4429f6c80a685cb44bda2999b18b5278c821181917fca9c671299",
+        "native/src/main.rs": "4937269e2d3854a368edc1ba5698927a173904a0e5e77d7cebb495146fffb787",
+        "native/Cargo.lock": "36bf83c62b8ae9abadc2f7061fda783624309ba36995399d9f2a5e48584fafa6"
+      }
+    },
+    "audit": {
+      "matches": true,
+      "requests": 12031,
+      "slo_passes": 1,
+      "metrics_sha256": "a52998ba8930e05549a0c7941d116e8a8a01a2f43c06cb3168f078b67f7c1f1d",
+      "occupancy_audited": true
+    },
+    "raw_sha256": {
+      "requests.jsonl": "1fc67ed58027006e3558d541731d9d56b94f9ee36f914cc6ff9264f731df5b57",
+      "tokens.jsonl": "c5594c6f8b193fce1bbf173acb1bc4160d0cc408bd2d546e6bc0932f5ae29c9a",
+      "evictions.json": "3143bbaa340255b48ef4859d1d61d5cfe6488decfe5d6807481d507d7f433868",
+      "occupancy.jsonl": "e3edc7b4e508a2a3313e9a60195c5de141d15c1cecd225212784e08a29cbe754"
+    }
+  },
+  "mooncake-toolagent/cadence-check/fine-telemetry": {
+    "manifest": {
+      "trace": "mooncake-toolagent",
+      "job": "cadence-check/fine-telemetry",
+      "workload_sha256": "ae6341c93661f8fac14be4d3af43adabb05b6fda5b625926f5005437233d8f68",
+      "replay_config_sha256": "5a2a170200b70095ff19b4fd1aef4200362f2d68d5b322176092f88622cbbfb4",
+      "policy_sha256": null,
+      "policy_mode": "native-lru",
+      "slo": {
+        "ttft_ms": 1000,
+        "per_request_p95_itl_ms": 50
+      },
+      "config_sha256": "d9c51eee8531e0fda5b54a32247e0e8dbfd9c88a1c144c861bcb11aad5e4e7ed",
+      "inventory_sha256": "6324b25f963a062eb44b55249d2d2c38046fdd3e0829bccdacc8df7415fea0fa",
+      "native_binary_sha256": "e98af2853f168870ab98dfdd1491badb7fa08f9681e42d1cbe615e6c0a339c23",
+      "policy_container": "python@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258",
+      "runtime_sha256": {
+        "kv_experiment/metrics.py": "e9209a115101ed8d3b65663109ac4f65d64f97659b69f4ec100319f18aa14a0f",
+        "kv_experiment/occupancy.py": "17f51bb869284e5a9f05fbeca24e4aea90f392aa1891cb48559324f188def846",
+        "kv_experiment/policy_worker.py": "da55172af816ad7dbcb28dce84fda79bb7d80ce58d3717d3315bb4d77cb002af",
+        "kv_experiment/runtime.py": "470a71084227c0a74eac441773b4dbc7c4d353f37c5f3b0a9e3cdb09947779ec",
+        "evidence/audit_run.py": "bf7c93d3b4b418c88988ba723dd6baf773c06bfd7268a8c6c1108c3c54f21e80",
+        "native/core.patch": "b7fc46a45eb4429f6c80a685cb44bda2999b18b5278c821181917fca9c671299",
+        "native/src/main.rs": "4937269e2d3854a368edc1ba5698927a173904a0e5e77d7cebb495146fffb787",
+        "native/Cargo.lock": "36bf83c62b8ae9abadc2f7061fda783624309ba36995399d9f2a5e48584fafa6"
+      }
+    },
+    "audit": {
+      "matches": true,
+      "requests": 2000,
+      "slo_passes": 1,
+      "metrics_sha256": "7d36bddef6ee2fe9842b932fc392a3e01980153c022d20cb5ced02f437e6f8ba",
+      "occupancy_audited": true
+    },
+    "raw_sha256": {
+      "requests.jsonl": "260f7d35931c630ef2ac9b2406614c0a3573dde99f44cf72af0fabd9066d177b",
+      "tokens.jsonl": "732aabd4875be95f59f97994cd1335dcbd3391c91625e756e14577cd0046d3a7",
+      "evictions.json": "a98605647405ea6e02d00bc515140ece999a8aff793f10ccf58894248e0b5f80",
+      "occupancy.jsonl": "befa0767cb7fb47a65ca78ac8c16c2889efd7a946d41370d581c88122e539335"
+    }
+  },
+  "mooncake-toolagent/cadence-check/telemetry": {
+    "manifest": {
+      "trace": "mooncake-toolagent",
+      "job": "cadence-check/telemetry",
+      "workload_sha256": "ae6341c93661f8fac14be4d3af43adabb05b6fda5b625926f5005437233d8f68",
+      "replay_config_sha256": "4fdc2f93b71a694cbd44d5229570f5c55767978738e065fa4cbf058763273c93",
+      "policy_sha256": null,
+      "policy_mode": "native-lru",
+      "slo": {
+        "ttft_ms": 1000,
+        "per_request_p95_itl_ms": 50
+      },
+      "config_sha256": "d9c51eee8531e0fda5b54a32247e0e8dbfd9c88a1c144c861bcb11aad5e4e7ed",
+      "inventory_sha256": "6324b25f963a062eb44b55249d2d2c38046fdd3e0829bccdacc8df7415fea0fa",
+      "native_binary_sha256": "e98af2853f168870ab98dfdd1491badb7fa08f9681e42d1cbe615e6c0a339c23",
+      "policy_container": "python@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258",
+      "runtime_sha256": {
+        "kv_experiment/metrics.py": "e9209a115101ed8d3b65663109ac4f65d64f97659b69f4ec100319f18aa14a0f",
+        "kv_experiment/occupancy.py": "17f51bb869284e5a9f05fbeca24e4aea90f392aa1891cb48559324f188def846",
+        "kv_experiment/policy_worker.py": "da55172af816ad7dbcb28dce84fda79bb7d80ce58d3717d3315bb4d77cb002af",
+        "kv_experiment/runtime.py": "470a71084227c0a74eac441773b4dbc7c4d353f37c5f3b0a9e3cdb09947779ec",
+        "evidence/audit_run.py": "bf7c93d3b4b418c88988ba723dd6baf773c06bfd7268a8c6c1108c3c54f21e80",
+        "native/core.patch": "b7fc46a45eb4429f6c80a685cb44bda2999b18b5278c821181917fca9c671299",
+        "native/src/main.rs": "4937269e2d3854a368edc1ba5698927a173904a0e5e77d7cebb495146fffb787",
+        "native/Cargo.lock": "36bf83c62b8ae9abadc2f7061fda783624309ba36995399d9f2a5e48584fafa6"
+      }
+    },
+    "audit": {
+      "matches": true,
+      "requests": 2000,
+      "slo_passes": 1,
+      "metrics_sha256": "7a6db0d4b200170ec12987c8810c714638b3e772ac3d42fd5ad0cc7e35b767a0",
+      "occupancy_audited": true
+    },
+    "raw_sha256": {
+      "requests.jsonl": "260f7d35931c630ef2ac9b2406614c0a3573dde99f44cf72af0fabd9066d177b",
+      "tokens.jsonl": "732aabd4875be95f59f97994cd1335dcbd3391c91625e756e14577cd0046d3a7",
+      "evictions.json": "a98605647405ea6e02d00bc515140ece999a8aff793f10ccf58894248e0b5f80",
+      "occupancy.jsonl": "f61486fbe8e0b7ac1017d22c729eb9896c780fb8c9d13e18131711f0842088fb"
+    }
+  },
+  "mooncake-toolagent/fifo": {
+    "manifest": {
+      "trace": "mooncake-toolagent",
+      "job": "fifo",
+      "workload_sha256": "48a2db1a13d3bc05e6330140c64f604ba366df20d3c9e128b5c35a01c1fa5f71",
+      "replay_config_sha256": "4fdc2f93b71a694cbd44d5229570f5c55767978738e065fa4cbf058763273c93",
+      "policy_sha256": "009ae4a5d23e2a9753f03121c511a50e6a22297888d431eb7beaf6be56943bcb",
+      "policy_mode": "container-callback",
+      "slo": {
+        "ttft_ms": 1000,
+        "per_request_p95_itl_ms": 50
+      },
+      "config_sha256": "d9c51eee8531e0fda5b54a32247e0e8dbfd9c88a1c144c861bcb11aad5e4e7ed",
+      "inventory_sha256": "6324b25f963a062eb44b55249d2d2c38046fdd3e0829bccdacc8df7415fea0fa",
+      "native_binary_sha256": "e98af2853f168870ab98dfdd1491badb7fa08f9681e42d1cbe615e6c0a339c23",
+      "policy_container": "python@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258",
+      "runtime_sha256": {
+        "kv_experiment/metrics.py": "e9209a115101ed8d3b65663109ac4f65d64f97659b69f4ec100319f18aa14a0f",
+        "kv_experiment/occupancy.py": "17f51bb869284e5a9f05fbeca24e4aea90f392aa1891cb48559324f188def846",
+        "kv_experiment/policy_worker.py": "da55172af816ad7dbcb28dce84fda79bb7d80ce58d3717d3315bb4d77cb002af",
+        "kv_experiment/runtime.py": "470a71084227c0a74eac441773b4dbc7c4d353f37c5f3b0a9e3cdb09947779ec",
+        "evidence/audit_run.py": "bf7c93d3b4b418c88988ba723dd6baf773c06bfd7268a8c6c1108c3c54f21e80",
+        "native/core.patch": "b7fc46a45eb4429f6c80a685cb44bda2999b18b5278c821181917fca9c671299",
+        "native/src/main.rs": "4937269e2d3854a368edc1ba5698927a173904a0e5e77d7cebb495146fffb787",
+        "native/Cargo.lock": "36bf83c62b8ae9abadc2f7061fda783624309ba36995399d9f2a5e48584fafa6"
+      }
+    },
+    "audit": {
+      "matches": true,
+      "requests": 23608,
+      "slo_passes": 1,
+      "metrics_sha256": "a4df6117fa193115c8a268baa8aaedbb2e494a46fec885efe495ce204957e382",
+      "occupancy_audited": true
+    },
+    "raw_sha256": {
+      "requests.jsonl": "0689b6b404a5cd9046e9dcdda3e485a6c05da0c15121fa42654693129e553645",
+      "tokens.jsonl": "8305b5aa6748fd344e42354194d6753fd0d5868fed2ea55b94df5eeb922313b1",
+      "evictions.json": "d239722ad6ba2b912de1a122ab75d0149d03950e84dc5fa865b25778ad81d00b",
+      "occupancy.jsonl": "29c198993aa6fd3be4d710352ccfff19b026e7f654b672e1e3a900612e77909f"
+    }
+  },
+  "mooncake-toolagent/lfu": {
+    "manifest": {
+      "trace": "mooncake-toolagent",
+      "job": "lfu",
+      "workload_sha256": "48a2db1a13d3bc05e6330140c64f604ba366df20d3c9e128b5c35a01c1fa5f71",
+      "replay_config_sha256": "4fdc2f93b71a694cbd44d5229570f5c55767978738e065fa4cbf058763273c93",
+      "policy_sha256": "9410a02892fad0893e028050dfe21cb84de3df5fce0b531f010bf1bc07159ee7",
+      "policy_mode": "container-callback",
+      "slo": {
+        "ttft_ms": 1000,
+        "per_request_p95_itl_ms": 50
+      },
+      "config_sha256": "d9c51eee8531e0fda5b54a32247e0e8dbfd9c88a1c144c861bcb11aad5e4e7ed",
+      "inventory_sha256": "6324b25f963a062eb44b55249d2d2c38046fdd3e0829bccdacc8df7415fea0fa",
+      "native_binary_sha256": "e98af2853f168870ab98dfdd1491badb7fa08f9681e42d1cbe615e6c0a339c23",
+      "policy_container": "python@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258",
+      "runtime_sha256": {
+        "kv_experiment/metrics.py": "e9209a115101ed8d3b65663109ac4f65d64f97659b69f4ec100319f18aa14a0f",
+        "kv_experiment/occupancy.py": "17f51bb869284e5a9f05fbeca24e4aea90f392aa1891cb48559324f188def846",
+        "kv_experiment/policy_worker.py": "da55172af816ad7dbcb28dce84fda79bb7d80ce58d3717d3315bb4d77cb002af",
+        "kv_experiment/runtime.py": "470a71084227c0a74eac441773b4dbc7c4d353f37c5f3b0a9e3cdb09947779ec",
+        "evidence/audit_run.py": "bf7c93d3b4b418c88988ba723dd6baf773c06bfd7268a8c6c1108c3c54f21e80",
+        "native/core.patch": "b7fc46a45eb4429f6c80a685cb44bda2999b18b5278c821181917fca9c671299",
+        "native/src/main.rs": "4937269e2d3854a368edc1ba5698927a173904a0e5e77d7cebb495146fffb787",
+        "native/Cargo.lock": "36bf83c62b8ae9abadc2f7061fda783624309ba36995399d9f2a5e48584fafa6"
+      }
+    },
+    "audit": {
+      "matches": true,
+      "requests": 23608,
+      "slo_passes": 1,
+      "metrics_sha256": "521ff427295869ccc46aef593fad4a1500ef74bbc8524b689f6d79bcd13cd93a",
+      "occupancy_audited": true
+    },
+    "raw_sha256": {
+      "requests.jsonl": "564aaeeff4fb8efeba549885d18249b5b93ef4c2237ab0c8fd8921da43681d85",
+      "tokens.jsonl": "228ea0ea820fc83367487536d84243b4ca05deec72e268b0ab659730944e3c82",
+      "evictions.json": "6bb654c58896a1c272de30f765fa0b3e01fdddbdb49a2d9bb2ad97e26f45a5d6",
+      "occupancy.jsonl": "5c10c98d07c20034466c07626e43dda7b93a5e8776abf72b9deff66e3e453f08"
+    }
+  },
+  "mooncake-toolagent/lru": {
+    "manifest": {
+      "trace": "mooncake-toolagent",
+      "job": "lru",
+      "workload_sha256": "48a2db1a13d3bc05e6330140c64f604ba366df20d3c9e128b5c35a01c1fa5f71",
+      "replay_config_sha256": "4fdc2f93b71a694cbd44d5229570f5c55767978738e065fa4cbf058763273c93",
+      "policy_sha256": null,
+      "policy_mode": "native-lru",
+      "slo": {
+        "ttft_ms": 1000,
+        "per_request_p95_itl_ms": 50
+      },
+      "config_sha256": "d9c51eee8531e0fda5b54a32247e0e8dbfd9c88a1c144c861bcb11aad5e4e7ed",
+      "inventory_sha256": "6324b25f963a062eb44b55249d2d2c38046fdd3e0829bccdacc8df7415fea0fa",
+      "native_binary_sha256": "e98af2853f168870ab98dfdd1491badb7fa08f9681e42d1cbe615e6c0a339c23",
+      "policy_container": "python@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258",
+      "runtime_sha256": {
+        "kv_experiment/metrics.py": "e9209a115101ed8d3b65663109ac4f65d64f97659b69f4ec100319f18aa14a0f",
+        "kv_experiment/occupancy.py": "17f51bb869284e5a9f05fbeca24e4aea90f392aa1891cb48559324f188def846",
+        "kv_experiment/policy_worker.py": "da55172af816ad7dbcb28dce84fda79bb7d80ce58d3717d3315bb4d77cb002af",
+        "kv_experiment/runtime.py": "470a71084227c0a74eac441773b4dbc7c4d353f37c5f3b0a9e3cdb09947779ec",
+        "evidence/audit_run.py": "bf7c93d3b4b418c88988ba723dd6baf773c06bfd7268a8c6c1108c3c54f21e80",
+        "native/core.patch": "b7fc46a45eb4429f6c80a685cb44bda2999b18b5278c821181917fca9c671299",
+        "native/src/main.rs": "4937269e2d3854a368edc1ba5698927a173904a0e5e77d7cebb495146fffb787",
+        "native/Cargo.lock": "36bf83c62b8ae9abadc2f7061fda783624309ba36995399d9f2a5e48584fafa6"
+      }
+    },
+    "audit": {
+      "matches": true,
+      "requests": 23608,
+      "slo_passes": 1,
+      "metrics_sha256": "9711be09655bac15d2c2bbdaf5c587136361fba77aac40a40494de130457f748",
+      "occupancy_audited": true
+    },
+    "raw_sha256": {
+      "requests.jsonl": "4b55fa48f0b9644f669bbf24fa0123e876e4d4bed72cbcaa84831e17cb6ee606",
+      "tokens.jsonl": "1cf4b51a13d78159bfcbf7380154ab870d92bedb8ef9a4449c85b6cc3478167a",
+      "evictions.json": "77fade63eaa03616ad08b2d737bab288c6363cca7c4d19531a6d3bf713563b1e",
+      "occupancy.jsonl": "5f32d2c393c97eb3ba076f7d9fa9c38ac5c00389f0fa54de26a61eba7b4b97d3"
+    }
+  },
+  "mooncake-toolagent/lru-callback": {
+    "manifest": {
+      "trace": "mooncake-toolagent",
+      "job": "lru-callback",
+      "workload_sha256": "48a2db1a13d3bc05e6330140c64f604ba366df20d3c9e128b5c35a01c1fa5f71",
+      "replay_config_sha256": "4fdc2f93b71a694cbd44d5229570f5c55767978738e065fa4cbf058763273c93",
+      "policy_sha256": "46cd2ac41bab52dcf00ba26ad03c8be8a1fd114275baef93b6294d822e4b6da5",
+      "policy_mode": "container-callback",
+      "slo": {
+        "ttft_ms": 1000,
+        "per_request_p95_itl_ms": 50
+      },
+      "config_sha256": "d9c51eee8531e0fda5b54a32247e0e8dbfd9c88a1c144c861bcb11aad5e4e7ed",
+      "inventory_sha256": "6324b25f963a062eb44b55249d2d2c38046fdd3e0829bccdacc8df7415fea0fa",
+      "native_binary_sha256": "e98af2853f168870ab98dfdd1491badb7fa08f9681e42d1cbe615e6c0a339c23",
+      "policy_container": "python@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258",
+      "runtime_sha256": {
+        "kv_experiment/metrics.py": "e9209a115101ed8d3b65663109ac4f65d64f97659b69f4ec100319f18aa14a0f",
+        "kv_experiment/occupancy.py": "17f51bb869284e5a9f05fbeca24e4aea90f392aa1891cb48559324f188def846",
+        "kv_experiment/policy_worker.py": "da55172af816ad7dbcb28dce84fda79bb7d80ce58d3717d3315bb4d77cb002af",
+        "kv_experiment/runtime.py": "470a71084227c0a74eac441773b4dbc7c4d353f37c5f3b0a9e3cdb09947779ec",
+        "evidence/audit_run.py": "bf7c93d3b4b418c88988ba723dd6baf773c06bfd7268a8c6c1108c3c54f21e80",
+        "native/core.patch": "b7fc46a45eb4429f6c80a685cb44bda2999b18b5278c821181917fca9c671299",
+        "native/src/main.rs": "4937269e2d3854a368edc1ba5698927a173904a0e5e77d7cebb495146fffb787",
+        "native/Cargo.lock": "36bf83c62b8ae9abadc2f7061fda783624309ba36995399d9f2a5e48584fafa6"
+      }
+    },
+    "audit": {
+      "matches": true,
+      "requests": 23608,
+      "slo_passes": 1,
+      "metrics_sha256": "2044b5c4988975ef418ff119c4450e1906ea4d380e714ded4bc005edf1f1fd02",
+      "occupancy_audited": true
+    },
+    "raw_sha256": {
+      "requests.jsonl": "4b55fa48f0b9644f669bbf24fa0123e876e4d4bed72cbcaa84831e17cb6ee606",
+      "tokens.jsonl": "1cf4b51a13d78159bfcbf7380154ab870d92bedb8ef9a4449c85b6cc3478167a",
+      "evictions.json": "77fade63eaa03616ad08b2d737bab288c6363cca7c4d19531a6d3bf713563b1e",
+      "occupancy.jsonl": "5f32d2c393c97eb3ba076f7d9fa9c38ac5c00389f0fa54de26a61eba7b4b97d3"
+    }
+  },
+  "mooncake-toolagent/lru-no-telemetry": {
+    "manifest": {
+      "trace": "mooncake-toolagent",
+      "job": "lru-no-telemetry",
+      "workload_sha256": "48a2db1a13d3bc05e6330140c64f604ba366df20d3c9e128b5c35a01c1fa5f71",
+      "replay_config_sha256": "8a36b6cbd0918725c5e6fedcb4697386cd4eb67f9b2bb058215b840f3a18f0eb",
+      "policy_sha256": null,
+      "policy_mode": "native-lru",
+      "slo": {
+        "ttft_ms": 1000,
+        "per_request_p95_itl_ms": 50
+      },
+      "config_sha256": "d9c51eee8531e0fda5b54a32247e0e8dbfd9c88a1c144c861bcb11aad5e4e7ed",
+      "inventory_sha256": "6324b25f963a062eb44b55249d2d2c38046fdd3e0829bccdacc8df7415fea0fa",
+      "native_binary_sha256": "e98af2853f168870ab98dfdd1491badb7fa08f9681e42d1cbe615e6c0a339c23",
+      "policy_container": "python@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258",
+      "runtime_sha256": {
+        "kv_experiment/metrics.py": "e9209a115101ed8d3b65663109ac4f65d64f97659b69f4ec100319f18aa14a0f",
+        "kv_experiment/occupancy.py": "17f51bb869284e5a9f05fbeca24e4aea90f392aa1891cb48559324f188def846",
+        "kv_experiment/policy_worker.py": "da55172af816ad7dbcb28dce84fda79bb7d80ce58d3717d3315bb4d77cb002af",
+        "kv_experiment/runtime.py": "470a71084227c0a74eac441773b4dbc7c4d353f37c5f3b0a9e3cdb09947779ec",
+        "evidence/audit_run.py": "bf7c93d3b4b418c88988ba723dd6baf773c06bfd7268a8c6c1108c3c54f21e80",
+        "native/core.patch": "b7fc46a45eb4429f6c80a685cb44bda2999b18b5278c821181917fca9c671299",
+        "native/src/main.rs": "4937269e2d3854a368edc1ba5698927a173904a0e5e77d7cebb495146fffb787",
+        "native/Cargo.lock": "36bf83c62b8ae9abadc2f7061fda783624309ba36995399d9f2a5e48584fafa6"
+      }
+    },
+    "audit": {
+      "matches": true,
+      "requests": 23608,
+      "slo_passes": 1,
+      "metrics_sha256": "5f8950cc46c9b931b9507530954403c80ac15b26f77a2031ac0812f39bbffe31"
+    },
+    "raw_sha256": {
+      "requests.jsonl": "4b55fa48f0b9644f669bbf24fa0123e876e4d4bed72cbcaa84831e17cb6ee606",
+      "tokens.jsonl": "1cf4b51a13d78159bfcbf7380154ab870d92bedb8ef9a4449c85b6cc3478167a",
+      "evictions.json": "77fade63eaa03616ad08b2d737bab288c6363cca7c4d19531a6d3bf713563b1e"
+    }
+  },
+  "mooncake-toolagent/lru-repeat": {
+    "manifest": {
+      "trace": "mooncake-toolagent",
+      "job": "lru-repeat",
+      "workload_sha256": "48a2db1a13d3bc05e6330140c64f604ba366df20d3c9e128b5c35a01c1fa5f71",
+      "replay_config_sha256": "4fdc2f93b71a694cbd44d5229570f5c55767978738e065fa4cbf058763273c93",
+      "policy_sha256": null,
+      "policy_mode": "native-lru",
+      "slo": {
+        "ttft_ms": 1000,
+        "per_request_p95_itl_ms": 50
+      },
+      "config_sha256": "d9c51eee8531e0fda5b54a32247e0e8dbfd9c88a1c144c861bcb11aad5e4e7ed",
+      "inventory_sha256": "6324b25f963a062eb44b55249d2d2c38046fdd3e0829bccdacc8df7415fea0fa",
+      "native_binary_sha256": "e98af2853f168870ab98dfdd1491badb7fa08f9681e42d1cbe615e6c0a339c23",
+      "policy_container": "python@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258",
+      "runtime_sha256": {
+        "kv_experiment/metrics.py": "e9209a115101ed8d3b65663109ac4f65d64f97659b69f4ec100319f18aa14a0f",
+        "kv_experiment/occupancy.py": "17f51bb869284e5a9f05fbeca24e4aea90f392aa1891cb48559324f188def846",
+        "kv_experiment/policy_worker.py": "da55172af816ad7dbcb28dce84fda79bb7d80ce58d3717d3315bb4d77cb002af",
+        "kv_experiment/runtime.py": "470a71084227c0a74eac441773b4dbc7c4d353f37c5f3b0a9e3cdb09947779ec",
+        "evidence/audit_run.py": "bf7c93d3b4b418c88988ba723dd6baf773c06bfd7268a8c6c1108c3c54f21e80",
+        "native/core.patch": "b7fc46a45eb4429f6c80a685cb44bda2999b18b5278c821181917fca9c671299",
+        "native/src/main.rs": "4937269e2d3854a368edc1ba5698927a173904a0e5e77d7cebb495146fffb787",
+        "native/Cargo.lock": "36bf83c62b8ae9abadc2f7061fda783624309ba36995399d9f2a5e48584fafa6"
+      }
+    },
+    "audit": {
+      "matches": true,
+      "requests": 23608,
+      "slo_passes": 1,
+      "metrics_sha256": "2ff6e41aea895ebe3a6d944899d50dca8d987e7c4e8a7de766045e9fc05cb58c",
+      "occupancy_audited": true
+    },
+    "raw_sha256": {
+      "requests.jsonl": "4b55fa48f0b9644f669bbf24fa0123e876e4d4bed72cbcaa84831e17cb6ee606",
+      "tokens.jsonl": "1cf4b51a13d78159bfcbf7380154ab870d92bedb8ef9a4449c85b6cc3478167a",
+      "evictions.json": "77fade63eaa03616ad08b2d737bab288c6363cca7c4d19531a6d3bf713563b1e",
+      "occupancy.jsonl": "5f32d2c393c97eb3ba076f7d9fa9c38ac5c00389f0fa54de26a61eba7b4b97d3"
+    }
+  },
+  "mooncake-toolagent/mru": {
+    "manifest": {
+      "trace": "mooncake-toolagent",
+      "job": "mru",
+      "workload_sha256": "48a2db1a13d3bc05e6330140c64f604ba366df20d3c9e128b5c35a01c1fa5f71",
+      "replay_config_sha256": "4fdc2f93b71a694cbd44d5229570f5c55767978738e065fa4cbf058763273c93",
+      "policy_sha256": "71aaa623c93b6f96533fef728c2835927e664b748e967118eae8883b5670ceb6",
+      "policy_mode": "container-callback",
+      "slo": {
+        "ttft_ms": 1000,
+        "per_request_p95_itl_ms": 50
+      },
+      "config_sha256": "d9c51eee8531e0fda5b54a32247e0e8dbfd9c88a1c144c861bcb11aad5e4e7ed",
+      "inventory_sha256": "6324b25f963a062eb44b55249d2d2c38046fdd3e0829bccdacc8df7415fea0fa",
+      "native_binary_sha256": "e98af2853f168870ab98dfdd1491badb7fa08f9681e42d1cbe615e6c0a339c23",
+      "policy_container": "python@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258",
+      "runtime_sha256": {
+        "kv_experiment/metrics.py": "e9209a115101ed8d3b65663109ac4f65d64f97659b69f4ec100319f18aa14a0f",
+        "kv_experiment/occupancy.py": "17f51bb869284e5a9f05fbeca24e4aea90f392aa1891cb48559324f188def846",
+        "kv_experiment/policy_worker.py": "da55172af816ad7dbcb28dce84fda79bb7d80ce58d3717d3315bb4d77cb002af",
+        "kv_experiment/runtime.py": "470a71084227c0a74eac441773b4dbc7c4d353f37c5f3b0a9e3cdb09947779ec",
+        "evidence/audit_run.py": "bf7c93d3b4b418c88988ba723dd6baf773c06bfd7268a8c6c1108c3c54f21e80",
+        "native/core.patch": "b7fc46a45eb4429f6c80a685cb44bda2999b18b5278c821181917fca9c671299",
+        "native/src/main.rs": "4937269e2d3854a368edc1ba5698927a173904a0e5e77d7cebb495146fffb787",
+        "native/Cargo.lock": "36bf83c62b8ae9abadc2f7061fda783624309ba36995399d9f2a5e48584fafa6"
+      }
+    },
+    "audit": {
+      "matches": true,
+      "requests": 23608,
+      "slo_passes": 1,
+      "metrics_sha256": "829023d6765effdad672a10751125b1ca9a1535eec82735502159a5e6fc439ec",
+      "occupancy_audited": true
+    },
+    "raw_sha256": {
+      "requests.jsonl": "816f866ece59a810ff1603fd562e483320633cc2374a149dd17ac03c9013ecf0",
+      "tokens.jsonl": "f2f384caa220765de78401f647fc041d0f425899068a3792dc46daca9098203c",
+      "evictions.json": "c6ae231156341c1818557795e5583c5d3d0993b31918728d7893b469c96def72",
+      "occupancy.jsonl": "80ead30b5a03f1b7f933d57bf2f9349a70ff8f412e08537c9385044f07c1b08d"
+    }
+  },
+  "mooncake-toolagent/random-0": {
+    "manifest": {
+      "trace": "mooncake-toolagent",
+      "job": "random-0",
+      "workload_sha256": "48a2db1a13d3bc05e6330140c64f604ba366df20d3c9e128b5c35a01c1fa5f71",
+      "replay_config_sha256": "4fdc2f93b71a694cbd44d5229570f5c55767978738e065fa4cbf058763273c93",
+      "policy_sha256": "b2b49061aa507fdd1c7e094215d6661f250a2911321060e775ec43258df92b54",
+      "policy_mode": "container-callback",
+      "slo": {
+        "ttft_ms": 1000,
+        "per_request_p95_itl_ms": 50
+      },
+      "config_sha256": "d9c51eee8531e0fda5b54a32247e0e8dbfd9c88a1c144c861bcb11aad5e4e7ed",
+      "inventory_sha256": "6324b25f963a062eb44b55249d2d2c38046fdd3e0829bccdacc8df7415fea0fa",
+      "native_binary_sha256": "e98af2853f168870ab98dfdd1491badb7fa08f9681e42d1cbe615e6c0a339c23",
+      "policy_container": "python@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258",
+      "runtime_sha256": {
+        "kv_experiment/metrics.py": "e9209a115101ed8d3b65663109ac4f65d64f97659b69f4ec100319f18aa14a0f",
+        "kv_experiment/occupancy.py": "17f51bb869284e5a9f05fbeca24e4aea90f392aa1891cb48559324f188def846",
+        "kv_experiment/policy_worker.py": "da55172af816ad7dbcb28dce84fda79bb7d80ce58d3717d3315bb4d77cb002af",
+        "kv_experiment/runtime.py": "470a71084227c0a74eac441773b4dbc7c4d353f37c5f3b0a9e3cdb09947779ec",
+        "evidence/audit_run.py": "bf7c93d3b4b418c88988ba723dd6baf773c06bfd7268a8c6c1108c3c54f21e80",
+        "native/core.patch": "b7fc46a45eb4429f6c80a685cb44bda2999b18b5278c821181917fca9c671299",
+        "native/src/main.rs": "4937269e2d3854a368edc1ba5698927a173904a0e5e77d7cebb495146fffb787",
+        "native/Cargo.lock": "36bf83c62b8ae9abadc2f7061fda783624309ba36995399d9f2a5e48584fafa6"
+      }
+    },
+    "audit": {
+      "matches": true,
+      "requests": 23608,
+      "slo_passes": 1,
+      "metrics_sha256": "92d36776df8b3c1b136d89907a71e5c57abee3fbb0ce9951353ff302e20b47f3",
+      "occupancy_audited": true
+    },
+    "raw_sha256": {
+      "requests.jsonl": "ea58fa6ce3680dc50503fdf354ac2c4c6fb61772ade1379f1d7c94a038bebc42",
+      "tokens.jsonl": "0856c5ca0cc984b2e811e6985086844409ff9c657d415867af573fae613dc1d2",
+      "evictions.json": "fbd5484a1d1a77de5ec03f9753a7d19a452dda86e9630c60ad710ac183be62fd",
+      "occupancy.jsonl": "d55bb637dcc2ebfc1d24f8dd67633a594fbdec8ed29d4129021572d346252f68"
+    }
+  },
+  "mooncake-toolagent/random-1": {
+    "manifest": {
+      "trace": "mooncake-toolagent",
+      "job": "random-1",
+      "workload_sha256": "48a2db1a13d3bc05e6330140c64f604ba366df20d3c9e128b5c35a01c1fa5f71",
+      "replay_config_sha256": "4fdc2f93b71a694cbd44d5229570f5c55767978738e065fa4cbf058763273c93",
+      "policy_sha256": "75a7069b56e57056aaffd2f6e41e529656d1d897e7e0ee0617f0767a28725b53",
+      "policy_mode": "container-callback",
+      "slo": {
+        "ttft_ms": 1000,
+        "per_request_p95_itl_ms": 50
+      },
+      "config_sha256": "d9c51eee8531e0fda5b54a32247e0e8dbfd9c88a1c144c861bcb11aad5e4e7ed",
+      "inventory_sha256": "6324b25f963a062eb44b55249d2d2c38046fdd3e0829bccdacc8df7415fea0fa",
+      "native_binary_sha256": "e98af2853f168870ab98dfdd1491badb7fa08f9681e42d1cbe615e6c0a339c23",
+      "policy_container": "python@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258",
+      "runtime_sha256": {
+        "kv_experiment/metrics.py": "e9209a115101ed8d3b65663109ac4f65d64f97659b69f4ec100319f18aa14a0f",
+        "kv_experiment/occupancy.py": "17f51bb869284e5a9f05fbeca24e4aea90f392aa1891cb48559324f188def846",
+        "kv_experiment/policy_worker.py": "da55172af816ad7dbcb28dce84fda79bb7d80ce58d3717d3315bb4d77cb002af",
+        "kv_experiment/runtime.py": "470a71084227c0a74eac441773b4dbc7c4d353f37c5f3b0a9e3cdb09947779ec",
+        "evidence/audit_run.py": "bf7c93d3b4b418c88988ba723dd6baf773c06bfd7268a8c6c1108c3c54f21e80",
+        "native/core.patch": "b7fc46a45eb4429f6c80a685cb44bda2999b18b5278c821181917fca9c671299",
+        "native/src/main.rs": "4937269e2d3854a368edc1ba5698927a173904a0e5e77d7cebb495146fffb787",
+        "native/Cargo.lock": "36bf83c62b8ae9abadc2f7061fda783624309ba36995399d9f2a5e48584fafa6"
+      }
+    },
+    "audit": {
+      "matches": true,
+      "requests": 23608,
+      "slo_passes": 1,
+      "metrics_sha256": "4d53ad49b499536ec1430930b7f9fe03866432828598a24ced757aa453d6250e",
+      "occupancy_audited": true
+    },
+    "raw_sha256": {
+      "requests.jsonl": "759b4ee87988e3baca3351b1f1ab7d8ec4a62ad03c69e5c60f55d3be600dde2a",
+      "tokens.jsonl": "85c3cee05667a68088e8a3bcf86104e3ba6373b3182e1f2d5ceee446971efcd8",
+      "evictions.json": "8087e409b677191606dbdf916d4e6fd2f4bd6a701598f964fcc51de626948b5d",
+      "occupancy.jsonl": "cdd33ecc55bbe0a3e102790249d139a1aeed51296d48dae37208882b8e2296a9"
+    }
+  },
+  "mooncake-toolagent/random-2": {
+    "manifest": {
+      "trace": "mooncake-toolagent",
+      "job": "random-2",
+      "workload_sha256": "48a2db1a13d3bc05e6330140c64f604ba366df20d3c9e128b5c35a01c1fa5f71",
+      "replay_config_sha256": "4fdc2f93b71a694cbd44d5229570f5c55767978738e065fa4cbf058763273c93",
+      "policy_sha256": "7d307d3db430a47643b0f40fa6f5084c45c59f975cc92b10b778ad352471ccf2",
+      "policy_mode": "container-callback",
+      "slo": {
+        "ttft_ms": 1000,
+        "per_request_p95_itl_ms": 50
+      },
+      "config_sha256": "d9c51eee8531e0fda5b54a32247e0e8dbfd9c88a1c144c861bcb11aad5e4e7ed",
+      "inventory_sha256": "6324b25f963a062eb44b55249d2d2c38046fdd3e0829bccdacc8df7415fea0fa",
+      "native_binary_sha256": "e98af2853f168870ab98dfdd1491badb7fa08f9681e42d1cbe615e6c0a339c23",
+      "policy_container": "python@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258",
+      "runtime_sha256": {
+        "kv_experiment/metrics.py": "e9209a115101ed8d3b65663109ac4f65d64f97659b69f4ec100319f18aa14a0f",
+        "kv_experiment/occupancy.py": "17f51bb869284e5a9f05fbeca24e4aea90f392aa1891cb48559324f188def846",
+        "kv_experiment/policy_worker.py": "da55172af816ad7dbcb28dce84fda79bb7d80ce58d3717d3315bb4d77cb002af",
+        "kv_experiment/runtime.py": "470a71084227c0a74eac441773b4dbc7c4d353f37c5f3b0a9e3cdb09947779ec",
+        "evidence/audit_run.py": "bf7c93d3b4b418c88988ba723dd6baf773c06bfd7268a8c6c1108c3c54f21e80",
+        "native/core.patch": "b7fc46a45eb4429f6c80a685cb44bda2999b18b5278c821181917fca9c671299",
+        "native/src/main.rs": "4937269e2d3854a368edc1ba5698927a173904a0e5e77d7cebb495146fffb787",
+        "native/Cargo.lock": "36bf83c62b8ae9abadc2f7061fda783624309ba36995399d9f2a5e48584fafa6"
+      }
+    },
+    "audit": {
+      "matches": true,
+      "requests": 23608,
+      "slo_passes": 1,
+      "metrics_sha256": "cc96e781ead7e450832d5f5def6d0e1be9472eecec918d04b85bdd0e73ff38f3",
+      "occupancy_audited": true
+    },
+    "raw_sha256": {
+      "requests.jsonl": "bf3bbbd7f302212929465cd9c1c7df7e485232acdaef69d4a6f5ab999167e116",
+      "tokens.jsonl": "9217f810928b98538ad22448d2185f35bf989b60c30eed0359de2670095cf0c7",
+      "evictions.json": "389b4d0513d02cd17147bc8bf01984e46100bb95d8827e09dde1a63e04e220d8",
+      "occupancy.jsonl": "d9d7dbf6f3045c1a4314b89a9deacea78d6bd324d1a8ba880b7917234f28f9df"
+    }
+  },
+  "mooncake-toolagent/slru": {
+    "manifest": {
+      "trace": "mooncake-toolagent",
+      "job": "slru",
+      "workload_sha256": "48a2db1a13d3bc05e6330140c64f604ba366df20d3c9e128b5c35a01c1fa5f71",
+      "replay_config_sha256": "4fdc2f93b71a694cbd44d5229570f5c55767978738e065fa4cbf058763273c93",
+      "policy_sha256": "c20eae486dc6d3dfe3a93508e5f67e65d2b4a3dd64b3a804d98935d8744e5276",
+      "policy_mode": "container-callback",
+      "slo": {
+        "ttft_ms": 1000,
+        "per_request_p95_itl_ms": 50
+      },
+      "config_sha256": "d9c51eee8531e0fda5b54a32247e0e8dbfd9c88a1c144c861bcb11aad5e4e7ed",
+      "inventory_sha256": "6324b25f963a062eb44b55249d2d2c38046fdd3e0829bccdacc8df7415fea0fa",
+      "native_binary_sha256": "e98af2853f168870ab98dfdd1491badb7fa08f9681e42d1cbe615e6c0a339c23",
+      "policy_container": "python@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258",
+      "runtime_sha256": {
+        "kv_experiment/metrics.py": "e9209a115101ed8d3b65663109ac4f65d64f97659b69f4ec100319f18aa14a0f",
+        "kv_experiment/occupancy.py": "17f51bb869284e5a9f05fbeca24e4aea90f392aa1891cb48559324f188def846",
+        "kv_experiment/policy_worker.py": "da55172af816ad7dbcb28dce84fda79bb7d80ce58d3717d3315bb4d77cb002af",
+        "kv_experiment/runtime.py": "470a71084227c0a74eac441773b4dbc7c4d353f37c5f3b0a9e3cdb09947779ec",
+        "evidence/audit_run.py": "bf7c93d3b4b418c88988ba723dd6baf773c06bfd7268a8c6c1108c3c54f21e80",
+        "native/core.patch": "b7fc46a45eb4429f6c80a685cb44bda2999b18b5278c821181917fca9c671299",
+        "native/src/main.rs": "4937269e2d3854a368edc1ba5698927a173904a0e5e77d7cebb495146fffb787",
+        "native/Cargo.lock": "36bf83c62b8ae9abadc2f7061fda783624309ba36995399d9f2a5e48584fafa6"
+      }
+    },
+    "audit": {
+      "matches": true,
+      "requests": 23608,
+      "slo_passes": 1,
+      "metrics_sha256": "b7039eebad3819c0f5c982e6fd545ab3462ef782f598e4e20b994ea4662fd70a",
+      "occupancy_audited": true
+    },
+    "raw_sha256": {
+      "requests.jsonl": "6b3813855d831dd0a465a59897c865c88de7e4cee81af7f232ad40261b70985c",
+      "tokens.jsonl": "984945c02b0b412c8a3a7aded617bd2d0b9b410ff0ad05830b00c7899b882ceb",
+      "evictions.json": "3470b1ef2c8ba711f88bbeca266f52d365cf1ac92542ad61f39d2bc955c62956",
+      "occupancy.jsonl": "5a65cbe06e22b76a2cd6addf5163235a78f2bde5cd7c1db2c105e22f7380c381"
+    }
+  }
+}

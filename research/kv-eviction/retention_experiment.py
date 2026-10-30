@@ -4,6 +4,9 @@
 validate-cache-sim: compare the timing-free cache model with Mooncake Table 1.
 prepare:            import every AgentX play once, split plays and inventory them.
 check-regression:   replay full Mooncake LRU with this engine; compare with PR #8.
+calibrate:          fit the offline reload-cost curve used by the Continuum rule.
+run:                replay every split, load level and policy, plus paired checks.
+audit:              re-audit every raw job, apply the frozen decision, write evidence.
 """
 
 import argparse
@@ -17,6 +20,9 @@ from kv_experiment.agentic import OUTPUT, prepare
 from kv_experiment.cachesim import validate
 from kv_experiment.comparison import replay_config
 from kv_experiment.inventory import fetch
+from kv_experiment.retention import calibrate_reload
+from kv_experiment.retention import run as run_sweep
+from kv_experiment.retention_evidence import build as build_evidence
 from kv_experiment.runtime import NATIVE
 from kv_experiment.traces import ROOT
 
@@ -95,6 +101,33 @@ def check_regression(args) -> None:
     print("LRU outputs are byte-identical to the audited full-trace sweep")
 
 
+def calibrate(args) -> None:
+    result = calibrate_reload(json.loads(args.config.read_text()))
+    args.output.write_text(json.dumps(result, indent=2) + "\n")
+    for size, value in zip(result["sizes_tokens"], result["prefill_ms"], strict=True):
+        print(f"{size:>9,} tokens  {value:12,.1f} ms")
+    print(
+        f"quadratic {result['quadratic']}; max residual {result['max_relative_residual']:.2%}"
+    )
+
+
+def run(args) -> None:
+    output = args.output.resolve()
+    output.relative_to(ROOT / "experiments")
+    status = run_sweep(args.config, output, args.jobs)
+    if status["failed"]:
+        raise SystemExit(f"Failed jobs preserved in {output}: {status['failed']}")
+    print(f"Completed {output}")
+
+
+def audit(args) -> None:
+    results = build_evidence(args.run, args.evidence)
+    print(
+        f"Audited {results['audited_jobs']} replays: {results['decision']['verdict']}"
+    )
+    print(f"Evidence in {args.evidence}")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
@@ -107,11 +140,26 @@ def main():
     prepare_parser = commands.add_parser("prepare", help="Import and split AgentX")
     prepare_parser.add_argument("--config", type=Path, required=True)
     commands.add_parser("check-regression", help="Compare LRU with PR #8's receipts")
+    calibration = commands.add_parser("calibrate", help="Fit the reload-cost curve")
+    calibration.add_argument("--config", type=Path, required=True)
+    calibration.add_argument(
+        "--output", type=Path, default=ROOT / "configs/agentic-reload-calibration.json"
+    )
+    runner = commands.add_parser("run", help="Run the frozen sweep")
+    runner.add_argument("--config", type=Path, required=True)
+    runner.add_argument("--output", type=Path, required=True, help="experiments/<date>")
+    runner.add_argument("--jobs", type=int, default=8)
+    auditor = commands.add_parser("audit", help="Audit a run and write evidence")
+    auditor.add_argument("--run", type=Path, required=True)
+    auditor.add_argument("--evidence", type=Path, required=True)
     args = parser.parse_args()
     {
         "validate-cache-sim": validate_cache_sim,
         "prepare": prepare_inputs,
         "check-regression": check_regression,
+        "calibrate": calibrate,
+        "run": run,
+        "audit": audit,
     }[args.command](args)
 
 

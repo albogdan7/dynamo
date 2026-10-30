@@ -1,0 +1,819 @@
+{
+  "schema_version": 1,
+  "trace": "mooncake-conversation",
+  "agent": "claude",
+  "model": "claude-sonnet-5-5",
+  "original_run": "experiments/extension-claude-conversation",
+  "manifest": {
+    "schema_version": 1,
+    "created_at": "2026-10-29T00:50:02.645821-05:00",
+    "timezone": "America/Chicago",
+    "command": [
+      "/Users/miguel/Documents/ChatGPT/Agentic GPU Environment/dynamo-kv-research/research/kv-eviction/.venv/bin/python",
+      "research/kv-eviction/experiment.py",
+      "run",
+      "--agent",
+      "claude",
+      "--model",
+      "claude-sonnet-5-5",
+      "--trace",
+      "mooncake-conversation",
+      "--window-requests",
+      "256",
+      "--arrival-scale",
+      "10",
+      "--cache-tokens",
+      "131072",
+      "--submissions",
+      "5",
+      "--output",
+      "experiments/extension-claude-conversation"
+    ],
+    "source": {
+      "commit": "d13a0c9de9e5fc0eb94edd22d18fd2214ef6537f",
+      "files": {
+        "research/kv-eviction/.gitattributes": "7992d1d038000e8b415e41cf862af0b9493a82501f8c7ad9e2e3b1f8c19c61b3",
+        "research/kv-eviction/.gitignore": "4b6f700070464a8005bda81aefda562b1205359cfa885a72c68d65fef6c9b406",
+        "research/kv-eviction/BASELINE.md": "a8a9d1854127f3cb9a4acc74f99ef4baf708351708c570bb4fa36e4bee8eda7c",
+        "research/kv-eviction/CODEX_RESULTS.md": "23fc200c07b698af99832202a67f6b3773a2e454009664b47d33534513349d8c",
+        "research/kv-eviction/PLAN.md": "9ccfb81447d488a95f2068d7156df28d77d7ac0eabf3bf45ead737a69428f9b2",
+        "research/kv-eviction/README.md": "086f02643ea8256a74c40154044b2ff9b9bc6f61cf28c7e133a5dcfaf5d7ba40",
+        "research/kv-eviction/REPORT.md": "ed97fb50e9d63cd3a4de9c1a216d8713b8076f707029ff7e8b8eed685aadcd83",
+        "research/kv-eviction/RESEARCH_NOTES.md": "5e83514e37dad0e17161f88d14d7b98a644d917ca79c2019b212eba77541c5f7",
+        "research/kv-eviction/baseline.py": "20eabe6909487ce0c370b1e8f62c84edee0b99d12b56270776ddcfc3cead0381",
+        "research/kv-eviction/experiment.py": "5f9b1bce6c3cf978382c63060ee3e39834e9f425ca6e32226ed1a01f0c672cc8",
+        "research/kv-eviction/kv_experiment/__init__.py": "d61ca6c3deda7cdc038ad8d853c01db2db33c1ec0eb7e873e02da34617f707e2",
+        "research/kv-eviction/kv_experiment/agents.py": "2fdfda62a2ec894905de54f8e8a5552a3125ffeebfaba08ccb5169e2d38b23e9",
+        "research/kv-eviction/kv_experiment/legacy.py": "82815d6db140cac818e71ead1fd7e6637fc3ff9307d84c7716fc67bb4dc13ee9",
+        "research/kv-eviction/kv_experiment/metrics.py": "e9209a115101ed8d3b65663109ac4f65d64f97659b69f4ec100319f18aa14a0f",
+        "research/kv-eviction/kv_experiment/policy_worker.py": "da55172af816ad7dbcb28dce84fda79bb7d80ce58d3717d3315bb4d77cb002af",
+        "research/kv-eviction/kv_experiment/runtime.py": "2134717bf3e1d3c44fb39aecf3e534ebefa37ff9117b55f8db5758c29d8e05e9",
+        "research/kv-eviction/kv_experiment/sessions.py": "ef97596ceb9c94cf2d97aad26f91f8de198b1fe587ff612b7db719c1486a6050",
+        "research/kv-eviction/kv_experiment/sources.py": "eebaf62e9f0ce044bc4baecbf83f317e0564867f4092b6ddfe26f9eed36e3715",
+        "research/kv-eviction/kv_experiment/traces.py": "fd162bfbb9b69ca844c3222c74aff4f6403d7b46c3d085b884e89c9c8905bad3",
+        "research/kv-eviction/native/Cargo.lock": "36bf83c62b8ae9abadc2f7061fda783624309ba36995399d9f2a5e48584fafa6",
+        "research/kv-eviction/native/Cargo.toml": "b26ca1c06181b60460e42ea0a8a130f8146e6a06ed4679804565e599963f832e",
+        "research/kv-eviction/native/core.patch": "3befaaf83ab93e88009212a160ad92fde11e356eede339f62cc5779934e3a834",
+        "research/kv-eviction/native/src/main.rs": "872f03cf9e7081d46ee7efad958e9624588dd7caea78fc75fdb80c31a346ae5c",
+        "research/kv-eviction/prepare_native.py": "727909fc852109c7699702dddd3a9fcb3d30356c7983fe5363af74b482806708",
+        "research/kv-eviction/profiles/interactive.json": "87e2329e77b845c0989e686848da6461a35f96969e35f0a631f0e20f15c2b440",
+        "research/kv-eviction/pytest.ini": "63d2d16d09ffac6af35c37894465ff5fda0f528400c04ea11195910526b03f28",
+        "research/kv-eviction/sandbox/AGENTS.md": "70f93658e904c2f7b0f4fa5881d05249237786da186210ab08eb61a6d0fc8c47",
+        "research/kv-eviction/sandbox/CLAUDE.md": "336cc4fbf19beaada7ccf9986414fa91851a8d7a07dfb3ccbe800a69eed0ab49",
+        "research/kv-eviction/sandbox/README.md": "1b9b67b87eb2e1499e2466ca98c8dbae89e7beb07cad95e3c8699f0d5eacbc3b",
+        "research/kv-eviction/sandbox/policy.py": "7cd83d7adc85da7cb8b73843f7eb32fd93faee1c6c9967a45910bdca57127769",
+        "research/kv-eviction/sandbox/policy_runner.py": "8ea160b6aa096ed1d52eacfe16a5ab4f9f73acaae2ee32f3c2bd805b93453164",
+        "research/kv-eviction/sandbox/submit.py": "67d39d494eafb2a38bc73948ea377cabbebf4c30ce14ad28e14300f5bd132742",
+        "research/kv-eviction/sim/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "research/kv-eviction/sim/cache.py": "ad3e312b64a9917edbff583a42ef795c31aa8f77f3477ebca64ab671a68599d0",
+        "research/kv-eviction/sim/trace.py": "66f310516e6282627b135969e2113885fcdeb995cd4ab0483f2e3e0369f322c6"
+      },
+      "sha256": "c33af23d689421f13f3c0ed203a98ef67d00d58c4b8aaa2a02f200c4b826b2be"
+    },
+    "trace": {
+      "name": "mooncake-conversation",
+      "revision": "bd7526307049ee1612cfcb90daceffb128994ade",
+      "url": "https://raw.githubusercontent.com/kvcache-ai/Mooncake/bd7526307049ee1612cfcb90daceffb128994ade/FAST25-release/traces/conversation_trace.jsonl",
+      "sha256": "b8cbb061a85206d729d91cdc2981f43c9e0d99209dce588d3af5f7934408b9df",
+      "filename": "mooncake-conversation.jsonl",
+      "kind": "mooncake",
+      "block_size": 512,
+      "license": "Apache-2.0",
+      "requests": 12031,
+      "subset_lines": null,
+      "uncompressed_sha256": null,
+      "format": "mooncake",
+      "execution": "fixed arrivals, cold state per window",
+      "arrival_time_multiplier": 10.0,
+      "windows": {
+        "tuning": {
+          "start_row": 0,
+          "requests": 256,
+          "first_arrival_ms": 0.0,
+          "last_arrival_ms": 869990.0,
+          "sha256": "1ce3d43624144e7046a9ce0020db3d876c624d5c72cc01056d77fbdd7d94ca09",
+          "cold_start": true
+        },
+        "evaluation": {
+          "start_row": 6015,
+          "requests": 256,
+          "first_arrival_ms": 1881000.0,
+          "last_arrival_ms": 2691000.0,
+          "sha256": "9999cf9a5f6f54bf130d240ff4e23aa31b50f916035078ea89d1e63910bb44e6",
+          "cold_start": true
+        }
+      }
+    },
+    "timing": {
+      "description": "Native polynomial timing: illustrative and uncalibrated; no GPU/model accuracy claim. Single vLLM worker, no offload or speculation. Original arrivals, cold cache per window.",
+      "timing_source": "aisimulate-core native polynomial, pinned version; assumed",
+      "rank": {
+        "block_size": 512,
+        "num_gpu_blocks": 256,
+        "max_num_seqs": 32,
+        "max_num_batched_tokens": 4096,
+        "timing_model": {
+          "type": "polynomial"
+        }
+      },
+      "trace": {
+        "format": "mooncake",
+        "source_block_size": 512,
+        "agentic_lanes": null
+      }
+    },
+    "config_sha256": "b71c5e1639a1f3b0b6e703cd45e0c5d022ce603fecc0a38681aed3ad760a4a9c",
+    "native_binary_sha256": "353cda9683ad0600cc2f0344e5471d45e833fc3e602c5975db9dc936b39b1b1a",
+    "policy_container": "python@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258",
+    "policy_decision_timeout_seconds": 2,
+    "python": "3.12.14 (main, Aug 14 2026, 15:24:41) [Clang 22.1.3 ]",
+    "cargo": "cargo 1.98.0 (797e8a9bc 2026-08-05) (Homebrew)",
+    "slo": {
+      "ttft_ms": 1000,
+      "per_request_p95_itl_ms": 50
+    },
+    "selection": "highest tuning goodput, lowest tuning mean TTFT, earlier submission",
+    "agent": "claude",
+    "model": "claude-sonnet-5-5",
+    "submission_budget": 5,
+    "warmup_requests": 0,
+    "arrival_rate_scale": 0.1,
+    "determinism": "canonical_v1",
+    "limitation": "Uncalibrated polynomial timing; not measured GPU performance. Native inactive release order has no ties, so the creation-order tiebreak is equivalent to native LRU. Legacy results are a separate simulator.",
+    "agent_cli_version": "2.1.285 (Claude Code)"
+  },
+  "baselines": {
+    "native-lru": {
+      "tuning": {
+        "valid": true,
+        "requests": 256,
+        "completed": 256,
+        "mean_ttft_ms": 4917.973468625422,
+        "p95_ttft_ms": 25846.755377999973,
+        "mean_itl_ms": 30.007888380219043,
+        "p95_itl_ms": 34.01000000000931,
+        "itl_samples": 93015,
+        "goodput_rps": 0.05953105007729879,
+        "slo_attainment_pct": 20.703125,
+        "slo_passes": 53,
+        "slo_eligible_requests": 256,
+        "zero_output_requests": 0,
+        "observation_duration_ms": 890291.7037610043,
+        "input_tokens": 3577080,
+        "reused_input_tokens": 130560,
+        "token_hit_pct": 3.6499043912912206,
+        "recomputed_input_tokens": 3446585,
+        "evictions": 6536,
+        "ttft_slo_ms": 1000,
+        "itl_slo_ms": 50,
+        "quantile": "nearest rank",
+        "itl_slo": "per-request p95 of individual gaps",
+        "slo_warning": null,
+        "policy_calls": 0,
+        "simulator_wall_seconds": 2.644367582979612
+      },
+      "evaluation": {
+        "valid": true,
+        "requests": 256,
+        "completed": 256,
+        "mean_ttft_ms": 3460.39840437128,
+        "p95_ttft_ms": 19887.93954000098,
+        "mean_itl_ms": 26.408064641449172,
+        "p95_itl_ms": 33.996203000002424,
+        "itl_samples": 86091,
+        "goodput_rps": 0.10121511157844874,
+        "slo_attainment_pct": 32.421875,
+        "slo_passes": 83,
+        "slo_eligible_requests": 256,
+        "zero_output_requests": 0,
+        "observation_duration_ms": 820035.6518469995,
+        "input_tokens": 2972554,
+        "reused_input_tokens": 130560,
+        "token_hit_pct": 4.392182614680843,
+        "recomputed_input_tokens": 2844801,
+        "evictions": 5345,
+        "ttft_slo_ms": 1000,
+        "itl_slo_ms": 50,
+        "quantile": "nearest rank",
+        "itl_slo": "per-request p95 of individual gaps",
+        "slo_warning": null,
+        "policy_calls": 0,
+        "simulator_wall_seconds": 2.674560792016564
+      }
+    },
+    "leaf-first-lru": {
+      "tuning": {
+        "valid": true,
+        "requests": 256,
+        "completed": 256,
+        "mean_ttft_ms": 4917.973468625422,
+        "p95_ttft_ms": 25846.755377999973,
+        "mean_itl_ms": 30.007888380219043,
+        "p95_itl_ms": 34.01000000000931,
+        "itl_samples": 93015,
+        "goodput_rps": 0.05953105007729879,
+        "slo_attainment_pct": 20.703125,
+        "slo_passes": 53,
+        "slo_eligible_requests": 256,
+        "zero_output_requests": 0,
+        "observation_duration_ms": 890291.7037610043,
+        "input_tokens": 3577080,
+        "reused_input_tokens": 130560,
+        "token_hit_pct": 3.6499043912912206,
+        "recomputed_input_tokens": 3446585,
+        "evictions": 6536,
+        "ttft_slo_ms": 1000,
+        "itl_slo_ms": 50,
+        "quantile": "nearest rank",
+        "itl_slo": "per-request p95 of individual gaps",
+        "slo_warning": null,
+        "policy_calls": 6536,
+        "simulator_wall_seconds": 80.9937176250096
+      },
+      "evaluation": {
+        "valid": true,
+        "requests": 256,
+        "completed": 256,
+        "mean_ttft_ms": 3460.39840437128,
+        "p95_ttft_ms": 19887.93954000098,
+        "mean_itl_ms": 26.408064641449172,
+        "p95_itl_ms": 33.996203000002424,
+        "itl_samples": 86091,
+        "goodput_rps": 0.10121511157844874,
+        "slo_attainment_pct": 32.421875,
+        "slo_passes": 83,
+        "slo_eligible_requests": 256,
+        "zero_output_requests": 0,
+        "observation_duration_ms": 820035.6518469995,
+        "input_tokens": 2972554,
+        "reused_input_tokens": 130560,
+        "token_hit_pct": 4.392182614680843,
+        "recomputed_input_tokens": 2844801,
+        "evictions": 5345,
+        "ttft_slo_ms": 1000,
+        "itl_slo_ms": 50,
+        "quantile": "nearest rank",
+        "itl_slo": "per-request p95 of individual gaps",
+        "slo_warning": null,
+        "policy_calls": 5345,
+        "simulator_wall_seconds": 75.02514716697624
+      }
+    }
+  },
+  "evaluation": {
+    "valid": true,
+    "requests": 256,
+    "completed": 256,
+    "mean_ttft_ms": 3460.39840437128,
+    "p95_ttft_ms": 19887.93954000098,
+    "mean_itl_ms": 26.408064641449172,
+    "p95_itl_ms": 33.996203000002424,
+    "itl_samples": 86091,
+    "goodput_rps": 0.10121511157844874,
+    "slo_attainment_pct": 32.421875,
+    "slo_passes": 83,
+    "slo_eligible_requests": 256,
+    "zero_output_requests": 0,
+    "observation_duration_ms": 820035.6518469995,
+    "input_tokens": 2972554,
+    "reused_input_tokens": 130560,
+    "token_hit_pct": 4.392182614680843,
+    "recomputed_input_tokens": 2844801,
+    "evictions": 5345,
+    "ttft_slo_ms": 1000,
+    "itl_slo_ms": 50,
+    "quantile": "nearest rank",
+    "itl_slo": "per-request p95 of individual gaps",
+    "slo_warning": null,
+    "policy_calls": 5345,
+    "simulator_wall_seconds": 77.4692429160059
+  },
+  "selection": {
+    "submission_id": "2026-10-29-00-52-44",
+    "tuning": {
+      "valid": true,
+      "requests": 256,
+      "completed": 256,
+      "mean_ttft_ms": 4917.973468625422,
+      "p95_ttft_ms": 25846.755377999973,
+      "mean_itl_ms": 30.007888380219043,
+      "p95_itl_ms": 34.01000000000931,
+      "itl_samples": 93015,
+      "goodput_rps": 0.05953105007729879,
+      "slo_attainment_pct": 20.703125,
+      "slo_passes": 53,
+      "slo_eligible_requests": 256,
+      "zero_output_requests": 0,
+      "observation_duration_ms": 890291.7037610043,
+      "input_tokens": 3577080,
+      "reused_input_tokens": 130560,
+      "token_hit_pct": 3.6499043912912206,
+      "recomputed_input_tokens": 3446585,
+      "evictions": 6536,
+      "ttft_slo_ms": 1000,
+      "itl_slo_ms": 50,
+      "quantile": "nearest rank",
+      "itl_slo": "per-request p95 of individual gaps",
+      "slo_warning": null,
+      "policy_calls": 6536,
+      "simulator_wall_seconds": 82.71384320798097
+    },
+    "policy_sha256": "dfcd47759e086eefd22c3eaabfba38dcf11984468a2c367a6a4c3eb8ae9ab934"
+  },
+  "submissions": [
+    {
+      "id": "2026-10-29-00-52-44",
+      "status": {
+        "id": "2026-10-29-00-52-44",
+        "ordinal": 1,
+        "created_at": "2026-10-29T00:52:44.134056-05:00",
+        "valid": true,
+        "tuning": {
+          "valid": true,
+          "requests": 256,
+          "completed": 256,
+          "mean_ttft_ms": 4917.973468625422,
+          "p95_ttft_ms": 25846.755377999973,
+          "mean_itl_ms": 30.007888380219043,
+          "p95_itl_ms": 34.01000000000931,
+          "itl_samples": 93015,
+          "goodput_rps": 0.05953105007729879,
+          "slo_attainment_pct": 20.703125,
+          "slo_passes": 53,
+          "slo_eligible_requests": 256,
+          "zero_output_requests": 0,
+          "observation_duration_ms": 890291.7037610043,
+          "input_tokens": 3577080,
+          "reused_input_tokens": 130560,
+          "token_hit_pct": 3.6499043912912206,
+          "recomputed_input_tokens": 3446585,
+          "evictions": 6536,
+          "ttft_slo_ms": 1000,
+          "itl_slo_ms": 50,
+          "quantile": "nearest rank",
+          "itl_slo": "per-request p95 of individual gaps",
+          "slo_warning": null,
+          "policy_calls": 6536,
+          "simulator_wall_seconds": 82.71384320798097
+        },
+        "policy_sha256": "dfcd47759e086eefd22c3eaabfba38dcf11984468a2c367a6a4c3eb8ae9ab934",
+        "duplicate": false,
+        "wall_seconds": 94.68826370799798
+      },
+      "policy_path": "evidence/comparison/mooncake-conversation-claude/policies/2026-10-29-00-52-44.py",
+      "agent_metadata": {
+        "requested_model": "claude-sonnet-5-5",
+        "resolved_model": "claude-sonnet-5-5",
+        "runtime_seconds": 11.911122958990745,
+        "usage": {
+          "input_tokens": 6,
+          "cache_creation_input_tokens": 3278,
+          "cache_read_input_tokens": 18171,
+          "output_tokens": 1039,
+          "output_tokens_details": {
+            "thinking_tokens": 317
+          },
+          "server_tool_use": {
+            "web_search_requests": 0,
+            "web_fetch_requests": 0
+          },
+          "service_tier": "standard",
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 3278,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "inference_geo": "global",
+          "iterations": [
+            {
+              "input_tokens": 2,
+              "output_tokens": 324,
+              "cache_read_input_tokens": 6983,
+              "cache_creation_input_tokens": 700,
+              "cache_creation": {
+                "ephemeral_5m_input_tokens": 0,
+                "ephemeral_1h_input_tokens": 700
+              },
+              "type": "message"
+            }
+          ],
+          "speed": "standard",
+          "fallback_credit": null
+        },
+        "model_usage": {
+          "claude-sonnet-5-5": {
+            "inputTokens": 6,
+            "outputTokens": 1039,
+            "cacheReadInputTokens": 18171,
+            "cacheCreationInputTokens": 3278,
+            "webSearchRequests": 0,
+            "costUSD": 0.027148199999999997,
+            "contextWindow": 1000000,
+            "maxOutputTokens": 128000,
+            "thinkingTokens": 317,
+            "canonicalModel": "claude-sonnet-5-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          }
+        },
+        "api_equivalent_usd": 0.027148199999999997,
+        "cost_note": "CLI-reported API-equivalent estimate, not subscription billing"
+      }
+    },
+    {
+      "id": "2026-10-29-00-54-18",
+      "status": {
+        "id": "2026-10-29-00-54-18",
+        "ordinal": 2,
+        "created_at": "2026-10-29T00:54:18.823391-05:00",
+        "valid": true,
+        "tuning": {
+          "valid": true,
+          "requests": 256,
+          "completed": 256,
+          "mean_ttft_ms": 4917.973468625422,
+          "p95_ttft_ms": 25846.755377999973,
+          "mean_itl_ms": 30.007888380219043,
+          "p95_itl_ms": 34.01000000000931,
+          "itl_samples": 93015,
+          "goodput_rps": 0.05953105007729879,
+          "slo_attainment_pct": 20.703125,
+          "slo_passes": 53,
+          "slo_eligible_requests": 256,
+          "zero_output_requests": 0,
+          "observation_duration_ms": 890291.7037610043,
+          "input_tokens": 3577080,
+          "reused_input_tokens": 130560,
+          "token_hit_pct": 3.6499043912912206,
+          "recomputed_input_tokens": 3446585,
+          "evictions": 6536,
+          "ttft_slo_ms": 1000,
+          "itl_slo_ms": 50,
+          "quantile": "nearest rank",
+          "itl_slo": "per-request p95 of individual gaps",
+          "slo_warning": null,
+          "policy_calls": 6536,
+          "simulator_wall_seconds": 83.59310800000094
+        },
+        "policy_sha256": "119b39b176e42899bdd88e8ea11194285d130287786bb04954e30728da2911ce",
+        "duplicate": false,
+        "wall_seconds": 96.57617462502094
+      },
+      "policy_path": "evidence/comparison/mooncake-conversation-claude/policies/2026-10-29-00-54-18.py",
+      "agent_metadata": {
+        "requested_model": "claude-sonnet-5-5",
+        "resolved_model": "claude-sonnet-5-5",
+        "runtime_seconds": 12.925825833983254,
+        "usage": {
+          "input_tokens": 6,
+          "cache_creation_input_tokens": 4140,
+          "cache_read_input_tokens": 19470,
+          "output_tokens": 1263,
+          "output_tokens_details": {
+            "thinking_tokens": 361
+          },
+          "server_tool_use": {
+            "web_search_requests": 0,
+            "web_fetch_requests": 0
+          },
+          "service_tier": "standard",
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 4140,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "inference_geo": "global",
+          "iterations": [
+            {
+              "input_tokens": 2,
+              "output_tokens": 376,
+              "cache_read_input_tokens": 7673,
+              "cache_creation_input_tokens": 872,
+              "cache_creation": {
+                "ephemeral_5m_input_tokens": 0,
+                "ephemeral_1h_input_tokens": 872
+              },
+              "type": "message"
+            }
+          ],
+          "speed": "standard",
+          "fallback_credit": null
+        },
+        "model_usage": {
+          "claude-sonnet-5-5": {
+            "inputTokens": 6,
+            "outputTokens": 1263,
+            "cacheReadInputTokens": 19470,
+            "cacheCreationInputTokens": 4140,
+            "webSearchRequests": 0,
+            "costUSD": 0.033096,
+            "contextWindow": 1000000,
+            "maxOutputTokens": 128000,
+            "thinkingTokens": 361,
+            "canonicalModel": "claude-sonnet-5-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          }
+        },
+        "api_equivalent_usd": 0.033096,
+        "cost_note": "CLI-reported API-equivalent estimate, not subscription billing"
+      }
+    },
+    {
+      "id": "2026-10-29-00-55-55",
+      "status": {
+        "id": "2026-10-29-00-55-55",
+        "ordinal": 3,
+        "created_at": "2026-10-29T00:55:55.400589-05:00",
+        "valid": true,
+        "tuning": {
+          "valid": true,
+          "requests": 256,
+          "completed": 256,
+          "mean_ttft_ms": 4917.973468625422,
+          "p95_ttft_ms": 25846.755377999973,
+          "mean_itl_ms": 30.007888380219043,
+          "p95_itl_ms": 34.01000000000931,
+          "itl_samples": 93015,
+          "goodput_rps": 0.05953105007729879,
+          "slo_attainment_pct": 20.703125,
+          "slo_passes": 53,
+          "slo_eligible_requests": 256,
+          "zero_output_requests": 0,
+          "observation_duration_ms": 890291.7037610043,
+          "input_tokens": 3577080,
+          "reused_input_tokens": 130560,
+          "token_hit_pct": 3.6499043912912206,
+          "recomputed_input_tokens": 3446585,
+          "evictions": 6536,
+          "ttft_slo_ms": 1000,
+          "itl_slo_ms": 50,
+          "quantile": "nearest rank",
+          "itl_slo": "per-request p95 of individual gaps",
+          "slo_warning": null,
+          "policy_calls": 6536,
+          "simulator_wall_seconds": 84.717593999987
+        },
+        "policy_sha256": "06adff298180cf5dceaf549ffc08613e3a5b9a3b7785848046261cda2213dcbf",
+        "duplicate": false,
+        "wall_seconds": 94.78587391698966
+      },
+      "policy_path": "evidence/comparison/mooncake-conversation-claude/policies/2026-10-29-00-55-55.py",
+      "agent_metadata": {
+        "requested_model": "claude-sonnet-5-5",
+        "resolved_model": "claude-sonnet-5-5",
+        "runtime_seconds": 10.012371999997413,
+        "usage": {
+          "input_tokens": 6,
+          "cache_creation_input_tokens": 4467,
+          "cache_read_input_tokens": 20781,
+          "output_tokens": 762,
+          "output_tokens_details": {
+            "thinking_tokens": 178
+          },
+          "server_tool_use": {
+            "web_search_requests": 0,
+            "web_fetch_requests": 0
+          },
+          "service_tier": "standard",
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 4467,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "inference_geo": "global",
+          "iterations": [
+            {
+              "input_tokens": 2,
+              "output_tokens": 278,
+              "cache_read_input_tokens": 8403,
+              "cache_creation_input_tokens": 469,
+              "cache_creation": {
+                "ephemeral_5m_input_tokens": 0,
+                "ephemeral_1h_input_tokens": 469
+              },
+              "type": "message"
+            }
+          ],
+          "speed": "standard",
+          "fallback_credit": null
+        },
+        "model_usage": {
+          "claude-sonnet-5-5": {
+            "inputTokens": 6,
+            "outputTokens": 762,
+            "cacheReadInputTokens": 20781,
+            "cacheCreationInputTokens": 4467,
+            "webSearchRequests": 0,
+            "costUSD": 0.0296562,
+            "contextWindow": 1000000,
+            "maxOutputTokens": 128000,
+            "thinkingTokens": 178,
+            "canonicalModel": "claude-sonnet-5-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          }
+        },
+        "api_equivalent_usd": 0.0296562,
+        "cost_note": "CLI-reported API-equivalent estimate, not subscription billing"
+      }
+    },
+    {
+      "id": "2026-10-29-00-57-30",
+      "status": {
+        "id": "2026-10-29-00-57-30",
+        "ordinal": 4,
+        "created_at": "2026-10-29T00:57:30.187582-05:00",
+        "valid": true,
+        "tuning": {
+          "valid": true,
+          "requests": 256,
+          "completed": 256,
+          "mean_ttft_ms": 4917.973468625422,
+          "p95_ttft_ms": 25846.755377999973,
+          "mean_itl_ms": 30.007888380219043,
+          "p95_itl_ms": 34.01000000000931,
+          "itl_samples": 93015,
+          "goodput_rps": 0.05953105007729879,
+          "slo_attainment_pct": 20.703125,
+          "slo_passes": 53,
+          "slo_eligible_requests": 256,
+          "zero_output_requests": 0,
+          "observation_duration_ms": 890291.7037610043,
+          "input_tokens": 3577080,
+          "reused_input_tokens": 130560,
+          "token_hit_pct": 3.6499043912912206,
+          "recomputed_input_tokens": 3446585,
+          "evictions": 6536,
+          "ttft_slo_ms": 1000,
+          "itl_slo_ms": 50,
+          "quantile": "nearest rank",
+          "itl_slo": "per-request p95 of individual gaps",
+          "slo_warning": null,
+          "policy_calls": 6536,
+          "simulator_wall_seconds": 84.75649620799231
+        },
+        "policy_sha256": "a6b7790988bb1a4154216b74e953629b9f52a7547d212f9514c779a415df1ce0",
+        "duplicate": false,
+        "wall_seconds": 95.28601229199558
+      },
+      "policy_path": "evidence/comparison/mooncake-conversation-claude/policies/2026-10-29-00-57-30.py",
+      "agent_metadata": {
+        "requested_model": "claude-sonnet-5-5",
+        "resolved_model": "claude-sonnet-5-5",
+        "runtime_seconds": 10.468788541998947,
+        "usage": {
+          "input_tokens": 6,
+          "cache_creation_input_tokens": 5462,
+          "cache_read_input_tokens": 21951,
+          "output_tokens": 1018,
+          "output_tokens_details": {
+            "thinking_tokens": 213
+          },
+          "server_tool_use": {
+            "web_search_requests": 0,
+            "web_fetch_requests": 0
+          },
+          "service_tier": "standard",
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 5462,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "inference_geo": "global",
+          "iterations": [
+            {
+              "input_tokens": 2,
+              "output_tokens": 276,
+              "cache_read_input_tokens": 8988,
+              "cache_creation_input_tokens": 879,
+              "cache_creation": {
+                "ephemeral_5m_input_tokens": 0,
+                "ephemeral_1h_input_tokens": 879
+              },
+              "type": "message"
+            }
+          ],
+          "speed": "standard",
+          "fallback_credit": null
+        },
+        "model_usage": {
+          "claude-sonnet-5-5": {
+            "inputTokens": 6,
+            "outputTokens": 1018,
+            "cacheReadInputTokens": 21951,
+            "cacheCreationInputTokens": 5462,
+            "webSearchRequests": 0,
+            "costUSD": 0.036430199999999996,
+            "contextWindow": 1000000,
+            "maxOutputTokens": 128000,
+            "thinkingTokens": 213,
+            "canonicalModel": "claude-sonnet-5-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          }
+        },
+        "api_equivalent_usd": 0.036430199999999996,
+        "cost_note": "CLI-reported API-equivalent estimate, not subscription billing"
+      }
+    },
+    {
+      "id": "2026-10-29-00-59-05",
+      "status": {
+        "id": "2026-10-29-00-59-05",
+        "ordinal": 5,
+        "created_at": "2026-10-29T00:59:05.474650-05:00",
+        "valid": true,
+        "tuning": {
+          "valid": true,
+          "requests": 256,
+          "completed": 256,
+          "mean_ttft_ms": 4917.973468625422,
+          "p95_ttft_ms": 25846.755377999973,
+          "mean_itl_ms": 30.007888380219043,
+          "p95_itl_ms": 34.01000000000931,
+          "itl_samples": 93015,
+          "goodput_rps": 0.05953105007729879,
+          "slo_attainment_pct": 20.703125,
+          "slo_passes": 53,
+          "slo_eligible_requests": 256,
+          "zero_output_requests": 0,
+          "observation_duration_ms": 890291.7037610043,
+          "input_tokens": 3577080,
+          "reused_input_tokens": 130560,
+          "token_hit_pct": 3.6499043912912206,
+          "recomputed_input_tokens": 3446585,
+          "evictions": 6536,
+          "ttft_slo_ms": 1000,
+          "itl_slo_ms": 50,
+          "quantile": "nearest rank",
+          "itl_slo": "per-request p95 of individual gaps",
+          "slo_warning": null,
+          "policy_calls": 6536,
+          "simulator_wall_seconds": 83.59420991700608
+        },
+        "policy_sha256": "92b57dfb91f88bd009b9fbb0afe5cfc2c9b6ddb9c5d22cde1868ae26cff114f0",
+        "duplicate": false,
+        "wall_seconds": 95.89862558399909
+      },
+      "policy_path": "evidence/comparison/mooncake-conversation-claude/policies/2026-10-29-00-59-05.py",
+      "agent_metadata": {
+        "requested_model": "claude-sonnet-5-5",
+        "resolved_model": "claude-sonnet-5-5",
+        "runtime_seconds": 12.243361375003587,
+        "usage": {
+          "input_tokens": 6,
+          "cache_creation_input_tokens": 5998,
+          "cache_read_input_tokens": 23131,
+          "output_tokens": 1190,
+          "output_tokens_details": {
+            "thinking_tokens": 365
+          },
+          "server_tool_use": {
+            "web_search_requests": 0,
+            "web_fetch_requests": 0
+          },
+          "service_tier": "standard",
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 5998,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "inference_geo": "global",
+          "iterations": [
+            {
+              "input_tokens": 2,
+              "output_tokens": 355,
+              "cache_read_input_tokens": 9583,
+              "cache_creation_input_tokens": 820,
+              "cache_creation": {
+                "ephemeral_5m_input_tokens": 0,
+                "ephemeral_1h_input_tokens": 820
+              },
+              "type": "message"
+            }
+          ],
+          "speed": "standard",
+          "fallback_credit": null
+        },
+        "model_usage": {
+          "claude-sonnet-5-5": {
+            "inputTokens": 6,
+            "outputTokens": 1190,
+            "cacheReadInputTokens": 23131,
+            "cacheCreationInputTokens": 5998,
+            "webSearchRequests": 0,
+            "costUSD": 0.0405302,
+            "contextWindow": 1000000,
+            "maxOutputTokens": 128000,
+            "thinkingTokens": 365,
+            "canonicalModel": "claude-sonnet-5-5",
+            "provider": "firstParty",
+            "costBasis": "list"
+          }
+        },
+        "api_equivalent_usd": 0.0405302,
+        "cost_note": "CLI-reported API-equivalent estimate, not subscription billing"
+      }
+    }
+  ],
+  "source_snapshot_path": "evidence/comparison/mooncake-conversation-claude/controller-source.zip",
+  "source_snapshot_sha256": "fc81c3b5b245cf611700f1e898418834690135969f2276439e1fe3583572e3e1",
+  "fresh_replay_matches": true,
+  "audited_replays": 10
+}

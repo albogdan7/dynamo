@@ -1,0 +1,62 @@
+{
+  "evaluation": {
+    "matches": true,
+    "requests": 256,
+    "slo_passes": 83,
+    "metrics_sha256": "f20f07bb7155f47c968637c9e70177177d098d2549b339d5b656396e3d37d537"
+  },
+  "leaf-first-lru-evaluation": {
+    "matches": true,
+    "requests": 256,
+    "slo_passes": 83,
+    "metrics_sha256": "e6d892ec6d9ba8df45d96210c816e7212d92deb0d5997af2fdf3d49c3ec1089e"
+  },
+  "leaf-first-lru-tuning": {
+    "matches": true,
+    "requests": 256,
+    "slo_passes": 53,
+    "metrics_sha256": "fe2f8ae6defdf5d3687a2f89c049426b391278304fcdf6a61de2d74f875ec7c5"
+  },
+  "native-lru-evaluation": {
+    "matches": true,
+    "requests": 256,
+    "slo_passes": 83,
+    "metrics_sha256": "bf5ccd1fa5ebc8e53d449d5cc9211b687c62e281a8dc37faeda516f886913e2a"
+  },
+  "native-lru-tuning": {
+    "matches": true,
+    "requests": 256,
+    "slo_passes": 53,
+    "metrics_sha256": "30f48641ac4ed63de921ca4c0a8c73c838005c341527f0ebe7be28c7042d8cea"
+  },
+  "submissions/2026-10-29-00-52-44/tuning": {
+    "matches": true,
+    "requests": 256,
+    "slo_passes": 53,
+    "metrics_sha256": "ef6be7a0e16a8af11f81da39a0d4a2a4f4e57fefaf93ea1d173e0886a27ac7a4"
+  },
+  "submissions/2026-10-29-00-54-18/tuning": {
+    "matches": true,
+    "requests": 256,
+    "slo_passes": 53,
+    "metrics_sha256": "4e60ceceb662b7b20ea74ce9e170c096024c3e57299ad9ca37003c31bfb6b859"
+  },
+  "submissions/2026-10-29-00-55-55/tuning": {
+    "matches": true,
+    "requests": 256,
+    "slo_passes": 53,
+    "metrics_sha256": "fff71cfec6d022f7722205f5a2d512ad3c9a37fe3f3a33ee8a06808058b30a9e"
+  },
+  "submissions/2026-10-29-00-57-30/tuning": {
+    "matches": true,
+    "requests": 256,
+    "slo_passes": 53,
+    "metrics_sha256": "796897698044ed6c1f9021a8ccdc72b7a10c2d4fffb455d64f00972eb7d298c0"
+  },
+  "submissions/2026-10-29-00-59-05/tuning": {
+    "matches": true,
+    "requests": 256,
+    "slo_passes": 53,
+    "metrics_sha256": "8c1612444344bf42e2e382b2667cde9fb460ce7673bb59541c27a25f2c3427ff"
+  }
+}

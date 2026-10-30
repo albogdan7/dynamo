@@ -1,0 +1,16 @@
+{
+  "requested_model": "gpt-6.1-sol",
+  "resolved_model": null,
+  "model_identity_note": "Exact requested model ID; CLI JSON does not report the server-resolved ID",
+  "runtime_seconds": 15.425225832994329,
+  "usage": {
+    "input_tokens": 29092,
+    "cached_input_tokens": 23552,
+    "cache_write_input_tokens": 0,
+    "output_tokens": 471,
+    "reasoning_output_tokens": 0
+  },
+  "model_usage": null,
+  "api_equivalent_usd": null,
+  "cost_note": "CLI reports token usage but no monetary cost; no estimate invented"
+}

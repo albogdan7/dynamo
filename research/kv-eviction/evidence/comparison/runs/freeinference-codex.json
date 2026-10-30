@@ -1,0 +1,745 @@
+{
+  "schema_version": 1,
+  "trace": "freeinference",
+  "agent": "codex",
+  "model": "gpt-6.1-sol",
+  "original_run": "experiments/extension-codex-freeinference",
+  "manifest": {
+    "schema_version": 1,
+    "created_at": "2026-10-29T00:50:15.544313-05:00",
+    "timezone": "America/Chicago",
+    "command": [
+      "/Users/miguel/Documents/ChatGPT/Agentic GPU Environment/dynamo-kv-research/research/kv-eviction/.venv/bin/python",
+      "research/kv-eviction/experiment.py",
+      "run",
+      "--agent",
+      "codex",
+      "--model",
+      "gpt-6.1-sol",
+      "--trace",
+      "freeinference",
+      "--sessions-per-split",
+      "3",
+      "--cache-tokens",
+      "81920",
+      "--submissions",
+      "5",
+      "--output",
+      "experiments/extension-codex-freeinference"
+    ],
+    "source": {
+      "commit": "d13a0c9de9e5fc0eb94edd22d18fd2214ef6537f",
+      "files": {
+        "research/kv-eviction/.gitattributes": "7992d1d038000e8b415e41cf862af0b9493a82501f8c7ad9e2e3b1f8c19c61b3",
+        "research/kv-eviction/.gitignore": "4b6f700070464a8005bda81aefda562b1205359cfa885a72c68d65fef6c9b406",
+        "research/kv-eviction/BASELINE.md": "a8a9d1854127f3cb9a4acc74f99ef4baf708351708c570bb4fa36e4bee8eda7c",
+        "research/kv-eviction/CODEX_RESULTS.md": "23fc200c07b698af99832202a67f6b3773a2e454009664b47d33534513349d8c",
+        "research/kv-eviction/PLAN.md": "9ccfb81447d488a95f2068d7156df28d77d7ac0eabf3bf45ead737a69428f9b2",
+        "research/kv-eviction/README.md": "086f02643ea8256a74c40154044b2ff9b9bc6f61cf28c7e133a5dcfaf5d7ba40",
+        "research/kv-eviction/REPORT.md": "ed97fb50e9d63cd3a4de9c1a216d8713b8076f707029ff7e8b8eed685aadcd83",
+        "research/kv-eviction/RESEARCH_NOTES.md": "5e83514e37dad0e17161f88d14d7b98a644d917ca79c2019b212eba77541c5f7",
+        "research/kv-eviction/baseline.py": "20eabe6909487ce0c370b1e8f62c84edee0b99d12b56270776ddcfc3cead0381",
+        "research/kv-eviction/experiment.py": "5f9b1bce6c3cf978382c63060ee3e39834e9f425ca6e32226ed1a01f0c672cc8",
+        "research/kv-eviction/kv_experiment/__init__.py": "d61ca6c3deda7cdc038ad8d853c01db2db33c1ec0eb7e873e02da34617f707e2",
+        "research/kv-eviction/kv_experiment/agents.py": "2fdfda62a2ec894905de54f8e8a5552a3125ffeebfaba08ccb5169e2d38b23e9",
+        "research/kv-eviction/kv_experiment/legacy.py": "82815d6db140cac818e71ead1fd7e6637fc3ff9307d84c7716fc67bb4dc13ee9",
+        "research/kv-eviction/kv_experiment/metrics.py": "e9209a115101ed8d3b65663109ac4f65d64f97659b69f4ec100319f18aa14a0f",
+        "research/kv-eviction/kv_experiment/policy_worker.py": "da55172af816ad7dbcb28dce84fda79bb7d80ce58d3717d3315bb4d77cb002af",
+        "research/kv-eviction/kv_experiment/runtime.py": "2134717bf3e1d3c44fb39aecf3e534ebefa37ff9117b55f8db5758c29d8e05e9",
+        "research/kv-eviction/kv_experiment/sessions.py": "ef97596ceb9c94cf2d97aad26f91f8de198b1fe587ff612b7db719c1486a6050",
+        "research/kv-eviction/kv_experiment/sources.py": "eebaf62e9f0ce044bc4baecbf83f317e0564867f4092b6ddfe26f9eed36e3715",
+        "research/kv-eviction/kv_experiment/traces.py": "fd162bfbb9b69ca844c3222c74aff4f6403d7b46c3d085b884e89c9c8905bad3",
+        "research/kv-eviction/native/Cargo.lock": "36bf83c62b8ae9abadc2f7061fda783624309ba36995399d9f2a5e48584fafa6",
+        "research/kv-eviction/native/Cargo.toml": "b26ca1c06181b60460e42ea0a8a130f8146e6a06ed4679804565e599963f832e",
+        "research/kv-eviction/native/core.patch": "3befaaf83ab93e88009212a160ad92fde11e356eede339f62cc5779934e3a834",
+        "research/kv-eviction/native/src/main.rs": "872f03cf9e7081d46ee7efad958e9624588dd7caea78fc75fdb80c31a346ae5c",
+        "research/kv-eviction/prepare_native.py": "727909fc852109c7699702dddd3a9fcb3d30356c7983fe5363af74b482806708",
+        "research/kv-eviction/profiles/interactive.json": "87e2329e77b845c0989e686848da6461a35f96969e35f0a631f0e20f15c2b440",
+        "research/kv-eviction/pytest.ini": "63d2d16d09ffac6af35c37894465ff5fda0f528400c04ea11195910526b03f28",
+        "research/kv-eviction/sandbox/AGENTS.md": "70f93658e904c2f7b0f4fa5881d05249237786da186210ab08eb61a6d0fc8c47",
+        "research/kv-eviction/sandbox/CLAUDE.md": "336cc4fbf19beaada7ccf9986414fa91851a8d7a07dfb3ccbe800a69eed0ab49",
+        "research/kv-eviction/sandbox/README.md": "1b9b67b87eb2e1499e2466ca98c8dbae89e7beb07cad95e3c8699f0d5eacbc3b",
+        "research/kv-eviction/sandbox/policy.py": "7cd83d7adc85da7cb8b73843f7eb32fd93faee1c6c9967a45910bdca57127769",
+        "research/kv-eviction/sandbox/policy_runner.py": "8ea160b6aa096ed1d52eacfe16a5ab4f9f73acaae2ee32f3c2bd805b93453164",
+        "research/kv-eviction/sandbox/submit.py": "67d39d494eafb2a38bc73948ea377cabbebf4c30ce14ad28e14300f5bd132742",
+        "research/kv-eviction/sim/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "research/kv-eviction/sim/cache.py": "ad3e312b64a9917edbff583a42ef795c31aa8f77f3477ebca64ab671a68599d0",
+        "research/kv-eviction/sim/trace.py": "66f310516e6282627b135969e2113885fcdeb995cd4ab0483f2e3e0369f322c6"
+      },
+      "sha256": "c33af23d689421f13f3c0ed203a98ef67d00d58c4b8aaa2a02f200c4b826b2be"
+    },
+    "trace": {
+      "name": "freeinference",
+      "revision": "16d3c04dae6ccaa0c48a9064e204e3a8f1eb9ade",
+      "url": "https://huggingface.co/datasets/harvardMadsys/freeinference_agentic_trace/resolve/16d3c04dae6ccaa0c48a9064e204e3a8f1eb9ade/release/2026-05-17_2026-05-23/traces/2026-05-20.jsonl.zst",
+      "sha256": "ea26af1a19b0b33ee40d89f5007bfd67f66cf4ee574f8b8b2819b6b16865ec38",
+      "filename": "freeinference-2026-05-20.jsonl.zst",
+      "kind": "freeinference",
+      "block_size": 16,
+      "license": "CC-BY-4.0",
+      "requests": 383,
+      "subset_lines": null,
+      "uncompressed_sha256": "adfe09d432bd8951ae8118af7f002da5c3ebc5c510c098cc35c10d2f1f71940b",
+      "format": "agentic_mooncake",
+      "arrival_time_multiplier": 1,
+      "execution": "closed-loop sequential sessions; observed global root arrivals",
+      "agentic_lanes": null,
+      "qualification": [
+        {
+          "source_ordinal": 0,
+          "session_id": "dd61cc99371202af32b75b9f27c597bf",
+          "excluded_reasons": []
+        },
+        {
+          "source_ordinal": 1,
+          "session_id": "d0fa3399fd997fb3d28c09993dd0ddb4",
+          "excluded_reasons": []
+        },
+        {
+          "source_ordinal": 2,
+          "session_id": "32a4cc99d4f882f3674231e3c8f5d303",
+          "excluded_reasons": [
+            "nonpositive or missing reported completion count",
+            "nested sessions require unsupported join semantics"
+          ]
+        },
+        {
+          "source_ordinal": 3,
+          "session_id": "a0065601c92b45745f34098489333c00",
+          "excluded_reasons": []
+        },
+        {
+          "source_ordinal": 4,
+          "session_id": "dd041c112f29ceac39e832f2ecb5daa1",
+          "excluded_reasons": []
+        },
+        {
+          "source_ordinal": 5,
+          "session_id": "16d5d171c7b702fc0bedab4b1dae9bff",
+          "excluded_reasons": [
+            "nonpositive or missing reported completion count"
+          ]
+        },
+        {
+          "source_ordinal": 6,
+          "session_id": "3241864c9ad29055b2c2c21bf23ee9f2",
+          "excluded_reasons": [
+            "nonpositive or missing reported completion count"
+          ]
+        },
+        {
+          "source_ordinal": 7,
+          "session_id": "6e249f132d1a6feed26d5f8974bfb926",
+          "excluded_reasons": [
+            "nonpositive or missing reported completion count"
+          ]
+        },
+        {
+          "source_ordinal": 8,
+          "session_id": "462cc2bb0823c654d053ce19ce13f24a",
+          "excluded_reasons": [
+            "nonpositive or missing reported completion count"
+          ]
+        },
+        {
+          "source_ordinal": 9,
+          "session_id": "c22b28eff2fd453764e64a4c32963ef8",
+          "excluded_reasons": [
+            "nonpositive or missing reported completion count"
+          ]
+        },
+        {
+          "source_ordinal": 10,
+          "session_id": "42311ae25abc4ace0b8f22111dd9ee27",
+          "excluded_reasons": [
+            "nonpositive or missing reported completion count"
+          ]
+        },
+        {
+          "source_ordinal": 11,
+          "session_id": "d656f4a253787c334fd3c0a1780c742f",
+          "excluded_reasons": [
+            "nonpositive or missing reported completion count"
+          ]
+        },
+        {
+          "source_ordinal": 12,
+          "session_id": "fe6ab274dcb83bade53ec09495dbaca9",
+          "excluded_reasons": [
+            "nonpositive or missing reported completion count"
+          ]
+        },
+        {
+          "source_ordinal": 13,
+          "session_id": "e12acdc528238f63c275b7a9d5bc970a",
+          "excluded_reasons": []
+        },
+        {
+          "source_ordinal": 14,
+          "session_id": "c7745fa83bd71feb808e427ca7ffa8f5",
+          "excluded_reasons": []
+        },
+        {
+          "source_ordinal": 15,
+          "session_id": "315cf0d7bb2f909e9351b68691950015",
+          "excluded_reasons": []
+        },
+        {
+          "source_ordinal": 16,
+          "session_id": "58cedf51d9aa480ac2836f7a3d8d7ad9",
+          "excluded_reasons": [
+            "nonpositive or missing reported completion count"
+          ]
+        }
+      ],
+      "source_sessions": 17,
+      "qualified_sessions": 7,
+      "windows": {
+        "tuning": {
+          "source_ordinals": [
+            0,
+            1,
+            3
+          ],
+          "session_ids": [
+            "dd61cc99371202af32b75b9f27c597bf",
+            "d0fa3399fd997fb3d28c09993dd0ddb4",
+            "a0065601c92b45745f34098489333c00"
+          ],
+          "sessions": 3,
+          "requests": 139,
+          "sha256": "73f71ab68c4dbb2cfd3313c0b85a0cbc9867ff7738e850973c7596ba5de56f7c",
+          "source_sha256": "c2eb3ff882a3956fc70b0b3a49a66ad4d6f64998d52a0417ce38c029062e9656",
+          "minimum_cache_tokens": 70144,
+          "cold_start": true
+        },
+        "evaluation": {
+          "source_ordinals": [
+            4,
+            13,
+            14
+          ],
+          "session_ids": [
+            "dd041c112f29ceac39e832f2ecb5daa1",
+            "e12acdc528238f63c275b7a9d5bc970a",
+            "c7745fa83bd71feb808e427ca7ffa8f5"
+          ],
+          "sessions": 3,
+          "requests": 33,
+          "sha256": "22550720ea378ad46fd02bc836756195919968d8588acfb50cb04bc4df15dbf9",
+          "source_sha256": "d0a2c25f95217d8738bb0c80679019f46dffb4bf4d4bd4fd3508b5c87c1fbdd2",
+          "minimum_cache_tokens": 44544,
+          "cold_start": true
+        }
+      },
+      "model_hash_isolation": true,
+      "input_count_basis": "o200k_base role-token sum; provider-reported completion tokens; private partial input tails"
+    },
+    "timing": {
+      "description": "Native polynomial timing: illustrative and uncalibrated; no GPU/model accuracy claim. Single vLLM worker, no offload or speculation. Original arrivals, cold cache per window.",
+      "timing_source": "aisimulate-core native polynomial, pinned version; assumed",
+      "rank": {
+        "block_size": 512,
+        "num_gpu_blocks": 160,
+        "max_num_seqs": 32,
+        "max_num_batched_tokens": 4096,
+        "timing_model": {
+          "type": "polynomial"
+        }
+      },
+      "trace": {
+        "format": "agentic_mooncake",
+        "source_block_size": 16,
+        "agentic_lanes": null
+      }
+    },
+    "config_sha256": "2bdb4bc040a82d28dbc0c2ce195c2d4ee93149b626acf6c8478366c01a5823b6",
+    "native_binary_sha256": "353cda9683ad0600cc2f0344e5471d45e833fc3e602c5975db9dc936b39b1b1a",
+    "policy_container": "python@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258",
+    "policy_decision_timeout_seconds": 2,
+    "python": "3.12.14 (main, Aug 14 2026, 15:24:41) [Clang 22.1.3 ]",
+    "cargo": "cargo 1.98.0 (797e8a9bc 2026-08-05) (Homebrew)",
+    "slo": {
+      "ttft_ms": 1000,
+      "per_request_p95_itl_ms": 50
+    },
+    "selection": "highest tuning goodput, lowest tuning mean TTFT, earlier submission",
+    "agent": "codex",
+    "model": "gpt-6.1-sol",
+    "submission_budget": 5,
+    "warmup_requests": 0,
+    "arrival_rate_scale": 1.0,
+    "determinism": "canonical_v1",
+    "limitation": "Uncalibrated polynomial timing; not measured GPU performance. Native inactive release order has no ties, so the creation-order tiebreak is equivalent to native LRU. Legacy results are a separate simulator.",
+    "agent_cli_version": "codex-cli 0.164.0"
+  },
+  "baselines": {
+    "native-lru": {
+      "tuning": {
+        "valid": true,
+        "requests": 139,
+        "completed": 139,
+        "mean_ttft_ms": 58.13206195682844,
+        "p95_ttft_ms": 210.5210569985211,
+        "mean_itl_ms": 28.782723594347807,
+        "p95_itl_ms": 32.93877800181508,
+        "itl_samples": 31816,
+        "goodput_rps": 0.003566683929981143,
+        "slo_attainment_pct": 99.28057553956835,
+        "slo_passes": 138,
+        "slo_eligible_requests": 139,
+        "zero_output_requests": 0,
+        "observation_duration_ms": 38691401.51163594,
+        "input_tokens": 6871394,
+        "reused_input_tokens": 6560768,
+        "token_hit_pct": 95.47943255764406,
+        "recomputed_input_tokens": 310626,
+        "evictions": 443,
+        "ttft_slo_ms": 1000,
+        "itl_slo_ms": 50,
+        "quantile": "nearest rank",
+        "itl_slo": "per-request p95 of individual gaps",
+        "slo_warning": "SLO attainment is <=5% or >=95%; check whether this load supports meaningful comparisons",
+        "policy_calls": 0,
+        "simulator_wall_seconds": 1.284827250026865
+      },
+      "evaluation": {
+        "valid": true,
+        "requests": 33,
+        "completed": 33,
+        "mean_ttft_ms": 86.94621200143762,
+        "p95_ttft_ms": 472.44280000030994,
+        "mean_itl_ms": 23.53870153079255,
+        "p95_itl_ms": 27.194962000008672,
+        "itl_samples": 9676,
+        "goodput_rps": 0.0018798951949952345,
+        "slo_attainment_pct": 100.0,
+        "slo_passes": 33,
+        "slo_eligible_requests": 33,
+        "zero_output_requests": 0,
+        "observation_duration_ms": 17554170.087701965,
+        "input_tokens": 776569,
+        "reused_input_tokens": 657408,
+        "token_hit_pct": 84.65545238092172,
+        "recomputed_input_tokens": 119161,
+        "evictions": 78,
+        "ttft_slo_ms": 1000,
+        "itl_slo_ms": 50,
+        "quantile": "nearest rank",
+        "itl_slo": "per-request p95 of individual gaps",
+        "slo_warning": "SLO attainment is <=5% or >=95%; check whether this load supports meaningful comparisons",
+        "policy_calls": 0,
+        "simulator_wall_seconds": 0.2732138340070378
+      }
+    },
+    "leaf-first-lru": {
+      "tuning": {
+        "valid": true,
+        "requests": 139,
+        "completed": 139,
+        "mean_ttft_ms": 58.13206195682844,
+        "p95_ttft_ms": 210.5210569985211,
+        "mean_itl_ms": 28.782723594347807,
+        "p95_itl_ms": 32.93877800181508,
+        "itl_samples": 31816,
+        "goodput_rps": 0.003566683929981143,
+        "slo_attainment_pct": 99.28057553956835,
+        "slo_passes": 138,
+        "slo_eligible_requests": 139,
+        "zero_output_requests": 0,
+        "observation_duration_ms": 38691401.51163594,
+        "input_tokens": 6871394,
+        "reused_input_tokens": 6560768,
+        "token_hit_pct": 95.47943255764406,
+        "recomputed_input_tokens": 310626,
+        "evictions": 443,
+        "ttft_slo_ms": 1000,
+        "itl_slo_ms": 50,
+        "quantile": "nearest rank",
+        "itl_slo": "per-request p95 of individual gaps",
+        "slo_warning": "SLO attainment is <=5% or >=95%; check whether this load supports meaningful comparisons",
+        "policy_calls": 443,
+        "simulator_wall_seconds": 6.1509161250141915
+      },
+      "evaluation": {
+        "valid": true,
+        "requests": 33,
+        "completed": 33,
+        "mean_ttft_ms": 86.94621200143762,
+        "p95_ttft_ms": 472.44280000030994,
+        "mean_itl_ms": 23.53870153079255,
+        "p95_itl_ms": 27.194962000008672,
+        "itl_samples": 9676,
+        "goodput_rps": 0.0018798951949952345,
+        "slo_attainment_pct": 100.0,
+        "slo_passes": 33,
+        "slo_eligible_requests": 33,
+        "zero_output_requests": 0,
+        "observation_duration_ms": 17554170.087701965,
+        "input_tokens": 776569,
+        "reused_input_tokens": 657408,
+        "token_hit_pct": 84.65545238092172,
+        "recomputed_input_tokens": 119161,
+        "evictions": 78,
+        "ttft_slo_ms": 1000,
+        "itl_slo_ms": 50,
+        "quantile": "nearest rank",
+        "itl_slo": "per-request p95 of individual gaps",
+        "slo_warning": "SLO attainment is <=5% or >=95%; check whether this load supports meaningful comparisons",
+        "policy_calls": 78,
+        "simulator_wall_seconds": 1.7672138330235612
+      }
+    }
+  },
+  "evaluation": {
+    "valid": true,
+    "requests": 33,
+    "completed": 33,
+    "mean_ttft_ms": 87.45565748616524,
+    "p95_ttft_ms": 472.44280000030994,
+    "mean_itl_ms": 23.540533671450298,
+    "p95_itl_ms": 27.194962000008672,
+    "itl_samples": 9676,
+    "goodput_rps": 0.0018798944127891791,
+    "slo_attainment_pct": 100.0,
+    "slo_passes": 33,
+    "slo_eligible_requests": 33,
+    "zero_output_requests": 0,
+    "observation_duration_ms": 17554177.391823966,
+    "input_tokens": 776569,
+    "reused_input_tokens": 656384,
+    "token_hit_pct": 84.52359030556202,
+    "recomputed_input_tokens": 120185,
+    "evictions": 80,
+    "ttft_slo_ms": 1000,
+    "itl_slo_ms": 50,
+    "quantile": "nearest rank",
+    "itl_slo": "per-request p95 of individual gaps",
+    "slo_warning": "SLO attainment is <=5% or >=95%; check whether this load supports meaningful comparisons",
+    "policy_calls": 80,
+    "simulator_wall_seconds": 1.8785518750082701
+  },
+  "selection": {
+    "submission_id": "2026-10-29-00-50-25",
+    "tuning": {
+      "valid": true,
+      "requests": 139,
+      "completed": 139,
+      "mean_ttft_ms": 58.13206195682844,
+      "p95_ttft_ms": 210.5210569985211,
+      "mean_itl_ms": 28.782723594347807,
+      "p95_itl_ms": 32.93877800181508,
+      "itl_samples": 31816,
+      "goodput_rps": 0.003566683929981143,
+      "slo_attainment_pct": 99.28057553956835,
+      "slo_passes": 138,
+      "slo_eligible_requests": 139,
+      "zero_output_requests": 0,
+      "observation_duration_ms": 38691401.51163594,
+      "input_tokens": 6871394,
+      "reused_input_tokens": 6560768,
+      "token_hit_pct": 95.47943255764406,
+      "recomputed_input_tokens": 310626,
+      "evictions": 443,
+      "ttft_slo_ms": 1000,
+      "itl_slo_ms": 50,
+      "quantile": "nearest rank",
+      "itl_slo": "per-request p95 of individual gaps",
+      "slo_warning": "SLO attainment is <=5% or >=95%; check whether this load supports meaningful comparisons",
+      "policy_calls": 443,
+      "simulator_wall_seconds": 7.392219540983206
+    },
+    "policy_sha256": "0061c4b24b5ae36ea8c7aa4a055f8a1175a60b714dfdb55012ffdef21592a7ca"
+  },
+  "submissions": [
+    {
+      "id": "2026-10-29-00-50-25",
+      "status": {
+        "id": "2026-10-29-00-50-25",
+        "ordinal": 1,
+        "created_at": "2026-10-29T00:50:25.053821-05:00",
+        "valid": true,
+        "tuning": {
+          "valid": true,
+          "requests": 139,
+          "completed": 139,
+          "mean_ttft_ms": 58.13206195682844,
+          "p95_ttft_ms": 210.5210569985211,
+          "mean_itl_ms": 28.782723594347807,
+          "p95_itl_ms": 32.93877800181508,
+          "itl_samples": 31816,
+          "goodput_rps": 0.003566683929981143,
+          "slo_attainment_pct": 99.28057553956835,
+          "slo_passes": 138,
+          "slo_eligible_requests": 139,
+          "zero_output_requests": 0,
+          "observation_duration_ms": 38691401.51163594,
+          "input_tokens": 6871394,
+          "reused_input_tokens": 6560768,
+          "token_hit_pct": 95.47943255764406,
+          "recomputed_input_tokens": 310626,
+          "evictions": 443,
+          "ttft_slo_ms": 1000,
+          "itl_slo_ms": 50,
+          "quantile": "nearest rank",
+          "itl_slo": "per-request p95 of individual gaps",
+          "slo_warning": "SLO attainment is <=5% or >=95%; check whether this load supports meaningful comparisons",
+          "policy_calls": 443,
+          "simulator_wall_seconds": 7.392219540983206
+        },
+        "policy_sha256": "0061c4b24b5ae36ea8c7aa4a055f8a1175a60b714dfdb55012ffdef21592a7ca",
+        "duplicate": false,
+        "wall_seconds": 22.879087250010343
+      },
+      "policy_path": "evidence/comparison/freeinference-codex/policies/2026-10-29-00-50-25.py",
+      "agent_metadata": {
+        "requested_model": "gpt-6.1-sol",
+        "resolved_model": null,
+        "model_identity_note": "Exact requested model ID; CLI JSON does not report the server-resolved ID",
+        "runtime_seconds": 15.261114708002424,
+        "usage": {
+          "input_tokens": 26933,
+          "cached_input_tokens": 22400,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 319,
+          "reasoning_output_tokens": 0
+        },
+        "model_usage": null,
+        "api_equivalent_usd": null,
+        "cost_note": "CLI reports token usage but no monetary cost; no estimate invented"
+      }
+    },
+    {
+      "id": "2026-10-29-00-50-47",
+      "status": {
+        "id": "2026-10-29-00-50-47",
+        "ordinal": 2,
+        "created_at": "2026-10-29T00:50:47.934481-05:00",
+        "valid": true,
+        "tuning": {
+          "valid": true,
+          "requests": 139,
+          "completed": 139,
+          "mean_ttft_ms": 58.13206195682844,
+          "p95_ttft_ms": 210.5210569985211,
+          "mean_itl_ms": 28.782723594347807,
+          "p95_itl_ms": 32.93877800181508,
+          "itl_samples": 31816,
+          "goodput_rps": 0.003566683929981143,
+          "slo_attainment_pct": 99.28057553956835,
+          "slo_passes": 138,
+          "slo_eligible_requests": 139,
+          "zero_output_requests": 0,
+          "observation_duration_ms": 38691401.51163594,
+          "input_tokens": 6871394,
+          "reused_input_tokens": 6560768,
+          "token_hit_pct": 95.47943255764406,
+          "recomputed_input_tokens": 310626,
+          "evictions": 443,
+          "ttft_slo_ms": 1000,
+          "itl_slo_ms": 50,
+          "quantile": "nearest rank",
+          "itl_slo": "per-request p95 of individual gaps",
+          "slo_warning": "SLO attainment is <=5% or >=95%; check whether this load supports meaningful comparisons",
+          "policy_calls": 443,
+          "simulator_wall_seconds": 5.920568916015327
+        },
+        "policy_sha256": "ef928e78a5d1d1c9c8b4e92688e850e3669aec57eee1cf42767c5e9789c4377a",
+        "duplicate": false,
+        "wall_seconds": 44.962501666974276
+      },
+      "policy_path": "evidence/comparison/freeinference-codex/policies/2026-10-29-00-50-47.py",
+      "agent_metadata": {
+        "requested_model": "gpt-6.1-sol",
+        "resolved_model": null,
+        "model_identity_note": "Exact requested model ID; CLI JSON does not report the server-resolved ID",
+        "runtime_seconds": 38.76377583399881,
+        "usage": {
+          "input_tokens": 42558,
+          "cached_input_tokens": 37120,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 825,
+          "reasoning_output_tokens": 321
+        },
+        "model_usage": null,
+        "api_equivalent_usd": null,
+        "cost_note": "CLI reports token usage but no monetary cost; no estimate invented"
+      }
+    },
+    {
+      "id": "2026-10-29-00-51-32",
+      "status": {
+        "id": "2026-10-29-00-51-32",
+        "ordinal": 3,
+        "created_at": "2026-10-29T00:51:32.897990-05:00",
+        "valid": true,
+        "tuning": {
+          "valid": true,
+          "requests": 139,
+          "completed": 139,
+          "mean_ttft_ms": 58.13206195682844,
+          "p95_ttft_ms": 210.5210569985211,
+          "mean_itl_ms": 28.782723594347807,
+          "p95_itl_ms": 32.93877800181508,
+          "itl_samples": 31816,
+          "goodput_rps": 0.003566683929981143,
+          "slo_attainment_pct": 99.28057553956835,
+          "slo_passes": 138,
+          "slo_eligible_requests": 139,
+          "zero_output_requests": 0,
+          "observation_duration_ms": 38691401.51163594,
+          "input_tokens": 6871394,
+          "reused_input_tokens": 6560768,
+          "token_hit_pct": 95.47943255764406,
+          "recomputed_input_tokens": 310626,
+          "evictions": 443,
+          "ttft_slo_ms": 1000,
+          "itl_slo_ms": 50,
+          "quantile": "nearest rank",
+          "itl_slo": "per-request p95 of individual gaps",
+          "slo_warning": "SLO attainment is <=5% or >=95%; check whether this load supports meaningful comparisons",
+          "policy_calls": 443,
+          "simulator_wall_seconds": 6.2868367500195745
+        },
+        "policy_sha256": "3de087047ec8a90141af0c3ad77585df5826a3709e49d9c4caf39c1b0f4a609b",
+        "duplicate": false,
+        "wall_seconds": 29.90212804201292
+      },
+      "policy_path": "evidence/comparison/freeinference-codex/policies/2026-10-29-00-51-32.py",
+      "agent_metadata": {
+        "requested_model": "gpt-6.1-sol",
+        "resolved_model": null,
+        "model_identity_note": "Exact requested model ID; CLI JSON does not report the server-resolved ID",
+        "runtime_seconds": 23.347945834015263,
+        "usage": {
+          "input_tokens": 44041,
+          "cached_input_tokens": 38144,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 656,
+          "reasoning_output_tokens": 117
+        },
+        "model_usage": null,
+        "api_equivalent_usd": null,
+        "cost_note": "CLI reports token usage but no monetary cost; no estimate invented"
+      }
+    },
+    {
+      "id": "2026-10-29-00-52-02",
+      "status": {
+        "id": "2026-10-29-00-52-02",
+        "ordinal": 4,
+        "created_at": "2026-10-29T00:52:02.800701-05:00",
+        "valid": true,
+        "tuning": {
+          "valid": true,
+          "requests": 139,
+          "completed": 139,
+          "mean_ttft_ms": 58.13206195682844,
+          "p95_ttft_ms": 210.5210569985211,
+          "mean_itl_ms": 28.782723594347807,
+          "p95_itl_ms": 32.93877800181508,
+          "itl_samples": 31816,
+          "goodput_rps": 0.003566683929981143,
+          "slo_attainment_pct": 99.28057553956835,
+          "slo_passes": 138,
+          "slo_eligible_requests": 139,
+          "zero_output_requests": 0,
+          "observation_duration_ms": 38691401.51163594,
+          "input_tokens": 6871394,
+          "reused_input_tokens": 6560768,
+          "token_hit_pct": 95.47943255764406,
+          "recomputed_input_tokens": 310626,
+          "evictions": 443,
+          "ttft_slo_ms": 1000,
+          "itl_slo_ms": 50,
+          "quantile": "nearest rank",
+          "itl_slo": "per-request p95 of individual gaps",
+          "slo_warning": "SLO attainment is <=5% or >=95%; check whether this load supports meaningful comparisons",
+          "policy_calls": 443,
+          "simulator_wall_seconds": 6.200684709008783
+        },
+        "policy_sha256": "143c82c31a661d322141cb0026ededc4141b2066461edc65fabffe5c25a29560",
+        "duplicate": false,
+        "wall_seconds": 29.96603308300837
+      },
+      "policy_path": "evidence/comparison/freeinference-codex/policies/2026-10-29-00-52-02.py",
+      "agent_metadata": {
+        "requested_model": "gpt-6.1-sol",
+        "resolved_model": null,
+        "model_identity_note": "Exact requested model ID; CLI JSON does not report the server-resolved ID",
+        "runtime_seconds": 23.503725749993464,
+        "usage": {
+          "input_tokens": 45317,
+          "cached_input_tokens": 38400,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 607,
+          "reasoning_output_tokens": 179
+        },
+        "model_usage": null,
+        "api_equivalent_usd": null,
+        "cost_note": "CLI reports token usage but no monetary cost; no estimate invented"
+      }
+    },
+    {
+      "id": "2026-10-29-00-52-32",
+      "status": {
+        "id": "2026-10-29-00-52-32",
+        "ordinal": 5,
+        "created_at": "2026-10-29T00:52:32.767350-05:00",
+        "valid": true,
+        "tuning": {
+          "valid": true,
+          "requests": 139,
+          "completed": 139,
+          "mean_ttft_ms": 58.13206195682844,
+          "p95_ttft_ms": 210.5210569985211,
+          "mean_itl_ms": 28.782723594347807,
+          "p95_itl_ms": 32.93877800181508,
+          "itl_samples": 31816,
+          "goodput_rps": 0.003566683929981143,
+          "slo_attainment_pct": 99.28057553956835,
+          "slo_passes": 138,
+          "slo_eligible_requests": 139,
+          "zero_output_requests": 0,
+          "observation_duration_ms": 38691401.51163594,
+          "input_tokens": 6871394,
+          "reused_input_tokens": 6560768,
+          "token_hit_pct": 95.47943255764406,
+          "recomputed_input_tokens": 310626,
+          "evictions": 443,
+          "ttft_slo_ms": 1000,
+          "itl_slo_ms": 50,
+          "quantile": "nearest rank",
+          "itl_slo": "per-request p95 of individual gaps",
+          "slo_warning": "SLO attainment is <=5% or >=95%; check whether this load supports meaningful comparisons",
+          "policy_calls": 443,
+          "simulator_wall_seconds": 6.167005082999822
+        },
+        "policy_sha256": "37e3aa7a68fbe474c3dcdf40c3237a769e767308a57415cf60481c8fc22646b4",
+        "duplicate": false,
+        "wall_seconds": 19.57275787499384
+      },
+      "policy_path": "evidence/comparison/freeinference-codex/policies/2026-10-29-00-52-32.py",
+      "agent_metadata": {
+        "requested_model": "gpt-6.1-sol",
+        "resolved_model": null,
+        "model_identity_note": "Exact requested model ID; CLI JSON does not report the server-resolved ID",
+        "runtime_seconds": 13.138881958991988,
+        "usage": {
+          "input_tokens": 30830,
+          "cached_input_tokens": 17920,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 398,
+          "reasoning_output_tokens": 0
+        },
+        "model_usage": null,
+        "api_equivalent_usd": null,
+        "cost_note": "CLI reports token usage but no monetary cost; no estimate invented"
+      }
+    }
+  ],
+  "source_snapshot_path": "evidence/comparison/freeinference-codex/controller-source.zip",
+  "source_snapshot_sha256": "fc81c3b5b245cf611700f1e898418834690135969f2276439e1fe3583572e3e1",
+  "fresh_replay_matches": true,
+  "audited_replays": 10
+}

@@ -1,0 +1,82 @@
+{
+  "source": {
+    "controller_sha256": "82815d6db140cac818e71ead1fd7e6637fc3ff9307d84c7716fc67bb4dc13ee9",
+    "python": "3.12.14 (main, Aug 14 2026, 15:24:41) [Clang 22.1.3 ]"
+  },
+  "baseline_commit": "dc61f2bbfbed0de800a7b2399188be82737f5bd0",
+  "baseline_file_sha256": {
+    "sim/cache.py": "ad3e312b64a9917edbff583a42ef795c31aa8f77f3477ebca64ab671a68599d0",
+    "sim/trace.py": "66f310516e6282627b135969e2113885fcdeb995cd4ab0483f2e3e0369f322c6",
+    "sandbox/policy.py": "7cd83d7adc85da7cb8b73843f7eb32fd93faee1c6c9967a45910bdca57127769",
+    "sandbox/submit.py": "67d39d494eafb2a38bc73948ea377cabbebf4c30ce14ad28e14300f5bd132742",
+    "sandbox/policy_runner.py": "8ea160b6aa096ed1d52eacfe16a5ab4f9f73acaae2ee32f3c2bd805b93453164",
+    "results/run_20261026_125852.json": "c3b3b1a836007ebcae7ffb96f538e054dc3879fdff64d2b088fb59af470b855e"
+  },
+  "results": {
+    "lru": {
+      "tuning": {
+        "num_requests": 312,
+        "capacity_blocks": 256,
+        "evictions": 853,
+        "invalid_policy_fallbacks": 0,
+        "mean_ttft_ms": 60.66,
+        "p50_ttft_ms": 59.0,
+        "p95_ttft_ms": 71.0,
+        "p99_ttft_ms": 71.0,
+        "overall_hit_rate": 0.7549,
+        "mean_request_hit_rate": 0.6759,
+        "sim_throughput_rps": 10.12,
+        "policy_timeout_calls": 0,
+        "policy_invalid_calls": 0
+      },
+      "eval": {
+        "num_requests": 312,
+        "capacity_blocks": 256,
+        "evictions": 843,
+        "invalid_policy_fallbacks": 0,
+        "mean_ttft_ms": 60.57,
+        "p50_ttft_ms": 59.0,
+        "p95_ttft_ms": 71.0,
+        "p99_ttft_ms": 71.0,
+        "overall_hit_rate": 0.7571,
+        "mean_request_hit_rate": 0.6801,
+        "sim_throughput_rps": 10.15,
+        "policy_timeout_calls": 0,
+        "policy_invalid_calls": 0
+      }
+    },
+    "leaf-first-lru": {
+      "tuning": {
+        "num_requests": 312,
+        "capacity_blocks": 256,
+        "evictions": 853,
+        "invalid_policy_fallbacks": 0,
+        "mean_ttft_ms": 60.66,
+        "p50_ttft_ms": 59.0,
+        "p95_ttft_ms": 71.0,
+        "p99_ttft_ms": 71.0,
+        "overall_hit_rate": 0.7549,
+        "mean_request_hit_rate": 0.6759,
+        "sim_throughput_rps": 10.12,
+        "policy_timeout_calls": 0,
+        "policy_invalid_calls": 0
+      },
+      "eval": {
+        "num_requests": 312,
+        "capacity_blocks": 256,
+        "evictions": 840,
+        "invalid_policy_fallbacks": 0,
+        "mean_ttft_ms": 60.54,
+        "p50_ttft_ms": 59.0,
+        "p95_ttft_ms": 71.0,
+        "p99_ttft_ms": 71.0,
+        "overall_hit_rate": 0.7577,
+        "mean_request_hit_rate": 0.6808,
+        "sim_throughput_rps": 10.15,
+        "policy_timeout_calls": 0,
+        "policy_invalid_calls": 0
+      }
+    }
+  },
+  "limitations": "Legacy 50ms + 3ms/missed-block proxy; no ITL or achieved goodput. Eval plain LRU is 60.57ms/75.71%/843 evictions, not tuning's 60.66ms/75.49%/853."
+}

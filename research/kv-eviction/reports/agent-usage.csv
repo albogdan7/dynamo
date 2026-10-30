@@ -1,0 +1,9 @@
+trace,agent,model,input,cache_read,cache_write,output,seconds,usd
+mooncake-toolagent,claude,claude-sonnet-5-5,30,136632,41228,5426,61.463659457018366,0.24655839999999998
+mooncake-toolagent,codex,gpt-6.1-sol,259109,209280,0,4260,167.37212833503145,
+mooncake-conversation,claude,claude-sonnet-5-5,30,137763,40799,5870,82.34177125006681,0.2495086
+mooncake-conversation,codex,gpt-6.1-sol,241700,190464,0,3753,231.43578737502685,
+agentx,claude,claude-sonnet-5-5,30,139859,40860,4717,66.51137308400939,0.23864180000000002
+agentx,codex,gpt-6.1-sol,258520,208000,0,2931,213.77316724995035,
+freeinference,claude,claude-sonnet-5-5,30,141118,41619,5083,77.35279033397092,0.24558960000000002
+freeinference,codex,gpt-6.1-sol,244371,166144,0,3516,236.2229767490353,

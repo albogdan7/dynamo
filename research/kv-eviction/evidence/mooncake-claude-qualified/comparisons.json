@@ -1,0 +1,78 @@
+{
+  "native-lru": {
+    "mean_ttft_ms": {
+      "absolute": -26.199012257803815,
+      "relative_pct": -1.990438822301471
+    },
+    "p95_ttft_ms": {
+      "absolute": 0.0,
+      "relative_pct": 0.0
+    },
+    "mean_itl_ms": {
+      "absolute": -0.04397738726917666,
+      "relative_pct": -0.157915211136326
+    },
+    "p95_itl_ms": {
+      "absolute": 0.0,
+      "relative_pct": 0.0
+    },
+    "goodput_rps": {
+      "absolute": 3.369381347355371e-05,
+      "relative_pct": 0.03185858251544003
+    },
+    "slo_attainment_pct": {
+      "absolute": 0.0,
+      "relative_pct": 0.0
+    },
+    "token_hit_pct": {
+      "absolute": 1.0888150882712893,
+      "relative_pct": 2.932960893854751
+    },
+    "recomputed_input_tokens": {
+      "absolute": -21504,
+      "relative_pct": -1.7316700582296605
+    },
+    "evictions": {
+      "absolute": -42,
+      "relative_pct": -1.9507663725034836
+    }
+  },
+  "leaf-first-lru": {
+    "mean_ttft_ms": {
+      "absolute": -26.199012257803815,
+      "relative_pct": -1.990438822301471
+    },
+    "p95_ttft_ms": {
+      "absolute": 0.0,
+      "relative_pct": 0.0
+    },
+    "mean_itl_ms": {
+      "absolute": -0.04397738726917666,
+      "relative_pct": -0.157915211136326
+    },
+    "p95_itl_ms": {
+      "absolute": 0.0,
+      "relative_pct": 0.0
+    },
+    "goodput_rps": {
+      "absolute": 3.369381347355371e-05,
+      "relative_pct": 0.03185858251544003
+    },
+    "slo_attainment_pct": {
+      "absolute": 0.0,
+      "relative_pct": 0.0
+    },
+    "token_hit_pct": {
+      "absolute": 1.0888150882712893,
+      "relative_pct": 2.932960893854751
+    },
+    "recomputed_input_tokens": {
+      "absolute": -21504,
+      "relative_pct": -1.7316700582296605
+    },
+    "evictions": {
+      "absolute": -42,
+      "relative_pct": -1.9507663725034836
+    }
+  }
+}

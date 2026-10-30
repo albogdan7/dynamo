@@ -1,0 +1,226 @@
+{
+  "mooncake-toolagent-claude": {
+    "tuning": {
+      "mean_ttft_ms": true,
+      "p95_ttft_ms": true,
+      "mean_itl_ms": true,
+      "p95_itl_ms": true,
+      "goodput_rps": true,
+      "slo_attainment_pct": true,
+      "token_hit_pct": true,
+      "recomputed_input_tokens": true,
+      "evictions": true,
+      "requests": true,
+      "slo_passes": true
+    },
+    "evaluation": {
+      "mean_ttft_ms": true,
+      "p95_ttft_ms": true,
+      "mean_itl_ms": true,
+      "p95_itl_ms": true,
+      "goodput_rps": true,
+      "slo_attainment_pct": true,
+      "token_hit_pct": true,
+      "recomputed_input_tokens": true,
+      "evictions": true,
+      "requests": true,
+      "slo_passes": true
+    }
+  },
+  "mooncake-toolagent-codex": {
+    "tuning": {
+      "mean_ttft_ms": true,
+      "p95_ttft_ms": true,
+      "mean_itl_ms": true,
+      "p95_itl_ms": true,
+      "goodput_rps": true,
+      "slo_attainment_pct": true,
+      "token_hit_pct": true,
+      "recomputed_input_tokens": true,
+      "evictions": true,
+      "requests": true,
+      "slo_passes": true
+    },
+    "evaluation": {
+      "mean_ttft_ms": true,
+      "p95_ttft_ms": true,
+      "mean_itl_ms": true,
+      "p95_itl_ms": true,
+      "goodput_rps": true,
+      "slo_attainment_pct": true,
+      "token_hit_pct": true,
+      "recomputed_input_tokens": true,
+      "evictions": true,
+      "requests": true,
+      "slo_passes": true
+    }
+  },
+  "agentx-codex": {
+    "tuning": {
+      "mean_ttft_ms": true,
+      "p95_ttft_ms": true,
+      "mean_itl_ms": true,
+      "p95_itl_ms": true,
+      "goodput_rps": true,
+      "slo_attainment_pct": true,
+      "token_hit_pct": true,
+      "recomputed_input_tokens": true,
+      "evictions": true,
+      "requests": true,
+      "slo_passes": true
+    },
+    "evaluation": {
+      "mean_ttft_ms": true,
+      "p95_ttft_ms": true,
+      "mean_itl_ms": true,
+      "p95_itl_ms": true,
+      "goodput_rps": true,
+      "slo_attainment_pct": true,
+      "token_hit_pct": true,
+      "recomputed_input_tokens": true,
+      "evictions": true,
+      "requests": true,
+      "slo_passes": true
+    }
+  },
+  "agentx-claude": {
+    "tuning": {
+      "mean_ttft_ms": true,
+      "p95_ttft_ms": true,
+      "mean_itl_ms": true,
+      "p95_itl_ms": true,
+      "goodput_rps": true,
+      "slo_attainment_pct": true,
+      "token_hit_pct": true,
+      "recomputed_input_tokens": true,
+      "evictions": true,
+      "requests": true,
+      "slo_passes": true
+    },
+    "evaluation": {
+      "mean_ttft_ms": true,
+      "p95_ttft_ms": true,
+      "mean_itl_ms": true,
+      "p95_itl_ms": true,
+      "goodput_rps": true,
+      "slo_attainment_pct": true,
+      "token_hit_pct": true,
+      "recomputed_input_tokens": true,
+      "evictions": true,
+      "requests": true,
+      "slo_passes": true
+    }
+  },
+  "freeinference-claude": {
+    "tuning": {
+      "mean_ttft_ms": true,
+      "p95_ttft_ms": true,
+      "mean_itl_ms": true,
+      "p95_itl_ms": true,
+      "goodput_rps": true,
+      "slo_attainment_pct": true,
+      "token_hit_pct": true,
+      "recomputed_input_tokens": true,
+      "evictions": true,
+      "requests": true,
+      "slo_passes": true
+    },
+    "evaluation": {
+      "mean_ttft_ms": true,
+      "p95_ttft_ms": true,
+      "mean_itl_ms": true,
+      "p95_itl_ms": true,
+      "goodput_rps": true,
+      "slo_attainment_pct": true,
+      "token_hit_pct": true,
+      "recomputed_input_tokens": true,
+      "evictions": true,
+      "requests": true,
+      "slo_passes": true
+    }
+  },
+  "freeinference-codex": {
+    "tuning": {
+      "mean_ttft_ms": true,
+      "p95_ttft_ms": true,
+      "mean_itl_ms": true,
+      "p95_itl_ms": true,
+      "goodput_rps": true,
+      "slo_attainment_pct": true,
+      "token_hit_pct": true,
+      "recomputed_input_tokens": true,
+      "evictions": true,
+      "requests": true,
+      "slo_passes": true
+    },
+    "evaluation": {
+      "mean_ttft_ms": true,
+      "p95_ttft_ms": true,
+      "mean_itl_ms": true,
+      "p95_itl_ms": true,
+      "goodput_rps": true,
+      "slo_attainment_pct": true,
+      "token_hit_pct": true,
+      "recomputed_input_tokens": true,
+      "evictions": true,
+      "requests": true,
+      "slo_passes": true
+    }
+  },
+  "mooncake-conversation-claude": {
+    "tuning": {
+      "mean_ttft_ms": true,
+      "p95_ttft_ms": true,
+      "mean_itl_ms": true,
+      "p95_itl_ms": true,
+      "goodput_rps": true,
+      "slo_attainment_pct": true,
+      "token_hit_pct": true,
+      "recomputed_input_tokens": true,
+      "evictions": true,
+      "requests": true,
+      "slo_passes": true
+    },
+    "evaluation": {
+      "mean_ttft_ms": true,
+      "p95_ttft_ms": true,
+      "mean_itl_ms": true,
+      "p95_itl_ms": true,
+      "goodput_rps": true,
+      "slo_attainment_pct": true,
+      "token_hit_pct": true,
+      "recomputed_input_tokens": true,
+      "evictions": true,
+      "requests": true,
+      "slo_passes": true
+    }
+  },
+  "mooncake-conversation-codex": {
+    "tuning": {
+      "mean_ttft_ms": true,
+      "p95_ttft_ms": true,
+      "mean_itl_ms": true,
+      "p95_itl_ms": true,
+      "goodput_rps": true,
+      "slo_attainment_pct": true,
+      "token_hit_pct": true,
+      "recomputed_input_tokens": true,
+      "evictions": true,
+      "requests": true,
+      "slo_passes": true
+    },
+    "evaluation": {
+      "mean_ttft_ms": true,
+      "p95_ttft_ms": true,
+      "mean_itl_ms": true,
+      "p95_itl_ms": true,
+      "goodput_rps": true,
+      "slo_attainment_pct": true,
+      "token_hit_pct": true,
+      "recomputed_input_tokens": true,
+      "evictions": true,
+      "requests": true,
+      "slo_passes": true
+    }
+  }
+}

@@ -1,0 +1,164 @@
+--- /dev/null
++++ b/src/research_eviction.rs
+@@ -0,0 +1,39 @@
++// SPDX-License-Identifier: Apache-2.0
++//! Research-only hooks. No forecast, active-block access, or changes to scheduling.
++use std::fs::File;
++use std::io::Write;
++use std::path::Path;
++use std::sync::{Mutex, OnceLock};
++use std::sync::atomic::{AtomicU64, Ordering};
++use anyhow::Result;
++use serde::Serialize;
++
++#[derive(Serialize)]
++pub struct Candidate {
++    pub block_id: u64,
++    pub creation_order: u64,
++    pub release_order: u64,
++    pub num_releases: u64,
++    pub lru_rank: usize,
++    pub hit_count: u64,
++    pub last_access_order: u64,
++}
++type Callback = Box<dyn Fn(&[Candidate]) -> Result<u64> + Send + Sync>;
++static CALLBACK: OnceLock<Callback> = OnceLock::new();
++static TOKENS: OnceLock<Mutex<File>> = OnceLock::new();
++static EVICTIONS: AtomicU64 = AtomicU64::new(0);
++pub fn set_callback(callback: Callback) { assert!(CALLBACK.set(callback).is_ok()); }
++pub fn capture_tokens(path: impl AsRef<Path>) -> Result<()> {
++    assert!(TOKENS.set(Mutex::new(File::create(path)?)).is_ok()); Ok(())
++}
++pub fn enabled() -> bool { CALLBACK.get().is_some() }
++pub fn choose(candidates: &[Candidate]) -> u64 {
++    CALLBACK.get().expect("callback missing")(candidates).expect("invalid policy decision")
++}
++pub fn count_eviction() { EVICTIONS.fetch_add(1, Ordering::Relaxed); }
++pub fn evictions() -> u64 { EVICTIONS.load(Ordering::Relaxed) }
++pub fn token(uuid: impl std::fmt::Display, time_ms: f64) {
++    if let Some(file) = TOKENS.get() {
++        writeln!(file.lock().unwrap(), "{}", serde_json::json!({"uuid":uuid.to_string(),"time_ms":time_ms})).unwrap();
++    }
++}
+--- a/src/lib.rs
++++ b/src/lib.rs
+@@ -83,3 +83,6 @@
+     DirectFpmQueryEvidence, ForwardPassEstimate, FpmCoordinates, FpmEstimateEvidence,
+     FpmMeasurementSupport, FpmQueryResolution, FpmRankEstimate,
+ };
++
++#[doc(hidden)]
++pub mod research_eviction;
+--- a/src/engine/cache/vllm_block_pool.rs
++++ b/src/engine/cache/vllm_block_pool.rs
+@@ -72,6 +72,11 @@
+ 
+ #[derive(Debug)]
+ struct BlockCopy {
++    hit_count: u64,
++    last_access_order: u64,
++    creation_order: u64,
++    release_order: u64,
++    num_releases: u64,
+     state: CopyState,
+ }
+ 
+@@ -335,6 +340,8 @@
+ }
+ 
+ pub(crate) struct VllmBlockPool {
++    research_clock: u64,
++    research_access_clock: u64,
+     capacity: usize,
+     copies: SlotMap<BlockCopyId, BlockCopy>,
+     // Preserve the compact token-only index. State keys are allocated lazily;
+@@ -361,6 +368,8 @@
+     pub(crate) fn new(capacity: usize) -> Self {
+         assert!(capacity > 0, "capacity must be > 0");
+         Self {
++            research_clock: 0,
++            research_access_clock: 0,
+             capacity,
+             copies: SlotMap::with_key(),
+             by_hash: FxHashMap::default(),
+@@ -626,7 +635,14 @@
+         assert!(self.reserved > 0, "pool reserved-capacity underflow");
+         self.reserved -= 1;
+ 
++        self.research_clock += 1;
++        self.research_access_clock += 1;
+         let id = self.copies.insert(BlockCopy {
++            hit_count: 1,
++            last_access_order: self.research_access_clock,
++            creation_order: self.research_clock,
++            release_order: 0,
++            num_releases: 0,
+             state: CopyState::Private,
+         });
+         if let Some(dependency) = source_reuse {
+@@ -1252,6 +1268,11 @@
+         *refs = refs
+             .checked_add(1)
+             .unwrap_or_else(|| panic!("reference count overflow"));
++        // Count committed reuse, including accesses while another request holds it.
++        // Speculative reservations and cancellations do not count.
++        self.research_access_clock += 1;
++        self.copies[id].hit_count += 1;
++        self.copies[id].last_access_order = self.research_access_clock;
+     }
+ 
+     fn unpin(&mut self, id: BlockCopyId, expected_hash: SequenceHash) {
+@@ -1277,6 +1298,9 @@
+     }
+ 
+     fn insert_inactive(&mut self, id: BlockCopyId) {
++        self.research_clock += 1;
++        self.copies[id].release_order = self.research_clock;
++        self.copies[id].num_releases += 1;
+         debug_assert!(
+             self.is_inactive(id),
+             "only an unreferenced, unpinned cached copy can enter the inactive LRU"
+@@ -1614,10 +1638,32 @@
+     /// Evict one physical copy. A hash is returned only on its final copy.
+     fn evict_one(&mut self) -> EvictedCapacity {
+         self.sync_belady_candidates();
+-        let victim = match &self.belady {
++        let mut victim = match &self.belady {
+             Some(belady) => belady.ranked.first().map(|candidate| candidate.id),
+             None => self.inactive_head,
+         };
++        crate::research_eviction::count_eviction();
++        if crate::research_eviction::enabled() {
++            use slotmap::Key;
++            let mut ids = Vec::new();
++            let mut current = self.inactive_head;
++            while let Some(id) = current {
++                ids.push(id);
++                let CopyState::Cached { inactive_next, .. } = self.copies[id].state else { unreachable!() };
++                current = inactive_next;
++            }
++            let candidates: Vec<_> = ids.iter().enumerate().map(|(rank, &id)| {
++                let copy = &self.copies[id];
++                crate::research_eviction::Candidate {
++                    block_id: id.data().as_ffi(), creation_order: copy.creation_order,
++                    release_order: copy.release_order, num_releases: copy.num_releases, lru_rank: rank,
++                    hit_count: copy.hit_count, last_access_order: copy.last_access_order,
++                }
++            }).collect();
++            let selected = crate::research_eviction::choose(&candidates);
++            victim = Some(*ids.iter().find(|id| id.data().as_ffi() == selected)
++                .expect("policy selected a non-candidate block"));
++        }
+         let Some(id) = victim else {
+             panic!("prechecked inactive capacity disappeared")
+         };
+--- a/src/replay/report.rs
++++ b/src/replay/report.rs
+@@ -1684,6 +1684,7 @@
+     }
+ 
+     pub fn on_token(&mut self, uuid: Uuid, token_time_ms: f64) {
++        crate::research_eviction::token(uuid, token_time_ms);
+         if let Some(stats) = self.requests.get_mut(&uuid)
+             && let TokenTimeline::Recording(times) = &mut stats.token_timeline
+         {

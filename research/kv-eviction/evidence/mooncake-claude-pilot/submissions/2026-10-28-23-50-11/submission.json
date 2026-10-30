@@ -1,0 +1,33 @@
+{
+  "id": "2026-10-28-23-50-11",
+  "valid": true,
+  "tuning": {
+    "valid": true,
+    "requests": 1000,
+    "completed": 1000,
+    "mean_ttft_ms": 423819.6795270417,
+    "p95_ttft_ms": 832499.3550470233,
+    "mean_itl_ms": 38.91957015090188,
+    "p95_itl_ms": 113.63480100000743,
+    "itl_samples": 198084,
+    "goodput_rps": 0.0009593962954340811,
+    "slo_attainment_pct": 0.1,
+    "slo_passes": 1,
+    "slo_eligible_requests": 1000,
+    "zero_output_requests": 0,
+    "observation_duration_ms": 1042322.1402450253,
+    "input_tokens": 9798419,
+    "reused_input_tokens": 2022912,
+    "token_hit_pct": 20.645289816653076,
+    "recomputed_input_tokens": 7780358,
+    "evictions": 14895,
+    "ttft_slo_ms": 1000,
+    "itl_slo_ms": 50,
+    "quantile": "nearest rank",
+    "itl_slo": "per-request p95 of individual gaps",
+    "slo_warning": null,
+    "policy_calls": 14895,
+    "simulator_wall_seconds": 83.2548789579887
+  },
+  "policy_sha256": "47e6d1dcbec61fb40b5ad78b1de1d4f03de46ba065f4abe20e82d24c04df31be"
+}

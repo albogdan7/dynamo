@@ -1,0 +1,22 @@
+{
+  "runtime_sha256": {
+    "codex": "d8990e3ee7acfbc26f91265b12a1a83f0fee40d0e0f8f1f40a37d4ec21f499cf",
+    "codex-code-mode-host": "416721e33af8822041dc650793512b3e58d43e0be4f3a5c6187eb4dfaad3148a"
+  },
+  "filesystem": {
+    ":root": "deny",
+    ":minimal": "read",
+    "/Users/miguel/Documents/ChatGPT/Agentic GPU Environment/dynamo-kv-research/research/kv-eviction/experiments/codex-mooncake-toolagent/agent-workspace": "write",
+    "/Users/miguel/Documents/ChatGPT/Agentic GPU Environment/dynamo-kv-research/research/kv-eviction/experiments/codex-mooncake-toolagent/agent-workspace/.runtime": "read",
+    "/Users/miguel/Documents/ChatGPT/Agentic GPU Environment/dynamo-kv-research/research/kv-eviction/experiments/codex-mooncake-toolagent/agent-workspace/.kv-experiment-root": "read",
+    "/Users/miguel/Documents/ChatGPT/Agentic GPU Environment/dynamo-kv-research/research/kv-eviction/experiments/codex-mooncake-toolagent/agent-workspace/.codex": "deny",
+    "/Users/miguel/Documents/ChatGPT/Agentic GPU Environment/dynamo-kv-research/research/kv-eviction/experiments/codex-mooncake-toolagent/agent-workspace/.agents": "deny",
+    "/Users/miguel/Documents/ChatGPT/Agentic GPU Environment/dynamo-kv-research/research/kv-eviction/experiments/codex-mooncake-toolagent/agent-workspace/.git": "deny",
+    "/Users/miguel/Documents/ChatGPT/Agentic GPU Environment/dynamo-kv-research/research/kv-eviction/experiments/codex-mooncake-toolagent/agent-workspace/AGENTS.md": "deny",
+    "/Users/miguel/Documents/ChatGPT/Agentic GPU Environment/dynamo-kv-research/research/kv-eviction/experiments/codex-mooncake-toolagent/agent-workspace/CLAUDE.md": "deny",
+    "/Users/miguel/Documents/ChatGPT/Agentic GPU Environment/dynamo-kv-research/research/kv-eviction/experiments/codex-mooncake-toolagent/agent-workspace/.mcp.json": "deny"
+  },
+  "network": false,
+  "shell_tool": false,
+  "reasoning_effort": "medium"
+}

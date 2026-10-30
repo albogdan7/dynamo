@@ -1,0 +1,2 @@
+# Unified diff context represents empty lines with a single space.
+native/core.patch whitespace=-blank-at-eol

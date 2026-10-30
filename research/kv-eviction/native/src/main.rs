@@ -13,7 +13,7 @@ use aisimulate_core::replay::{
     ReplayRequest, ReplayRuntimeInput, ReplaySpec, ReplayTelemetryObserver,
     ReplayTelemetrySnapshot, ReplayTopology, Replayer,
 };
-use aisimulate_core::research_eviction::{self, Candidate};
+use aisimulate_core::research_eviction::{self, Candidate, NativeOrder, Pause, RetentionPolicy};
 use anyhow::{Context, Result, ensure};
 use serde_json::{Value, json};
 
@@ -58,6 +58,69 @@ impl ReplayTelemetryObserver for OccupancyWriter {
         writeln!(writer)?;
         Ok(())
     }
+}
+
+/// Synchronous JSON-lines exchange with the policy process over stdout/stdin.
+fn ask(message: Value) -> Result<Value> {
+    let mut stdout = io::stdout().lock();
+    serde_json::to_writer(&mut stdout, &message)?;
+    writeln!(stdout)?;
+    stdout.flush()?;
+    let mut line = String::new();
+    io::stdin().lock().read_line(&mut line)?;
+    Ok(serde_json::from_str(&line)?)
+}
+
+/// Native research baselines; absent configuration keeps the engine's LRU.
+fn configure_research_policy(config: &Value, policy_process: bool) -> Result<bool> {
+    let research = &config["research_policy"];
+    let retention = &research["retention"];
+    let name = retention["policy"].as_str().unwrap_or("none");
+    let order = match research["order"].as_str().unwrap_or("lru") {
+        _ if name != "none" => NativeOrder::Protected,
+        "lru" => NativeOrder::Lru,
+        "lfu" => NativeOrder::Lfu,
+        "slru" => NativeOrder::Slru,
+        "random" => NativeOrder::Random,
+        other => anyhow::bail!("unknown research order {other}"),
+    };
+    research_eviction::set_native_order(order, research["seed"].as_u64().unwrap_or(0));
+    let policy = match name {
+        "none" => RetentionPolicy::None,
+        "last_gap" => RetentionPolicy::LastGap,
+        "global_median" => RetentionPolicy::GlobalMedian,
+        "continuum" => {
+            let reload: Vec<f64> = serde_json::from_value(retention["reload_quadratic"].clone())?;
+            ensure!(reload.len() == 3, "reload_quadratic needs [a, b, c]");
+            RetentionPolicy::Continuum {
+                reload: [reload[0], reload[1], reload[2]],
+                min_history: retention["min_history"].as_u64().context("min_history missing")?,
+                cold_mean_ms: retention["cold_mean_ms"].as_f64().context("cold_mean_ms missing")?,
+            }
+        }
+        "oracle" => RetentionPolicy::Oracle {
+            gaps: serde_json::from_reader(File::open(
+                retention["oracle_gaps"].as_str().context("oracle_gaps missing")?,
+            )?)?,
+            slack_ms: retention["slack_ms"].as_f64().context("slack_ms missing")?,
+        },
+        "callback" => {
+            ensure!(policy_process, "callback retention needs a policy process");
+            RetentionPolicy::Callback(Box::new(|pause: &Pause| {
+                let response = ask(json!({"pause": pause}))?;
+                match &response["protect_until_ms"] {
+                    Value::Null => Ok(None),
+                    value => Ok(Some(value.as_f64().context("protect_until_ms must be a number or null")?)),
+                }
+            }))
+        }
+        other => anyhow::bail!("unknown retention policy {other}"),
+    };
+    let callback = name == "callback";
+    if name != "none" {
+        research_eviction::set_retention(policy);
+    }
+    Ok(callback)
 }
 
 fn main() -> Result<()> {
@@ -158,21 +221,18 @@ fn main() -> Result<()> {
         })
         .collect();
     research_eviction::capture_tokens(output.join("tokens.jsonl"))?;
-    match args[4].as_str() {
-        "native-lru" => {}
-        "policy" => research_eviction::set_callback(Box::new(|candidates: &[Candidate]| {
-            let mut stdout = io::stdout().lock();
-            serde_json::to_writer(&mut stdout, &json!({"candidates": candidates}))?;
-            writeln!(stdout)?;
-            stdout.flush()?;
-            let mut line = String::new();
-            io::stdin().lock().read_line(&mut line)?;
-            let response: Value = serde_json::from_str(&line)?;
-            response["victim_id"]
+    let policy_process = match args[4].as_str() {
+        "native-lru" => false,
+        "policy" => true,
+        other => anyhow::bail!("unknown policy mode {other}"),
+    };
+    let retention_callback = configure_research_policy(&config, policy_process)?;
+    if policy_process && !retention_callback {
+        research_eviction::set_callback(Box::new(|candidates: &[Candidate]| {
+            ask(json!({"candidates": candidates}))?["victim_id"]
                 .as_u64()
                 .context("policy response missing victim_id")
-        })),
-        other => anyhow::bail!("unknown policy mode {other}"),
+        }));
     }
     let spec = ReplaySpec {
         version: 1,
@@ -225,7 +285,8 @@ fn main() -> Result<()> {
     serde_json::to_writer_pretty(File::create(output.join("native-report.json"))?, &report)?;
     serde_json::to_writer_pretty(
         File::create(output.join("evictions.json"))?,
-        &json!({"evictions":research_eviction::evictions()}),
+        &json!({"evictions":research_eviction::evictions(),
+            "protected_evictions":research_eviction::protected_evictions()}),
     )?;
     println!("{{\"status\":\"done\"}}");
     Ok(())

@@ -1,10 +1,10 @@
 --- /dev/null
 +++ b/src/research_eviction.rs
-@@ -0,0 +1,39 @@
+@@ -0,0 +1,44 @@
 +// SPDX-License-Identifier: Apache-2.0
 +//! Research-only hooks. No forecast, active-block access, or changes to scheduling.
 +use std::fs::File;
-+use std::io::Write;
++use std::io::{BufWriter, Write};
 +use std::path::Path;
 +use std::sync::{Mutex, OnceLock};
 +use std::sync::atomic::{AtomicU64, Ordering};
@@ -23,11 +23,16 @@
 +}
 +type Callback = Box<dyn Fn(&[Candidate]) -> Result<u64> + Send + Sync>;
 +static CALLBACK: OnceLock<Callback> = OnceLock::new();
-+static TOKENS: OnceLock<Mutex<File>> = OnceLock::new();
++static TOKENS: OnceLock<Mutex<BufWriter<File>>> = OnceLock::new();
 +static EVICTIONS: AtomicU64 = AtomicU64::new(0);
 +pub fn set_callback(callback: Callback) { assert!(CALLBACK.set(callback).is_ok()); }
 +pub fn capture_tokens(path: impl AsRef<Path>) -> Result<()> {
-+    assert!(TOKENS.set(Mutex::new(File::create(path)?)).is_ok()); Ok(())
++    assert!(TOKENS.set(Mutex::new(BufWriter::new(File::create(path)?))).is_ok()); Ok(())
++}
++/// Flush buffered token events; a run that fails before this is discarded.
++pub fn finish_tokens() -> Result<()> {
++    if let Some(file) = TOKENS.get() { file.lock().unwrap().flush()?; }
++    Ok(())
 +}
 +pub fn enabled() -> bool { CALLBACK.get().is_some() }
 +pub fn choose(candidates: &[Candidate]) -> u64 {
@@ -96,7 +101,20 @@
              state: CopyState::Private,
          });
          if let Some(dependency) = source_reuse {
-@@ -1252,6 +1268,11 @@
+@@ -896,6 +912,12 @@
+         self.inactive_len
+     }
+ 
++    /// Research telemetry: the anonymous free list, independent of the
++    /// copy/reservation counts used by `num_active` and `num_inactive`.
++    pub(crate) fn num_free(&self) -> usize {
++        self.free.len()
++    }
++
+     pub(crate) fn capacity(&self) -> usize {
+         self.capacity
+     }
+@@ -1252,6 +1274,11 @@
          *refs = refs
              .checked_add(1)
              .unwrap_or_else(|| panic!("reference count overflow"));
@@ -108,7 +126,7 @@
      }
  
      fn unpin(&mut self, id: BlockCopyId, expected_hash: SequenceHash) {
-@@ -1277,6 +1298,9 @@
+@@ -1277,6 +1304,9 @@
      }
  
      fn insert_inactive(&mut self, id: BlockCopyId) {
@@ -118,7 +136,7 @@
          debug_assert!(
              self.is_inactive(id),
              "only an unreferenced, unpinned cached copy can enter the inactive LRU"
-@@ -1614,10 +1638,32 @@
+@@ -1614,10 +1644,32 @@
      /// Evict one physical copy. A hash is returned only on its final copy.
      fn evict_one(&mut self) -> EvictedCapacity {
          self.sync_belady_candidates();
@@ -152,6 +170,93 @@
          let Some(id) = victim else {
              panic!("prechecked inactive capacity disappeared")
          };
+--- a/src/engine/kv_manager/g1_manager.rs
++++ b/src/engine/kv_manager/g1_manager.rs
+@@ -400,6 +400,10 @@
+ 
+     pub(crate) fn num_inactive_blocks(&self) -> usize {
+         self.inner.num_inactive_blocks()
++    }
++
++    pub(crate) fn num_free_blocks(&self) -> Option<usize> {
++        self.inner.num_free_blocks()
+     }
+ }
+ 
+--- a/src/engine/kv_manager/vllm_backend.rs
++++ b/src/engine/kv_manager/vllm_backend.rs
+@@ -1765,6 +1765,11 @@
+         self.pool.num_inactive()
+     }
+ 
++    /// Free linear-pool blocks; grouped caches have no scalar block count.
++    pub(crate) fn num_free_blocks(&self) -> Option<usize> {
++        self.grouped.is_none().then(|| self.pool.num_free())
++    }
++
+     pub(crate) fn max_capacity(&self) -> usize {
+         self.pool.capacity()
+     }
+--- a/src/engine/protocol.rs
++++ b/src/engine/protocol.rs
+@@ -285,6 +285,8 @@
+     /// Total SGLang prefill tokens considered by the most recently completed
+     /// pass. Backends without an equivalent pass-local metric report zero.
+     pub sglang_cache_total_tokens: u64,
++    /// Research telemetry: vLLM linear-pool free blocks, when available.
++    pub free_blocks: Option<u64>,
+ }
+ 
+ /// Per-pass scheduling statistics.
+--- a/src/engine/scheduler/mod.rs
++++ b/src/engine/scheduler/mod.rs
+@@ -146,6 +146,8 @@
+     pub vllm_preemptions_total: u64,
+     pub sglang_cache_hit_tokens: u64,
+     pub sglang_cache_total_tokens: u64,
++    /// Research telemetry: vLLM linear-pool free blocks, when available.
++    pub free_blocks: Option<u64>,
+ }
+ 
+ impl MockerMetrics {
+@@ -212,6 +214,7 @@
+             vllm_preemptions_total,
+             sglang_cache_hit_tokens,
+             sglang_cache_total_tokens,
++            free_blocks: None,
+         }
+     }
+ }
+--- a/src/engine/scheduler/rank.rs
++++ b/src/engine/scheduler/rank.rs
+@@ -597,6 +597,7 @@
+         preemptions_total: metrics.vllm_preemptions_total,
+         sglang_cache_hit_tokens: metrics.sglang_cache_hit_tokens,
+         sglang_cache_total_tokens: metrics.sglang_cache_total_tokens,
++        free_blocks: metrics.free_blocks,
+     }
+ }
+ 
+--- a/src/engine/scheduler/vllm/core.rs
++++ b/src/engine/scheduler/vllm/core.rs
+@@ -1756,6 +1756,7 @@
+             0,
+             0,
+         );
++        metrics.free_blocks = self.kv_manager.num_free_blocks().map(|count| count as u64);
+         if let Some(pool) = self.kv_manager.grouped() {
+             metrics.total_blocks = 0;
+             metrics.kv_cache_used_bytes = Some(pool.used_bytes());
+--- a/src/replay/components/engine.rs
++++ b/src/replay/components/engine.rs
+@@ -119,6 +119,7 @@
+             worker_id,
+             dp_rank: self.latest.dp_rank,
+             active_blocks: self.latest.active_blocks,
++            free_blocks: self.latest.free_blocks,
+             inactive_blocks: self.latest.inactive_blocks,
+             total_blocks: self.latest.total_blocks,
+             kv_cache_used_bytes: self.latest.kv_cache_used_bytes,
 --- a/src/replay/report.rs
 +++ b/src/replay/report.rs
 @@ -1684,6 +1684,7 @@
@@ -162,3 +267,15 @@
          if let Some(stats) = self.requests.get_mut(&uuid)
              && let TokenTimeline::Recording(times) = &mut stats.token_timeline
          {
+--- a/src/replay/telemetry.rs
++++ b/src/replay/telemetry.rs
+@@ -33,6 +33,9 @@
+     /// across all groups for grouped caches); SGLang counts occupied page-pool
+     /// blocks, including radix-resident pages.
+     pub active_blocks: u64,
++    /// Research telemetry: free linear-pool blocks (vLLM only).
++    #[serde(skip_serializing_if = "Option::is_none")]
++    pub free_blocks: Option<u64>,
+     /// Reusable resident blocks excluded from `active_blocks` (vLLM only;
+     /// SGLang reports zero because its legacy occupancy already includes them).
+     pub inactive_blocks: u64,

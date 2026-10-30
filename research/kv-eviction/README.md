@@ -130,6 +130,38 @@ python3 research/kv-eviction/export_report.py \
 
 `audit` touches no simulation. It re-verifies every job's inputs, recomputes metrics and occupancy from raw request, token and occupancy files, checks request coverage and parity, and writes compact, checksummed evidence (`results.json`, `job-receipts.json`, `source-inventory.json`, policy sources and the run manifest). It fails on a failed or incomplete job, changed inputs or inconsistent arithmetic. `export_report.py --baseline-evidence` verifies the evidence checksums and writes a self-contained HTML page (one table per trace, every heuristic as a column, changes from LRU) and a sibling CSV in long format. The page embeds the compact evidence and generator for offline sharing.
 
+## Agentic KV retention experiment
+
+[AGENTIC_RETENTION_SPEC.md](AGENTIC_RETENTION_SPEC.md) freezes the protocol and [AGENTIC_RETENTION_RESULTS.md](AGENTIC_RETENTION_RESULTS.md) reports the outcome. The experiment replays complete AgentX (all 393 Claude Code plays) on one simulated worker sized for Qwen2.5-7B-Instruct-1M on an H200. It runs 8, 32 and 128 concurrent plays and compares LRU, LFU, SLRU, Random, last-gap, global-median and Continuum-style TTL retention, plus an oracle and an unbounded cache as bounds. Settings live in [configs/agentic-retention.json](configs/agentic-retention.json). Run from the repository root:
+
+```bash
+python3 research/kv-eviction/prepare_native.py
+python3 research/kv-eviction/retention_experiment.py validate-cache-sim
+python3 research/kv-eviction/retention_experiment.py check-regression
+python3 research/kv-eviction/retention_experiment.py prepare \
+  --config research/kv-eviction/configs/agentic-retention.json
+python3 research/kv-eviction/retention_experiment.py calibrate \
+  --config research/kv-eviction/configs/agentic-retention.json
+python3 research/kv-eviction/retention_experiment.py run \
+  --config research/kv-eviction/configs/agentic-retention.json \
+  --output research/kv-eviction/experiments/$(date +%Y-%m-%d-%H-%M-%S)
+python3 research/kv-eviction/retention_experiment.py audit \
+  --run research/kv-eviction/experiments/<that directory> \
+  --evidence research/kv-eviction/evidence/<new name>
+python3 research/kv-eviction/export_report.py \
+  --retention-evidence research/kv-eviction/evidence/agentic-retention \
+  --output research/kv-eviction/reports/agentic-retention.html
+```
+
+What each command does:
+
+- `validate-cache-sim` checks the timing-free cache model against Mooncake's published hit-ratio table.
+- `check-regression` replays both full Mooncake traces with LRU and requires byte-identical outputs to the audited full-trace sweep.
+- `prepare` imports every AgentX play once (about 25 minutes, mostly the native importer) and writes the seeded 131/262 tuning/evaluation split with oracle gaps.
+- `calibrate` fits the reload-cost curve used by the Continuum rule. Its output is committed, so rerunning it is only a check.
+
+`run` and `audit` behave like the full-trace commands: resumable, failures kept, independent audit, frozen decision rule. Retention policies implement `on_pause(pause) -> protect_until_ms | None`. A protected block is evicted only when no unprotected block remains, so protection never blocks admission. AgentX emits about 10^8 output tokens, so these replays write exact per-request token summaries instead of every token event. A test shows the summaries reproduce the token-event metrics.
+
 ## KV occupancy telemetry
 
 Add `"telemetry": {"sample_interval_ms": 100}` to a replay configuration to record per-rank KV occupancy from the simulator's native virtual-time telemetry API. Each replay then writes `occupancy.jsonl`: active (referenced or reserved), inactive (reclaimable eviction candidates), free and total 512-token blocks, running/waiting requests and interval preemptions. Without the key, telemetry is disabled; enabling it does not change request, token or eviction records.

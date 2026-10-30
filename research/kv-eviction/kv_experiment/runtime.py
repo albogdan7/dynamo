@@ -11,6 +11,7 @@ from contextlib import ExitStack
 from pathlib import Path
 
 from .metrics import score
+from .occupancy import read_samples, summarize
 from .traces import ROOT
 
 IMAGE = "python@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258"
@@ -47,7 +48,9 @@ class JsonLines:
         line, self.pending = self.pending.split(b"\n", 1)
         message = json.loads(line)
         if not isinstance(message, dict):
-            raise ValueError("Policy/replay protocol requires a JSON object")  # noqa: TRY004 - invalid wire data, not a caller argument
+            raise ValueError(
+                "Policy/replay protocol requires a JSON object"
+            )  # noqa: TRY004 - invalid wire data, not a caller argument
         return message
 
 
@@ -209,6 +212,17 @@ def replay(
         if process.wait(timeout=10) != 0:
             raise RuntimeError("Native replay failed")
     result = score(output, ttft_slo_ms, itl_slo_ms, write_request_scores=True)
+    telemetry = json.loads(config.read_text()).get("telemetry")
+    if telemetry:
+        end_ms = max(
+            json.loads(line)["terminal_time_ms"]
+            for line in (output / "requests.jsonl").read_text().splitlines()
+        )
+        result["occupancy"] = summarize(
+            read_samples(output / "occupancy.jsonl"),
+            telemetry["sample_interval_ms"],
+            end_ms,
+        )
     result["policy_calls"] = calls
     result["simulator_wall_seconds"] = time.monotonic() - started
     (output / "metrics.json").write_text(json.dumps(result, indent=2) + "\n")

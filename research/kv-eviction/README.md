@@ -1,5 +1,7 @@
 # KV eviction experiments
 
+Planned next: [full-trace heuristic comparison and KV occupancy measurements](FULL_TRACE_BASELINE_SPEC.md), preserving recorded timestamps. Current reports below describe subset pilots.
+
 Run from the fork repository root. This release supports **Claude Code or Codex** with **Mooncake tool/agent, Mooncake conversation, AgentX and a qualified FreeInference subset**. It launches the agent, evaluates submitted Python policies in containers, selects using tuning data, and saves an independent evaluation. [TRACE_SOURCES.md](TRACE_SOURCES.md) defines each source, qualification and schedule.
 
 The [HTML report](reports/kv-eviction-results.html) contains the current fresh agent and heuristic comparison. [EXTENSION_RESULTS.md](EXTENSION_RESULTS.md) and [REPORT.md](REPORT.md) retain earlier comparisons and release findings.
@@ -104,6 +106,14 @@ Compare mean/p95 simulated TTFT, mean/p95 simulated ITL, SLO goodput in requests
 Policy IPC/Python decision wall time does not advance the simulated clock; real serving overhead is unvalidated.
 
 The legacy experiment uses `50 ms + 3 ms/missed block`; it cannot measure ITL or achieved goodput. Native candidate metadata uses allocation/release counters and LRU queue rank, not legacy timestamps/hit counts. Native release order has no ties; its creation-order tiebreak therefore matches LRU. Do not claim the legacy leaf-first gain transfers to native serving.
+
+## KV occupancy telemetry
+
+Add `"telemetry": {"sample_interval_ms": 100}` to a replay configuration to record per-rank KV occupancy from the simulator's native virtual-time telemetry API. Each replay then writes `occupancy.jsonl`: active (referenced or reserved), inactive (reclaimable eviction candidates), free and total 512-token blocks, running/waiting requests and interval preemptions. Without the key, telemetry is disabled; enabling it does not change request, token or eviction records.
+
+`metrics.json` gains an `occupancy` summary from `kv_experiment/occupancy.py`. Physical occupancy is active plus inactive. Statistics are duration-weighted with a sample-and-hold convention: a sample covers the interval until the next one, and the closing sample, which must coincide with the last terminal request, has no duration. Each series reports the mean, time-weighted p95 and sampled peak, plus the fraction of time at or above 95% and 100% of capacity, for the whole run (including idle time) and separately for intervals that start with a request in the system. Peaks and threshold fractions are sampled estimates.
+
+Every sample must satisfy `active + inactive + free = capacity`, using the engine's own free list rather than a derived value. The independent audit (`evidence/audit_run.py`) recomputes the summaries and checks telemetry preemptions against request readmissions. A full physical cache of reclaimable blocks is not active-memory pressure.
 
 ## Saved files and retrieval
 

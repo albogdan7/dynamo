@@ -1,5 +1,7 @@
 # KV eviction agent experiments
 
+Next experiment: [Full-trace baseline specification](FULL_TRACE_BASELINE_SPEC.md). Run complete workloads with fixed recorded timing, occupancy measurements and heuristics only before further agent tuning. The implementation history below describes the earlier pilots.
+
 Updated: 2026-10-29. Implementation branch: `research/kv-eviction-additional-traces` in [albogdan7/dynamo](https://github.com/albogdan7/dynamo). All code, tests, documents and artifacts stay in this fork.
 
 ## Deliverable

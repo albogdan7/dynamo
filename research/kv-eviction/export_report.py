@@ -236,6 +236,26 @@ def delta(value, baseline):
     return 100 * (value / baseline - 1) if baseline else None
 
 
+HIGHER_IS_BETTER = {"goodput_rps", "slo_attainment_pct", "token_hit_pct", "slo_passes"}
+LOWER_IS_BETTER = {
+    "mean_ttft_ms",
+    "p95_ttft_ms",
+    "mean_itl_ms",
+    "p95_itl_ms",
+    "recomputed_input_tokens",
+}
+
+
+def best_columns(values, higher, digits):
+    """Rank displayed precision; do not imply a winner when every value ties."""
+    rounded = [round(value, digits) if value is not None else None for value in values]
+    available = [value for value in rounded if value is not None]
+    if len(available) < 2 or len(set(available)) == 1:
+        return []
+    best = (max if higher else min)(available)
+    return [index for index, value in enumerate(rounded) if value == best]
+
+
 def usage(record):
     results = {
         key: 0 for key in ("input", "cache_read", "cache_write", "output", "seconds")
@@ -342,6 +362,9 @@ def sections(root, runs):
                         "label": f"{label} ({unit})",
                         "values": [fmt(value, digits) for value in values],
                         "changes": [delta(value, values[0]) for value in values],
+                        "best": best_columns(values, field in HIGHER_IS_BETTER, digits)
+                        if field in HIGHER_IS_BETTER | LOWER_IS_BETTER
+                        else [],
                     }
                 )
             rows.append(
@@ -356,6 +379,9 @@ def sections(root, runs):
                         delta(item["slo_passes"], metrics[0]["slo_passes"])
                         for item in metrics
                     ],
+                    "best": best_columns(
+                        [item["slo_passes"] for item in metrics], True, 0
+                    ),
                 }
             )
             rows.append(
@@ -373,6 +399,7 @@ def sections(root, runs):
                         )
                         for item in metrics
                     ],
+                    "best": [],
                 }
             )
             comparisons.append(
@@ -476,27 +503,11 @@ def webpage(traces, reproduction):
         parts.append(
             f'<section id="{trace["trace"]}"><h2>{html.escape(trace["label"])}</h2><p class="context">Cache {trace["cache_tokens"]:,} tokens</p>'
         )
-        choices = [policy for policy in trace["policies"] if "baseline" in policy]
-        if choices:
-            options = "".join(
-                f'<option value="{policy["baseline"]}"{" selected" if policy["baseline"] == "lfu" else ""}>{html.escape(policy["label"])}</option>'
-                for policy in choices
-            )
-            parts.append(
-                f'<label class="baseline-picker">Compare baseline <select data-baseline-for="{trace["trace"]}">{options}</select></label>'
-            )
-
-        def column_attributes(policy, trace_name=trace["trace"]):
-            if "baseline" not in policy:
-                return ""
-            hidden = " hidden" if policy["baseline"] != "lfu" else ""
-            return f' data-baseline-group="{trace_name}" data-baseline-name="{policy["baseline"]}"{hidden}'
-
         for comparison in trace["tables"]:
             parts.append(
                 f'<h3>{comparison["title"]} <span>{comparison["requests"]} requests</span></h3><div class="table-scroll"><table><thead><tr><th scope="col">Metric and unit</th>'
                 + "".join(
-                    f'<th scope="col"{column_attributes(policy)}>{html.escape(policy["label"])}</th>'
+                    f'<th scope="col">{html.escape(policy["label"])}</th>'
                     for policy in trace["policies"]
                 )
                 + "</tr></thead><tbody>"
@@ -515,7 +526,7 @@ def webpage(traces, reproduction):
                         else f'<span class="change">{change_text(row["changes"][index])}</span>'
                     )
                     parts.append(
-                        f'<td{column_attributes(policy)}><div class="value"><span>{row["values"][index]}</span><button type="button" class="view-policy" data-policy="{policy["id"]}" aria-label="{accessible}" title="{accessible}">&lt;/&gt;</button></div>{change}</td>'
+                        f'<td class="{"best" if index in row["best"] else ""}"><div class="value"><span>{row["values"][index]}</span><button type="button" class="view-policy" data-policy="{policy["id"]}" aria-label="{accessible}" title="{accessible}">&lt;/&gt;</button></div>{change}</td>'
                     )
                 parts.append("</tr>")
             parts.append("</tbody></table></div>")
@@ -528,20 +539,13 @@ def webpage(traces, reproduction):
     return (
         """<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>KV eviction results</title>
 <style>
-*{box-sizing:border-box}[hidden]{display:none!important}.baseline-picker{font-size:12px;color:#555}.baseline-picker select{font:inherit;margin-left:6px;padding:4px 6px;border:1px solid #ccc;background:white;border-radius:3px}body{margin:32px auto;padding:0 22px;max-width:1120px;font:15px/1.5 system-ui,sans-serif;color:#202020;background:white}h1{font-size:26px;letter-spacing:-.5px;margin:0 0 8px}h2{font-size:21px;margin:0}h3{font-size:16px;font-weight:600;margin:20px 0 8px}h3 span{font-size:12px;font-weight:400;color:#666;margin-left:8px}.intro,.context,footer{color:#666;font-size:12px}.intro{margin:0 0 28px}.context{margin:3px 0 16px}section{padding:0 0 32px;margin:0 0 30px;border-bottom:1px solid #ddd}.table-scroll{overflow-x:auto}table{width:100%;min-width:860px;border-collapse:collapse;font-variant-numeric:tabular-nums}th,td{padding:9px 12px;border-bottom:1px solid #e8e8e8;vertical-align:middle}thead th{font-size:12px;font-weight:600;background:#f4f4f4;text-align:right;color:#333}thead th:first-child{text-align:left;width:30%}tbody th{text-align:left;font-size:13px;font-weight:400}td{text-align:right;font-size:13px;width:17.5%}.value{display:flex;align-items:center;justify-content:flex-end;gap:6px;white-space:nowrap}.change{display:block;color:#777;font-size:11px;margin-right:27px;white-space:nowrap}.view-policy{font:11px ui-monospace,monospace;padding:3px 2px;color:#666;background:transparent;border:0;border-radius:3px;cursor:pointer}.view-policy:hover{background:#eee;color:#111}button:focus-visible,a:focus-visible{outline:2px solid #555;outline-offset:2px}dialog{border:1px solid #ddd;border-radius:6px;width:min(760px,calc(100% - 32px));max-height:85vh;padding:22px;box-shadow:0 12px 45px #0002}dialog::backdrop{background:#0005}.modal-heading{display:flex;justify-content:space-between;align-items:center;gap:12px}.modal-heading h2{font-size:19px}dialog p{font-size:13px;margin:8px 0}.policy-note{color:#666}dialog pre{margin:18px 0 0;overflow:auto;font:13px/1.6 ui-monospace,monospace;white-space:pre}form{margin:0}.close{font:inherit;font-size:13px;border:1px solid #ccc;border-radius:4px;padding:5px 10px;background:white;cursor:pointer}footer{margin:0 0 28px}footer a{color:inherit}footer p{margin:5px 0}@media(max-width:600px){body{padding:0 12px;margin:20px auto}h1{font-size:23px}th,td{padding:8px}dialog{padding:15px}dialog pre{font-size:12px}}@media print{body{font-size:10pt;margin:0;padding:0;max-width:none}.view-policy,dialog,footer{display:none}.table-scroll{overflow:visible}table{min-width:0}section{break-before:page;border:0;margin:0;padding:0}section:first-of-type{break-before:auto}tr{break-inside:avoid}.change{margin-right:0}}
+*{box-sizing:border-box}body{margin:32px auto;padding:0 22px;max-width:1900px;font:15px/1.5 system-ui,sans-serif;color:#202020;background:white}h1{font-size:26px;letter-spacing:-.5px;margin:0 0 8px}h2{font-size:21px;margin:0}h3{font-size:16px;font-weight:600;margin:20px 0 8px}h3 span{font-size:12px;font-weight:400;color:#666;margin-left:8px}.intro,.context,footer{color:#666;font-size:12px}.intro{margin:0 0 28px}.context{margin:3px 0 16px}section{padding:0 0 32px;margin:0 0 30px;border-bottom:1px solid #ddd}.table-scroll{overflow-x:auto}table{width:100%;min-width:1460px;border-collapse:collapse;font-variant-numeric:tabular-nums}th,td{padding:8px 8px;border-bottom:1px solid #e8e8e8;vertical-align:middle}thead th{font-size:11px;font-weight:600;background:#f4f4f4;text-align:right;color:#333}thead th:first-child{text-align:left;width:220px}tbody th{text-align:left;font-size:13px;font-weight:400}td{text-align:right;font-size:12px}td.best{background:#e8f3ec}td.best .value>span{font-weight:650;color:#20553a}tbody th{position:sticky;left:0;background:#fff;z-index:1}thead th{position:sticky;top:0;z-index:2}thead th:first-child{left:0;z-index:3}.value{display:flex;align-items:center;justify-content:flex-end;gap:4px;white-space:nowrap}.change{display:block;color:#777;font-size:11px;margin-right:23px;white-space:nowrap}.view-policy{font:11px ui-monospace,monospace;padding:3px 2px;color:#666;background:transparent;border:0;border-radius:3px;cursor:pointer}.view-policy:hover{background:#eee;color:#111}button:focus-visible,a:focus-visible{outline:2px solid #555;outline-offset:2px}dialog{border:1px solid #ddd;border-radius:6px;width:min(760px,calc(100% - 32px));max-height:85vh;padding:22px;box-shadow:0 12px 45px #0002}dialog::backdrop{background:#0005}.modal-heading{display:flex;justify-content:space-between;align-items:center;gap:12px}.modal-heading h2{font-size:19px}dialog p{font-size:13px;margin:8px 0}.policy-note{color:#666}dialog pre{margin:18px 0 0;overflow:auto;font:13px/1.6 ui-monospace,monospace;white-space:pre}form{margin:0}.close{font:inherit;font-size:13px;border:1px solid #ccc;border-radius:4px;padding:5px 10px;background:white;cursor:pointer}footer{margin:0 0 28px}footer a{color:inherit}footer p{margin:5px 0}@media(max-width:600px){body{padding:0 12px;margin:20px auto}h1{font-size:23px}th,td{padding:8px}dialog{padding:15px}dialog pre{font-size:12px}}@media print{body{font-size:10pt;margin:0;padding:0;max-width:none}.view-policy,dialog,footer{display:none}.table-scroll{overflow:visible}table{min-width:0;font-size:7pt}th,td{padding:5px 4px}tbody th{position:static}section{break-before:page;border:0;margin:0;padding:0}section:first-of-type{break-before:auto}tr{break-inside:avoid}.change{margin-right:0}}
 </style></head><body><main><h1>KV eviction results</h1><p class="intro">Uncalibrated simulation · SLO: TTFT ≤ 1,000 ms and per-request p95 ITL ≤ 50 ms · Percentages show relative change from LRU. Click &lt;/&gt; beside a value to view its policy.</p>
 """
         + "\n".join(parts)
-        + f'<footer><p>Δ = 100 × (policy − LRU) / LRU. Percentage-valued metrics also use relative change. A negative change means a lower value, not necessarily a better result. Random seeds 0, 1 and 2 are separate runs, not an average or a best-seed selection.</p><p><a download="kv-eviction-reproduce.zip" href="data:application/zip;base64,{payload}">Reproduction files</a></p></footer></main><noscript>Enable JavaScript to open policy source dialogs and switch heuristic baselines.</noscript>'
+        + f'<footer><p>Green marks the best value per metric, including ties at displayed precision. All-equal rows are unmarked. Evictions and observation span are diagnostic and are not ranked.</p><p>Δ = 100 × (policy − LRU) / LRU. Percentage-valued metrics also use relative change. Random seeds 0, 1 and 2 are separate runs, not an average or a best-seed selection.</p><p><a download="kv-eviction-reproduce.zip" href="data:application/zip;base64,{payload}">Reproduction files</a></p></footer></main><noscript>Enable JavaScript to open policy source dialogs.</noscript>'
         + """
 <script>
-document.addEventListener('change', function(event) {
-  const menu = event.target.closest('select[data-baseline-for]');
-  if (!menu) return;
-  document.querySelectorAll('[data-baseline-group="' + menu.dataset.baselineFor + '"]').forEach(function(cell) {
-    cell.hidden = cell.dataset.baselineName !== menu.value;
-  });
-});
 document.addEventListener('click', function(event) {
   const button = event.target.closest('button[data-policy]');
   if (button) {

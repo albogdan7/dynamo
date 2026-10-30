@@ -44,4 +44,4 @@ The collector refuses incomplete runs, mismatched raw sources/configuration, fai
 python3 research/kv-eviction/export_report.py
 ```
 
-For an additional fresh raw audit during HTML generation, pass `--raw-root` pointing to the directory that contains the eight original run folders. The HTML baseline selector switches the added comparison column while keeping LRU and both selected agent policies visible. Every source remains available in its dialog and embedded reproduction bundle.
+For an additional fresh raw audit during HTML generation, pass `--raw-root` pointing to the directory that contains the eight original run folders. The HTML displays all baselines and both selected agent policies as adjacent columns, with the best values highlighted per metric. Ties use displayed precision; all-equal rows and diagnostic eviction counts/observation spans are unranked. Every source remains available in its dialog and embedded reproduction bundle.

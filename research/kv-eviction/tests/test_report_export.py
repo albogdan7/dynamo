@@ -16,6 +16,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from export_report import (
     ROOT,
+    best_columns,
     build,
     comparison_root,
     delta,
@@ -185,3 +186,29 @@ def test_tuning_values_and_rate_changes_use_their_own_lru_baseline():
     )
     assert delta(75, 50) == 50  # Relative percent, rather than 25 percentage points.
     assert delta(3, 0) is None  # Undefined comparisons must not invent a percentage.
+
+
+def test_highlights_respect_direction_ties_and_display_precision():
+    assert best_columns([3, 1, 1], False, 0) == [1, 2]
+    assert best_columns([3, 1, 3], True, 0) == [0, 2]
+    assert best_columns([10.0012, 10.0014, 11], False, 3) == [0, 1]
+    assert best_columns([10.0001, 10.0002], False, 3) == []
+    assert best_columns([None, None], True, 3) == []
+
+
+def test_all_policy_columns_are_visible_and_diagnostics_unranked(tmp_path):
+    build(ROOT, tmp_path)
+    text = (tmp_path / "kv-eviction-results.html").read_text()
+    assert "<select" not in text
+    assert " hidden" not in text
+    runs, _ = validate(ROOT)
+    for trace in sections(ROOT, runs):
+        for table in trace["tables"]:
+            assert all(
+                len(row["values"]) == len(trace["policies"]) for row in table["rows"]
+            )
+            assert all(
+                not row["best"]
+                for row in table["rows"]
+                if row["metric"] in {"evictions", "observation_duration_ms"}
+            )

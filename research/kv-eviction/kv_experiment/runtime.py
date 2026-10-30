@@ -1,6 +1,7 @@
 """Native replay plus a credential-free, network-free policy container."""
 
 import json
+import math
 import os
 import selectors
 import signal
@@ -12,6 +13,7 @@ from pathlib import Path
 
 from .metrics import score
 from .occupancy import read_samples, summarize
+from .summary_metrics import score_summary
 from .traces import ROOT
 
 IMAGE = "python@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258"
@@ -48,9 +50,9 @@ class JsonLines:
         line, self.pending = self.pending.split(b"\n", 1)
         message = json.loads(line)
         if not isinstance(message, dict):
-            raise ValueError(
+            raise ValueError(  # noqa: TRY004 - invalid wire data, not caller misuse
                 "Policy/replay protocol requires a JSON object"
-            )  # noqa: TRY004 - invalid wire data, not a caller argument
+            )
         return message
 
 
@@ -147,6 +149,20 @@ class PolicyProcess:
             raise ValueError("Policy returned an invalid block ID")
         return {"victim_id": victim}
 
+    def pause(self, pause: dict) -> dict:
+        """Retention decision for a finished request: protect until a time, or not."""
+        deadline = time.monotonic() + 2
+        send_json(self.process.stdin, {"pause": pause})
+        response = self.reader.read(max(0, deadline - time.monotonic()))
+        if "error_kind" in response:
+            raise PolicyError(response["error_kind"], response["message"])
+        until = response.get("protect_until_ms")
+        if until is not None and (
+            type(until) not in (int, float) or not math.isfinite(until)
+        ):
+            raise ValueError("Policy returned an invalid protection time")
+        return {"protect_until_ms": until}
+
     def close(self):
         subprocess.run(
             ["docker", "rm", "--force", self.name],
@@ -204,14 +220,19 @@ def replay(
             event = reader.read(remaining)
             if event == {"status": "done"}:
                 break
-            if worker is None or set(event) != {"candidates"}:
+            if worker is None or set(event) not in ({"candidates"}, {"pause"}):
                 raise ValueError("Unexpected replay event")
-            response = worker.choose(event["candidates"])
+            response = (
+                worker.choose(event["candidates"])
+                if "candidates" in event
+                else worker.pause(event["pause"])
+            )
             send_json(process.stdin, response)
             calls += 1
         if process.wait(timeout=10) != 0:
             raise RuntimeError("Native replay failed")
-    result = score(output, ttft_slo_ms, itl_slo_ms, write_request_scores=True)
+    scorer = score_summary if (output / "token-summary.jsonl").exists() else score
+    result = scorer(output, ttft_slo_ms, itl_slo_ms, write_request_scores=True)
     telemetry = json.loads(config.read_text()).get("telemetry")
     if telemetry:
         end_ms = max(

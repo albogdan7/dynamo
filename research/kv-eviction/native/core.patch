@@ -1,14 +1,16 @@
 --- /dev/null
 +++ b/src/research_eviction.rs
-@@ -0,0 +1,44 @@
+@@ -0,0 +1,252 @@
 +// SPDX-License-Identifier: Apache-2.0
 +//! Research-only hooks. No forecast, active-block access, or changes to scheduling.
++use std::collections::HashMap;
 +use std::fs::File;
 +use std::io::{BufWriter, Write};
-+use std::path::Path;
++use std::path::{Path, PathBuf};
 +use std::sync::{Mutex, OnceLock};
 +use std::sync::atomic::{AtomicU64, Ordering};
 +use anyhow::Result;
++use rand::{Rng, SeedableRng, rngs::StdRng};
 +use serde::Serialize;
 +
 +#[derive(Serialize)]
@@ -23,15 +25,55 @@
 +}
 +type Callback = Box<dyn Fn(&[Candidate]) -> Result<u64> + Send + Sync>;
 +static CALLBACK: OnceLock<Callback> = OnceLock::new();
-+static TOKENS: OnceLock<Mutex<BufWriter<File>>> = OnceLock::new();
++/// Every output-token event, or exact per-request summaries for large runs.
++enum TokenSink {
++    Events(Mutex<BufWriter<File>>),
++    Summary(Mutex<HashMap<String, Vec<f64>>>, PathBuf),
++}
++static TOKENS: OnceLock<TokenSink> = OnceLock::new();
 +static EVICTIONS: AtomicU64 = AtomicU64::new(0);
++static PROTECTED_EVICTIONS: AtomicU64 = AtomicU64::new(0);
 +pub fn set_callback(callback: Callback) { assert!(CALLBACK.set(callback).is_ok()); }
 +pub fn capture_tokens(path: impl AsRef<Path>) -> Result<()> {
-+    assert!(TOKENS.set(Mutex::new(BufWriter::new(File::create(path)?))).is_ok()); Ok(())
++    assert!(TOKENS.set(TokenSink::Events(Mutex::new(BufWriter::new(File::create(path)?)))).is_ok()); Ok(())
 +}
-+/// Flush buffered token events; a run that fails before this is discarded.
++pub fn summarize_tokens(directory: impl AsRef<Path>) {
++    assert!(TOKENS.set(TokenSink::Summary(Mutex::new(HashMap::new()), directory.as_ref().to_path_buf())).is_ok());
++}
++fn nearest_rank_p95(values: &mut [f64]) -> Option<f64> {
++    if values.is_empty() { return None; }
++    let index = (0.95 * values.len() as f64).ceil() as usize - 1;
++    Some(*values.select_nth_unstable_by(index, f64::total_cmp).1)
++}
++/// Flush token events, or write per-request summaries and the pooled gap p95.
++/// A run that fails before this is discarded.
 +pub fn finish_tokens() -> Result<()> {
-+    if let Some(file) = TOKENS.get() { file.lock().unwrap().flush()?; }
++    match TOKENS.get() {
++        None => {}
++        Some(TokenSink::Events(file)) => file.lock().unwrap().flush()?,
++        Some(TokenSink::Summary(times, directory)) => {
++            let times = std::mem::take(&mut *times.lock().unwrap());
++            let mut uuids: Vec<_> = times.keys().cloned().collect();
++            uuids.sort();
++            let mut writer = BufWriter::new(File::create(directory.join("token-summary.jsonl"))?);
++            let mut pooled = Vec::new();
++            for uuid in uuids {
++                let values = &times[&uuid];
++                anyhow::ensure!(values.windows(2).all(|w| w[0] <= w[1]), "nonmonotonic token times");
++                let mut gaps: Vec<f64> = values.windows(2).map(|w| w[1] - w[0]).collect();
++                pooled.extend_from_slice(&gaps);
++                writeln!(writer, "{}", serde_json::json!({
++                    "uuid": uuid, "tokens": values.len(), "first_ms": values[0],
++                    "last_ms": values[values.len() - 1], "gap_p95_ms": nearest_rank_p95(&mut gaps),
++                }))?;
++            }
++            writer.flush()?;
++            let count = pooled.len();
++            serde_json::to_writer_pretty(File::create(directory.join("token-pooled.json"))?, &serde_json::json!({
++                "gap_count": count, "gap_p95_ms": nearest_rank_p95(&mut pooled),
++            }))?;
++        }
++    }
 +    Ok(())
 +}
 +pub fn enabled() -> bool { CALLBACK.get().is_some() }
@@ -40,10 +82,176 @@
 +}
 +pub fn count_eviction() { EVICTIONS.fetch_add(1, Ordering::Relaxed); }
 +pub fn evictions() -> u64 { EVICTIONS.load(Ordering::Relaxed) }
++pub fn count_protected_eviction() { PROTECTED_EVICTIONS.fetch_add(1, Ordering::Relaxed); }
++pub fn protected_evictions() -> u64 { PROTECTED_EVICTIONS.load(Ordering::Relaxed) }
 +pub fn token(uuid: impl std::fmt::Display, time_ms: f64) {
-+    if let Some(file) = TOKENS.get() {
-+        writeln!(file.lock().unwrap(), "{}", serde_json::json!({"uuid":uuid.to_string(),"time_ms":time_ms})).unwrap();
++    match TOKENS.get() {
++        Some(TokenSink::Events(file)) => {
++            writeln!(file.lock().unwrap(), "{}", serde_json::json!({"uuid":uuid.to_string(),"time_ms":time_ms})).unwrap();
++        }
++        Some(TokenSink::Summary(times, _)) => {
++            times.lock().unwrap().entry(uuid.to_string()).or_default().push(time_ms);
++        }
++        None => {}
 +    }
++}
++
++/// Native victim order over the same eligible candidates as the callback.
++#[derive(Clone, Copy, Debug, PartialEq, Eq)]
++pub enum NativeOrder { Lru, Lfu, Slru, Random, Protected }
++static ORDER: OnceLock<NativeOrder> = OnceLock::new();
++static RNG: OnceLock<Mutex<StdRng>> = OnceLock::new();
++pub fn set_native_order(order: NativeOrder, seed: u64) {
++    assert!(ORDER.set(order).is_ok());
++    assert!(RNG.set(Mutex::new(StdRng::seed_from_u64(seed))).is_ok());
++}
++pub fn native_order() -> NativeOrder { ORDER.get().copied().unwrap_or(NativeOrder::Lru) }
++/// Candidates arrive in native LRU order, so index 0 is the LRU head.
++pub fn choose_native(candidates: &[Candidate]) -> u64 {
++    let pick = match native_order() {
++        NativeOrder::Lfu => candidates.iter().min_by_key(|c| (c.hit_count, c.lru_rank)),
++        NativeOrder::Slru => candidates.iter().min_by_key(|c| (c.hit_count >= 2, c.lru_rank)),
++        NativeOrder::Random => {
++            let index = RNG.get().expect("random order needs a seed").lock().unwrap().random_range(0..candidates.len());
++            candidates.get(index)
++        }
++        NativeOrder::Lru | NativeOrder::Protected => candidates.first(),
++    };
++    pick.expect("eviction requires a candidate").block_id
++}
++
++// Simulated time of the current scheduler pass or command, stored as f64 bits.
++static NOW: AtomicU64 = AtomicU64::new(0);
++static RELEASE_PROTECTION: AtomicU64 = AtomicU64::new(0xfff0_0000_0000_0000); // -inf
++pub fn set_now(now_ms: f64) { NOW.store(now_ms.to_bits(), Ordering::Relaxed); }
++pub fn now() -> f64 { f64::from_bits(NOW.load(Ordering::Relaxed)) }
++/// Protection applied to copies released by the request now finishing.
++pub fn set_release_protection(until_ms: f64) { RELEASE_PROTECTION.store(until_ms.to_bits(), Ordering::Relaxed); }
++pub fn release_protection() -> f64 { f64::from_bits(RELEASE_PROTECTION.load(Ordering::Relaxed)) }
++
++/// What a retention policy may see when a request finishes: no future arrivals.
++#[derive(Serialize)]
++pub struct Pause {
++    pub session_id: Option<String>,
++    pub arrival_ms: f64,
++    pub now_ms: f64,
++    pub input_tokens: usize,
++    pub cached_input_tokens: usize,
++    pub output_tokens: usize,
++}
++pub type RetentionCallback = Box<dyn Fn(&Pause) -> Result<Option<f64>> + Send + Sync>;
++
++/// Log-spaced histogram of observed pauses, 1 ms to 10^9 ms, 40 bins per decade.
++struct PauseHistogram { counts: Vec<u64>, total: u64 }
++impl PauseHistogram {
++    const BINS_PER_DECADE: f64 = 40.0;
++    fn new() -> Self { Self { counts: vec![0; 361], total: 0 } }
++    fn edge(index: usize) -> f64 { 10f64.powf(index as f64 / Self::BINS_PER_DECADE) }
++    fn add(&mut self, gap_ms: f64) {
++        let index = if gap_ms <= 1.0 { 0 } else { (gap_ms.log10() * Self::BINS_PER_DECADE).ceil() as usize };
++        let last = self.counts.len() - 1;
++        self.counts[index.min(last)] += 1;
++        self.total += 1;
++    }
++    /// Upper bin edge reached by the median observation.
++    fn median(&self) -> Option<f64> {
++        let mut seen = 0;
++        for (index, count) in self.counts.iter().enumerate() {
++            seen += count;
++            if self.total > 0 && 2 * seen >= self.total { return Some(Self::edge(index)); }
++        }
++        None
++    }
++    /// Continuum: argmax over candidate TTLs of P(pause <= ttl) * benefit - ttl.
++    fn best_ttl(&self, benefit_ms: f64) -> f64 {
++        let (mut best, mut best_value, mut seen) = (0.0, 0.0, 0);
++        for (index, count) in self.counts.iter().enumerate() {
++            seen += count;
++            if *count == 0 { continue; }
++            let ttl = Self::edge(index);
++            let value = seen as f64 / self.total as f64 * benefit_ms - ttl;
++            if value > best_value { best = ttl; best_value = value; }
++        }
++        best
++    }
++}
++
++pub enum RetentionPolicy {
++    None,
++    LastGap,
++    GlobalMedian,
++    /// Reload cost a*n^2 + b*n + c for n context tokens; exponential(mean) cold start.
++    Continuum { reload: [f64; 3], min_history: u64, cold_mean_ms: f64 },
++    /// Upper bound only: recorded gap after each session's k-th request.
++    Oracle { gaps: HashMap<String, Vec<Option<f64>>>, slack_ms: f64 },
++    Callback(RetentionCallback),
++}
++struct Retention {
++    policy: RetentionPolicy,
++    arrivals: HashMap<u128, f64>,
++    last_completion: HashMap<String, f64>,
++    last_gap: HashMap<String, f64>,
++    completions: HashMap<String, usize>,
++    pauses: PauseHistogram,
++}
++static RETENTION: OnceLock<Mutex<Retention>> = OnceLock::new();
++pub fn set_retention(policy: RetentionPolicy) {
++    let state = Retention {
++        policy,
++        arrivals: HashMap::new(),
++        last_completion: HashMap::new(),
++        last_gap: HashMap::new(),
++        completions: HashMap::new(),
++        pauses: PauseHistogram::new(),
++    };
++    assert!(RETENTION.set(Mutex::new(state)).is_ok());
++}
++pub fn note_arrival(uuid: u128, now_ms: f64) {
++    if let Some(state) = RETENTION.get() { state.lock().unwrap().arrivals.insert(uuid, now_ms); }
++}
++/// Called once per completed request; returns the protection time for its copies.
++pub fn on_complete(uuid: u128, session_id: Option<&str>, input_tokens: usize, cached_input_tokens: usize, output_tokens: usize) -> f64 {
++    let Some(state) = RETENTION.get() else { return f64::NEG_INFINITY };
++    let mut state = state.lock().unwrap();
++    let now_ms = now();
++    let arrival_ms = state.arrivals.remove(&uuid).unwrap_or(now_ms);
++    let Some(session) = session_id else { return f64::NEG_INFINITY };
++    // Causal history: the pause before this request, seen only once it arrived.
++    if let Some(previous) = state.last_completion.get(session).copied() {
++        let gap = arrival_ms - previous;
++        if gap >= 0.0 {
++            state.last_gap.insert(session.to_string(), gap);
++            state.pauses.add(gap);
++        }
++    }
++    state.last_completion.insert(session.to_string(), now_ms);
++    let ordinal = *state.completions.entry(session.to_string()).and_modify(|count| *count += 1).or_insert(0);
++    let context = (input_tokens + output_tokens) as f64;
++    let until = match &state.policy {
++        RetentionPolicy::None => None,
++        RetentionPolicy::LastGap => state.last_gap.get(session).map(|gap| now_ms + gap),
++        RetentionPolicy::GlobalMedian => state.pauses.median().map(|gap| now_ms + gap),
++        RetentionPolicy::Continuum { reload, min_history, cold_mean_ms } => {
++            let benefit = reload[0] * context * context + reload[1] * context + reload[2];
++            let ttl = if state.pauses.total >= *min_history {
++                state.pauses.best_ttl(benefit)
++            } else if benefit > *cold_mean_ms {
++                cold_mean_ms * (benefit / cold_mean_ms).ln()
++            } else {
++                0.0
++            };
++            (ttl > 0.0).then_some(now_ms + ttl)
++        }
++        RetentionPolicy::Oracle { gaps, slack_ms } => gaps
++            .get(session)
++            .and_then(|values| values.get(ordinal).copied().flatten())
++            .map(|gap| now_ms + gap + slack_ms),
++        RetentionPolicy::Callback(callback) => {
++            let pause = Pause { session_id: Some(session.to_string()), arrival_ms, now_ms, input_tokens, cached_input_tokens, output_tokens };
++            callback(&pause).expect("invalid retention decision")
++        }
++    };
++    until.unwrap_or(f64::NEG_INFINITY)
 +}
 --- a/src/lib.rs
 +++ b/src/lib.rs
@@ -56,10 +264,11 @@
 +pub mod research_eviction;
 --- a/src/engine/cache/vllm_block_pool.rs
 +++ b/src/engine/cache/vllm_block_pool.rs
-@@ -72,6 +72,11 @@
+@@ -72,6 +72,12 @@
  
  #[derive(Debug)]
  struct BlockCopy {
++    protect_until_ms: f64,
 +    hit_count: u64,
 +    last_access_order: u64,
 +    creation_order: u64,
@@ -68,7 +277,7 @@
      state: CopyState,
  }
  
-@@ -335,6 +340,8 @@
+@@ -335,6 +341,8 @@
  }
  
  pub(crate) struct VllmBlockPool {
@@ -77,7 +286,7 @@
      capacity: usize,
      copies: SlotMap<BlockCopyId, BlockCopy>,
      // Preserve the compact token-only index. State keys are allocated lazily;
-@@ -361,6 +368,8 @@
+@@ -361,6 +369,8 @@
      pub(crate) fn new(capacity: usize) -> Self {
          assert!(capacity > 0, "capacity must be > 0");
          Self {
@@ -86,13 +295,14 @@
              capacity,
              copies: SlotMap::with_key(),
              by_hash: FxHashMap::default(),
-@@ -626,7 +635,14 @@
+@@ -626,7 +636,15 @@
          assert!(self.reserved > 0, "pool reserved-capacity underflow");
          self.reserved -= 1;
  
 +        self.research_clock += 1;
 +        self.research_access_clock += 1;
          let id = self.copies.insert(BlockCopy {
++            protect_until_ms: f64::NEG_INFINITY,
 +            hit_count: 1,
 +            last_access_order: self.research_access_clock,
 +            creation_order: self.research_clock,
@@ -101,7 +311,19 @@
              state: CopyState::Private,
          });
          if let Some(dependency) = source_reuse {
-@@ -896,6 +912,12 @@
+@@ -858,6 +876,11 @@
+             return;
+         }
+ 
++        // Research retention: keep the latest protection any releasing request asked for.
++        let protection = crate::research_eviction::release_protection();
++        if protection > self.copies[id].protect_until_ms {
++            self.copies[id].protect_until_ms = protection;
++        }
+         let should_deactivate = {
+             let CopyState::Cached { refs, pins, .. } = &mut self.copies[id].state else {
+                 unreachable!()
+@@ -896,6 +919,12 @@
          self.inactive_len
      }
  
@@ -114,7 +336,7 @@
      pub(crate) fn capacity(&self) -> usize {
          self.capacity
      }
-@@ -1252,6 +1274,11 @@
+@@ -1252,6 +1281,11 @@
          *refs = refs
              .checked_add(1)
              .unwrap_or_else(|| panic!("reference count overflow"));
@@ -126,7 +348,7 @@
      }
  
      fn unpin(&mut self, id: BlockCopyId, expected_hash: SequenceHash) {
-@@ -1277,6 +1304,9 @@
+@@ -1277,6 +1311,9 @@
      }
  
      fn insert_inactive(&mut self, id: BlockCopyId) {
@@ -136,7 +358,7 @@
          debug_assert!(
              self.is_inactive(id),
              "only an unreferenced, unpinned cached copy can enter the inactive LRU"
-@@ -1614,10 +1644,32 @@
+@@ -1614,10 +1651,60 @@
      /// Evict one physical copy. A hash is returned only on its final copy.
      fn evict_one(&mut self) -> EvictedCapacity {
          self.sync_belady_candidates();
@@ -146,7 +368,8 @@
              None => self.inactive_head,
          };
 +        crate::research_eviction::count_eviction();
-+        if crate::research_eviction::enabled() {
++        let order = crate::research_eviction::native_order();
++        if crate::research_eviction::enabled() || !matches!(order, crate::research_eviction::NativeOrder::Lru | crate::research_eviction::NativeOrder::Protected) {
 +            use slotmap::Key;
 +            let mut ids = Vec::new();
 +            let mut current = self.inactive_head;
@@ -163,9 +386,36 @@
 +                    hit_count: copy.hit_count, last_access_order: copy.last_access_order,
 +                }
 +            }).collect();
-+            let selected = crate::research_eviction::choose(&candidates);
++            let selected = if crate::research_eviction::enabled() {
++                crate::research_eviction::choose(&candidates)
++            } else {
++                crate::research_eviction::choose_native(&candidates)
++            };
 +            victim = Some(*ids.iter().find(|id| id.data().as_ffi() == selected)
 +                .expect("policy selected a non-candidate block"));
++        } else if order == crate::research_eviction::NativeOrder::Protected {
++            // Unprotected or expired copies go first in LRU order; otherwise the
++            // copy whose protection ends last, i.e. the furthest predicted reuse.
++            let now_ms = crate::research_eviction::now();
++            let mut latest: Option<(f64, BlockCopyId)> = None;
++            let mut current = self.inactive_head;
++            victim = None;
++            while let Some(id) = current {
++                let until = self.copies[id].protect_until_ms;
++                if until <= now_ms {
++                    victim = Some(id);
++                    break;
++                }
++                if latest.is_none_or(|(best, _)| until > best) {
++                    latest = Some((until, id));
++                }
++                let CopyState::Cached { inactive_next, .. } = self.copies[id].state else { unreachable!() };
++                current = inactive_next;
++            }
++            if victim.is_none() {
++                crate::research_eviction::count_protected_eviction();
++                victim = latest.map(|(_, id)| id);
++            }
 +        }
          let Some(id) = victim else {
              panic!("prechecked inactive capacity disappeared")
@@ -239,7 +489,36 @@
  
 --- a/src/engine/scheduler/vllm/core.rs
 +++ b/src/engine/scheduler/vllm/core.rs
-@@ -1756,6 +1756,7 @@
+@@ -982,6 +982,10 @@
+             SchedulerCommand::Submit(mut request) => {
+                 let uuid = request.uuid.unwrap_or_else(Uuid::new_v4);
+                 request.uuid = Some(uuid);
++                crate::research_eviction::note_arrival(
++                    uuid.as_u128(),
++                    command_now_ms.unwrap_or_else(crate::research_eviction::now),
++                );
+                 self.validate_request_id(uuid)?;
+                 Ok(SchedulerCommandEffects::new(
+                     SchedulerCommandResult::Submitted(self.submit(request)?),
+@@ -1507,8 +1511,17 @@
+             request_id,
+             request,
+         } = payload;
++        // Research retention: the policy sees only this request and its history.
++        crate::research_eviction::set_release_protection(crate::research_eviction::on_complete(
++            request_id.as_u128(),
++            request.sequence.lease.session_id.as_deref(),
++            request.sequence.num_input_tokens(),
++            request.cached_prefix_tokens.unwrap_or(0),
++            request.sequence.generated_tokens(),
++        ));
+         self.kv_manager
+             .finish_native(request_id, request.sequence.lease);
++        crate::research_eviction::set_release_protection(f64::NEG_INFINITY);
+     }
+ 
+     #[cfg(test)]
+@@ -1756,6 +1769,7 @@
              0,
              0,
          );
@@ -247,6 +526,14 @@
          if let Some(pool) = self.kv_manager.grouped() {
              metrics.total_blocks = 0;
              metrics.kv_cache_used_bytes = Some(pool.used_bytes());
+@@ -1797,6 +1811,7 @@
+         mut collector: Option<&mut TraceCollector>,
+         now_ms: f64,
+     ) -> anyhow::Result<EnginePassResult> {
++        crate::research_eviction::set_now(now_ms);
+         #[cfg(test)]
+         let requests_before = self.state.requests.len();
+         let g3_epoch_before = self.native_host_offload.as_ref().and_then(|a| a.g3_epoch());
 --- a/src/replay/components/engine.rs
 +++ b/src/replay/components/engine.rs
 @@ -119,6 +119,7 @@

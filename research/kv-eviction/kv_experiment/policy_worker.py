@@ -2,6 +2,7 @@
 
 import importlib.util
 import json
+import math
 import sys
 
 try:
@@ -23,15 +24,29 @@ except Exception as error:
     raise
 print(json.dumps({"status": "ready"}), flush=True)
 for line in sys.stdin:
-    candidates = json.loads(line)
+    message = json.loads(line)
     error_kind = "policy_exception"
     try:
-        victim = policy.select_victim(candidates)
-        error_kind = "invalid_decision"
-        if type(victim) is not int or victim not in {
-            row["block_id"] for row in candidates
-        }:
-            raise ValueError("select_victim must return an integer candidate block_id")
+        if isinstance(message, dict) and set(message) == {"pause"}:
+            # Retention: protect this request's KV until a time, or return None.
+            until = policy.on_pause(message["pause"])
+            error_kind = "invalid_decision"
+            if until is not None and (
+                type(until) not in (int, float) or not math.isfinite(until)
+            ):
+                raise ValueError("on_pause must return a finite number or None")
+            response = {"protect_until_ms": until}
+        else:
+            candidates = message
+            victim = policy.select_victim(candidates)
+            error_kind = "invalid_decision"
+            if type(victim) is not int or victim not in {
+                row["block_id"] for row in candidates
+            }:
+                raise ValueError(
+                    "select_victim must return an integer candidate block_id"
+                )
+            response = {"victim_id": victim}
     except Exception as error:
         print(
             json.dumps(
@@ -44,4 +59,4 @@ for line in sys.stdin:
             flush=True,
         )
         raise
-    print(json.dumps({"victim_id": victim}), flush=True)
+    print(json.dumps(response), flush=True)

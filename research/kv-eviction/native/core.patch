@@ -1,12 +1,12 @@
 --- /dev/null
 +++ b/src/research_eviction.rs
-@@ -0,0 +1,207 @@
+@@ -0,0 +1,252 @@
 +// SPDX-License-Identifier: Apache-2.0
 +//! Research-only hooks. No forecast, active-block access, or changes to scheduling.
 +use std::collections::HashMap;
 +use std::fs::File;
 +use std::io::{BufWriter, Write};
-+use std::path::Path;
++use std::path::{Path, PathBuf};
 +use std::sync::{Mutex, OnceLock};
 +use std::sync::atomic::{AtomicU64, Ordering};
 +use anyhow::Result;
@@ -25,16 +25,55 @@
 +}
 +type Callback = Box<dyn Fn(&[Candidate]) -> Result<u64> + Send + Sync>;
 +static CALLBACK: OnceLock<Callback> = OnceLock::new();
-+static TOKENS: OnceLock<Mutex<BufWriter<File>>> = OnceLock::new();
++/// Every output-token event, or exact per-request summaries for large runs.
++enum TokenSink {
++    Events(Mutex<BufWriter<File>>),
++    Summary(Mutex<HashMap<String, Vec<f64>>>, PathBuf),
++}
++static TOKENS: OnceLock<TokenSink> = OnceLock::new();
 +static EVICTIONS: AtomicU64 = AtomicU64::new(0);
 +static PROTECTED_EVICTIONS: AtomicU64 = AtomicU64::new(0);
 +pub fn set_callback(callback: Callback) { assert!(CALLBACK.set(callback).is_ok()); }
 +pub fn capture_tokens(path: impl AsRef<Path>) -> Result<()> {
-+    assert!(TOKENS.set(Mutex::new(BufWriter::new(File::create(path)?))).is_ok()); Ok(())
++    assert!(TOKENS.set(TokenSink::Events(Mutex::new(BufWriter::new(File::create(path)?)))).is_ok()); Ok(())
 +}
-+/// Flush buffered token events; a run that fails before this is discarded.
++pub fn summarize_tokens(directory: impl AsRef<Path>) {
++    assert!(TOKENS.set(TokenSink::Summary(Mutex::new(HashMap::new()), directory.as_ref().to_path_buf())).is_ok());
++}
++fn nearest_rank_p95(values: &mut [f64]) -> Option<f64> {
++    if values.is_empty() { return None; }
++    let index = (0.95 * values.len() as f64).ceil() as usize - 1;
++    Some(*values.select_nth_unstable_by(index, f64::total_cmp).1)
++}
++/// Flush token events, or write per-request summaries and the pooled gap p95.
++/// A run that fails before this is discarded.
 +pub fn finish_tokens() -> Result<()> {
-+    if let Some(file) = TOKENS.get() { file.lock().unwrap().flush()?; }
++    match TOKENS.get() {
++        None => {}
++        Some(TokenSink::Events(file)) => file.lock().unwrap().flush()?,
++        Some(TokenSink::Summary(times, directory)) => {
++            let times = std::mem::take(&mut *times.lock().unwrap());
++            let mut uuids: Vec<_> = times.keys().cloned().collect();
++            uuids.sort();
++            let mut writer = BufWriter::new(File::create(directory.join("token-summary.jsonl"))?);
++            let mut pooled = Vec::new();
++            for uuid in uuids {
++                let values = &times[&uuid];
++                anyhow::ensure!(values.windows(2).all(|w| w[0] <= w[1]), "nonmonotonic token times");
++                let mut gaps: Vec<f64> = values.windows(2).map(|w| w[1] - w[0]).collect();
++                pooled.extend_from_slice(&gaps);
++                writeln!(writer, "{}", serde_json::json!({
++                    "uuid": uuid, "tokens": values.len(), "first_ms": values[0],
++                    "last_ms": values[values.len() - 1], "gap_p95_ms": nearest_rank_p95(&mut gaps),
++                }))?;
++            }
++            writer.flush()?;
++            let count = pooled.len();
++            serde_json::to_writer_pretty(File::create(directory.join("token-pooled.json"))?, &serde_json::json!({
++                "gap_count": count, "gap_p95_ms": nearest_rank_p95(&mut pooled),
++            }))?;
++        }
++    }
 +    Ok(())
 +}
 +pub fn enabled() -> bool { CALLBACK.get().is_some() }
@@ -46,8 +85,14 @@
 +pub fn count_protected_eviction() { PROTECTED_EVICTIONS.fetch_add(1, Ordering::Relaxed); }
 +pub fn protected_evictions() -> u64 { PROTECTED_EVICTIONS.load(Ordering::Relaxed) }
 +pub fn token(uuid: impl std::fmt::Display, time_ms: f64) {
-+    if let Some(file) = TOKENS.get() {
-+        writeln!(file.lock().unwrap(), "{}", serde_json::json!({"uuid":uuid.to_string(),"time_ms":time_ms})).unwrap();
++    match TOKENS.get() {
++        Some(TokenSink::Events(file)) => {
++            writeln!(file.lock().unwrap(), "{}", serde_json::json!({"uuid":uuid.to_string(),"time_ms":time_ms})).unwrap();
++        }
++        Some(TokenSink::Summary(times, _)) => {
++            times.lock().unwrap().entry(uuid.to_string()).or_default().push(time_ms);
++        }
++        None => {}
 +    }
 +}
 +

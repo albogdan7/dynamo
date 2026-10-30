@@ -13,6 +13,7 @@ from pathlib import Path
 
 from .metrics import score
 from .occupancy import read_samples, summarize
+from .summary_metrics import score_summary
 from .traces import ROOT
 
 IMAGE = "python@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258"
@@ -230,7 +231,8 @@ def replay(
             calls += 1
         if process.wait(timeout=10) != 0:
             raise RuntimeError("Native replay failed")
-    result = score(output, ttft_slo_ms, itl_slo_ms, write_request_scores=True)
+    scorer = score_summary if (output / "token-summary.jsonl").exists() else score
+    result = scorer(output, ttft_slo_ms, itl_slo_ms, write_request_scores=True)
     telemetry = json.loads(config.read_text()).get("telemetry")
     if telemetry:
         end_ms = max(

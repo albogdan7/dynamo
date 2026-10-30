@@ -220,7 +220,12 @@ fn main() -> Result<()> {
             metadata: Value::Null,
         })
         .collect();
-    research_eviction::capture_tokens(output.join("tokens.jsonl"))?;
+    // Token events are exact but large; summaries keep every per-request gap metric.
+    if config["token_capture"].as_str() == Some("summary") {
+        research_eviction::summarize_tokens(output);
+    } else {
+        research_eviction::capture_tokens(output.join("tokens.jsonl"))?;
+    }
     let policy_process = match args[4].as_str() {
         "native-lru" => false,
         "policy" => true,

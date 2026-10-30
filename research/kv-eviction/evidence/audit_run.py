@@ -104,7 +104,74 @@ def audit_occupancy(directory: Path, saved: dict, requests: list[dict]) -> None:
                         raise ValueError(f"Occupancy {period}/{name}/{key} mismatch")
 
 
+def audit_summary(directory: Path, saved: dict, native: dict) -> tuple:
+    """Recompute metrics from per-request token summaries (large agentic runs)."""
+    requests = [
+        json.loads(line)
+        for line in (directory / "requests.jsonl").read_text().splitlines()
+    ]
+    summaries = {}
+    for line in (directory / "token-summary.jsonl").read_text().splitlines():
+        row = json.loads(line)
+        summaries[row["uuid"]] = row
+    pooled = json.loads((directory / "token-pooled.json").read_text())
+    ttfts, latencies, passes, gap_time, gap_count = [], [], 0, 0.0, 0
+    for request in requests:
+        summary = summaries.get(request["uuid"])
+        if (summary["tokens"] if summary else 0) != request["output_length"]:
+            raise ValueError("Token summary count mismatch")
+        if request["terminal_status"] == "completed":
+            latencies.append(request["terminal_time_ms"] - request["arrival_time_ms"])
+        if (
+            request["terminal_status"] != "completed"
+            or request["requested_output_length"] == 0
+        ):
+            continue
+        first = summary["first_ms"] - request["arrival_time_ms"]
+        ttfts.append(first)
+        gap_time += summary["last_ms"] - summary["first_ms"]
+        gap_count += summary["tokens"] - 1
+        tail = summary["gap_p95_ms"]
+        passes += first <= saved["ttft_slo_ms"] and (
+            tail is None or tail <= saved["itl_slo_ms"]
+        )
+    if pooled["gap_count"] != sum(max(r["output_length"] - 1, 0) for r in requests):
+        raise ValueError("Pooled gap count mismatch")
+    duration = max(row["terminal_time_ms"] for row in requests) - min(
+        row["arrival_time_ms"] for row in requests
+    )
+    hits = sum(
+        row["admission_history"][0]["reused_input_tokens"]
+        if row["admission_history"]
+        else 0
+        for row in requests
+    )
+    calculated = {
+        "mean_request_latency_ms": statistics.mean(latencies),
+        "p95_request_latency_ms": quantile(latencies),
+        "mean_ttft_ms": statistics.mean(ttfts),
+        "p95_ttft_ms": quantile(ttfts),
+        "mean_itl_ms": gap_time / gap_count if gap_count else None,
+        "p95_itl_ms": pooled["gap_p95_ms"],
+        "goodput_rps": passes * 1000 / duration,
+        "slo_attainment_pct": 100
+        * passes
+        / sum(row["requested_output_length"] > 0 for row in requests),
+        "token_hit_pct": 100 * hits / sum(row["input_length"] for row in requests),
+        "recomputed_input_tokens": native["committed_prefill_tokens"],
+        "evictions": json.loads((directory / "evictions.json").read_text())[
+            "evictions"
+        ],
+    }
+    return calculated, passes, requests
+
+
 def audit(directory: Path) -> dict:
+    if not (directory / "tokens.jsonl").exists():
+        saved = json.loads((directory / "metrics.json").read_text())
+        native = json.loads((directory / "native-report.json").read_text())
+        calculated, passes, requests = audit_summary(directory, saved, native)
+        return verify(directory, saved, native, calculated, passes, requests, 1e-9)
     requests = [
         json.loads(line)
         for line in (directory / "requests.jsonl").read_text().splitlines()
@@ -159,6 +226,11 @@ def audit(directory: Path) -> dict:
             "evictions"
         ],
     }
+    return verify(directory, saved, native, calculated, passes, requests, 1e-12)
+
+
+def verify(directory, saved, native, calculated, passes, requests, tolerance) -> dict:
+    """Compare recomputed and saved metrics, then occupancy; return a receipt."""
     for key, value in calculated.items():
         if value is None and saved[key] is None:
             continue
@@ -167,7 +239,9 @@ def audit(directory: Path) -> dict:
     if "occupancy" in saved:
         audit_occupancy(directory, saved["occupancy"], requests)
     for key in ("mean_ttft_ms", "mean_itl_ms"):
-        if not math.isclose(calculated[key], native[key], rel_tol=1e-12, abs_tol=1e-9):
+        if not math.isclose(
+            calculated[key], native[key], rel_tol=tolerance, abs_tol=1e-9
+        ):
             raise ValueError(f"Native collector disagrees on {key}")
     result = {
         "matches": True,

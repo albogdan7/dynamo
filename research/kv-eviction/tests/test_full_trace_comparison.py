@@ -74,6 +74,12 @@ def sweep(tmp_path):
             "flag_counts": {"infeasible": blocked},
             "blocker_counts": {"infeasible": blocked} if blocked else {},
             "flag_definitions": {},
+            "by_model": {"unrecorded": {"requests": requests, "blocked": blocked}},
+            "by_day": {"unrecorded": {"requests": requests, "blocked": blocked}},
+            "by_file": {"trace.jsonl": {"requests": requests, "blocked": blocked}},
+            "sessions_with_blocked_requests": 0,
+            "ledger": {"path": "ledger.jsonl.gz", "sha256": "0" * 64, "rows": requests},
+            "files": [],
             "revision": "fixture",
             "license": "fixture",
         }

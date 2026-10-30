@@ -23,6 +23,7 @@ LABELS = {
 GENERATOR_FILES = [
     "baseline_report.py",
     "export_report.py",
+    "summarize.py",
     "baseline_comparison.py",
     "kv_experiment/baseline_evidence.py",
     "kv_experiment/comparison.py",
@@ -118,7 +119,9 @@ def change(value, reference, kind):
         return None
     if kind == "points":
         return value - reference
-    return None if reference == 0 else 100 * (value / reference - 1)
+    if reference == 0:
+        return 0.0 if value == 0 else None
+    return 100 * (value / reference - 1)
 
 
 def change_text(delta, kind) -> str:
@@ -254,6 +257,31 @@ def coverage_table(results: dict) -> str:
     return "".join(lines)
 
 
+def glance(section: dict, labels: list[str]) -> str:
+    """Computed ranges across non-LRU heuristics; no editorial ranking."""
+    rows = {row["metric"]: row for row in section["rows"]}
+    parts = []
+    for metric, unit, decimals in (
+        ("Input-token hit rate (first admission)", "%", 2),
+        ("Mean TTFT, including queueing", " ms", 0),
+        ("p95 ITL over individual token gaps", " ms", 2),
+        ("SLO attainment", "%", 3),
+    ):
+        values = rows[metric]["values"]
+        others = [
+            (v, label) for v, label in zip(values[1:], labels[1:]) if v is not None
+        ]
+        if values[0] is None or not others:
+            continue
+        low, high = min(others), max(others)
+        parts.append(
+            f"{html.escape(metric)}: LRU {fmt(values[0], decimals)}{unit}; other heuristics "
+            f"{fmt(low[0], decimals)}{unit} ({html.escape(low[1])}) to "
+            f"{fmt(high[0], decimals)}{unit} ({html.escape(high[1])})"
+        )
+    return "<ul class='glance'>" + "".join(f"<li>{p}</li>" for p in parts) + "</ul>"
+
+
 def trace_section(results: dict, section: dict) -> str:
     item, labels = (
         section["item"],
@@ -263,7 +291,8 @@ def trace_section(results: dict, section: dict) -> str:
         f"<section id='{section['trace']}'><h2>{html.escape(section['label'])}</h2>"
         f"<p class='context'>{item['replayable_requests']:,} requests, one recording replayed from a cold cache with original timestamps · "
         f"cache {item['cache_tokens']:,} tokens ({item['capacity_blocks']} blocks) · workload SHA-256 {item['recording']['sha256'][:12]}…</p>"
-        "<div class='scroll'><table><thead><tr><th scope='col'>Metric</th><th scope='col'>Unit</th>"
+        + glance(section, labels)
+        + "<div class='scroll'><table><thead><tr><th scope='col'>Metric</th><th scope='col'>Unit</th>"
         + "".join(f"<th scope='col'>{html.escape(label)}</th>" for label in labels)
         + "</tr></thead><tbody>"
     ]
@@ -319,7 +348,7 @@ def trace_section(results: dict, section: dict) -> str:
         )
         + f"<li>Sampling error on the first {cadence['bounded_prefix_requests']:,} requests: "
         f"{cadence['frozen_interval_ms']:g} ms versus {cadence['finer_interval_ms']:g} ms cadence, largest absolute "
-        f"difference {cadence['max_absolute_difference']:.4f} (percentage points or time fraction) across occupancy summaries.</li></ul></section>"
+        f"difference {cadence['max_absolute_difference_pp']:.4f} percentage points across occupancy means, p95s, peaks and threshold times.</li></ul></section>"
     )
     return "".join(parts)
 
@@ -375,7 +404,7 @@ th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:right;verti
 tbody th,td.text,td.unit{text-align:left;font-weight:400}td.unit{color:var(--muted);white-space:nowrap}tr.group th{text-align:left;font-weight:650;background:var(--head)}
 td.lead{background:var(--lead);color:var(--lead-fg);font-weight:650}.delta{display:block;color:var(--muted);font-size:11px;font-weight:400}
 td.status.blocked{color:var(--bad);font-weight:650}td.status.ready{color:var(--lead-fg);font-weight:650}
-.policies td,.policies th{text-align:left}pre{white-space:pre-wrap;font-size:12px;margin:6px 0}.checks{font-size:12.5px}
+.policies td,.policies th{text-align:left}pre{white-space:pre-wrap;font-size:12px;margin:6px 0}.checks,.glance{font-size:12.5px}
 .callout{border-left:3px solid var(--warn);padding:6px 12px;background:var(--head);margin:14px 0}
 """
 

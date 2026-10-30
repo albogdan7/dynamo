@@ -98,18 +98,20 @@ def cadence_error(coarse: dict, fine: dict) -> dict:
                     "time_fraction_at_or_above_100pct",
                 ):
                     if a[key] is not None and b[key] is not None:
+                        # Express every statistic in percentage points.
+                        scale = 1 if key.endswith("_pct") else 100
                         result[f"{rank}/{period}/{series}/{key}"] = {
-                            "frozen": a[key],
-                            "finer": b[key],
-                            "absolute_difference": abs(a[key] - b[key]),
+                            "frozen_pct": a[key] * scale,
+                            "finer_pct": b[key] * scale,
+                            "absolute_difference_pp": abs(a[key] - b[key]) * scale,
                         }
     return {
         "frozen_interval_ms": left["sample_interval_ms"],
         "finer_interval_ms": right["sample_interval_ms"],
         "frozen_samples": left["samples"],
         "finer_samples": right["samples"],
-        "max_absolute_difference": max(
-            (item["absolute_difference"] for item in result.values()), default=None
+        "max_absolute_difference_pp": max(
+            (item["absolute_difference_pp"] for item in result.values()), default=None
         ),
         "differences": result,
     }
@@ -230,6 +232,12 @@ def build(run: Path, output: Path, window_s: float = 600) -> dict:
                 "flag_counts",
                 "blocker_counts",
                 "flag_definitions",
+                "by_model",
+                "by_day",
+                "by_file",
+                "sessions_with_blocked_requests",
+                "ledger",
+                "files",
             )
         }
         summary["revision"], summary["license"] = item["revision"], item["license"]

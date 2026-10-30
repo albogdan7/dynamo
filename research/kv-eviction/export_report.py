@@ -657,8 +657,19 @@ if __name__ == "__main__":
         help="Report audited full-trace heuristic evidence instead of agent runs; "
         "--output is then the HTML path and a sibling CSV is written",
     )
+    parser.add_argument(
+        "--retention-evidence",
+        type=Path,
+        help="Report audited agentic retention evidence; --output is the HTML path",
+    )
     args = parser.parse_args()
-    if args.baseline_evidence:
+    if args.retention_evidence:
+        from retention_report import build as build_retention
+
+        print(
+            json.dumps(build_retention(args.retention_evidence, args.output), indent=2)
+        )
+    elif args.baseline_evidence:
         from baseline_report import build as build_baselines
 
         print(

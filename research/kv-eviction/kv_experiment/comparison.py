@@ -34,6 +34,7 @@ RUNTIME_FILES = [
     "kv_experiment/occupancy.py",
     "kv_experiment/policy_worker.py",
     "kv_experiment/runtime.py",
+    "kv_experiment/summary_metrics.py",
     "evidence/audit_run.py",
     "native/core.patch",
     "native/src/main.rs",

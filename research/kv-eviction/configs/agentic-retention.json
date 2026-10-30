@@ -2,20 +2,61 @@
   "schema_version": 1,
   "description": "Agentic KV retention experiment; frozen in AGENTIC_RETENTION_SPEC.md before any policy comparison.",
   "trace": "agentx",
-  "split": {"seed": 0, "tuning_plays": 131},
+  "split": {
+    "seed": 0,
+    "tuning_plays": 131
+  },
   "served_model": {
     "name": "Qwen2.5-7B-Instruct-1M",
     "dtype": "bf16",
     "kv_bytes_per_token": 57344,
     "note": "Sets KV capacity only; timing is the pinned uncalibrated polynomial model."
   },
-  "hardware": {"gpu": "H200 SXM 141 GB", "tensor_parallel": 1, "kv_budget_bytes": 105226698752},
+  "hardware": {
+    "gpu": "H200 SXM 141 GB",
+    "tensor_parallel": 1,
+    "kv_budget_bytes": 105226698752
+  },
   "block_tokens": 512,
   "cache_blocks": 3584,
-  "scheduler": {"max_num_seqs": 64, "max_num_batched_tokens": 8192},
+  "scheduler": {
+    "max_num_seqs": 64,
+    "max_num_batched_tokens": 8192
+  },
   "timing_profile": "profiles/interactive.json",
-  "lanes": [8, 32, 128],
-  "telemetry": {"sample_interval_ms": 10000, "finer_check": {"sample_interval_ms": 1000, "plays": 8, "lanes": 8}},
-  "slo": {"ttft_ms": 1000, "per_request_p95_itl_ms": 50},
-  "job_timeout_seconds": 21600
+  "lanes": [
+    8,
+    32,
+    128
+  ],
+  "telemetry": {
+    "sample_interval_ms": 10000,
+    "finer_check": {
+      "sample_interval_ms": 1000,
+      "plays": 8,
+      "lanes": 8
+    }
+  },
+  "slo": {
+    "ttft_ms": 1000,
+    "per_request_p95_itl_ms": 50
+  },
+  "job_timeout_seconds": 21600,
+  "continuum": {
+    "reload_calibration": "configs/agentic-reload-calibration.json",
+    "min_history": 100,
+    "cold_mean_ms": 1000
+  },
+  "oracle_slack_ms": 60000,
+  "parity_fixture": {
+    "plays": 4,
+    "lanes": 4
+  },
+  "decision_rule": {
+    "split": "evaluation",
+    "real_policy_min_reduction_pct": 5,
+    "oracle_min_reduction_pct": 10,
+    "min_load_levels": 2,
+    "metric": "mean_request_latency_ms"
+  }
 }

@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-10-30T18:02:25.445244-05:00",
+  "command": [
+    "/Users/miguel/anaconda3/bin/python3",
+    "research/kv-eviction/retention_experiment.py",
+    "run",
+    "--config",
+    "research/kv-eviction/configs/agentic-retention.json",
+    "--output",
+    "research/kv-eviction/experiments/2026-10-30-18-02-25",
+    "--jobs",
+    "6"
+  ],
+  "identity": {
+    "config_sha256": "7e24194211957a75ac92bcf98955aa3f38b4cd173ce270cc001ff300fbe41a5c",
+    "inventory_sha256": "35a4918accc9bd2e63252aecf0cc1ce00a55fb85e48bd58819a39dff308dc442",
+    "native_binary_sha256": "d5f68cc21187b37e2f963d821c10390ba1d9e633d2af01f711312660ea17a53d",
+    "policy_container": "python@sha256:34386ef0cb081344d7ec1c103ba398e6e9f64e9ab3a1509accc92a4e24a07258",
+    "runtime_sha256": {
+      "kv_experiment/metrics.py": "e9209a115101ed8d3b65663109ac4f65d64f97659b69f4ec100319f18aa14a0f",
+      "kv_experiment/occupancy.py": "17f51bb869284e5a9f05fbeca24e4aea90f392aa1891cb48559324f188def846",
+      "kv_experiment/policy_worker.py": "ec74b48ddf455e15c57dfcf6b85b3f56368b05675d11817213998980057d69b4",
+      "kv_experiment/runtime.py": "4eb33e2481bb1dde34114e9df3b3d0e613926cfac599f36d400e81a376c33de0",
+      "kv_experiment/summary_metrics.py": "bc05f8c3db1350809b8bbbb835bf2dd49918c2375e4cf6774e9c1f0947e51ed7",
+      "evidence/audit_run.py": "ea74eee5629afc41726e76be4d4ac19aa27945bd1d7541697423e6a99120cc68",
+      "native/core.patch": "2b09f769e0c4429c01d7ebee25d78e36ba92ced05ac3c62ff9e8210ddf7f94e7",
+      "native/src/main.rs": "60d5df5b9e0dd66b3b29908261c48d1081f4505fa094920c1ed7e771ec96aaa9",
+      "native/Cargo.lock": "36bf83c62b8ae9abadc2f7061fda783624309ba36995399d9f2a5e48584fafa6"
+    },
+    "calibration_sha256": "01821b8b01006e6fb4e7d0d2b68f6ca875d486b6b4f0b2f7dcc936a8d934fff6"
+  },
+  "git_commit": "2bf8fd74660a3cb817e8c9255cc1917dae108fb9",
+  "git_status": "",
+  "python": "3.14.6 | packaged by Anaconda, Inc. | (main, Jul  9 2026, 14:30:20) [Clang 20.1.8 ]",
+  "platform": "macOS-27.2-arm64-arm-64bit-Mach-O",
+  "docker": "29.7.2",
+  "policies": {
+    "lru": {
+      "label": "LRU",
+      "research": null,
+      "note": "Native engine LRU; never protects."
+    },
+    "lfu": {
+      "label": "LFU",
+      "research": {
+        "order": "lfu"
+      },
+      "note": "Fewest physical-copy accesses, then LRU."
+    },
+    "slru": {
+      "label": "SLRU",
+      "research": {
+        "order": "slru"
+      },
+      "note": "Copies used at least twice evicted after others; LRU within tiers."
+    },
+    "random-0": {
+      "label": "Random 0",
+      "research": {
+        "order": "random",
+        "seed": 0
+      },
+      "note": "Uniform among eligible blocks, seed 0."
+    },
+    "last-gap": {
+      "label": "Last gap",
+      "research": {
+        "retention": {
+          "policy": "last_gap"
+        }
+      },
+      "note": "Protect until now + this session's last observed pause."
+    },
+    "global-median": {
+      "label": "Global median",
+      "research": {
+        "retention": {
+          "policy": "global_median"
+        }
+      },
+      "note": "Protect until now + median observed pause (log-binned)."
+    },
+    "continuum-ttl": {
+      "label": "Continuum TTL",
+      "research": {
+        "retention": {
+          "policy": "continuum",
+          "reload_quadratic": [
+            1.8087785399092775e-12,
+            0.02064446520460425,
+            0.4749819378014666
+          ],
+          "min_history": 100,
+          "cold_mean_ms": 1000
+        }
+      },
+      "note": "argmax_t P(pause<=t)*reload(context) - t over observed pauses; retention only, soft protection."
+    },
+    "oracle": {
+      "label": "Oracle (bound)",
+      "research": {
+        "retention": {
+          "policy": "oracle",
+          "slack_ms": 60000
+        }
+      },
+      "note": "Protect until the recorded next arrival plus slack; uses future data."
+    },
+    "unbounded": {
+      "label": "Unbounded cache (bound)",
+      "research": null,
+      "note": "LRU with enough capacity that nothing is evicted."
+    }
+  },
+  "limitation": "Uncalibrated native polynomial timing on one simulated worker; soft retention; not measured GPU latency."
+}

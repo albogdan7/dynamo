@@ -130,14 +130,14 @@ def decision_block(results: dict) -> str:
         parts.append(
             f"<tr><th scope='row'>{lanes}</th><td>{level['lru_ms'] / 1000:,.3f}</td>"
             + "".join(
-                f"<td class='{'lead' if n == level['best_real_policy'] else ''}'>{level['reduction_pct'][n]:+.2f}%</td>"
+                f"<td class='{'lead' if n == level['best_real_policy'] and level['reduction_pct'][n] > 0 else ''}'>{level['reduction_pct'][n]:+.2f}%</td>"
                 for n in names
             )
             + "</tr>"
         )
     parts.append(
         "</tbody></table></div><p class='muted'>Cells show the reduction in mean request latency versus LRU (positive is faster). "
-        "Green marks the best non-oracle policy at each level. Oracle and unbounded cache are bounds, not deployable policies.</p></section>"
+        "Green marks the best non-oracle policy at a level only when it is faster than LRU. Oracle and unbounded cache are bounds, not deployable policies.</p></section>"
     )
     return "".join(parts)
 

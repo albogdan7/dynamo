@@ -1,6 +1,6 @@
 # Agentic KV retention experiment
 
-Status: frozen 2026-10-30, before any policy was compared. Follows [FULL_TRACE_RESULTS.md](FULL_TRACE_RESULTS.md), which found limited headroom for eviction heuristics on a saturated single worker.
+Status: frozen 2026-10-30, before any policy was compared; run and audited the same day. See [AGENTIC_RETENTION_RESULTS.md](AGENTIC_RETENTION_RESULTS.md). Follows [FULL_TRACE_RESULTS.md](FULL_TRACE_RESULTS.md), which found limited headroom for eviction heuristics on a saturated single worker.
 
 ## Question
 

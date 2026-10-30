@@ -1,0 +1,1189 @@
+split,concurrent_plays,policy,group,metric,unit,value,change_vs_lru,change_kind
+evaluation,8,lru,Latency,Mean request latency (arrival to last token) — primary,s,21.188619659468742,0.0,relative %
+evaluation,8,lfu,Latency,Mean request latency (arrival to last token) — primary,s,21.47007372466438,1.328326572089189,relative %
+evaluation,8,slru,Latency,Mean request latency (arrival to last token) — primary,s,21.23326471504806,0.21070299196845887,relative %
+evaluation,8,random-0,Latency,Mean request latency (arrival to last token) — primary,s,24.83870232427483,17.22661845588862,relative %
+evaluation,8,last-gap,Latency,Mean request latency (arrival to last token) — primary,s,21.244814905474392,0.2652142844073335,relative %
+evaluation,8,global-median,Latency,Mean request latency (arrival to last token) — primary,s,21.306511388077084,0.5563917352948478,relative %
+evaluation,8,continuum-ttl,Latency,Mean request latency (arrival to last token) — primary,s,21.21355257089885,0.11767123970705118,relative %
+evaluation,8,oracle,Latency,Mean request latency (arrival to last token) — primary,s,21.17477726758415,-0.06532937070492517,relative %
+evaluation,8,unbounded,Latency,Mean request latency (arrival to last token) — primary,s,6.37537680956183,-69.91131601763963,relative %
+evaluation,8,lru,Latency,p95 request latency,s,88.77849294877052,0.0,relative %
+evaluation,8,lfu,Latency,p95 request latency,s,90.21373344895989,1.6166533723630305,relative %
+evaluation,8,slru,Latency,p95 request latency,s,88.38648352718353,-0.4415589953900234,relative %
+evaluation,8,random-0,Latency,p95 request latency,s,101.4196063760221,14.238936714713235,relative %
+evaluation,8,last-gap,Latency,p95 request latency,s,88.82025781869889,0.04704390505081424,relative %
+evaluation,8,global-median,Latency,p95 request latency,s,89.97901949998736,1.3522718299685543,relative %
+evaluation,8,continuum-ttl,Latency,p95 request latency,s,89.34548630504683,0.6386607132467192,relative %
+evaluation,8,oracle,Latency,p95 request latency,s,88.77140882271529,-0.007979552051329275,relative %
+evaluation,8,unbounded,Latency,p95 request latency,s,25.38748682689667,-71.40356184966276,relative %
+evaluation,8,lru,Latency,"Mean TTFT, including queueing",ms,580.0126931058471,0.0,relative %
+evaluation,8,lfu,Latency,"Mean TTFT, including queueing",ms,724.2089474531593,24.86087909131287,relative %
+evaluation,8,slru,Latency,"Mean TTFT, including queueing",ms,509.97409080437467,-12.075356821318916,relative %
+evaluation,8,random-0,Latency,"Mean TTFT, including queueing",ms,2172.0301244917664,274.4797571344513,relative %
+evaluation,8,last-gap,Latency,"Mean TTFT, including queueing",ms,502.04586074107726,-13.442263124841924,relative %
+evaluation,8,global-median,Latency,"Mean TTFT, including queueing",ms,621.3062468779482,7.1194224303924525,relative %
+evaluation,8,continuum-ttl,Latency,"Mean TTFT, including queueing",ms,530.2800551153955,-8.57440510898886,relative %
+evaluation,8,oracle,Latency,"Mean TTFT, including queueing",ms,517.8216747788985,-10.722354711571692,relative %
+evaluation,8,unbounded,Latency,"Mean TTFT, including queueing",ms,98.8019553114233,-82.96555291189243,relative %
+evaluation,8,lru,Latency,p95 TTFT,ms,482.184828042984,0.0,relative %
+evaluation,8,lfu,Latency,p95 TTFT,ms,1346.1358593702316,179.17424628097825,relative %
+evaluation,8,slru,Latency,p95 TTFT,ms,538.8762690126896,11.757201320455458,relative %
+evaluation,8,random-0,Latency,p95 TTFT,ms,13002.732832074165,2596.628362374572,relative %
+evaluation,8,last-gap,Latency,p95 TTFT,ms,522.266773223877,8.312568718425094,relative %
+evaluation,8,global-median,Latency,p95 TTFT,ms,486.6009039878845,0.9158471374605126,relative %
+evaluation,8,continuum-ttl,Latency,p95 TTFT,ms,460.29528880119324,-4.539657402874453,relative %
+evaluation,8,oracle,Latency,p95 TTFT,ms,437.0495899319649,-9.360567874814096,relative %
+evaluation,8,unbounded,Latency,p95 TTFT,ms,256.37779673933983,-46.82997435238978,relative %
+evaluation,8,lru,Latency,Mean ITL over individual gaps,ms/gap,19.079578804386063,0.0,relative %
+evaluation,8,lfu,Latency,Mean ITL over individual gaps,ms/gap,19.20634360376462,0.6644004077774213,relative %
+evaluation,8,slru,Latency,Mean ITL over individual gaps,ms/gap,19.185565459787274,0.555497878060307,relative %
+evaluation,8,random-0,Latency,Mean ITL over individual gaps,ms/gap,20.985071111164757,9.987077420915892,relative %
+evaluation,8,last-gap,Latency,Mean ITL over individual gaps,ms/gap,19.203753578516892,0.6508255523035134,relative %
+evaluation,8,global-median,Latency,Mean ITL over individual gaps,ms/gap,19.150509420788406,0.3717619614644674,relative %
+evaluation,8,continuum-ttl,Latency,Mean ITL over individual gaps,ms/gap,19.148684171113313,0.36219545219395854,relative %
+evaluation,8,oracle,Latency,Mean ITL over individual gaps,ms/gap,19.1242820394991,0.23429885728274424,relative %
+evaluation,8,unbounded,Latency,Mean ITL over individual gaps,ms/gap,5.810781779368143,-69.5444965586329,relative %
+evaluation,8,lru,Latency,p95 ITL over individual gaps,ms/gap,32.47659099847078,0.0,relative %
+evaluation,8,lfu,Latency,p95 ITL over individual gaps,ms/gap,32.324689999222755,-0.4677245812381603,relative %
+evaluation,8,slru,Latency,p95 ITL over individual gaps,ms/gap,32.32918298244476,-0.4538900527858991,relative %
+evaluation,8,random-0,Latency,p95 ITL over individual gaps,ms/gap,32.93259811401367,1.4041101652706223,relative %
+evaluation,8,last-gap,Latency,p95 ITL over individual gaps,ms/gap,32.48881196975708,0.037630092662355175,relative %
+evaluation,8,global-median,Latency,p95 ITL over individual gaps,ms/gap,32.4373140335083,-0.12093930968410938,relative %
+evaluation,8,continuum-ttl,Latency,p95 ITL over individual gaps,ms/gap,32.44943809509277,-0.08360761564933927,relative %
+evaluation,8,oracle,Latency,p95 ITL over individual gaps,ms/gap,32.344849944114685,-0.40564927015369623,relative %
+evaluation,8,unbounded,Latency,p95 ITL over individual gaps,ms/gap,5.762704014778137,-82.2558223089071,relative %
+evaluation,8,lru,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,96.24734800881069,0.0,percentage points
+evaluation,8,lfu,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,93.07576924636153,-3.1715787624491583,percentage points
+evaluation,8,slru,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,96.2243753462791,-0.022972662531586252,percentage points
+evaluation,8,random-0,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,77.72462534290077,-18.522722665909924,percentage points
+evaluation,8,last-gap,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,96.11356603289144,-0.13378197591924845,percentage points
+evaluation,8,global-median,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,96.19329468520695,-0.054053323603739045,percentage points
+evaluation,8,continuum-ttl,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,96.4297779759733,0.18242996716260507,percentage points
+evaluation,8,oracle,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,96.80409724192916,0.5567492331184667,percentage points
+evaluation,8,unbounded,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,98.96352751989838,2.716179511087688,percentage points
+evaluation,8,lru,SLO,SLO passes,requests,71224,0.0,relative %
+evaluation,8,lfu,SLO,SLO passes,requests,68877,-3.29523756037291,relative %
+evaluation,8,slru,SLO,SLO passes,requests,71207,-0.023868358980116966,relative %
+evaluation,8,random-0,SLO,SLO passes,requests,57517,-19.24491744355835,relative %
+evaluation,8,last-gap,SLO,SLO passes,requests,71125,-0.13899809053128376,relative %
+evaluation,8,global-median,SLO,SLO passes,requests,71184,-0.056160844659103315,relative %
+evaluation,8,continuum-ttl,SLO,SLO passes,requests,71359,0.18954285072447785,relative %
+evaluation,8,oracle,SLO,SLO passes,requests,71636,0.5784566999887719,relative %
+evaluation,8,unbounded,SLO,SLO passes,requests,73234,2.8220824441199666,relative %
+evaluation,8,lru,Cache effectiveness,Input-token hit rate (first admission),%,96.21492441532422,0.0,percentage points
+evaluation,8,lfu,Cache effectiveness,Input-token hit rate (first admission),%,94.21167776201057,-2.003246653313653,percentage points
+evaluation,8,slru,Cache effectiveness,Input-token hit rate (first admission),%,96.1981174136627,-0.01680700166151894,percentage points
+evaluation,8,random-0,Cache effectiveness,Input-token hit rate (first admission),%,75.81304825140585,-20.401876163918374,percentage points
+evaluation,8,last-gap,Cache effectiveness,Input-token hit rate (first admission),%,95.97905138416567,-0.23587303115854752,percentage points
+evaluation,8,global-median,Cache effectiveness,Input-token hit rate (first admission),%,96.07061540212709,-0.1443090131971303,percentage points
+evaluation,8,continuum-ttl,Cache effectiveness,Input-token hit rate (first admission),%,96.3371704952996,0.12224607997538328,percentage points
+evaluation,8,oracle,Cache effectiveness,Input-token hit rate (first admission),%,96.69448399641091,0.47955958108668995,percentage points
+evaluation,8,unbounded,Cache effectiveness,Input-token hit rate (first admission),%,98.3489823704151,2.1340579550908814,percentage points
+evaluation,8,lru,Cache effectiveness,Recomputed input tokens,tokens,647109519,0.0,relative %
+evaluation,8,lfu,Cache effectiveness,Recomputed input tokens,tokens,989582882,52.92355512390476,relative %
+evaluation,8,slru,Cache effectiveness,Recomputed input tokens,tokens,649981242,0.4437769675275094,relative %
+evaluation,8,random-0,Cache effectiveness,Recomputed input tokens,tokens,4136610032,539.2441944591453,relative %
+evaluation,8,last-gap,Cache effectiveness,Recomputed input tokens,tokens,687433350,6.2313765778494234,relative %
+evaluation,8,global-median,Cache effectiveness,Recomputed input tokens,tokens,671783264,3.8129164037223884,relative %
+evaluation,8,continuum-ttl,Cache effectiveness,Recomputed input tokens,tokens,626215947,-3.2287536168974174,relative %
+evaluation,8,oracle,Cache effectiveness,Recomputed input tokens,tokens,565126643,-12.669088244396542,relative %
+evaluation,8,unbounded,Cache effectiveness,Recomputed input tokens,tokens,282259840,-56.381442134217785,relative %
+evaluation,8,lru,Cache effectiveness,Evicted blocks,512-token blocks,1379464,0.0,relative %
+evaluation,8,lfu,Cache effectiveness,Evicted blocks,512-token blocks,2048358,48.48941327936067,relative %
+evaluation,8,slru,Cache effectiveness,Evicted blocks,512-token blocks,1385075,0.40675218780628075,relative %
+evaluation,8,random-0,Cache effectiveness,Evicted blocks,512-token blocks,8194896,494.06378129476377,relative %
+evaluation,8,last-gap,Cache effectiveness,Evicted blocks,512-token blocks,1458223,5.7093914737898155,relative %
+evaluation,8,global-median,Cache effectiveness,Evicted blocks,512-token blocks,1427654,3.493385836817775,relative %
+evaluation,8,continuum-ttl,Cache effectiveness,Evicted blocks,512-token blocks,1338656,-2.9582504508997687,relative %
+evaluation,8,oracle,Cache effectiveness,Evicted blocks,512-token blocks,1219342,-11.607551918716252,relative %
+evaluation,8,unbounded,Cache effectiveness,Evicted blocks,512-token blocks,0,-100.0,relative %
+evaluation,8,lru,Cache effectiveness,Forced evictions of protected blocks,blocks,0,0.0,relative %
+evaluation,8,lfu,Cache effectiveness,Forced evictions of protected blocks,blocks,0,0.0,relative %
+evaluation,8,slru,Cache effectiveness,Forced evictions of protected blocks,blocks,0,0.0,relative %
+evaluation,8,random-0,Cache effectiveness,Forced evictions of protected blocks,blocks,0,0.0,relative %
+evaluation,8,last-gap,Cache effectiveness,Forced evictions of protected blocks,blocks,337869,,relative %
+evaluation,8,global-median,Cache effectiveness,Forced evictions of protected blocks,blocks,113844,,relative %
+evaluation,8,continuum-ttl,Cache effectiveness,Forced evictions of protected blocks,blocks,84295,,relative %
+evaluation,8,oracle,Cache effectiveness,Forced evictions of protected blocks,blocks,509561,,relative %
+evaluation,8,unbounded,Cache effectiveness,Forced evictions of protected blocks,blocks,0,0.0,relative %
+evaluation,8,lru,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.97223225426089,0.0,percentage points
+evaluation,8,lfu,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.97227749210465,4.523784376431195e-05,percentage points
+evaluation,8,slru,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.9721395628758,-9.26913850918254e-05,percentage points
+evaluation,8,random-0,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.97298614297738,0.0007538887164884045,percentage points
+evaluation,8,last-gap,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.9721643080117,-6.794624918882164e-05,percentage points
+evaluation,8,global-median,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.97222827089627,-3.983364621262808e-06,percentage points
+evaluation,8,continuum-ttl,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.97221705950567,-1.519475522115954e-05,percentage points
+evaluation,8,oracle,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.97217482215969,-5.743210120101594e-05,percentage points
+evaluation,8,unbounded,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,9.067198699718366,-90.90503355454253,percentage points
+evaluation,8,lru,"KV occupancy, whole run","Active, mean",% of capacity,13.214802684672316,0.0,percentage points
+evaluation,8,lfu,"KV occupancy, whole run","Active, mean",% of capacity,13.306092598877639,0.09128991420532273,percentage points
+evaluation,8,slru,"KV occupancy, whole run","Active, mean",% of capacity,13.196227155011806,-0.01857552966050946,percentage points
+evaluation,8,random-0,"KV occupancy, whole run","Active, mean",% of capacity,14.595411806978522,1.3806091223062058,percentage points
+evaluation,8,last-gap,"KV occupancy, whole run","Active, mean",% of capacity,13.242196938848926,0.027394254176609678,percentage points
+evaluation,8,global-median,"KV occupancy, whole run","Active, mean",% of capacity,13.192406545161006,-0.0223961395113097,percentage points
+evaluation,8,continuum-ttl,"KV occupancy, whole run","Active, mean",% of capacity,13.22006362338793,0.005260938715613506,percentage points
+evaluation,8,oracle,"KV occupancy, whole run","Active, mean",% of capacity,13.18383946092358,-0.030963223748736723,percentage points
+evaluation,8,unbounded,"KV occupancy, whole run","Active, mean",% of capacity,0.00288299284585832,-13.211919691826457,percentage points
+evaluation,8,lru,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,0.2137172772377723,0.0,percentage points
+evaluation,8,lfu,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,0.19266665951981307,-0.02105061771795924,percentage points
+evaluation,8,slru,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,0.1551616861110907,-0.0585555911266816,percentage points
+evaluation,8,random-0,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,0.22326532171304173,0.009548044475269413,percentage points
+evaluation,8,last-gap,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,0.20390251419595057,-0.009814763041821745,percentage points
+evaluation,8,global-median,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,0.21588361045451068,0.0021663332167383698,percentage points
+evaluation,8,continuum-ttl,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,0.19926805246814425,-0.014449224769628066,percentage points
+evaluation,8,oracle,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,0.17142742285143917,-0.04228985438633315,percentage points
+evaluation,8,unbounded,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,0.0,-0.2137172772377723,percentage points
+evaluation,8,lru,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,86.75742956958857,0.0,percentage points
+evaluation,8,lfu,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,86.666184893227,-0.09124467636156908,percentage points
+evaluation,8,slru,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,86.775912407864,0.018482838275431845,percentage points
+evaluation,8,random-0,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,85.37757433599884,-1.3798552335897227,percentage points
+evaluation,8,last-gap,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,86.72996736916278,-0.02746220042578784,percentage points
+evaluation,8,global-median,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,86.77982172573526,0.022392156146693765,percentage points
+evaluation,8,continuum-ttl,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,86.75215343611774,-0.005276133470829336,percentage points
+evaluation,8,oracle,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,86.78833536123611,0.030905791647541037,percentage points
+evaluation,8,unbounded,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,9.064315706872506,-77.69311386271606,percentage points
+evaluation,8,lru,Pressure and completion,"Waiting queue, time-weighted mean",requests,0.015104236267391255,0.0,relative %
+evaluation,8,lfu,Pressure and completion,"Waiting queue, time-weighted mean",requests,0.016824674074694037,11.39043230551855,relative %
+evaluation,8,slru,Pressure and completion,"Waiting queue, time-weighted mean",requests,0.013128351046405461,-13.08166256146006,relative %
+evaluation,8,random-0,Pressure and completion,"Waiting queue, time-weighted mean",requests,0.033333282361322374,120.68830076027122,relative %
+evaluation,8,last-gap,Pressure and completion,"Waiting queue, time-weighted mean",requests,0.011867219220288239,-21.431186521436086,relative %
+evaluation,8,global-median,Pressure and completion,"Waiting queue, time-weighted mean",requests,0.016040384389684612,6.197917628674943,relative %
+evaluation,8,continuum-ttl,Pressure and completion,"Waiting queue, time-weighted mean",requests,0.013628262609359797,-9.771918499566624,relative %
+evaluation,8,oracle,Pressure and completion,"Waiting queue, time-weighted mean",requests,0.013523718913835756,-10.46406667358415,relative %
+evaluation,8,unbounded,Pressure and completion,"Waiting queue, time-weighted mean",requests,0.0024811473616192926,-83.573169025594,relative %
+evaluation,8,lru,Pressure and completion,"Waiting queue, sampled peak",requests,12,0.0,relative %
+evaluation,8,lfu,Pressure and completion,"Waiting queue, sampled peak",requests,11,-8.333333333333337,relative %
+evaluation,8,slru,Pressure and completion,"Waiting queue, sampled peak",requests,16,33.33333333333333,relative %
+evaluation,8,random-0,Pressure and completion,"Waiting queue, sampled peak",requests,21,75.0,relative %
+evaluation,8,last-gap,Pressure and completion,"Waiting queue, sampled peak",requests,14,16.666666666666675,relative %
+evaluation,8,global-median,Pressure and completion,"Waiting queue, sampled peak",requests,17,41.66666666666667,relative %
+evaluation,8,continuum-ttl,Pressure and completion,"Waiting queue, sampled peak",requests,12,0.0,relative %
+evaluation,8,oracle,Pressure and completion,"Waiting queue, sampled peak",requests,10,-16.666666666666664,relative %
+evaluation,8,unbounded,Pressure and completion,"Waiting queue, sampled peak",requests,8,-33.333333333333336,relative %
+evaluation,8,lru,Pressure and completion,Preemptions,events,7,0.0,relative %
+evaluation,8,lfu,Pressure and completion,Preemptions,events,7,0.0,relative %
+evaluation,8,slru,Pressure and completion,Preemptions,events,3,-57.14285714285714,relative %
+evaluation,8,random-0,Pressure and completion,Preemptions,events,8,14.28571428571428,relative %
+evaluation,8,last-gap,Pressure and completion,Preemptions,events,5,-28.57142857142857,relative %
+evaluation,8,global-median,Pressure and completion,Preemptions,events,7,0.0,relative %
+evaluation,8,continuum-ttl,Pressure and completion,Preemptions,events,11,57.14285714285714,relative %
+evaluation,8,oracle,Pressure and completion,Preemptions,events,6,-14.28571428571429,relative %
+evaluation,8,unbounded,Pressure and completion,Preemptions,events,0,-100.0,relative %
+evaluation,8,lru,Pressure and completion,Completed requests,requests,74031,0.0,relative %
+evaluation,8,lfu,Pressure and completion,Completed requests,requests,74031,0.0,relative %
+evaluation,8,slru,Pressure and completion,Completed requests,requests,74031,0.0,relative %
+evaluation,8,random-0,Pressure and completion,Completed requests,requests,74031,0.0,relative %
+evaluation,8,last-gap,Pressure and completion,Completed requests,requests,74031,0.0,relative %
+evaluation,8,global-median,Pressure and completion,Completed requests,requests,74031,0.0,relative %
+evaluation,8,continuum-ttl,Pressure and completion,Completed requests,requests,74031,0.0,relative %
+evaluation,8,oracle,Pressure and completion,Completed requests,requests,74031,0.0,relative %
+evaluation,8,unbounded,Pressure and completion,Completed requests,requests,74031,0.0,relative %
+evaluation,8,lru,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,16.843829273896517,0.0,relative %
+evaluation,8,lfu,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,16.863507250667848,0.11682602840095146,relative %
+evaluation,8,slru,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,16.839667688622068,-0.02470688349293093,relative %
+evaluation,8,random-0,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,17.027307025006067,1.0892876443119315,relative %
+evaluation,8,last-gap,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,16.84517207128353,0.007972043442006083,relative %
+evaluation,8,global-median,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,16.849762338889434,0.035223967759590025,relative %
+evaluation,8,continuum-ttl,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,16.846660036150606,0.016805930575869432,relative %
+evaluation,8,oracle,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,16.842745907993574,-0.006431826666764007,relative %
+evaluation,8,unbounded,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,16.07320828040738,-4.575093827882704,relative %
+evaluation,8,lru,Pressure and completion,Observation span,h,597.8823024009328,0.0,relative %
+evaluation,8,lfu,Pressure and completion,Observation span,h,598.3275885152462,0.07447721943354413,relative %
+evaluation,8,slru,Pressure and completion,Observation span,h,597.9425727002728,0.010080629431241661,relative %
+evaluation,8,random-0,Pressure and completion,Observation span,h,603.417589388906,0.9258154934081553,relative %
+evaluation,8,last-gap,Pressure and completion,Observation span,h,598.0526769143007,0.028496329910376872,relative %
+evaluation,8,global-median,Pressure and completion,Observation span,h,598.3162241669274,0.07257645263158974,relative %
+evaluation,8,continuum-ttl,Pressure and completion,Observation span,h,598.0219367362818,0.02335481996844635,relative %
+evaluation,8,oracle,Pressure and completion,Observation span,h,597.9206727550678,0.006417710305361979,relative %
+evaluation,8,unbounded,Pressure and completion,Observation span,h,573.211508603836,-4.1263629476948065,relative %
+evaluation,32,lru,Latency,Mean request latency (arrival to last token) — primary,s,214.92867395267106,0.0,relative %
+evaluation,32,lfu,Latency,Mean request latency (arrival to last token) — primary,s,213.1236160604964,-0.8398404265836379,relative %
+evaluation,32,slru,Latency,Mean request latency (arrival to last token) — primary,s,214.3159546008496,-0.2850803201607133,relative %
+evaluation,32,random-0,Latency,Mean request latency (arrival to last token) — primary,s,217.5459403791944,1.2177372048085555,relative %
+evaluation,32,last-gap,Latency,Mean request latency (arrival to last token) — primary,s,216.17843604344424,0.5814775980278908,relative %
+evaluation,32,global-median,Latency,Mean request latency (arrival to last token) — primary,s,216.17287771162248,0.5788914694673908,relative %
+evaluation,32,continuum-ttl,Latency,Mean request latency (arrival to last token) — primary,s,215.50851762411097,0.2697842315667831,relative %
+evaluation,32,oracle,Latency,Mean request latency (arrival to last token) — primary,s,214.6002038065143,-0.1528275125491696,relative %
+evaluation,32,unbounded,Latency,Mean request latency (arrival to last token) — primary,s,6.519061222645098,-96.96687226382804,relative %
+evaluation,32,lru,Latency,p95 request latency,s,473.5158677764535,0.0,relative %
+evaluation,32,lfu,Latency,p95 request latency,s,468.6917494614124,-1.0187870446019653,relative %
+evaluation,32,slru,Latency,p95 request latency,s,475.39896232485773,0.397683515284708,relative %
+evaluation,32,random-0,Latency,p95 request latency,s,472.8929792012572,-0.1315454491781276,relative %
+evaluation,32,last-gap,Latency,p95 request latency,s,471.682102879405,-0.3872657754130815,relative %
+evaluation,32,global-median,Latency,p95 request latency,s,469.52969978117943,-0.8418235304325505,relative %
+evaluation,32,continuum-ttl,Latency,p95 request latency,s,475.33463227415086,0.38409789860642807,relative %
+evaluation,32,oracle,Latency,p95 request latency,s,465.34174668228627,-1.726261282974828,relative %
+evaluation,32,unbounded,Latency,p95 request latency,s,25.904416595689952,-94.52934561256997,relative %
+evaluation,32,lru,Latency,"Mean TTFT, including queueing",ms,161978.71019375618,0.0,relative %
+evaluation,32,lfu,Latency,"Mean TTFT, including queueing",ms,160281.9293795047,-1.0475332296582818,relative %
+evaluation,32,slru,Latency,"Mean TTFT, including queueing",ms,161476.32108540388,-0.3101574940011287,relative %
+evaluation,32,random-0,Latency,"Mean TTFT, including queueing",ms,163873.58094588044,1.169827040762117,relative %
+evaluation,32,last-gap,Latency,"Mean TTFT, including queueing",ms,163158.77442004715,0.7285304500075362,relative %
+evaluation,32,global-median,Latency,"Mean TTFT, including queueing",ms,163216.0290563545,0.7638774633519807,relative %
+evaluation,32,continuum-ttl,Latency,"Mean TTFT, including queueing",ms,162602.63877964544,0.38519172374129607,relative %
+evaluation,32,oracle,Latency,"Mean TTFT, including queueing",ms,161981.93770002646,0.0019925496791639574,relative %
+evaluation,32,unbounded,Latency,"Mean TTFT, including queueing",ms,115.4947159771631,-99.92869759498701,relative %
+evaluation,32,lru,Latency,p95 TTFT,ms,356945.56185132265,0.0,relative %
+evaluation,32,lfu,Latency,p95 TTFT,ms,358071.8396156132,0.3155320823850616,relative %
+evaluation,32,slru,Latency,p95 TTFT,ms,361219.5702890605,1.1973838295034067,relative %
+evaluation,32,random-0,Latency,p95 TTFT,ms,363322.8578438759,1.7866298601604491,relative %
+evaluation,32,last-gap,Latency,p95 TTFT,ms,363266.215091303,1.7707611231241538,relative %
+evaluation,32,global-median,Latency,p95 TTFT,ms,360450.11500918865,0.9818172663891289,relative %
+evaluation,32,continuum-ttl,Latency,p95 TTFT,ms,358877.9032396078,0.5413546475442788,relative %
+evaluation,32,oracle,Latency,p95 TTFT,ms,354157.729744792,-0.7810244486782247,relative %
+evaluation,32,unbounded,Latency,p95 TTFT,ms,283.44655510783195,-99.92059109696231,relative %
+evaluation,32,lru,Latency,Mean ITL over individual gaps,ms/gap,49.030230334032076,0.0,relative %
+evaluation,32,lfu,Latency,Mean ITL over individual gaps,ms/gap,48.918662309804134,-0.22754945972689455,relative %
+evaluation,32,slru,Latency,Mean ITL over individual gaps,ms/gap,48.925773683663905,-0.21304540006549244,relative %
+evaluation,32,random-0,Latency,Mean ITL over individual gaps,ms/gap,49.69919361378493,1.3643894291243353,relative %
+evaluation,32,last-gap,Latency,Mean ITL over individual gaps,ms/gap,49.087321980807154,0.1164417266370732,relative %
+evaluation,32,global-median,Latency,Mean ITL over individual gaps,ms/gap,49.03536001213702,0.010462276171252505,relative %
+evaluation,32,continuum-ttl,Latency,Mean ITL over individual gaps,ms/gap,48.98212539345313,-0.09811281784976034,relative %
+evaluation,32,oracle,Latency,Mean ITL over individual gaps,ms/gap,48.719474842072685,-0.6338038590524286,relative %
+evaluation,32,unbounded,Latency,Mean ITL over individual gaps,ms/gap,5.928353934726756,-87.90877812660027,relative %
+evaluation,32,lru,Latency,p95 ITL over individual gaps,ms/gap,200.56337296962738,0.0,relative %
+evaluation,32,lfu,Latency,p95 ITL over individual gaps,ms/gap,200.56071599572897,-0.0013247552925865769,relative %
+evaluation,32,slru,Latency,p95 ITL over individual gaps,ms/gap,200.56841999292374,0.0025164232240637574,relative %
+evaluation,32,random-0,Latency,p95 ITL over individual gaps,ms/gap,200.67656594514847,0.05643751091992666,relative %
+evaluation,32,last-gap,Latency,p95 ITL over individual gaps,ms/gap,200.62683700025082,0.03164288159087647,relative %
+evaluation,32,global-median,Latency,p95 ITL over individual gaps,ms/gap,200.60925197601318,0.022875067220140544,relative %
+evaluation,32,continuum-ttl,Latency,p95 ITL over individual gaps,ms/gap,200.60322099924088,0.019868049197357962,relative %
+evaluation,32,oracle,Latency,p95 ITL over individual gaps,ms/gap,200.52894496917725,-0.01716564691767175,relative %
+evaluation,32,unbounded,Latency,p95 ITL over individual gaps,ms/gap,5.776529997587204,-97.11984800013211,relative %
+evaluation,32,lru,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,12.386319103795895,0.0,percentage points
+evaluation,32,lfu,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,11.9565951811462,-0.4297239226496945,percentage points
+evaluation,32,slru,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,12.025513168740963,-0.3608059350549322,percentage points
+evaluation,32,random-0,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,9.033661707274225,-3.3526573965216695,percentage points
+evaluation,32,last-gap,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,12.247131795516276,-0.13918730827961845,percentage points
+evaluation,32,global-median,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,12.316049783111039,-0.07026932068485614,percentage points
+evaluation,32,continuum-ttl,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,12.44037242739963,0.05405332360373549,percentage points
+evaluation,32,oracle,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,12.728206375589519,0.3418872717936239,percentage points
+evaluation,32,unbounded,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,98.6324509128255,86.2461318090296,percentage points
+evaluation,32,lru,SLO,SLO passes,requests,9166,0.0,relative %
+evaluation,32,lfu,SLO,SLO passes,requests,8848,-3.4693432249618184,relative %
+evaluation,32,slru,SLO,SLO passes,requests,8899,-2.9129391228452928,relative %
+evaluation,32,random-0,SLO,SLO passes,requests,6685,-27.0674230853153,relative %
+evaluation,32,last-gap,SLO,SLO passes,requests,9063,-1.1237180885882658,relative %
+evaluation,32,global-median,SLO,SLO passes,requests,9114,-0.5673139864717403,relative %
+evaluation,32,continuum-ttl,SLO,SLO passes,requests,9206,0.43639537420903096,relative %
+evaluation,32,oracle,SLO,SLO passes,requests,9419,2.760200741872132,relative %
+evaluation,32,unbounded,SLO,SLO passes,requests,72989,696.3015492035784,relative %
+evaluation,32,lru,Cache effectiveness,Input-token hit rate (first admission),%,19.296070091306387,0.0,percentage points
+evaluation,32,lfu,Cache effectiveness,Input-token hit rate (first admission),%,20.055658518323096,0.759588427016709,percentage points
+evaluation,32,slru,Cache effectiveness,Input-token hit rate (first admission),%,20.38411381059433,1.088043719287942,percentage points
+evaluation,32,random-0,Cache effectiveness,Input-token hit rate (first admission),%,14.809588942502302,-4.486481148804085,percentage points
+evaluation,32,last-gap,Cache effectiveness,Input-token hit rate (first admission),%,19.09702751389578,-0.19904257741060505,percentage points
+evaluation,32,global-median,Cache effectiveness,Input-token hit rate (first admission),%,19.381680381665685,0.08561029035929835,percentage points
+evaluation,32,continuum-ttl,Cache effectiveness,Input-token hit rate (first admission),%,19.498406984794627,0.20233689348824058,percentage points
+evaluation,32,oracle,Cache effectiveness,Input-token hit rate (first admission),%,20.908170617391445,1.612100526085058,percentage points
+evaluation,32,unbounded,Cache effectiveness,Input-token hit rate (first admission),%,98.3489823704151,79.05291227910871,percentage points
+evaluation,32,lru,Cache effectiveness,Recomputed input tokens,tokens,13797625391,0.0,relative %
+evaluation,32,lfu,Cache effectiveness,Recomputed input tokens,tokens,13667696815,-0.9416734569758001,relative %
+evaluation,32,slru,Cache effectiveness,Recomputed input tokens,tokens,13611618152,-1.3481105170555674,relative %
+evaluation,32,random-0,Cache effectiveness,Recomputed input tokens,tokens,14594265604,5.773748673591594,relative %
+evaluation,32,last-gap,Cache effectiveness,Recomputed input tokens,tokens,13831694447,0.24691970563444077,relative %
+evaluation,32,global-median,Cache effectiveness,Recomputed input tokens,tokens,13783020695,-0.10584934426126624,relative %
+evaluation,32,continuum-ttl,Cache effectiveness,Recomputed input tokens,tokens,13763031029,-0.2507269259721001,relative %
+evaluation,32,oracle,Cache effectiveness,Recomputed input tokens,tokens,13522006233,-1.9975840058665595,relative %
+evaluation,32,unbounded,Cache effectiveness,Recomputed input tokens,tokens,282259840,-97.95428682833995,relative %
+evaluation,32,lru,Cache effectiveness,Evicted blocks,512-token blocks,27063957,0.0,relative %
+evaluation,32,lfu,Cache effectiveness,Evicted blocks,512-token blocks,26810196,-0.9376345077698689,relative %
+evaluation,32,slru,Cache effectiveness,Evicted blocks,512-token blocks,26700660,-1.3423646808188416,relative %
+evaluation,32,random-0,Cache effectiveness,Evicted blocks,512-token blocks,28619876,5.749044753507415,relative %
+evaluation,32,last-gap,Cache effectiveness,Evicted blocks,512-token blocks,27130498,0.24586574683074236,relative %
+evaluation,32,global-median,Cache effectiveness,Evicted blocks,512-token blocks,27035422,-0.10543543207669481,relative %
+evaluation,32,continuum-ttl,Cache effectiveness,Evicted blocks,512-token blocks,26996383,-0.24968263140530134,relative %
+evaluation,32,oracle,Cache effectiveness,Evicted blocks,512-token blocks,26525639,-1.989058732246729,relative %
+evaluation,32,unbounded,Cache effectiveness,Evicted blocks,512-token blocks,0,-100.0,relative %
+evaluation,32,lru,Cache effectiveness,Forced evictions of protected blocks,blocks,0,0.0,relative %
+evaluation,32,lfu,Cache effectiveness,Forced evictions of protected blocks,blocks,0,0.0,relative %
+evaluation,32,slru,Cache effectiveness,Forced evictions of protected blocks,blocks,0,0.0,relative %
+evaluation,32,random-0,Cache effectiveness,Forced evictions of protected blocks,blocks,0,0.0,relative %
+evaluation,32,last-gap,Cache effectiveness,Forced evictions of protected blocks,blocks,8962404,,relative %
+evaluation,32,global-median,Cache effectiveness,Forced evictions of protected blocks,blocks,1817944,,relative %
+evaluation,32,continuum-ttl,Cache effectiveness,Forced evictions of protected blocks,blocks,996183,,relative %
+evaluation,32,oracle,Cache effectiveness,Forced evictions of protected blocks,blocks,23845645,,relative %
+evaluation,32,unbounded,Cache effectiveness,Forced evictions of protected blocks,blocks,0,0.0,relative %
+evaluation,32,lru,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.98470196196898,0.0,percentage points
+evaluation,32,lfu,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.98443181676961,-0.00027014519936585657,percentage points
+evaluation,32,slru,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.98442042409532,-0.00028153787366136385,percentage points
+evaluation,32,random-0,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.98485362022477,0.00015165825578833392,percentage points
+evaluation,32,last-gap,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.98446437427899,-0.00023758768999471158,percentage points
+evaluation,32,global-median,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.98449301508413,-0.0002089468848538445,percentage points
+evaluation,32,continuum-ttl,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.9845102575498,-0.00019170441917992775,percentage points
+evaluation,32,oracle,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.98444126848358,-0.0002606934854014753,percentage points
+evaluation,32,unbounded,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,12.336689695733273,-87.64801226623571,percentage points
+evaluation,32,lru,"KV occupancy, whole run","Active, mean",% of capacity,45.313251737145194,0.0,percentage points
+evaluation,32,lfu,"KV occupancy, whole run","Active, mean",% of capacity,45.18773529684405,-0.12551644030114062,percentage points
+evaluation,32,slru,"KV occupancy, whole run","Active, mean",% of capacity,45.11514133062716,-0.19811040651803324,percentage points
+evaluation,32,random-0,"KV occupancy, whole run","Active, mean",% of capacity,45.876129963485745,0.5628782263405512,percentage points
+evaluation,32,last-gap,"KV occupancy, whole run","Active, mean",% of capacity,45.310155383784675,-0.003096353360518833,percentage points
+evaluation,32,global-median,"KV occupancy, whole run","Active, mean",% of capacity,45.24147497633279,-0.07177676081240492,percentage points
+evaluation,32,continuum-ttl,"KV occupancy, whole run","Active, mean",% of capacity,45.18900240917721,-0.1242493279679806,percentage points
+evaluation,32,oracle,"KV occupancy, whole run","Active, mean",% of capacity,45.01632405510974,-0.2969276820354523,percentage points
+evaluation,32,unbounded,"KV occupancy, whole run","Active, mean",% of capacity,0.0058776398300712015,-45.307374097315126,percentage points
+evaluation,32,lru,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,8.115720923081417,0.0,percentage points
+evaluation,32,lfu,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,8.288717728882473,0.1729968058010556,percentage points
+evaluation,32,slru,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,8.158326547124013,0.04260562404259538,percentage points
+evaluation,32,random-0,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,8.131608174614913,0.015887251533495572,percentage points
+evaluation,32,last-gap,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,8.268583023138797,0.15286210005738,percentage points
+evaluation,32,global-median,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,8.105968055763867,-0.009752867317549985,percentage points
+evaluation,32,continuum-ttl,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,8.15965616322734,0.043935240145922094,percentage points
+evaluation,32,oracle,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,8.165906276903447,0.050185353822030265,percentage points
+evaluation,32,unbounded,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,0.0,-8.115720923081417,percentage points
+evaluation,32,lru,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,54.671450224823786,0.0,percentage points
+evaluation,32,lfu,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,54.79669651992557,0.12524629510178187,percentage points
+evaluation,32,slru,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,54.86927909346816,0.19782886864437188,percentage points
+evaluation,32,random-0,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,54.10872365673904,-0.5627265680847486,percentage points
+evaluation,32,last-gap,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,54.67430899049429,0.0028587656705028053,percentage points
+evaluation,32,global-median,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,54.74301803875135,0.07156781392756528,percentage points
+evaluation,32,continuum-ttl,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,54.79550784837259,0.12405762354880068,percentage points
+evaluation,32,oracle,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,54.96811721337385,0.296666988550065,percentage points
+evaluation,32,unbounded,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,12.3308120559032,-42.340638168920584,percentage points
+evaluation,32,lru,Pressure and completion,"Waiting queue, time-weighted mean",requests,8.497178744605177,0.0,relative %
+evaluation,32,lfu,Pressure and completion,"Waiting queue, time-weighted mean",requests,8.410698506712356,-1.0177523680754308,relative %
+evaluation,32,slru,Pressure and completion,"Waiting queue, time-weighted mean",requests,8.464409321120419,-0.385650631458867,relative %
+evaluation,32,random-0,Pressure and completion,"Waiting queue, time-weighted mean",requests,8.539405824879415,0.49695412493291347,relative %
+evaluation,32,last-gap,Pressure and completion,"Waiting queue, time-weighted mean",requests,8.546250636135502,0.5775080530285415,relative %
+evaluation,32,global-median,Pressure and completion,"Waiting queue, time-weighted mean",requests,8.543520305988002,0.5453758568071398,relative %
+evaluation,32,continuum-ttl,Pressure and completion,"Waiting queue, time-weighted mean",requests,8.508342903321028,0.13138665257499405,relative %
+evaluation,32,oracle,Pressure and completion,"Waiting queue, time-weighted mean",requests,8.499642366235319,0.02899340715536436,relative %
+evaluation,32,unbounded,Pressure and completion,"Waiting queue, time-weighted mean",requests,0.006287978999927135,-99.92599921469323,relative %
+evaluation,32,lru,Pressure and completion,"Waiting queue, sampled peak",requests,85,0.0,relative %
+evaluation,32,lfu,Pressure and completion,"Waiting queue, sampled peak",requests,82,-3.529411764705881,relative %
+evaluation,32,slru,Pressure and completion,"Waiting queue, sampled peak",requests,90,5.882352941176472,relative %
+evaluation,32,random-0,Pressure and completion,"Waiting queue, sampled peak",requests,91,7.058823529411762,relative %
+evaluation,32,last-gap,Pressure and completion,"Waiting queue, sampled peak",requests,96,12.941176470588234,relative %
+evaluation,32,global-median,Pressure and completion,"Waiting queue, sampled peak",requests,91,7.058823529411762,relative %
+evaluation,32,continuum-ttl,Pressure and completion,"Waiting queue, sampled peak",requests,87,2.35294117647058,relative %
+evaluation,32,oracle,Pressure and completion,"Waiting queue, sampled peak",requests,93,9.411764705882364,relative %
+evaluation,32,unbounded,Pressure and completion,"Waiting queue, sampled peak",requests,32,-62.35294117647059,relative %
+evaluation,32,lru,Pressure and completion,Preemptions,events,325,0.0,relative %
+evaluation,32,lfu,Pressure and completion,Preemptions,events,292,-10.153846153846157,relative %
+evaluation,32,slru,Pressure and completion,Preemptions,events,279,-14.15384615384615,relative %
+evaluation,32,random-0,Pressure and completion,Preemptions,events,320,-1.538461538461533,relative %
+evaluation,32,last-gap,Pressure and completion,Preemptions,events,293,-9.846153846153848,relative %
+evaluation,32,global-median,Pressure and completion,Preemptions,events,301,-7.3846153846153895,relative %
+evaluation,32,continuum-ttl,Pressure and completion,Preemptions,events,301,-7.3846153846153895,relative %
+evaluation,32,oracle,Pressure and completion,Preemptions,events,280,-13.846153846153841,relative %
+evaluation,32,unbounded,Pressure and completion,Preemptions,events,0,-100.0,relative %
+evaluation,32,lru,Pressure and completion,Completed requests,requests,74031,0.0,relative %
+evaluation,32,lfu,Pressure and completion,Completed requests,requests,74031,0.0,relative %
+evaluation,32,slru,Pressure and completion,Completed requests,requests,74031,0.0,relative %
+evaluation,32,random-0,Pressure and completion,Completed requests,requests,74031,0.0,relative %
+evaluation,32,last-gap,Pressure and completion,Completed requests,requests,74031,0.0,relative %
+evaluation,32,global-median,Pressure and completion,Completed requests,requests,74031,0.0,relative %
+evaluation,32,continuum-ttl,Pressure and completion,Completed requests,requests,74031,0.0,relative %
+evaluation,32,oracle,Pressure and completion,Completed requests,requests,74031,0.0,relative %
+evaluation,32,unbounded,Pressure and completion,Completed requests,requests,74031,0.0,relative %
+evaluation,32,lru,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,27.59344337194292,0.0,relative %
+evaluation,32,lfu,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,27.493334571785955,-0.36279923026482086,relative %
+evaluation,32,slru,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,27.53995862599403,-0.19383135779015292,relative %
+evaluation,32,random-0,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,27.743454820105015,0.5436488883972634,relative %
+evaluation,32,last-gap,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,27.58758380725316,-0.021235351495563215,relative %
+evaluation,32,global-median,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,27.594810563192233,0.0049547685328166224,relative %
+evaluation,32,continuum-ttl,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,27.587491752876847,-0.021568961096485317,relative %
+evaluation,32,oracle,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,27.506688581250653,-0.3144036411942719,relative %
+evaluation,32,unbounded,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,16.080082895002516,-41.724986337323955,relative %
+evaluation,32,lru,Pressure and completion,Observation span,h,381.35860379300414,0.0,relative %
+evaluation,32,lfu,Pressure and completion,Observation span,h,381.2076035852933,-0.03959533263677706,relative %
+evaluation,32,slru,Pressure and completion,Observation span,h,381.750402665894,0.1027376513845546,relative %
+evaluation,32,random-0,Pressure and completion,Observation span,h,383.3804990422617,0.5301821511689342,relative %
+evaluation,32,last-gap,Pressure and completion,Observation span,h,382.0014992015024,0.1685802816834281,relative %
+evaluation,32,global-median,Pressure and completion,Observation span,h,382.2971997385776,0.24611899043005536,relative %
+evaluation,32,continuum-ttl,Pressure and completion,Observation span,h,382.4030958362874,0.27388710596658594,relative %
+evaluation,32,oracle,Pressure and completion,Observation span,h,381.46408914960307,0.02766041084423243,relative %
+evaluation,32,unbounded,Pressure and completion,Observation span,h,285.37697795511696,-25.16833890287279,relative %
+evaluation,128,lru,Latency,Mean request latency (arrival to last token) — primary,s,724.8884868025536,0.0,relative %
+evaluation,128,lfu,Latency,Mean request latency (arrival to last token) — primary,s,722.4513254156038,-0.33621190449582006,relative %
+evaluation,128,slru,Latency,Mean request latency (arrival to last token) — primary,s,723.6365669601008,-0.17270516296582494,relative %
+evaluation,128,random-0,Latency,Mean request latency (arrival to last token) — primary,s,729.0124840518608,0.5689147123163707,relative %
+evaluation,128,last-gap,Latency,Mean request latency (arrival to last token) — primary,s,723.8568042051595,-0.14232293879363755,relative %
+evaluation,128,global-median,Latency,Mean request latency (arrival to last token) — primary,s,723.8892513373087,-0.13784678380706072,relative %
+evaluation,128,continuum-ttl,Latency,Mean request latency (arrival to last token) — primary,s,723.7007383438159,-0.16385257599783598,relative %
+evaluation,128,oracle,Latency,Mean request latency (arrival to last token) — primary,s,723.5290578712006,-0.1875362840082384,relative %
+evaluation,128,unbounded,Latency,Mean request latency (arrival to last token) — primary,s,8.04925286813583,-98.88958743107638,relative %
+evaluation,128,lru,Latency,p95 request latency,s,1391.004721176088,0.0,relative %
+evaluation,128,lfu,Latency,p95 request latency,s,1380.4567945736646,-0.7582955285374671,relative %
+evaluation,128,slru,Latency,p95 request latency,s,1388.4959142135383,-0.18035934201779957,relative %
+evaluation,128,random-0,Latency,p95 request latency,s,1387.147827286005,-0.2772739611424213,relative %
+evaluation,128,last-gap,Latency,p95 request latency,s,1387.8895709918738,-0.22394964853751365,relative %
+evaluation,128,global-median,Latency,p95 request latency,s,1381.1445666607322,-0.7088512616275744,relative %
+evaluation,128,continuum-ttl,Latency,p95 request latency,s,1389.8569927162528,-0.08251075229024352,relative %
+evaluation,128,oracle,Latency,p95 request latency,s,1383.062690574795,-0.5709564087300945,relative %
+evaluation,128,unbounded,Latency,p95 request latency,s,30.79974131499976,-97.78579174850258,relative %
+evaluation,128,lru,Latency,"Mean TTFT, including queueing",ms,671898.8128596476,0.0,relative %
+evaluation,128,lfu,Latency,"Mean TTFT, including queueing",ms,669683.5205257373,-0.3297062431888875,relative %
+evaluation,128,slru,Latency,"Mean TTFT, including queueing",ms,670821.2619713936,-0.16037398305078776,relative %
+evaluation,128,random-0,Latency,"Mean TTFT, including queueing",ms,674919.0574531668,0.4495088450394702,relative %
+evaluation,128,last-gap,Latency,"Mean TTFT, including queueing",ms,670872.9682607643,-0.15267843598609776,relative %
+evaluation,128,global-median,Latency,"Mean TTFT, including queueing",ms,670896.4708850248,-0.14918049495530328,relative %
+evaluation,128,continuum-ttl,Latency,"Mean TTFT, including queueing",ms,670765.4207043295,-0.16868494684404434,relative %
+evaluation,128,oracle,Latency,"Mean TTFT, including queueing",ms,670744.3684794607,-0.17181819019347344,relative %
+evaluation,128,unbounded,Latency,"Mean TTFT, including queueing",ms,587.6742592151169,-99.912535303238,relative %
+evaluation,128,lru,Latency,p95 TTFT,ms,1302113.5830857158,0.0,relative %
+evaluation,128,lfu,Latency,p95 TTFT,ms,1293213.4068287015,-0.6835176571864721,relative %
+evaluation,128,slru,Latency,p95 TTFT,ms,1304160.5622024536,0.15720434402404226,relative %
+evaluation,128,random-0,Latency,p95 TTFT,ms,1302579.1046606302,0.03575122638774797,relative %
+evaluation,128,last-gap,Latency,p95 TTFT,ms,1304057.6224974394,0.14929875834002182,relative %
+evaluation,128,global-median,Latency,p95 TTFT,ms,1302739.9396554232,0.048103067032223557,relative %
+evaluation,128,continuum-ttl,Latency,p95 TTFT,ms,1296783.803575039,-0.409317557232336,relative %
+evaluation,128,oracle,Latency,p95 TTFT,ms,1301742.3208714724,-0.028512275662129216,relative %
+evaluation,128,unbounded,Latency,p95 TTFT,ms,1920.7930200034752,-99.85248652306878,relative %
+evaluation,128,lru,Latency,Mean ITL over individual gaps,ms/gap,49.01215555071286,0.0,relative %
+evaluation,128,lfu,Latency,Mean ITL over individual gaps,ms/gap,48.80972657060683,-0.4130179091931252,relative %
+evaluation,128,slru,Latency,Mean ITL over individual gaps,ms/gap,48.863523871418444,-0.303254728596114,relative %
+evaluation,128,random-0,Latency,Mean ITL over individual gaps,ms/gap,50.04228418817955,2.1017819475432242,relative %
+evaluation,128,last-gap,Latency,Mean ITL over individual gaps,ms/gap,49.01493924613435,0.005679602111374749,relative %
+evaluation,128,global-median,Latency,Mean ITL over individual gaps,ms/gap,49.02384097676807,0.023841893758613786,relative %
+evaluation,128,continuum-ttl,Latency,Mean ITL over individual gaps,ms/gap,48.97336512907611,-0.07914449222014008,relative %
+evaluation,128,oracle,Latency,Mean ITL over individual gaps,ms/gap,48.83131185975084,-0.36897722397640775,relative %
+evaluation,128,unbounded,Latency,Mean ITL over individual gaps,ms/gap,6.9080345522358675,-85.90546676714081,relative %
+evaluation,128,lru,Latency,p95 ITL over individual gaps,ms/gap,201.26651100069284,0.0,relative %
+evaluation,128,lfu,Latency,p95 ITL over individual gaps,ms/gap,201.22768199443817,-0.019292333365161785,relative %
+evaluation,128,slru,Latency,p95 ITL over individual gaps,ms/gap,201.23786000162363,-0.014235353376357285,relative %
+evaluation,128,random-0,Latency,p95 ITL over individual gaps,ms/gap,201.3302440047264,0.03166597548527328,relative %
+evaluation,128,last-gap,Latency,p95 ITL over individual gaps,ms/gap,201.27941298484802,0.006410397880407537,relative %
+evaluation,128,global-median,Latency,p95 ITL over individual gaps,ms/gap,201.24836000800133,-0.009018386914583232,relative %
+evaluation,128,continuum-ttl,Latency,p95 ITL over individual gaps,ms/gap,201.26646300405264,-2.3847305730129165e-05,relative %
+evaluation,128,oracle,Latency,p95 ITL over individual gaps,ms/gap,201.2362340092659,-0.015043233609213225,relative %
+evaluation,128,unbounded,Latency,p95 ITL over individual gaps,ms/gap,5.878187999944203,-97.07940085475822,relative %
+evaluation,128,lru,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,13.809272847664221,0.0,percentage points
+evaluation,128,lfu,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,13.790354184402913,-0.01891866326130831,percentage points
+evaluation,128,slru,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,13.75657085715058,-0.05270199051364166,percentage points
+evaluation,128,random-0,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,8.821502412129567,-4.987770435534655,percentage points
+evaluation,128,last-gap,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,13.741706193159551,-0.06756665450467025,percentage points
+evaluation,128,global-median,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,13.949811489033932,0.1405386413697105,percentage points
+evaluation,128,continuum-ttl,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,13.979540817015986,0.17026796935176414,percentage points
+evaluation,128,oracle,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,14.003864812637667,0.194591964973446,percentage points
+evaluation,128,unbounded,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,91.86227213145769,78.05299928379347,percentage points
+evaluation,128,lru,SLO,SLO passes,requests,10219,0.0,relative %
+evaluation,128,lfu,SLO,SLO passes,requests,10205,-0.13699970642919723,relative %
+evaluation,128,slru,SLO,SLO passes,requests,10180,-0.3816420393384923,relative %
+evaluation,128,random-0,SLO,SLO passes,requests,6528,-36.11899403072708,relative %
+evaluation,128,last-gap,SLO,SLO passes,requests,10169,-0.4892846658185679,relative %
+evaluation,128,global-median,SLO,SLO passes,requests,10323,1.0177121049026239,relative %
+evaluation,128,continuum-ttl,SLO,SLO passes,requests,10345,1.2329973578627973,relative %
+evaluation,128,oracle,SLO,SLO passes,requests,10363,1.4091398375574826,relative %
+evaluation,128,unbounded,SLO,SLO passes,requests,67979,565.2216459536157,relative %
+evaluation,128,lru,Cache effectiveness,Input-token hit rate (first admission),%,21.645920723646242,0.0,percentage points
+evaluation,128,lfu,Cache effectiveness,Input-token hit rate (first admission),%,21.938536851825624,0.29261612817938243,percentage points
+evaluation,128,slru,Cache effectiveness,Input-token hit rate (first admission),%,21.94119626335011,0.2952755397038693,percentage points
+evaluation,128,random-0,Cache effectiveness,Input-token hit rate (first admission),%,15.420885228700744,-6.225035494945498,percentage points
+evaluation,128,last-gap,Cache effectiveness,Input-token hit rate (first admission),%,21.214751650907196,-0.4311690727390456,percentage points
+evaluation,128,global-median,Cache effectiveness,Input-token hit rate (first admission),%,21.25582278789689,-0.3900979357493526,percentage points
+evaluation,128,continuum-ttl,Cache effectiveness,Input-token hit rate (first admission),%,21.40241386368598,-0.243506859960263,percentage points
+evaluation,128,oracle,Cache effectiveness,Input-token hit rate (first admission),%,21.950285580891585,0.3043648572453428,percentage points
+evaluation,128,unbounded,Cache effectiveness,Input-token hit rate (first admission),%,98.3489823704151,76.70306164676886,percentage points
+evaluation,128,lru,Cache effectiveness,Recomputed input tokens,tokens,13395994481,0.0,relative %
+evaluation,128,lfu,Cache effectiveness,Recomputed input tokens,tokens,13345967764,-0.37344533898513443,relative %
+evaluation,128,slru,Cache effectiveness,Recomputed input tokens,tokens,13345500087,-0.3769365094291266,relative %
+evaluation,128,random-0,Cache effectiveness,Recomputed input tokens,tokens,14485817418,8.135438832449005,relative %
+evaluation,128,last-gap,Cache effectiveness,Recomputed input tokens,tokens,13469649947,0.5498320121321898,relative %
+evaluation,128,global-median,Cache effectiveness,Recomputed input tokens,tokens,13462629697,0.4974264217151747,relative %
+evaluation,128,continuum-ttl,Cache effectiveness,Recomputed input tokens,tokens,13437604408,0.31061469201869585,relative %
+evaluation,128,oracle,Cache effectiveness,Recomputed input tokens,tokens,13343944906,-0.3885458080310822,relative %
+evaluation,128,unbounded,Cache effectiveness,Recomputed input tokens,tokens,282259840,-97.89295344664154,relative %
+evaluation,128,lru,Cache effectiveness,Evicted blocks,512-token blocks,26279490,0.0,relative %
+evaluation,128,lfu,Cache effectiveness,Evicted blocks,512-token blocks,26181782,-0.3718032579779873,relative %
+evaluation,128,slru,Cache effectiveness,Evicted blocks,512-token blocks,26180853,-0.3753383341914218,relative %
+evaluation,128,random-0,Cache effectiveness,Evicted blocks,512-token blocks,28408051,8.099704370214189,relative %
+evaluation,128,last-gap,Cache effectiveness,Evicted blocks,512-token blocks,26423350,0.5474231044818589,relative %
+evaluation,128,global-median,Cache effectiveness,Evicted blocks,512-token blocks,26409644,0.4952683632749366,relative %
+evaluation,128,continuum-ttl,Cache effectiveness,Evicted blocks,512-token blocks,26360764,0.3092677978149494,relative %
+evaluation,128,oracle,Cache effectiveness,Evicted blocks,512-token blocks,26177837,-0.3868149648261765,relative %
+evaluation,128,unbounded,Cache effectiveness,Evicted blocks,512-token blocks,0,-100.0,relative %
+evaluation,128,lru,Cache effectiveness,Forced evictions of protected blocks,blocks,0,0.0,relative %
+evaluation,128,lfu,Cache effectiveness,Forced evictions of protected blocks,blocks,0,0.0,relative %
+evaluation,128,slru,Cache effectiveness,Forced evictions of protected blocks,blocks,0,0.0,relative %
+evaluation,128,random-0,Cache effectiveness,Forced evictions of protected blocks,blocks,0,0.0,relative %
+evaluation,128,last-gap,Cache effectiveness,Forced evictions of protected blocks,blocks,8732574,,relative %
+evaluation,128,global-median,Cache effectiveness,Forced evictions of protected blocks,blocks,1523064,,relative %
+evaluation,128,continuum-ttl,Cache effectiveness,Forced evictions of protected blocks,blocks,926458,,relative %
+evaluation,128,oracle,Cache effectiveness,Forced evictions of protected blocks,blocks,23418180,,relative %
+evaluation,128,unbounded,Cache effectiveness,Forced evictions of protected blocks,blocks,0,0.0,relative %
+evaluation,128,lru,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.98582537621239,0.0,percentage points
+evaluation,128,lfu,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.9858285074582,3.131245804866012e-06,percentage points
+evaluation,128,slru,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.98578951370803,-3.5862504361716674e-05,percentage points
+evaluation,128,random-0,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.98614352982301,0.00031815361062115244,percentage points
+evaluation,128,last-gap,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.9858314421242,6.0659118048533855e-06,percentage points
+evaluation,128,global-median,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.9858286328542,3.256641804227911e-06,percentage points
+evaluation,128,continuum-ttl,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.98585431749667,2.894128428465592e-05,percentage points
+evaluation,128,oracle,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.98587492117305,4.954496066034153e-05,percentage points
+evaluation,128,unbounded,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,13.640424629357934,-86.34540074685445,percentage points
+evaluation,128,lru,"KV occupancy, whole run","Active, mean",% of capacity,46.985042113764614,0.0,percentage points
+evaluation,128,lfu,"KV occupancy, whole run","Active, mean",% of capacity,46.951207710197515,-0.03383440356709855,percentage points
+evaluation,128,slru,"KV occupancy, whole run","Active, mean",% of capacity,46.921181339647276,-0.06386077411733737,percentage points
+evaluation,128,random-0,"KV occupancy, whole run","Active, mean",% of capacity,47.94049831155927,0.9554561977946534,percentage points
+evaluation,128,last-gap,"KV occupancy, whole run","Active, mean",% of capacity,47.05625932161747,0.0712172078528539,percentage points
+evaluation,128,global-median,"KV occupancy, whole run","Active, mean",% of capacity,47.12887971032023,0.14383759655561335,percentage points
+evaluation,128,continuum-ttl,"KV occupancy, whole run","Active, mean",% of capacity,47.099964616893445,0.11492250312883101,percentage points
+evaluation,128,oracle,"KV occupancy, whole run","Active, mean",% of capacity,47.00791885051922,0.02287673675460411,percentage points
+evaluation,128,unbounded,"KV occupancy, whole run","Active, mean",% of capacity,0.007495040384192142,-46.97754707338042,percentage points
+evaluation,128,lru,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,8.88090501322939,0.0,percentage points
+evaluation,128,lfu,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,9.03987556867914,0.15897055544975025,percentage points
+evaluation,128,slru,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,8.993630159396568,0.11272514616717899,percentage points
+evaluation,128,random-0,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,9.123123286087752,0.24221827285836284,percentage points
+evaluation,128,last-gap,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,8.943908372922397,0.06300335969300797,percentage points
+evaluation,128,global-median,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,9.146862539144353,0.26595752591496336,percentage points
+evaluation,128,continuum-ttl,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,9.072881670246945,0.1919766570175554,percentage points
+evaluation,128,oracle,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,9.015742579598973,0.13483756636958333,percentage points
+evaluation,128,unbounded,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,0.0,-8.88090501322939,percentage points
+evaluation,128,lru,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,53.000783262447776,0.0,percentage points
+evaluation,128,lfu,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,53.03462079726069,0.033837534812917625,percentage points
+evaluation,128,slru,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,53.064608174060744,0.06382491161296855,percentage points
+evaluation,128,random-0,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,52.04564521826375,-0.9551380441840251,percentage points
+evaluation,128,last-gap,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,52.92957212050671,-0.07121114194106326,percentage points
+evaluation,128,global-median,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,52.85694892253396,-0.14383433991381622,percentage points
+evaluation,128,continuum-ttl,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,52.88588970060324,-0.11489356184453925,percentage points
+evaluation,128,oracle,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,52.977956070653825,-0.022827191793950874,percentage points
+evaluation,128,unbounded,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,13.632929588973742,-39.36785367347403,percentage points
+evaluation,128,lru,Pressure and completion,"Waiting queue, time-weighted mean",requests,37.62256730341312,0.0,relative %
+evaluation,128,lfu,Pressure and completion,"Waiting queue, time-weighted mean",requests,37.53991199932489,-0.21969607608550712,relative %
+evaluation,128,slru,Pressure and completion,"Waiting queue, time-weighted mean",requests,37.59923268685587,-0.06202292461613412,relative %
+evaluation,128,random-0,Pressure and completion,"Waiting queue, time-weighted mean",requests,37.57415486853091,-0.128679243210017,relative %
+evaluation,128,last-gap,Pressure and completion,"Waiting queue, time-weighted mean",requests,37.57565310681926,-0.12469695705642492,relative %
+evaluation,128,global-median,Pressure and completion,"Waiting queue, time-weighted mean",requests,37.58544132208597,-0.09868008482181168,relative %
+evaluation,128,continuum-ttl,Pressure and completion,"Waiting queue, time-weighted mean",requests,37.59323264711429,-0.0779709052342259,relative %
+evaluation,128,oracle,Pressure and completion,"Waiting queue, time-weighted mean",requests,37.61071471406684,-0.03150393552544539,relative %
+evaluation,128,unbounded,Pressure and completion,"Waiting queue, time-weighted mean",requests,0.04692253077377806,-99.875280890867,relative %
+evaluation,128,lru,Pressure and completion,"Waiting queue, sampled peak",requests,199,0.0,relative %
+evaluation,128,lfu,Pressure and completion,"Waiting queue, sampled peak",requests,201,1.005025125628145,relative %
+evaluation,128,slru,Pressure and completion,"Waiting queue, sampled peak",requests,200,0.5025125628140614,relative %
+evaluation,128,random-0,Pressure and completion,"Waiting queue, sampled peak",requests,199,0.0,relative %
+evaluation,128,last-gap,Pressure and completion,"Waiting queue, sampled peak",requests,201,1.005025125628145,relative %
+evaluation,128,global-median,Pressure and completion,"Waiting queue, sampled peak",requests,201,1.005025125628145,relative %
+evaluation,128,continuum-ttl,Pressure and completion,"Waiting queue, sampled peak",requests,199,0.0,relative %
+evaluation,128,oracle,Pressure and completion,"Waiting queue, sampled peak",requests,198,-0.5025125628140725,relative %
+evaluation,128,unbounded,Pressure and completion,"Waiting queue, sampled peak",requests,128,-35.678391959798994,relative %
+evaluation,128,lru,Pressure and completion,Preemptions,events,361,0.0,relative %
+evaluation,128,lfu,Pressure and completion,Preemptions,events,353,-2.216066481994461,relative %
+evaluation,128,slru,Pressure and completion,Preemptions,events,363,0.5540166204986097,relative %
+evaluation,128,random-0,Pressure and completion,Preemptions,events,347,-3.878116343490301,relative %
+evaluation,128,last-gap,Pressure and completion,Preemptions,events,335,-7.202216066481992,relative %
+evaluation,128,global-median,Pressure and completion,Preemptions,events,346,-4.155124653739617,relative %
+evaluation,128,continuum-ttl,Pressure and completion,Preemptions,events,317,-12.188365650969523,relative %
+evaluation,128,oracle,Pressure and completion,Preemptions,events,356,-1.3850415512465353,relative %
+evaluation,128,unbounded,Pressure and completion,Preemptions,events,0,-100.0,relative %
+evaluation,128,lru,Pressure and completion,Completed requests,requests,74031,0.0,relative %
+evaluation,128,lfu,Pressure and completion,Completed requests,requests,74031,0.0,relative %
+evaluation,128,slru,Pressure and completion,Completed requests,requests,74031,0.0,relative %
+evaluation,128,random-0,Pressure and completion,Completed requests,requests,74031,0.0,relative %
+evaluation,128,last-gap,Pressure and completion,Completed requests,requests,74031,0.0,relative %
+evaluation,128,global-median,Pressure and completion,Completed requests,requests,74031,0.0,relative %
+evaluation,128,continuum-ttl,Pressure and completion,Completed requests,requests,74031,0.0,relative %
+evaluation,128,oracle,Pressure and completion,Completed requests,requests,74031,0.0,relative %
+evaluation,128,unbounded,Pressure and completion,Completed requests,requests,74031,0.0,relative %
+evaluation,128,lru,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,56.42385062922437,0.0,relative %
+evaluation,128,lfu,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,56.31354705680306,-0.19549104003223627,relative %
+evaluation,128,slru,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,56.34421829596832,-0.14113239767936658,relative %
+evaluation,128,random-0,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,56.64290822044834,0.38823580592444173,relative %
+evaluation,128,last-gap,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,56.40178173005589,-0.03911271372367686,relative %
+evaluation,128,global-median,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,56.39864860960971,-0.04466554361961528,relative %
+evaluation,128,continuum-ttl,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,56.39278590961942,-0.05505600780258968,relative %
+evaluation,128,oracle,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,56.37551015448297,-0.0856738315487493,relative %
+evaluation,128,unbounded,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,16.161178971259577,-71.35753977966013,relative %
+evaluation,128,lru,Pressure and completion,Observation span,h,364.9527954958428,0.0,relative %
+evaluation,128,lfu,Pressure and completion,Observation span,h,364.55762366617233,-0.10828025830944554,relative %
+evaluation,128,slru,Pressure and completion,Observation span,h,364.60990818491507,-0.09395387983310854,relative %
+evaluation,128,random-0,Pressure and completion,Observation span,h,366.8943318267492,0.5319965636291446,relative %
+evaluation,128,last-gap,Pressure and completion,Observation span,h,364.83553045270753,-0.032131564570136995,relative %
+evaluation,128,global-median,Pressure and completion,Observation span,h,364.7577379249642,-0.05344734258401207,relative %
+evaluation,128,continuum-ttl,Pressure and completion,Observation span,h,364.6091369629333,-0.09416520085634428,relative %
+evaluation,128,oracle,Pressure and completion,Observation span,h,364.4550966626522,-0.13637348153873186,relative %
+evaluation,128,unbounded,Pressure and completion,Observation span,h,243.1312451652481,-33.38008417364825,relative %
+tuning,8,lru,Latency,Mean request latency (arrival to last token) — primary,s,16.801652564535928,0.0,relative %
+tuning,8,lfu,Latency,Mean request latency (arrival to last token) — primary,s,17.028495647929645,1.3501236412454265,relative %
+tuning,8,slru,Latency,Mean request latency (arrival to last token) — primary,s,16.81461919403339,0.07717472699579897,relative %
+tuning,8,random-0,Latency,Mean request latency (arrival to last token) — primary,s,18.390845579064294,9.458551820567651,relative %
+tuning,8,last-gap,Latency,Mean request latency (arrival to last token) — primary,s,16.772551904788013,-0.17320117551614667,relative %
+tuning,8,global-median,Latency,Mean request latency (arrival to last token) — primary,s,16.801652564535928,0.0,relative %
+tuning,8,continuum-ttl,Latency,Mean request latency (arrival to last token) — primary,s,16.801652564535928,0.0,relative %
+tuning,8,oracle,Latency,Mean request latency (arrival to last token) — primary,s,16.77599400153166,-0.15271451963259075,relative %
+tuning,8,unbounded,Latency,Mean request latency (arrival to last token) — primary,s,6.315452196473436,-62.41172008398881,relative %
+tuning,8,lru,Latency,p95 request latency,s,68.18216188418866,0.0,relative %
+tuning,8,lfu,Latency,p95 request latency,s,68.81697773522139,0.931058554744868,relative %
+tuning,8,slru,Latency,p95 request latency,s,68.12668437802792,-0.08136659886932573,relative %
+tuning,8,random-0,Latency,p95 request latency,s,74.23884890663624,8.883096186851924,relative %
+tuning,8,last-gap,Latency,p95 request latency,s,67.94349448627234,-0.35004375238454344,relative %
+tuning,8,global-median,Latency,p95 request latency,s,68.18216188418866,0.0,relative %
+tuning,8,continuum-ttl,Latency,p95 request latency,s,68.18216188418866,0.0,relative %
+tuning,8,oracle,Latency,p95 request latency,s,68.27798407185078,0.14053850012101243,relative %
+tuning,8,unbounded,Latency,p95 request latency,s,23.852687550365925,-65.01623461150866,relative %
+tuning,8,lru,Latency,"Mean TTFT, including queueing",ms,142.63863703730573,0.0,relative %
+tuning,8,lfu,Latency,"Mean TTFT, including queueing",ms,235.3102448405392,64.96949895770257,relative %
+tuning,8,slru,Latency,"Mean TTFT, including queueing",ms,155.6698695729937,9.135836408952635,relative %
+tuning,8,random-0,Latency,"Mean TTFT, including queueing",ms,771.82653334072,441.1062173419789,relative %
+tuning,8,last-gap,Latency,"Mean TTFT, including queueing",ms,152.6826782258575,7.041599244898045,relative %
+tuning,8,global-median,Latency,"Mean TTFT, including queueing",ms,142.63863703730573,0.0,relative %
+tuning,8,continuum-ttl,Latency,"Mean TTFT, including queueing",ms,142.63863703730573,0.0,relative %
+tuning,8,oracle,Latency,"Mean TTFT, including queueing",ms,129.84374529073878,-8.970144423926719,relative %
+tuning,8,unbounded,Latency,"Mean TTFT, including queueing",ms,113.74869598275971,-20.253937961416536,relative %
+tuning,8,lru,Latency,p95 TTFT,ms,350.69919099938124,0.0,relative %
+tuning,8,lfu,Latency,p95 TTFT,ms,909.4062500596046,159.31233187852126,relative %
+tuning,8,slru,Latency,p95 TTFT,ms,446.4236350655556,27.295313625728678,relative %
+tuning,8,random-0,Latency,p95 TTFT,ms,5151.309141039848,1368.8682703716124,relative %
+tuning,8,last-gap,Latency,p95 TTFT,ms,384.6134485602379,9.670469288569429,relative %
+tuning,8,global-median,Latency,p95 TTFT,ms,350.69919099938124,0.0,relative %
+tuning,8,continuum-ttl,Latency,p95 TTFT,ms,350.69919099938124,0.0,relative %
+tuning,8,oracle,Latency,p95 TTFT,ms,344.6159299015999,-1.7346093900148407,relative %
+tuning,8,unbounded,Latency,p95 TTFT,ms,314.2000260055065,-10.40754182804463,relative %
+tuning,8,lru,Latency,Mean ITL over individual gaps,ms/gap,15.639738808787984,0.0,relative %
+tuning,8,lfu,Latency,Mean ITL over individual gaps,ms/gap,15.765734621954396,0.8056132823370143,relative %
+tuning,8,slru,Latency,Mean ITL over individual gaps,ms/gap,15.639680913253171,-0.00037018223590923327,relative %
+tuning,8,random-0,Latency,Mean ITL over individual gaps,ms/gap,16.540943036142913,5.762271597838597,relative %
+tuning,8,last-gap,Latency,Mean ITL over individual gaps,ms/gap,15.602990826218864,-0.2349654493492559,relative %
+tuning,8,global-median,Latency,Mean ITL over individual gaps,ms/gap,15.639738808787984,0.0,relative %
+tuning,8,continuum-ttl,Latency,Mean ITL over individual gaps,ms/gap,15.639738808787984,0.0,relative %
+tuning,8,oracle,Latency,Mean ITL over individual gaps,ms/gap,15.627662066888874,-0.077218309376903,relative %
+tuning,8,unbounded,Latency,Mean ITL over individual gaps,ms/gap,5.822327646949218,-62.772219420457034,relative %
+tuning,8,lru,Latency,p95 ITL over individual gaps,ms/gap,27.969745993614197,0.0,relative %
+tuning,8,lfu,Latency,p95 ITL over individual gaps,ms/gap,28.1229650080204,0.5478026666426938,relative %
+tuning,8,slru,Latency,p95 ITL over individual gaps,ms/gap,27.820069015026093,-0.5351388554700409,relative %
+tuning,8,random-0,Latency,p95 ITL over individual gaps,ms/gap,29.260190963745117,4.613717158623976,relative %
+tuning,8,last-gap,Latency,p95 ITL over individual gaps,ms/gap,27.83916300535202,-0.46687227081715355,relative %
+tuning,8,global-median,Latency,p95 ITL over individual gaps,ms/gap,27.969745993614197,0.0,relative %
+tuning,8,continuum-ttl,Latency,p95 ITL over individual gaps,ms/gap,27.969745993614197,0.0,relative %
+tuning,8,oracle,Latency,p95 ITL over individual gaps,ms/gap,27.96161499619484,-0.029070687382048988,relative %
+tuning,8,unbounded,Latency,p95 ITL over individual gaps,ms/gap,5.786529004573822,-79.31147102338738,relative %
+tuning,8,lru,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,98.10369174904176,0.0,percentage points
+tuning,8,lfu,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,94.89610651603793,-3.207585233003826,percentage points
+tuning,8,slru,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,97.89792213032077,-0.20576961872099275,percentage points
+tuning,8,random-0,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,86.24167843453702,-11.862013314504736,percentage points
+tuning,8,last-gap,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,97.81319346378858,-0.2904982852531788,percentage points
+tuning,8,global-median,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,98.10369174904176,0.0,percentage points
+tuning,8,continuum-ttl,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,98.10369174904176,0.0,percentage points
+tuning,8,oracle,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,98.3498083518257,0.24611660278394254,percentage points
+tuning,8,unbounded,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,98.71696590679846,0.613274157756706,percentage points
+tuning,8,lru,SLO,SLO passes,requests,24315,0.0,relative %
+tuning,8,lfu,SLO,SLO passes,requests,23520,-3.2695866748920444,relative %
+tuning,8,slru,SLO,SLO passes,requests,24264,-0.2097470697100534,relative %
+tuning,8,random-0,SLO,SLO passes,requests,21375,-12.091301665638499,relative %
+tuning,8,last-gap,SLO,SLO passes,requests,24243,-0.296113510178897,relative %
+tuning,8,global-median,SLO,SLO passes,requests,24315,0.0,relative %
+tuning,8,continuum-ttl,SLO,SLO passes,requests,24315,0.0,relative %
+tuning,8,oracle,SLO,SLO passes,requests,24376,0.25087394612379743,relative %
+tuning,8,unbounded,SLO,SLO passes,requests,24467,0.6251285214887936,relative %
+tuning,8,lru,Cache effectiveness,Input-token hit rate (first admission),%,97.15889509058925,0.0,percentage points
+tuning,8,lfu,Cache effectiveness,Input-token hit rate (first admission),%,94.94003248565816,-2.2188626049310898,percentage points
+tuning,8,slru,Cache effectiveness,Input-token hit rate (first admission),%,96.84070460525177,-0.31819048533748173,percentage points
+tuning,8,random-0,Cache effectiveness,Input-token hit rate (first admission),%,84.10474975153001,-13.054145339059247,percentage points
+tuning,8,last-gap,Cache effectiveness,Input-token hit rate (first admission),%,96.9420495719571,-0.21684551863215518,percentage points
+tuning,8,global-median,Cache effectiveness,Input-token hit rate (first admission),%,97.15889509058925,0.0,percentage points
+tuning,8,continuum-ttl,Cache effectiveness,Input-token hit rate (first admission),%,97.15889509058925,0.0,percentage points
+tuning,8,oracle,Cache effectiveness,Input-token hit rate (first admission),%,97.45248531188842,0.29359022129916923,percentage points
+tuning,8,unbounded,Cache effectiveness,Input-token hit rate (first admission),%,97.67297406082062,0.5140789702313668,percentage points
+tuning,8,lru,Cache effectiveness,Recomputed input tokens,tokens,128965376,0.0,relative %
+tuning,8,lfu,Cache effectiveness,Recomputed input tokens,tokens,229685504,78.09858050582508,relative %
+tuning,8,slru,Cache effectiveness,Recomputed input tokens,tokens,143408896,11.1995331211999,relative %
+tuning,8,random-0,Cache effectiveness,Recomputed input tokens,tokens,721528064,459.4742452423819,relative %
+tuning,8,last-gap,Cache effectiveness,Recomputed input tokens,tokens,138808576,7.632436166432766,relative %
+tuning,8,global-median,Cache effectiveness,Recomputed input tokens,tokens,128965376,0.0,relative %
+tuning,8,continuum-ttl,Cache effectiveness,Recomputed input tokens,tokens,128965376,0.0,relative %
+tuning,8,oracle,Cache effectiveness,Recomputed input tokens,tokens,115638528,-10.333663509809021,relative %
+tuning,8,unbounded,Cache effectiveness,Recomputed input tokens,tokens,105629952,-18.094332543953506,relative %
+tuning,8,lru,Cache effectiveness,Evicted blocks,512-token blocks,287449,0.0,relative %
+tuning,8,lfu,Cache effectiveness,Evicted blocks,512-token blocks,484168,68.4361399761349,relative %
+tuning,8,slru,Cache effectiveness,Evicted blocks,512-token blocks,315659,9.813914816193492,relative %
+tuning,8,random-0,Cache effectiveness,Evicted blocks,512-token blocks,1444798,402.6275965475615,relative %
+tuning,8,last-gap,Cache effectiveness,Evicted blocks,512-token blocks,306674,6.6881429401389525,relative %
+tuning,8,global-median,Cache effectiveness,Evicted blocks,512-token blocks,287449,0.0,relative %
+tuning,8,continuum-ttl,Cache effectiveness,Evicted blocks,512-token blocks,287449,0.0,relative %
+tuning,8,oracle,Cache effectiveness,Evicted blocks,512-token blocks,261420,-9.055171526079409,relative %
+tuning,8,unbounded,Cache effectiveness,Evicted blocks,512-token blocks,0,-100.0,relative %
+tuning,8,lru,Cache effectiveness,Forced evictions of protected blocks,blocks,0,0.0,relative %
+tuning,8,lfu,Cache effectiveness,Forced evictions of protected blocks,blocks,0,0.0,relative %
+tuning,8,slru,Cache effectiveness,Forced evictions of protected blocks,blocks,0,0.0,relative %
+tuning,8,random-0,Cache effectiveness,Forced evictions of protected blocks,blocks,0,0.0,relative %
+tuning,8,last-gap,Cache effectiveness,Forced evictions of protected blocks,blocks,14486,,relative %
+tuning,8,global-median,Cache effectiveness,Forced evictions of protected blocks,blocks,0,0.0,relative %
+tuning,8,continuum-ttl,Cache effectiveness,Forced evictions of protected blocks,blocks,0,0.0,relative %
+tuning,8,oracle,Cache effectiveness,Forced evictions of protected blocks,blocks,13593,,relative %
+tuning,8,unbounded,Cache effectiveness,Forced evictions of protected blocks,blocks,0,0.0,relative %
+tuning,8,lru,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.95515520055616,0.0,percentage points
+tuning,8,lfu,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.9551922211739,3.7020617739358386e-05,percentage points
+tuning,8,slru,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.9551178200135,-3.738054266477775e-05,percentage points
+tuning,8,random-0,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.95545043601469,0.0002952354585232797,percentage points
+tuning,8,last-gap,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.95514217210334,-1.3028452826802095e-05,percentage points
+tuning,8,global-median,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.95515520055616,0.0,percentage points
+tuning,8,continuum-ttl,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.95515520055616,0.0,percentage points
+tuning,8,oracle,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.95513449878642,-2.0701769742004217e-05,percentage points
+tuning,8,unbounded,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,9.602155333539734,-90.35299986701642,percentage points
+tuning,8,lru,"KV occupancy, whole run","Active, mean",% of capacity,6.2105383650081905,0.0,percentage points
+tuning,8,lfu,"KV occupancy, whole run","Active, mean",% of capacity,6.2520247299881575,0.04148636497996705,percentage points
+tuning,8,slru,"KV occupancy, whole run","Active, mean",% of capacity,6.194551717857861,-0.015986647150329603,percentage points
+tuning,8,random-0,"KV occupancy, whole run","Active, mean",% of capacity,6.655346107239714,0.4448077422315233,percentage points
+tuning,8,last-gap,"KV occupancy, whole run","Active, mean",% of capacity,6.208474031392727,-0.0020643336154630987,percentage points
+tuning,8,global-median,"KV occupancy, whole run","Active, mean",% of capacity,6.2105383650081905,0.0,percentage points
+tuning,8,continuum-ttl,"KV occupancy, whole run","Active, mean",% of capacity,6.2105383650081905,0.0,percentage points
+tuning,8,oracle,"KV occupancy, whole run","Active, mean",% of capacity,6.199410525914355,-0.011127839093835412,percentage points
+tuning,8,unbounded,"KV occupancy, whole run","Active, mean",% of capacity,0.004277362680111727,-6.206261002328079,percentage points
+tuning,8,lru,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,0.0,0.0,percentage points
+tuning,8,lfu,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,0.0,0.0,percentage points
+tuning,8,slru,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,0.0,0.0,percentage points
+tuning,8,random-0,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,0.009579459266439118,0.009579459266439118,percentage points
+tuning,8,last-gap,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,0.0,0.0,percentage points
+tuning,8,global-median,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,0.0,0.0,percentage points
+tuning,8,continuum-ttl,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,0.0,0.0,percentage points
+tuning,8,oracle,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,0.0,0.0,percentage points
+tuning,8,unbounded,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,0.0,0.0,percentage points
+tuning,8,lru,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,93.74461683554796,0.0,percentage points
+tuning,8,lfu,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,93.70316749118574,-0.041449344362220586,percentage points
+tuning,8,slru,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,93.76056610215564,0.01594926660767726,percentage points
+tuning,8,random-0,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,93.30010432877498,-0.4445125067729805,percentage points
+tuning,8,last-gap,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,93.74666814071061,0.002051305162652284,percentage points
+tuning,8,global-median,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,93.74461683554796,0.0,percentage points
+tuning,8,continuum-ttl,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,93.74461683554796,0.0,percentage points
+tuning,8,oracle,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,93.75572397287206,0.011107137324103178,percentage points
+tuning,8,unbounded,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,9.59787797085962,-84.14673886468833,percentage points
+tuning,8,lru,Pressure and completion,"Waiting queue, time-weighted mean",requests,0.001837403688813658,0.0,relative %
+tuning,8,lfu,Pressure and completion,"Waiting queue, time-weighted mean",requests,0.0025101071792541607,36.611632736779896,relative %
+tuning,8,slru,Pressure and completion,"Waiting queue, time-weighted mean",requests,0.002203622863515829,19.931339908140956,relative %
+tuning,8,random-0,Pressure and completion,"Waiting queue, time-weighted mean",requests,0.004598140447890776,150.25205271355588,relative %
+tuning,8,last-gap,Pressure and completion,"Waiting queue, time-weighted mean",requests,0.002521406421616715,37.22658972371453,relative %
+tuning,8,global-median,Pressure and completion,"Waiting queue, time-weighted mean",requests,0.001837403688813658,0.0,relative %
+tuning,8,continuum-ttl,Pressure and completion,"Waiting queue, time-weighted mean",requests,0.001837403688813658,0.0,relative %
+tuning,8,oracle,Pressure and completion,"Waiting queue, time-weighted mean",requests,0.0019144560833262905,4.193547394170216,relative %
+tuning,8,unbounded,Pressure and completion,"Waiting queue, time-weighted mean",requests,0.0017018198513348798,-7.379099013691414,relative %
+tuning,8,lru,Pressure and completion,"Waiting queue, sampled peak",requests,8,0.0,relative %
+tuning,8,lfu,Pressure and completion,"Waiting queue, sampled peak",requests,8,0.0,relative %
+tuning,8,slru,Pressure and completion,"Waiting queue, sampled peak",requests,8,0.0,relative %
+tuning,8,random-0,Pressure and completion,"Waiting queue, sampled peak",requests,8,0.0,relative %
+tuning,8,last-gap,Pressure and completion,"Waiting queue, sampled peak",requests,8,0.0,relative %
+tuning,8,global-median,Pressure and completion,"Waiting queue, sampled peak",requests,8,0.0,relative %
+tuning,8,continuum-ttl,Pressure and completion,"Waiting queue, sampled peak",requests,8,0.0,relative %
+tuning,8,oracle,Pressure and completion,"Waiting queue, sampled peak",requests,8,0.0,relative %
+tuning,8,unbounded,Pressure and completion,"Waiting queue, sampled peak",requests,8,0.0,relative %
+tuning,8,lru,Pressure and completion,Preemptions,events,0,0.0,relative %
+tuning,8,lfu,Pressure and completion,Preemptions,events,0,0.0,relative %
+tuning,8,slru,Pressure and completion,Preemptions,events,0,0.0,relative %
+tuning,8,random-0,Pressure and completion,Preemptions,events,0,0.0,relative %
+tuning,8,last-gap,Pressure and completion,Preemptions,events,0,0.0,relative %
+tuning,8,global-median,Pressure and completion,Preemptions,events,0,0.0,relative %
+tuning,8,continuum-ttl,Pressure and completion,Preemptions,events,0,0.0,relative %
+tuning,8,oracle,Pressure and completion,Preemptions,events,0,0.0,relative %
+tuning,8,unbounded,Pressure and completion,Preemptions,events,0,0.0,relative %
+tuning,8,lru,Pressure and completion,Completed requests,requests,24796,0.0,relative %
+tuning,8,lfu,Pressure and completion,Completed requests,requests,24796,0.0,relative %
+tuning,8,slru,Pressure and completion,Completed requests,requests,24796,0.0,relative %
+tuning,8,random-0,Pressure and completion,Completed requests,requests,24796,0.0,relative %
+tuning,8,last-gap,Pressure and completion,Completed requests,requests,24796,0.0,relative %
+tuning,8,global-median,Pressure and completion,Completed requests,requests,24796,0.0,relative %
+tuning,8,continuum-ttl,Pressure and completion,Completed requests,requests,24796,0.0,relative %
+tuning,8,oracle,Pressure and completion,Completed requests,requests,24796,0.0,relative %
+tuning,8,unbounded,Pressure and completion,Completed requests,requests,24796,0.0,relative %
+tuning,8,lru,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,14.723048588986815,0.0,relative %
+tuning,8,lfu,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,14.7295961126677,0.04447124956024062,relative %
+tuning,8,slru,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,14.722910888080838,-0.0009352744110402433,relative %
+tuning,8,random-0,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,14.78549153804229,0.4241169801082023,relative %
+tuning,8,last-gap,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,14.722175903468882,-0.005927342511025113,relative %
+tuning,8,global-median,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,14.723048588986815,0.0,relative %
+tuning,8,continuum-ttl,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,14.723048588986815,0.0,relative %
+tuning,8,oracle,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,14.721759365489946,-0.008756498282791458,relative %
+tuning,8,unbounded,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,14.319289359494414,-2.74236159075385,relative %
+tuning,8,lru,Pressure and completion,Observation span,h,288.75285207363174,0.0,relative %
+tuning,8,lfu,Pressure and completion,Observation span,h,288.83228811584945,0.027510045925871474,relative %
+tuning,8,slru,Pressure and completion,Observation span,h,288.66605154759134,-0.030060491322270178,relative %
+tuning,8,random-0,Pressure and completion,Observation span,h,289.97229389653586,0.4223133431053183,relative %
+tuning,8,last-gap,Pressure and completion,Observation span,h,288.6396145969715,-0.03921605478423018,relative %
+tuning,8,global-median,Pressure and completion,Observation span,h,288.75285207363174,0.0,relative %
+tuning,8,continuum-ttl,Pressure and completion,Observation span,h,288.75285207363174,0.0,relative %
+tuning,8,oracle,Pressure and completion,Observation span,h,288.738813385235,-0.004861835405578496,relative %
+tuning,8,unbounded,Pressure and completion,Observation span,h,277.48073443368213,-3.903725126522817,relative %
+tuning,32,lru,Latency,Mean request latency (arrival to last token) — primary,s,102.34535313773618,0.0,relative %
+tuning,32,lfu,Latency,Mean request latency (arrival to last token) — primary,s,102.53584691169829,0.18612840556202492,relative %
+tuning,32,slru,Latency,Mean request latency (arrival to last token) — primary,s,101.40834145610569,-0.9155390576155109,relative %
+tuning,32,random-0,Latency,Mean request latency (arrival to last token) — primary,s,108.53730437314873,6.050056055871367,relative %
+tuning,32,last-gap,Latency,Mean request latency (arrival to last token) — primary,s,102.69894287627608,0.3454868518202536,relative %
+tuning,32,global-median,Latency,Mean request latency (arrival to last token) — primary,s,100.61304937821446,-1.6926061676590165,relative %
+tuning,32,continuum-ttl,Latency,Mean request latency (arrival to last token) — primary,s,102.74972417121684,0.3951044391204084,relative %
+tuning,32,oracle,Latency,Mean request latency (arrival to last token) — primary,s,98.60597676473098,-3.6536845673616036,relative %
+tuning,32,unbounded,Latency,Mean request latency (arrival to last token) — primary,s,6.57527716002517,-93.57540234271684,relative %
+tuning,32,lru,Latency,p95 request latency,s,289.2936649955064,0.0,relative %
+tuning,32,lfu,Latency,p95 request latency,s,287.8259304941632,-0.5073510688061611,relative %
+tuning,32,slru,Latency,p95 request latency,s,286.28471418941024,-1.0401025567368993,relative %
+tuning,32,random-0,Latency,p95 request latency,s,295.79774472410975,2.248262065712492,relative %
+tuning,32,last-gap,Latency,p95 request latency,s,288.85193512910604,-0.15269254734879834,relative %
+tuning,32,global-median,Latency,p95 request latency,s,291.04246176186206,0.604505724791049,relative %
+tuning,32,continuum-ttl,Latency,p95 request latency,s,286.08028869389,-1.1107662180111388,relative %
+tuning,32,oracle,Latency,p95 request latency,s,282.7615464579687,-2.2579542271135344,relative %
+tuning,32,unbounded,Latency,p95 request latency,s,24.918405409932138,-91.38646696244828,relative %
+tuning,32,lru,Latency,"Mean TTFT, including queueing",ms,53213.58884076528,0.0,relative %
+tuning,32,lfu,Latency,"Mean TTFT, including queueing",ms,53627.98755085414,0.7787460291935666,relative %
+tuning,32,slru,Latency,"Mean TTFT, including queueing",ms,52481.80458390139,-1.3751830553163091,relative %
+tuning,32,random-0,Latency,"Mean TTFT, including queueing",ms,57561.610747991814,8.170886425716217,relative %
+tuning,32,last-gap,Latency,"Mean TTFT, including queueing",ms,53514.738959510905,0.5659270973938257,relative %
+tuning,32,global-median,Latency,"Mean TTFT, including queueing",ms,51759.15685760294,-2.7331965666035796,relative %
+tuning,32,continuum-ttl,Latency,"Mean TTFT, including queueing",ms,53642.68552770165,0.8063667500803007,relative %
+tuning,32,oracle,Latency,"Mean TTFT, including queueing",ms,50860.53795583446,-4.42189849658895,relative %
+tuning,32,unbounded,Latency,"Mean TTFT, including queueing",ms,147.74657661843,-99.72235179051626,relative %
+tuning,32,lru,Latency,p95 TTFT,ms,152897.55012444966,0.0,relative %
+tuning,32,lfu,Latency,p95 TTFT,ms,148025.21805761755,-3.186664575636644,relative %
+tuning,32,slru,Latency,p95 TTFT,ms,149787.72313287668,-2.033928594043366,relative %
+tuning,32,random-0,Latency,p95 TTFT,ms,157635.13960295916,3.0985385146154343,relative %
+tuning,32,last-gap,Latency,p95 TTFT,ms,152667.45969498158,-0.15048666854425852,relative %
+tuning,32,global-median,Latency,p95 TTFT,ms,151321.66024765372,-1.0306835364682132,relative %
+tuning,32,continuum-ttl,Latency,p95 TTFT,ms,151678.32183463871,-0.7974151899873827,relative %
+tuning,32,oracle,Latency,p95 TTFT,ms,148864.10886569694,-2.6380025418783593,relative %
+tuning,32,unbounded,Latency,p95 TTFT,ms,356.72563400119543,-99.7666897646752,relative %
+tuning,32,lru,Latency,Mean ITL over individual gaps,ms/gap,46.11200959730269,0.0,relative %
+tuning,32,lfu,Latency,Mean ITL over individual gaps,ms/gap,45.908184880484725,-0.4420208934678205,relative %
+tuning,32,slru,Latency,Mean ITL over individual gaps,ms/gap,45.92444411281836,-0.4067605947395192,relative %
+tuning,32,random-0,Latency,Mean ITL over individual gaps,ms/gap,47.852675681285284,3.774864941224365,relative %
+tuning,32,last-gap,Latency,Mean ITL over individual gaps,ms/gap,46.16436764590673,0.11354536282692784,relative %
+tuning,32,global-median,Latency,Mean ITL over individual gaps,ms/gap,45.86190169064516,-0.5423921204946947,relative %
+tuning,32,continuum-ttl,Latency,Mean ITL over individual gaps,ms/gap,46.089985315922206,-0.04776257112371063,relative %
+tuning,32,oracle,Latency,Mean ITL over individual gaps,ms/gap,44.8192629158303,-2.8034923933308864,relative %
+tuning,32,unbounded,Latency,Mean ITL over individual gaps,ms/gap,6.03430561821886,-86.91380906857758,relative %
+tuning,32,lru,Latency,p95 ITL over individual gaps,ms/gap,201.2431100010872,0.0,relative %
+tuning,32,lfu,Latency,p95 ITL over individual gaps,ms/gap,201.14278399944305,-0.04985313616132636,relative %
+tuning,32,slru,Latency,p95 ITL over individual gaps,ms/gap,201.20589600503445,-0.0184920597045779,relative %
+tuning,32,random-0,Latency,p95 ITL over individual gaps,ms/gap,201.3383689969778,0.047335283126015426,relative %
+tuning,32,last-gap,Latency,p95 ITL over individual gaps,ms/gap,201.23894299939275,-0.0020706307383266953,relative %
+tuning,32,global-median,Latency,p95 ITL over individual gaps,ms/gap,201.20041500031948,-0.021215633552607027,relative %
+tuning,32,continuum-ttl,Latency,p95 ITL over individual gaps,ms/gap,201.20495900511742,-0.018957665665952916,relative %
+tuning,32,oracle,Latency,p95 ITL over individual gaps,ms/gap,201.01884800195694,-0.11143834893480031,relative %
+tuning,32,unbounded,Latency,p95 ITL over individual gaps,ms/gap,5.826896000187844,-97.10454882149438,relative %
+tuning,32,lru,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,25.616300181561428,0.0,percentage points
+tuning,32,lfu,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,25.62033487996772,0.004034698406293558,percentage points
+tuning,32,slru,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,26.13677627597337,0.5204760944119435,percentage points
+tuning,32,random-0,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,18.838006858987292,-6.778293322574136,percentage points
+tuning,32,last-gap,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,25.721202340125075,0.10490215856364671,percentage points
+tuning,32,global-median,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,25.797861609844663,0.18156142828323496,percentage points
+tuning,32,continuum-ttl,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,25.98749243494049,0.3711922533790606,percentage points
+tuning,32,oracle,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,27.66996167036514,2.053661488803712,percentage points
+tuning,32,unbounded,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,98.03913657454105,72.42283639297962,percentage points
+tuning,32,lru,SLO,SLO passes,requests,6349,0.0,relative %
+tuning,32,lfu,SLO,SLO passes,requests,6350,0.01575051189164345,relative %
+tuning,32,slru,SLO,SLO passes,requests,6478,2.0318160340211167,relative %
+tuning,32,random-0,SLO,SLO passes,requests,4669,-26.46085997794928,relative %
+tuning,32,last-gap,SLO,SLO passes,requests,6375,0.409513309182552,relative %
+tuning,32,global-median,SLO,SLO passes,requests,6394,0.7087730351236443,relative %
+tuning,32,continuum-ttl,SLO,SLO passes,requests,6441,1.4490470940305533,relative %
+tuning,32,oracle,SLO,SLO passes,requests,6858,8.017010552842962,relative %
+tuning,32,unbounded,SLO,SLO passes,requests,24299,282.7216884548748,relative %
+tuning,32,lru,Cache effectiveness,Input-token hit rate (first admission),%,34.34358154465859,0.0,percentage points
+tuning,32,lfu,Cache effectiveness,Input-token hit rate (first admission),%,34.795578968229286,0.4519974235706954,percentage points
+tuning,32,slru,Cache effectiveness,Input-token hit rate (first admission),%,35.80694195538938,1.463360410730786,percentage points
+tuning,32,random-0,Cache effectiveness,Input-token hit rate (first admission),%,25.72637186090733,-8.617209683751259,percentage points
+tuning,32,last-gap,Cache effectiveness,Input-token hit rate (first admission),%,34.60593924366426,0.2623576990056691,percentage points
+tuning,32,global-median,Cache effectiveness,Input-token hit rate (first admission),%,34.612233121396216,0.26865157673762496,percentage points
+tuning,32,continuum-ttl,Cache effectiveness,Input-token hit rate (first admission),%,34.928889615028424,0.5853080703698339,percentage points
+tuning,32,oracle,Cache effectiveness,Input-token hit rate (first admission),%,39.95968308859304,5.616101543934448,percentage points
+tuning,32,unbounded,Cache effectiveness,Input-token hit rate (first admission),%,97.67297406082062,63.32939251616203,percentage points
+tuning,32,lru,Cache effectiveness,Recomputed input tokens,tokens,2980487964,0.0,relative %
+tuning,32,lfu,Cache effectiveness,Recomputed input tokens,tokens,2959965213,-0.6885701686396795,relative %
+tuning,32,slru,Cache effectiveness,Recomputed input tokens,tokens,2914021656,-2.230047858029194,relative %
+tuning,32,random-0,Cache effectiveness,Recomputed input tokens,tokens,3380888568,13.434062101114396,relative %
+tuning,32,last-gap,Cache effectiveness,Recomputed input tokens,tokens,2968582238,-0.39945559733184366,relative %
+tuning,32,global-median,Cache effectiveness,Recomputed input tokens,tokens,2968284592,-0.4094420828870682,relative %
+tuning,32,continuum-ttl,Cache effectiveness,Recomputed input tokens,tokens,2953899354,-0.8920891585925572,relative %
+tuning,32,oracle,Cache effectiveness,Recomputed input tokens,tokens,2725564819,-8.553067419801863,relative %
+tuning,32,unbounded,Cache effectiveness,Recomputed input tokens,tokens,105629952,-96.45595106318638,relative %
+tuning,32,lru,Cache effectiveness,Evicted blocks,512-token blocks,5856781,0.0,relative %
+tuning,32,lfu,Cache effectiveness,Evicted blocks,512-token blocks,5816688,-0.6845569264071871,relative %
+tuning,32,slru,Cache effectiveness,Evicted blocks,512-token blocks,5726970,-2.2164222975043835,relative %
+tuning,32,random-0,Cache effectiveness,Evicted blocks,512-token blocks,6638811,13.352556634779411,relative %
+tuning,32,last-gap,Cache effectiveness,Evicted blocks,512-token blocks,5833529,-0.397009893318534,relative %
+tuning,32,global-median,Cache effectiveness,Evicted blocks,512-token blocks,5832944,-0.4069983152861667,relative %
+tuning,32,continuum-ttl,Cache effectiveness,Evicted blocks,512-token blocks,5804855,-0.8865962377626935,relative %
+tuning,32,oracle,Cache effectiveness,Evicted blocks,512-token blocks,5358886,-8.501171547988562,relative %
+tuning,32,unbounded,Cache effectiveness,Evicted blocks,512-token blocks,0,-100.0,relative %
+tuning,32,lru,Cache effectiveness,Forced evictions of protected blocks,blocks,0,0.0,relative %
+tuning,32,lfu,Cache effectiveness,Forced evictions of protected blocks,blocks,0,0.0,relative %
+tuning,32,slru,Cache effectiveness,Forced evictions of protected blocks,blocks,0,0.0,relative %
+tuning,32,random-0,Cache effectiveness,Forced evictions of protected blocks,blocks,0,0.0,relative %
+tuning,32,last-gap,Cache effectiveness,Forced evictions of protected blocks,blocks,2045391,,relative %
+tuning,32,global-median,Cache effectiveness,Forced evictions of protected blocks,blocks,476516,,relative %
+tuning,32,continuum-ttl,Cache effectiveness,Forced evictions of protected blocks,blocks,223194,,relative %
+tuning,32,oracle,Cache effectiveness,Forced evictions of protected blocks,blocks,4943562,,relative %
+tuning,32,unbounded,Cache effectiveness,Forced evictions of protected blocks,blocks,0,0.0,relative %
+tuning,32,lru,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.97656821196111,0.0,percentage points
+tuning,32,lfu,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.97656235793067,-5.854030433738444e-06,percentage points
+tuning,32,slru,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.97655120358922,-1.7008371884230655e-05,percentage points
+tuning,32,random-0,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.97695856443875,0.00039035247763763437,percentage points
+tuning,32,last-gap,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.97655684790038,-1.1364060725327363e-05,percentage points
+tuning,32,global-median,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.9766055768741,3.736491299832778e-05,percentage points
+tuning,32,continuum-ttl,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.9765641299874,-4.0819737137098855e-06,percentage points
+tuning,32,oracle,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.97631280515152,-0.00025540680958613393,percentage points
+tuning,32,unbounded,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,12.83835090427406,-87.13821730768704,percentage points
+tuning,32,lru,"KV occupancy, whole run","Active, mean",% of capacity,25.62471730204228,0.0,percentage points
+tuning,32,lfu,"KV occupancy, whole run","Active, mean",% of capacity,25.511210517649307,-0.11350678439297468,percentage points
+tuning,32,slru,"KV occupancy, whole run","Active, mean",% of capacity,25.41953239175965,-0.20518491028263242,percentage points
+tuning,32,random-0,"KV occupancy, whole run","Active, mean",% of capacity,26.255950113585936,0.6312328115436543,percentage points
+tuning,32,last-gap,"KV occupancy, whole run","Active, mean",% of capacity,25.57860937032277,-0.04610793171951144,percentage points
+tuning,32,global-median,"KV occupancy, whole run","Active, mean",% of capacity,25.527604244832876,-0.09711305720940544,percentage points
+tuning,32,continuum-ttl,"KV occupancy, whole run","Active, mean",% of capacity,25.558373441137974,-0.06634386090430766,percentage points
+tuning,32,oracle,"KV occupancy, whole run","Active, mean",% of capacity,24.891786675933822,-0.7329306261084589,percentage points
+tuning,32,unbounded,"KV occupancy, whole run","Active, mean",% of capacity,0.00808575919110927,-25.616631542851174,percentage points
+tuning,32,lru,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,5.638066897721998,0.0,percentage points
+tuning,32,lfu,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,5.403880807406501,-0.23418609031549753,percentage points
+tuning,32,slru,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,5.601815173473086,-0.03625172424891243,percentage points
+tuning,32,random-0,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,5.414227238065523,-0.22383965965647512,percentage points
+tuning,32,last-gap,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,5.419592480497343,-0.21847441722465533,percentage points
+tuning,32,global-median,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,5.549629600837899,-0.0884372968840994,percentage points
+tuning,32,continuum-ttl,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,5.5290063242302425,-0.1090605734917558,percentage points
+tuning,32,oracle,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,5.396100331893244,-0.2419665658287542,percentage points
+tuning,32,unbounded,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,0.0,-5.638066897721998,percentage points
+tuning,32,lru,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,74.35185090991884,0.0,percentage points
+tuning,32,lfu,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,74.46535184028137,0.11350093036253384,percentage points
+tuning,32,slru,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,74.55701881182956,0.20516790191072687,percentage points
+tuning,32,random-0,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,73.7210084508528,-0.6308424590660309,percentage points
+tuning,32,last-gap,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,74.39794747757762,0.04609656765877901,percentage points
+tuning,32,global-median,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,74.44900133204123,0.09715042212239666,percentage points
+tuning,32,continuum-ttl,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,74.41819068884942,0.06633977893058329,percentage points
+tuning,32,oracle,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,75.08452612921769,0.732675219298855,percentage points
+tuning,32,unbounded,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,12.830265145082949,-61.52158576483589,percentage points
+tuning,32,lru,Pressure and completion,"Waiting queue, time-weighted mean",requests,2.0708091198336027,0.0,relative %
+tuning,32,lfu,Pressure and completion,"Waiting queue, time-weighted mean",requests,2.0886330847056027,0.8607246656047174,relative %
+tuning,32,slru,Pressure and completion,"Waiting queue, time-weighted mean",requests,2.0426903016145896,-1.3578662538086816,relative %
+tuning,32,random-0,Pressure and completion,"Waiting queue, time-weighted mean",requests,2.2136459482411452,6.897633733572706,relative %
+tuning,32,last-gap,Pressure and completion,"Waiting queue, time-weighted mean",requests,2.085730994803268,0.7205818646802253,relative %
+tuning,32,global-median,Pressure and completion,"Waiting queue, time-weighted mean",requests,2.010204686897359,-2.926606433967882,relative %
+tuning,32,continuum-ttl,Pressure and completion,"Waiting queue, time-weighted mean",requests,2.089603082591801,0.9075661575079552,relative %
+tuning,32,oracle,Pressure and completion,"Waiting queue, time-weighted mean",requests,1.9902439512299355,-3.890516408877942,relative %
+tuning,32,unbounded,Pressure and completion,"Waiting queue, time-weighted mean",requests,0.00514999457764656,-99.75130520102884,relative %
+tuning,32,lru,Pressure and completion,"Waiting queue, sampled peak",requests,45,0.0,relative %
+tuning,32,lfu,Pressure and completion,"Waiting queue, sampled peak",requests,42,-6.666666666666665,relative %
+tuning,32,slru,Pressure and completion,"Waiting queue, sampled peak",requests,38,-15.555555555555555,relative %
+tuning,32,random-0,Pressure and completion,"Waiting queue, sampled peak",requests,37,-17.777777777777782,relative %
+tuning,32,last-gap,Pressure and completion,"Waiting queue, sampled peak",requests,34,-24.444444444444446,relative %
+tuning,32,global-median,Pressure and completion,"Waiting queue, sampled peak",requests,34,-24.444444444444446,relative %
+tuning,32,continuum-ttl,Pressure and completion,"Waiting queue, sampled peak",requests,51,13.33333333333333,relative %
+tuning,32,oracle,Pressure and completion,"Waiting queue, sampled peak",requests,51,13.33333333333333,relative %
+tuning,32,unbounded,Pressure and completion,"Waiting queue, sampled peak",requests,32,-28.888888888888886,relative %
+tuning,32,lru,Pressure and completion,Preemptions,events,123,0.0,relative %
+tuning,32,lfu,Pressure and completion,Preemptions,events,122,-0.8130081300813052,relative %
+tuning,32,slru,Pressure and completion,Preemptions,events,113,-8.130081300813007,relative %
+tuning,32,random-0,Pressure and completion,Preemptions,events,116,-5.691056910569103,relative %
+tuning,32,last-gap,Pressure and completion,Preemptions,events,94,-23.577235772357717,relative %
+tuning,32,global-median,Pressure and completion,Preemptions,events,112,-8.943089430894313,relative %
+tuning,32,continuum-ttl,Pressure and completion,Preemptions,events,107,-13.008130081300816,relative %
+tuning,32,oracle,Pressure and completion,Preemptions,events,104,-15.44715447154471,relative %
+tuning,32,unbounded,Pressure and completion,Preemptions,events,0,-100.0,relative %
+tuning,32,lru,Pressure and completion,Completed requests,requests,24796,0.0,relative %
+tuning,32,lfu,Pressure and completion,Completed requests,requests,24796,0.0,relative %
+tuning,32,slru,Pressure and completion,Completed requests,requests,24796,0.0,relative %
+tuning,32,random-0,Pressure and completion,Completed requests,requests,24796,0.0,relative %
+tuning,32,last-gap,Pressure and completion,Completed requests,requests,24796,0.0,relative %
+tuning,32,global-median,Pressure and completion,Completed requests,requests,24796,0.0,relative %
+tuning,32,continuum-ttl,Pressure and completion,Completed requests,requests,24796,0.0,relative %
+tuning,32,oracle,Pressure and completion,Completed requests,requests,24796,0.0,relative %
+tuning,32,unbounded,Pressure and completion,Completed requests,requests,24796,0.0,relative %
+tuning,32,lru,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,18.05629372512813,0.0,relative %
+tuning,32,lfu,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,18.051213953067236,-0.028132972016414737,relative %
+tuning,32,slru,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,17.999753258044674,-0.31313440036019324,relative %
+tuning,32,random-0,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,18.282154834503498,1.2508719276151714,relative %
+tuning,32,last-gap,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,18.06750201881997,0.06207416573116298,relative %
+tuning,32,global-median,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,17.999199816800015,-0.3161994880968244,relative %
+tuning,32,continuum-ttl,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,18.042861847109727,-0.0743888985351937,relative %
+tuning,32,oracle,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,17.875888068511067,-0.9991289428682659,relative %
+tuning,32,unbounded,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,14.328095742931957,-20.64763698990899,relative %
+tuning,32,lru,Pressure and completion,Observation span,h,167.65990807234076,0.0,relative %
+tuning,32,lfu,Pressure and completion,Observation span,h,167.57504242403178,-0.05061773520259605,relative %
+tuning,32,slru,Pressure and completion,Observation span,h,167.60440318254635,-0.033105642507247346,relative %
+tuning,32,random-0,Pressure and completion,Observation span,h,169.25571251352025,0.9518103997116389,relative %
+tuning,32,last-gap,Pressure and completion,Observation span,h,167.6017775509899,-0.03467168866976289,relative %
+tuning,32,global-median,Pressure and completion,Observation span,h,167.72891170841265,0.041156909165263045,relative %
+tuning,32,continuum-ttl,Pressure and completion,Observation span,h,167.60094171092828,-0.035170221724700745,relative %
+tuning,32,oracle,Pressure and completion,Observation span,h,167.19893380960798,-0.2749460309460994,relative %
+tuning,32,unbounded,Pressure and completion,Observation span,h,151.02497023078536,-9.921834046561607,relative %
+tuning,128,lru,Latency,Mean request latency (arrival to last token) — primary,s,350.42245123853786,0.0,relative %
+tuning,128,lfu,Latency,Mean request latency (arrival to last token) — primary,s,349.2194240389785,-0.3433076834282067,relative %
+tuning,128,slru,Latency,Mean request latency (arrival to last token) — primary,s,349.6271566425641,-0.22695309423321763,relative %
+tuning,128,random-0,Latency,Mean request latency (arrival to last token) — primary,s,352.40956271340343,0.5670616902091474,relative %
+tuning,128,last-gap,Latency,Mean request latency (arrival to last token) — primary,s,350.61041928899937,0.05364041310627066,relative %
+tuning,128,global-median,Latency,Mean request latency (arrival to last token) — primary,s,349.9796586964871,-0.1263596383410226,relative %
+tuning,128,continuum-ttl,Latency,Mean request latency (arrival to last token) — primary,s,350.2410655563925,-0.051762003691324665,relative %
+tuning,128,oracle,Latency,Mean request latency (arrival to last token) — primary,s,348.84586317479517,-0.44991068870455786,relative %
+tuning,128,unbounded,Latency,Mean request latency (arrival to last token) — primary,s,9.229539561426133,-97.36616774159158,relative %
+tuning,128,lru,Latency,p95 request latency,s,684.1394827367812,0.0,relative %
+tuning,128,lfu,Latency,p95 request latency,s,684.4987771914862,0.05251771952521356,relative %
+tuning,128,slru,Latency,p95 request latency,s,685.2548942758702,0.1630386152582597,relative %
+tuning,128,random-0,Latency,p95 request latency,s,682.4691046336499,-0.24415753589448475,relative %
+tuning,128,last-gap,Latency,p95 request latency,s,685.4154321671873,0.1865042820364371,relative %
+tuning,128,global-median,Latency,p95 request latency,s,682.9837527655494,-0.16893192110598587,relative %
+tuning,128,continuum-ttl,Latency,p95 request latency,s,684.0176172816381,-0.017812954553608762,relative %
+tuning,128,oracle,Latency,p95 request latency,s,681.8881597978752,-0.32907367513712593,relative %
+tuning,128,unbounded,Latency,p95 request latency,s,34.010163745002004,-95.02876758275224,relative %
+tuning,128,lru,Latency,"Mean TTFT, including queueing",ms,297671.9731875104,0.0,relative %
+tuning,128,lfu,Latency,"Mean TTFT, including queueing",ms,296706.79935030907,-0.3242407495963162,relative %
+tuning,128,slru,Latency,"Mean TTFT, including queueing",ms,296868.5943813244,-0.2698872848469036,relative %
+tuning,128,random-0,Latency,"Mean TTFT, including queueing",ms,299059.13542837417,0.46600364354423274,relative %
+tuning,128,last-gap,Latency,"Mean TTFT, including queueing",ms,297964.00631422916,0.09810568445247636,relative %
+tuning,128,global-median,Latency,"Mean TTFT, including queueing",ms,297396.35831015976,-0.09259013349469658,relative %
+tuning,128,continuum-ttl,Latency,"Mean TTFT, including queueing",ms,297614.07428337046,-0.019450572897383722,relative %
+tuning,128,oracle,Latency,"Mean TTFT, including queueing",ms,296262.3703501868,-0.47354234334842094,relative %
+tuning,128,unbounded,Latency,"Mean TTFT, including queueing",ms,1279.1648378828495,-99.57027703206809,relative %
+tuning,128,lru,Latency,p95 TTFT,ms,580436.8428949891,0.0,relative %
+tuning,128,lfu,Latency,p95 TTFT,ms,582384.4345584996,0.33553894577000865,relative %
+tuning,128,slru,Latency,p95 TTFT,ms,581355.1357987747,0.1582072046298011,relative %
+tuning,128,random-0,Latency,p95 TTFT,ms,578722.5517406724,-0.2953449932238006,relative %
+tuning,128,last-gap,Latency,p95 TTFT,ms,582806.8727925848,0.4083183082891573,relative %
+tuning,128,global-median,Latency,p95 TTFT,ms,579878.9080401231,-0.09612326675944027,relative %
+tuning,128,continuum-ttl,Latency,p95 TTFT,ms,580436.8428949891,0.0,relative %
+tuning,128,oracle,Latency,p95 TTFT,ms,582572.3221470565,0.36790897721385996,relative %
+tuning,128,unbounded,Latency,p95 TTFT,ms,5306.966118276119,-99.08569447593865,relative %
+tuning,128,lru,Latency,Mean ITL over individual gaps,ms/gap,49.49122350886931,0.0,relative %
+tuning,128,lfu,Latency,Mean ITL over individual gaps,ms/gap,49.25340487808071,-0.48052687714617015,relative %
+tuning,128,slru,Latency,Mean ITL over individual gaps,ms/gap,49.50455662734536,0.02694036948522882,relative %
+tuning,128,random-0,Latency,Mean ITL over individual gaps,ms/gap,50.07075085893518,1.1709699396742712,relative %
+tuning,128,last-gap,Latency,Mean ITL over individual gaps,ms/gap,49.387455646493564,-0.20966922015405176,relative %
+tuning,128,global-median,Latency,Mean ITL over individual gaps,ms/gap,49.32458794465922,-0.33669720082839527,relative %
+tuning,128,continuum-ttl,Latency,Mean ITL over individual gaps,ms/gap,49.37526469079757,-0.23430178090254605,relative %
+tuning,128,oracle,Latency,Mean ITL over individual gaps,ms/gap,49.33153577437813,-0.32265869212662057,relative %
+tuning,128,unbounded,Latency,Mean ITL over individual gaps,ms/gap,7.464080185135817,-84.91837611612455,relative %
+tuning,128,lru,Latency,p95 ITL over individual gaps,ms/gap,201.84633900225163,0.0,relative %
+tuning,128,lfu,Latency,p95 ITL over individual gaps,ms/gap,201.82339299842715,-0.011368055491067786,relative %
+tuning,128,slru,Latency,p95 ITL over individual gaps,ms/gap,201.82860899996012,-0.008783910760601366,relative %
+tuning,128,random-0,Latency,p95 ITL over individual gaps,ms/gap,201.8694629985839,0.01145623767395687,relative %
+tuning,128,last-gap,Latency,p95 ITL over individual gaps,ms/gap,201.8145549967885,-0.015746634603452936,relative %
+tuning,128,global-median,Latency,p95 ITL over individual gaps,ms/gap,201.83250499889255,-0.006853730133260516,relative %
+tuning,128,continuum-ttl,Latency,p95 ITL over individual gaps,ms/gap,201.84077900089324,-0.002754571316909704,relative %
+tuning,128,oracle,Latency,p95 ITL over individual gaps,ms/gap,201.84009899944067,-0.0030914619714161873,relative %
+tuning,128,unbounded,Latency,p95 ITL over individual gaps,ms/gap,6.117237999977078,-96.96935895383822,relative %
+tuning,128,lru,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,17.659874924349406,0.0,percentage points
+tuning,128,lfu,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,17.95037320960258,0.2904982852531752,percentage points
+tuning,128,slru,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,17.53883397216058,-0.12104095218882449,percentage points
+tuning,128,random-0,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,15.68287270526528,-1.9770022190841257,percentage points
+tuning,128,last-gap,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,17.833366955820054,0.17349203147064785,percentage points
+tuning,128,global-median,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,18.236836796449467,0.5769618721000604,percentage points
+tuning,128,continuum-ttl,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,18.16017752672988,0.5003026023804722,percentage points
+tuning,128,oracle,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,18.773451684486584,1.1135767601371782,percentage points
+tuning,128,unbounded,SLO,SLO attainment (TTFT ≤ 1 s and p95 ITL ≤ 50 ms),% of eligible,86.06818640306638,68.40831147871697,percentage points
+tuning,128,lru,SLO,SLO passes,requests,4377,0.0,relative %
+tuning,128,lfu,SLO,SLO passes,requests,4449,1.6449623029472171,relative %
+tuning,128,slru,SLO,SLO passes,requests,4347,-0.6854009595613442,relative %
+tuning,128,random-0,SLO,SLO passes,requests,3887,-11.194882339501945,relative %
+tuning,128,last-gap,SLO,SLO passes,requests,4420,0.98240804203793,relative %
+tuning,128,global-median,SLO,SLO passes,requests,4520,3.2670779072424105,relative %
+tuning,128,continuum-ttl,SLO,SLO passes,requests,4501,2.8329906328535603,relative %
+tuning,128,oracle,SLO,SLO passes,requests,4653,6.305688827964362,relative %
+tuning,128,unbounded,SLO,SLO passes,requests,21332,387.3657756454192,relative %
+tuning,128,lru,Cache effectiveness,Input-token hit rate (first admission),%,23.081104679311984,0.0,percentage points
+tuning,128,lfu,Cache effectiveness,Input-token hit rate (first admission),%,24.04859099196081,0.9674863126488269,percentage points
+tuning,128,slru,Cache effectiveness,Input-token hit rate (first admission),%,23.79302346212115,0.711918782809164,percentage points
+tuning,128,random-0,Cache effectiveness,Input-token hit rate (first admission),%,20.228658382697883,-2.852446296614101,percentage points
+tuning,128,last-gap,Cache effectiveness,Input-token hit rate (first admission),%,23.279406945271518,0.19830226595953349,percentage points
+tuning,128,global-median,Cache effectiveness,Input-token hit rate (first admission),%,23.631593393842163,0.5504887145301787,percentage points
+tuning,128,continuum-ttl,Cache effectiveness,Input-token hit rate (first admission),%,23.567932738073115,0.4868280587611302,percentage points
+tuning,128,oracle,Cache effectiveness,Input-token hit rate (first admission),%,25.48886257165701,2.4077578923450247,percentage points
+tuning,128,unbounded,Cache effectiveness,Input-token hit rate (first admission),%,97.67297406082062,74.59186938150864,percentage points
+tuning,128,lru,Cache effectiveness,Recomputed input tokens,tokens,3491732070,0.0,relative %
+tuning,128,lfu,Cache effectiveness,Recomputed input tokens,tokens,3447812599,-1.2578133178471562,relative %
+tuning,128,slru,Cache effectiveness,Recomputed input tokens,tokens,3459428879,-0.9251337259676973,relative %
+tuning,128,random-0,Cache effectiveness,Recomputed input tokens,tokens,3628978150,3.930601697054037,relative %
+tuning,128,last-gap,Cache effectiveness,Recomputed input tokens,tokens,3482709643,-0.2583940239148985,relative %
+tuning,128,global-median,Cache effectiveness,Recomputed input tokens,tokens,3466765311,-0.7150250505904343,relative %
+tuning,128,continuum-ttl,Cache effectiveness,Recomputed input tokens,tokens,3469624643,-0.6331364078573154,relative %
+tuning,128,oracle,Cache effectiveness,Recomputed input tokens,tokens,3382456379,-3.1295554415204596,relative %
+tuning,128,unbounded,Cache effectiveness,Recomputed input tokens,tokens,105629952,-96.97485517552897,relative %
+tuning,128,lru,Cache effectiveness,Evicted blocks,512-token blocks,6855291,0.0,relative %
+tuning,128,lfu,Cache effectiveness,Evicted blocks,512-token blocks,6769506,-1.2513691978940034,relative %
+tuning,128,slru,Cache effectiveness,Evicted blocks,512-token blocks,6792197,-0.9203693905918797,relative %
+tuning,128,random-0,Cache effectiveness,Evicted blocks,512-token blocks,7123356,3.91033728546315,relative %
+tuning,128,last-gap,Cache effectiveness,Evicted blocks,512-token blocks,6837677,-0.25694022325237764,relative %
+tuning,128,global-median,Cache effectiveness,Evicted blocks,512-token blocks,6806529,-0.7113045966976483,relative %
+tuning,128,continuum-ttl,Cache effectiveness,Evicted blocks,512-token blocks,6812114,-0.6298346780610808,relative %
+tuning,128,oracle,Cache effectiveness,Evicted blocks,512-token blocks,6641862,-3.1133470482872294,relative %
+tuning,128,unbounded,Cache effectiveness,Evicted blocks,512-token blocks,0,-100.0,relative %
+tuning,128,lru,Cache effectiveness,Forced evictions of protected blocks,blocks,0,0.0,relative %
+tuning,128,lfu,Cache effectiveness,Forced evictions of protected blocks,blocks,0,0.0,relative %
+tuning,128,slru,Cache effectiveness,Forced evictions of protected blocks,blocks,0,0.0,relative %
+tuning,128,random-0,Cache effectiveness,Forced evictions of protected blocks,blocks,0,0.0,relative %
+tuning,128,last-gap,Cache effectiveness,Forced evictions of protected blocks,blocks,2336550,,relative %
+tuning,128,global-median,Cache effectiveness,Forced evictions of protected blocks,blocks,426497,,relative %
+tuning,128,continuum-ttl,Cache effectiveness,Forced evictions of protected blocks,blocks,217041,,relative %
+tuning,128,oracle,Cache effectiveness,Forced evictions of protected blocks,blocks,6023364,,relative %
+tuning,128,unbounded,Cache effectiveness,Forced evictions of protected blocks,blocks,0,0.0,relative %
+tuning,128,lru,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.9770957852121,0.0,percentage points
+tuning,128,lfu,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.97708414253295,-1.16426791549884e-05,percentage points
+tuning,128,slru,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.97702910250815,-6.668270394527553e-05,percentage points
+tuning,128,random-0,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.97717156551263,7.57803005342339e-05,percentage points
+tuning,128,last-gap,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.97707802802746,-1.7757184636479906e-05,percentage points
+tuning,128,global-median,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.97710175345826,5.968246156839996e-06,percentage points
+tuning,128,continuum-ttl,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.97707686166196,-1.8923550143767898e-05,percentage points
+tuning,128,oracle,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,99.97701242915602,-8.335605608067453e-05,percentage points
+tuning,128,unbounded,"KV occupancy, whole run","Physical (active + inactive), mean",% of capacity,13.453182307141665,-86.52391347807044,percentage points
+tuning,128,lru,"KV occupancy, whole run","Active, mean",% of capacity,27.283175542609815,0.0,percentage points
+tuning,128,lfu,"KV occupancy, whole run","Active, mean",% of capacity,27.154988280827883,-0.12818726178193174,percentage points
+tuning,128,slru,"KV occupancy, whole run","Active, mean",% of capacity,27.287308773869004,0.004133231259189074,percentage points
+tuning,128,random-0,"KV occupancy, whole run","Active, mean",% of capacity,27.591743707051823,0.30856816444200774,percentage points
+tuning,128,last-gap,"KV occupancy, whole run","Active, mean",% of capacity,27.225246612240856,-0.057928930368959186,percentage points
+tuning,128,global-median,"KV occupancy, whole run","Active, mean",% of capacity,27.198515644421658,-0.084659898188157,percentage points
+tuning,128,continuum-ttl,"KV occupancy, whole run","Active, mean",% of capacity,27.224694939454913,-0.058480603154901445,percentage points
+tuning,128,oracle,"KV occupancy, whole run","Active, mean",% of capacity,27.035427289873518,-0.2477482527362973,percentage points
+tuning,128,unbounded,"KV occupancy, whole run","Active, mean",% of capacity,0.009269449281402642,-27.273906093328414,percentage points
+tuning,128,lru,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,6.146875623179826,0.0,percentage points
+tuning,128,lfu,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,6.078399089270474,-0.06847653390935182,percentage points
+tuning,128,slru,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,6.316500125456484,0.16962450227665826,percentage points
+tuning,128,random-0,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,6.349528365781114,0.20265274260128852,percentage points
+tuning,128,last-gap,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,6.151511823919229,0.004636200739403407,percentage points
+tuning,128,global-median,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,6.364117792011828,0.2172421688320023,percentage points
+tuning,128,continuum-ttl,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,6.080708611657855,-0.06616701152197102,percentage points
+tuning,128,oracle,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,6.304319172158141,0.15744354897831503,percentage points
+tuning,128,unbounded,"KV occupancy, whole run",Time with active ≥ 95% of capacity,% of time,0.0,-6.146875623179826,percentage points
+tuning,128,lru,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,72.69392024260229,0.0,percentage points
+tuning,128,lfu,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,72.82209586170507,0.12817561910277675,percentage points
+tuning,128,slru,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,72.68972032863915,-0.00419991396313435,percentage points
+tuning,128,random-0,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,72.3854278584608,-0.3084923841414877,percentage points
+tuning,128,last-gap,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,72.75183141578661,0.057911173184322706,percentage points
+tuning,128,global-median,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,72.7785861090366,0.08466586643430674,percentage points
+tuning,128,continuum-ttl,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,72.75238192220702,0.05846167960473281,percentage points
+tuning,128,oracle,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,72.9415851392825,0.24766489668020597,percentage points
+tuning,128,unbounded,"KV occupancy, whole run","Inactive (evictable), mean",% of capacity,13.44391285786026,-59.25000738474203,percentage points
+tuning,128,lru,Pressure and completion,"Waiting queue, time-weighted mean",requests,12.074839104279022,0.0,relative %
+tuning,128,lfu,Pressure and completion,"Waiting queue, time-weighted mean",requests,12.041169623192795,-0.27883999774618307,relative %
+tuning,128,slru,Pressure and completion,"Waiting queue, time-weighted mean",requests,12.047590725142205,-0.2256624614332181,relative %
+tuning,128,random-0,Pressure and completion,"Waiting queue, time-weighted mean",requests,12.135925072197683,0.5058946739672443,relative %
+tuning,128,last-gap,Pressure and completion,"Waiting queue, time-weighted mean",requests,12.08309056381124,0.06833597914603917,relative %
+tuning,128,global-median,Pressure and completion,"Waiting queue, time-weighted mean",requests,12.066082792905732,-0.07251700248483983,relative %
+tuning,128,continuum-ttl,Pressure and completion,"Waiting queue, time-weighted mean",requests,12.073299881709884,-0.01274735469222188,relative %
+tuning,128,oracle,Pressure and completion,"Waiting queue, time-weighted mean",requests,12.0122315730388,-0.5184957803540002,relative %
+tuning,128,unbounded,Pressure and completion,"Waiting queue, time-weighted mean",requests,0.05937780149321057,-99.50825182033135,relative %
+tuning,128,lru,Pressure and completion,"Waiting queue, sampled peak",requests,155,0.0,relative %
+tuning,128,lfu,Pressure and completion,"Waiting queue, sampled peak",requests,156,0.6451612903225712,relative %
+tuning,128,slru,Pressure and completion,"Waiting queue, sampled peak",requests,156,0.6451612903225712,relative %
+tuning,128,random-0,Pressure and completion,"Waiting queue, sampled peak",requests,157,1.2903225806451646,relative %
+tuning,128,last-gap,Pressure and completion,"Waiting queue, sampled peak",requests,155,0.0,relative %
+tuning,128,global-median,Pressure and completion,"Waiting queue, sampled peak",requests,156,0.6451612903225712,relative %
+tuning,128,continuum-ttl,Pressure and completion,"Waiting queue, sampled peak",requests,155,0.0,relative %
+tuning,128,oracle,Pressure and completion,"Waiting queue, sampled peak",requests,158,1.9354838709677358,relative %
+tuning,128,unbounded,Pressure and completion,"Waiting queue, sampled peak",requests,128,-17.419354838709676,relative %
+tuning,128,lru,Pressure and completion,Preemptions,events,129,0.0,relative %
+tuning,128,lfu,Pressure and completion,Preemptions,events,136,5.4263565891472965,relative %
+tuning,128,slru,Pressure and completion,Preemptions,events,130,0.7751937984496138,relative %
+tuning,128,random-0,Pressure and completion,Preemptions,events,126,-2.3255813953488413,relative %
+tuning,128,last-gap,Pressure and completion,Preemptions,events,120,-6.976744186046513,relative %
+tuning,128,global-median,Pressure and completion,Preemptions,events,138,6.976744186046502,relative %
+tuning,128,continuum-ttl,Pressure and completion,Preemptions,events,126,-2.3255813953488413,relative %
+tuning,128,oracle,Pressure and completion,Preemptions,events,131,1.5503875968992276,relative %
+tuning,128,unbounded,Pressure and completion,Preemptions,events,0,-100.0,relative %
+tuning,128,lru,Pressure and completion,Completed requests,requests,24796,0.0,relative %
+tuning,128,lfu,Pressure and completion,Completed requests,requests,24796,0.0,relative %
+tuning,128,slru,Pressure and completion,Completed requests,requests,24796,0.0,relative %
+tuning,128,random-0,Pressure and completion,Completed requests,requests,24796,0.0,relative %
+tuning,128,last-gap,Pressure and completion,Completed requests,requests,24796,0.0,relative %
+tuning,128,global-median,Pressure and completion,Completed requests,requests,24796,0.0,relative %
+tuning,128,continuum-ttl,Pressure and completion,Completed requests,requests,24796,0.0,relative %
+tuning,128,oracle,Pressure and completion,Completed requests,requests,24796,0.0,relative %
+tuning,128,unbounded,Pressure and completion,Completed requests,requests,24796,0.0,relative %
+tuning,128,lru,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,27.442230268378868,0.0,relative %
+tuning,128,lfu,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,27.419103819189903,-0.08427321308360769,relative %
+tuning,128,slru,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,27.419681317499037,-0.0821687984515318,relative %
+tuning,128,random-0,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,27.513657798350504,0.26028325421472154,relative %
+tuning,128,last-gap,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,27.459212204666848,0.06188249322995887,relative %
+tuning,128,global-median,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,27.44063387107119,-0.005817301626243054,relative %
+tuning,128,continuum-ttl,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,27.43497543312126,-0.026436755273384627,relative %
+tuning,128,oracle,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,27.392310430761817,-0.18190882129056618,relative %
+tuning,128,unbounded,Pressure and completion,Mean play span (dominated by recorded idle gaps),h,14.429356697786444,-47.41915450504363,relative %
+tuning,128,lru,Pressure and completion,Observation span,h,167.92632314369908,0.0,relative %
+tuning,128,lfu,Pressure and completion,Observation span,h,167.89874119273105,-0.016425031199207574,relative %
+tuning,128,slru,Pressure and completion,Observation span,h,167.90240394064912,-0.01424386754986795,relative %
+tuning,128,random-0,Pressure and completion,Observation span,h,167.8164887486839,-0.06540630019106208,relative %
+tuning,128,last-gap,Pressure and completion,Observation span,h,167.98038643368477,0.03219464880406253,relative %
+tuning,128,global-median,Pressure and completion,Observation span,h,167.911900130513,-0.008588893579075663,relative %
+tuning,128,continuum-ttl,Pressure and completion,Observation span,h,167.92633495929243,7.036177018804324e-06,relative %
+tuning,128,oracle,Pressure and completion,Observation span,h,168.09463373972073,0.10022883421179074,relative %
+tuning,128,unbounded,Pressure and completion,Observation span,h,144.8820529126772,-13.722845709723696,relative %

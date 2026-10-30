@@ -1,6 +1,6 @@
 # KV eviction experiments
 
-Planned next: [full-trace heuristic comparison and KV occupancy measurements](FULL_TRACE_BASELINE_SPEC.md), preserving recorded timestamps. Current reports below describe subset pilots.
+Full-trace heuristic comparison with KV occupancy measurements: [results](FULL_TRACE_RESULTS.md), [report](reports/full-trace-baselines.html) and [commands](#full-trace-heuristic-baselines). The agent reports below describe earlier subset pilots.
 
 Run from the fork repository root. This release supports **Claude Code or Codex** with **Mooncake tool/agent, Mooncake conversation, AgentX and a qualified FreeInference subset**. It launches the agent, evaluates submitted Python policies in containers, selects using tuning data, and saves an independent evaluation. [TRACE_SOURCES.md](TRACE_SOURCES.md) defines each source, qualification and schedule.
 
@@ -106,6 +106,29 @@ Compare mean/p95 simulated TTFT, mean/p95 simulated ITL, SLO goodput in requests
 Policy IPC/Python decision wall time does not advance the simulated clock; real serving overhead is unvalidated.
 
 The legacy experiment uses `50 ms + 3 ms/missed block`; it cannot measure ITL or achieved goodput. Native candidate metadata uses allocation/release counters and LRU queue rank, not legacy timestamps/hit counts. Native release order has no ties; its creation-order tiebreak therefore matches LRU. Do not claim the legacy leaf-first gain transfers to native serving.
+
+## Full-trace heuristic baselines
+
+[FULL_TRACE_BASELINE_SPEC.md](FULL_TRACE_BASELINE_SPEC.md) defines this experiment and [FULL_TRACE_RESULTS.md](FULL_TRACE_RESULTS.md) interprets the current results. It replays complete public workloads with their original timestamps under LRU, FIFO, MRU, LFU, SLRU and random seeds 0, 1 and 2. There are no agent calls, credentials, arrival scaling or tuning. Frozen settings live in [configs/full-trace-baselines.json](configs/full-trace-baselines.json). Run from the repository root; Python 3.12+, Rust/Cargo, Docker and `zstd` are required.
+
+```bash
+python3 research/kv-eviction/prepare_native.py
+python3 research/kv-eviction/baseline_comparison.py fetch \
+  --config research/kv-eviction/configs/full-trace-baselines.json
+python3 research/kv-eviction/baseline_comparison.py run \
+  --config research/kv-eviction/configs/full-trace-baselines.json \
+  --output research/kv-eviction/experiments/$(date +%Y-%m-%d-%H-%M-%S)
+python3 research/kv-eviction/baseline_comparison.py audit \
+  --run research/kv-eviction/experiments/<that directory> \
+  --evidence research/kv-eviction/evidence/<new name>
+python3 research/kv-eviction/export_report.py \
+  --baseline-evidence research/kv-eviction/evidence/full-trace-baselines \
+  --output research/kv-eviction/reports/full-trace-baselines.html
+```
+
+`fetch` downloads and verifies about 2.3 GB of pinned sources, then ledgers every source request (see [TRACE_SOURCES.md](TRACE_SOURCES.md#full-release-coverage)). Traces with any request the replay contract cannot represent are blocked rather than filtered. `run` replays each ready trace once per policy from a cold cache, plus native LRU again (determinism), LRU as a container callback (callback/native parity), LRU without telemetry (instrumentation parity), and a bounded-prefix run at a 10x finer occupancy cadence (sampling error). Each job is audited as it finishes. A failed job keeps its logs and a `failure.json`, never a substitute score. Rerunning `run` with the same output directory resumes: it skips completed, audited jobs whose workload, configuration, policy, runtime and binary hashes match, and preserves interrupted attempts as `<job>.attempt-N`. The current sweep took about one hour on an 18-core machine with eight parallel jobs, mostly Docker round trips for callback policies.
+
+`audit` touches no simulation. It re-verifies every job's inputs, recomputes metrics and occupancy from raw request, token and occupancy files, checks request coverage and parity, and writes compact, checksummed evidence (`results.json`, `job-receipts.json`, `source-inventory.json`, policy sources and the run manifest). It fails on a failed or incomplete job, changed inputs or inconsistent arithmetic. `export_report.py --baseline-evidence` verifies the evidence checksums and writes a self-contained HTML page (one table per trace, every heuristic as a column, changes from LRU) and a sibling CSV in long format. The page embeds the compact evidence and generator for offline sharing.
 
 ## KV occupancy telemetry
 

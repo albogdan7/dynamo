@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "description": "Full-trace, heuristic-only KV eviction comparison. Original recorded timing, frozen per-trace capacities, 512-token engine blocks.",
+  "block_tokens": 512,
+  "timing_profile": "profiles/interactive.json",
+  "slo": {
+    "ttft_ms": 1000,
+    "per_request_p95_itl_ms": 50
+  },
+  "telemetry": {
+    "sample_interval_ms": 100,
+    "finer_check": {
+      "sample_interval_ms": 10,
+      "requests": 2000
+    }
+  },
+  "policies": [
+    "lru",
+    "fifo",
+    "mru",
+    "lfu",
+    "slru",
+    "random-0",
+    "random-1",
+    "random-2"
+  ],
+  "job_timeout_seconds": 21600,
+  "traces": {
+    "mooncake-toolagent": {
+      "cache_tokens": 131072
+    },
+    "mooncake-conversation": {
+      "cache_tokens": 131072
+    },
+    "agentx": {
+      "cache_tokens": 196608
+    },
+    "freeinference": {
+      "cache_tokens": 81920
+    }
+  }
+}

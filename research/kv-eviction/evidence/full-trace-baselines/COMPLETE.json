@@ -1,0 +1,15 @@
+{
+  "config.json": "d9c51eee8531e0fda5b54a32247e0e8dbfd9c88a1c144c861bcb11aad5e4e7ed",
+  "job-receipts.json": "2cb37fa77011362d3384a297f0213cb2fd915bae7b6c6b9f98a8e06304e3de3c",
+  "policies/fifo.py": "009ae4a5d23e2a9753f03121c511a50e6a22297888d431eb7beaf6be56943bcb",
+  "policies/lfu.py": "9410a02892fad0893e028050dfe21cb84de3df5fce0b531f010bf1bc07159ee7",
+  "policies/lru-callback.py": "46cd2ac41bab52dcf00ba26ad03c8be8a1fd114275baef93b6294d822e4b6da5",
+  "policies/mru.py": "71aaa623c93b6f96533fef728c2835927e664b748e967118eae8883b5670ceb6",
+  "policies/random-0.py": "b2b49061aa507fdd1c7e094215d6661f250a2911321060e775ec43258df92b54",
+  "policies/random-1.py": "75a7069b56e57056aaffd2f6e41e529656d1d897e7e0ee0617f0767a28725b53",
+  "policies/random-2.py": "7d307d3db430a47643b0f40fa6f5084c45c59f975cc92b10b778ad352471ccf2",
+  "policies/slru.py": "c20eae486dc6d3dfe3a93508e5f67e65d2b4a3dd64b3a804d98935d8744e5276",
+  "results.json": "17c252053fb6b9fedafb5b377af7ff604152d163a3d91ccdf61197d4b29641b2",
+  "run-manifest.json": "29e068a3ce5a92a12f0e747b7295544c487e6540ff7fe4b3081104039b2dd5c4",
+  "source-inventory.json": "a6a8ebd44e57dd559c89a6bdd7a839808c14aa8ed4ab22d0d3e6dbd5925edc42"
+}

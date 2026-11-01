@@ -1,0 +1,27 @@
+# SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+traffic:
+  source:
+    type: trace
+    paths: [research/trace-replay/data/mooncake-toolagent.jsonl]
+    format: mooncake
+    block_size: 512
+  load:
+    type: trace_timestamps
+    speedup: 0.1
+engine:
+  model: Qwen/Qwen2.5-7B-Instruct-1M
+  hardware: h200_sxm
+  backend: vllm
+  workers:
+    aggregated:
+      scheduler:
+        max_batched_tokens: 8192
+        max_sequences: 256
+      kv_cache:
+        block_size: 512
+        capacity:
+          type: fixed
+          blocks: 256
+      timing:
+        type: polynomial
